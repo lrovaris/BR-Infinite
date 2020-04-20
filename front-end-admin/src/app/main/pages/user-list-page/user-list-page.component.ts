@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import * as tableData from './data/smart-data-table';
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-user-list-page',
@@ -13,8 +14,9 @@ export class UserListPageComponent implements OnInit {
   source: LocalDataSource;
   filterSource: LocalDataSource;
   alertSource: LocalDataSource;
+  users: any;
 
-  constructor() {
+  constructor(public loginService: LoginService) {
     this.source = new LocalDataSource(tableData.data); // create the source
     this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
     this.alertSource = new LocalDataSource(tableData.alertdata); // create the source
@@ -23,31 +25,15 @@ export class UserListPageComponent implements OnInit {
   filtersettings = tableData.filtersettings;
   alertsettings = tableData.alertsettings;
 
-  // And the listener code which asks the DataSource to filter the data:
-  onSearch(query: string = '') {
-    this.source.setFilter([
-      // fields we want to inclue in the search
-      {
-        field: 'Telefone',
-        search: query,
-      },
-      {
-        field: 'Nome',
-        search: query,
-      },
-      {
-        field: 'Usuário',
-        search: query,
-      },
-    ], false);
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
+
+
+  log(event){
+    console.log(event.data);
   }
 
   //  For confirm action On Delete
   onDeleteConfirm(event) {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm('Tem certeza que deseja deletar?')) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -56,7 +42,7 @@ export class UserListPageComponent implements OnInit {
 
   //  For confirm action On Save
   onSaveConfirm(event) {
-    if (window.confirm('Are you sure you want to save?')) {
+    if (window.confirm('Tem certeza que deseja salvar?')) {
       event.newData['name'] += ' + added in code';
       event.confirm.resolve(event.newData);
     } else {
@@ -75,6 +61,13 @@ export class UserListPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginService.getUsers().subscribe((data: any) => {
+      this.users = data;
+      console.log(this.users);
+      this.filterSource = this.users;
+      this.source = this.users;
+      this.alertSource = this.users;
+    })
   }
 
 }

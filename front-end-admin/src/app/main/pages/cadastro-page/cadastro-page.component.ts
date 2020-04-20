@@ -48,6 +48,10 @@ export class CadastroPageComponent implements OnInit {
     this.onReset();
   }
 
+  navigateLista() {
+    this.router.navigate(['lista'])
+  }
+
   ngOnInit() {
   }
 

@@ -1,1 +1,11 @@
-<p>header works!</p>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" style="margin-left: 2rem">
+    <img style="margin-top: -6px" src="../../assets/logo.png" width="35" height="40" class="d-inline-block align-top" alt="">
+   <a style="text-align: center"> BR Infinite</a>
+  </a>
+<div>
+  <button *ngIf="check" (click)="navigateLista()" class="btn btn-primary" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Lista</a></button>
+  <button *ngIf="!check" (click)="navigateCadastro()" class="btn btn-primary" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Cadastrar</a></button>
+  <button class="btn btn-primary" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Sair</a></button>
+</div>
+</nav>

@@ -45,9 +45,9 @@ export class LoginService {
 
   cadastro(newUser) {
     const options = {
-      headers: new HttpHeaders().append('Content-Type\'', 'application/x-www-form-urlencoded'),
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}user/new`, newUser, options).pipe(
+    return this.http.post(`${this.url}users/new`, newUser, options).pipe(
       retry(2),
       catchError( (err: any) => {
         console.log(err.error.Message);
@@ -119,6 +119,17 @@ export class LoginService {
         alert('Por favor, verifique seus dados de autenticação');
       });
     this.saveAuthData(this.token, new Date(Date.now()));
+  }
+
+  getUsers() {
+    return this.http.get(`${this.url}users/all`).pipe(
+      retry(2),
+      catchError( (err: any) => {
+        console.log(err.error.Message);
+        alert(err.error.Message);
+        return throwError(err);
+      })
+    )
   }
 
   getToken() {

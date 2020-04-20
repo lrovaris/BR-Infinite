@@ -11,15 +11,12 @@ router.get('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 })
 
-
 //Carregar rotas de usuário
 router.use('/auth', require('./auth/routes'))
 
 router.use(auth);
 
 router.use('/users', require('./users/routes'))
-
-
 
 
 module.exports = router;

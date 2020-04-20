@@ -16,7 +16,8 @@ if(process.argv[2] === 'prod'){
 }
 
 
-//Inicializando middleware
+//Middleware
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
@@ -34,9 +35,10 @@ async function initialize_database() {
     console.log("Inicializando banco de dados...");
     var _db = await(db.init_db());
 
-    // Setup cache
+    // Inicializando cache
     console.log("Inicializando cache...");
     await require('./users/db').get_users();
+    await require('./seguradoras/db').get_seguradoras();
 }
 
 app.listen(3000, () => {

@@ -25,13 +25,11 @@ router.get ('/all', async (req,res) => {
   }
 });
 
-router.post('/new', (req,res) => {
+router.post('/new', async(req,res) => {
     var valid = true;
 
-    console.log(req.body);
     var new_user = req.body;
 
-    
     if (!new_user.login){
       res.status(400).json({"Message":"Campo de login vazio"});
       valid = false;
@@ -70,7 +68,7 @@ router.post('/new', (req,res) => {
     if (valid) {
       new_user.password = md5(new_user.password);
       console.log(new_user);
-      db.register_user(new_user);
+      await db.register_user(new_user).catch(err => console.error(err));
       res.status(200).json({"Message":"Usuário criado com sucesso!"});
     }
 });
@@ -78,10 +76,10 @@ router.post('/new', (req,res) => {
 
 //Alterar o objeto usuário
 
-router.post('/:id', async(req,res) => {
-
+router.post('/:id/edit', async(req,res) => {
 
   let req_user = req.body;
+
   req_user['_id'] = req.params.id;
 
   let db_user = cache.get("users").filter((user_obj) => {
@@ -97,8 +95,5 @@ router.post('/:id', async(req,res) => {
 
   await res.json(edited_user);
 });
-
-
-
 
 module.exports = router;

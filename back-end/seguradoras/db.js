@@ -23,7 +23,8 @@ function register_seguradora(new_seguradora) {
             if(err){
                 reject(err);
             }else {
-                let new_seguradora_list = [cache.get("seguradoras"), new_seguradora];
+                let new_seguradora_list = cache.get("seguradoras");
+                new_seguradora_list.push(new_seguradora);
                 cache.set("seguradoras",new_seguradora_list);
                 console.log("Seguradora nova cadastrada");
                 resolve(result);

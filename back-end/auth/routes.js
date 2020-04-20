@@ -15,22 +15,32 @@ router.post('/login', (req,res) => {
     })[0];
 
     if (this_user){
-      var valid = (this_user.password === md5(req.body.password));
-      if (valid) {
+      let valid = false;
+
+      valid = (this_user.active)
+
+      if(valid){
+
+        valid = (this_user.password === md5(req.body.password));
+
+        if (valid) {
           var response_json = {
-              "id":this_user._id,
-              "nome":this_user.nome,
-              "admin": this_user.admin,
-              "login": this_user.login
+            "id":this_user._id,
+            "nome":this_user.nome,
+            "admin": this_user.admin,
+            "login": this_user.login
           };
 
           var token = jwt.sign(response_json, "s3nh453Cr3T4d4Ap1", {"expiresIn": "1h"});
           res.status(200).json({
-              "Message":"Login efetuado com sucesso!",
-              "Token": token
+            "Message":"Login efetuado com sucesso!",
+            "Token": token
           });
-      }else {
+        }else {
           res.status(401).json({"Message":"As credenciais de login são inválidas"})
+        }
+      }else {
+        res.status(401).json({"Message":"Este usuário está invativo"})
       }
     }
     else {

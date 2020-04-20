@@ -39,6 +39,7 @@ async function initialize_database() {
     console.log("Inicializando cache...");
     await require('./users/db').get_users();
     await require('./seguradoras/db').get_seguradoras();
+    await require('./colaboradores/db').get_colaboradores();
 }
 
 app.listen(3000, () => {

@@ -16,7 +16,8 @@ router.use('/auth', require('./auth/routes'))
 
 router.use(auth);
 
-router.use('/users', require('./users/routes'))
-
+router.use('/users', require('./users/routes'));
+router.use('/seguradoras', require('./seguradoras/routes'));
+router.use('/colaboradores', require('./colaboradores/routes'));
 
 module.exports = router;

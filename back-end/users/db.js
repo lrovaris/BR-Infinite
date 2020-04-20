@@ -24,7 +24,8 @@ function register_user(new_user) {
             if(err){
                 reject(err);
             }else {
-                let new_user_list = [cache.get("users"), new_user];
+                let new_user_list = cache.get("users");
+                new_user_list.push(new_user);
                 cache.set("users",new_user_list);
                 console.log("Usuário novo criado");
                 resolve(result);

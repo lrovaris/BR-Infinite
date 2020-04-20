@@ -34,7 +34,7 @@ router.post('/new', async(req,res) => {
     if (valid) {
       console.log(new_seguradora);
       await db.register_seguradora(new_seguradora).catch(err => console.error(err));
-      res.status(200).json({"Message":"Usuário criado com sucesso!"});
+      res.status(200).json({"Message":"Segudoradora cadastrada com sucesso!"});
     }
 });
 

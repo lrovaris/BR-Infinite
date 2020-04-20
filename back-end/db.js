@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
-const url = "mongodb://anjos:123456qwe@ds149124.mlab.com:49124/anjoshelp";
-const client = new MongoClient(url, { useNewUrlParser: true });
+const url = "mongodb://luizfelipe:123456qwe@ds141410.mlab.com:41410/brinfinite";
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true  });
 const assert = require('assert');
 const cache = require('./memoryCache');
 
@@ -15,7 +15,7 @@ function init_db(){
             }
             else {
                 console.log("Conectado");
-                global.db = client.db("anjoshelp");
+                global.db = client.db("brinfinite");
                 resolve(global.db);
             }
         });

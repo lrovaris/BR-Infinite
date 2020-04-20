@@ -29,9 +29,9 @@ router.post('/new', (req,res) => {
     var valid = true;
 
     console.log(req.body);
-
     var new_user = req.body;
 
+    
     if (!new_user.login){
       res.status(400).json({"Message":"Campo de login vazio"});
       valid = false;

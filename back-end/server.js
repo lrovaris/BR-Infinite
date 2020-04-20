@@ -6,13 +6,24 @@ const router = require('./routes');
 const cache = require('./memoryCache');
 const cors = require('cors');
 
+//Mudanças de ambiente
+
+console.log(process.argv);
+
+if(process.argv[2] === 'dev'){
+  global.env = 'dev';
+}
+
+if(process.argv[2] === 'prod'){
+  global.env = 'prod';
+}
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
-
 
 app.use(body_parser.urlencoded({ extended: true }));
 

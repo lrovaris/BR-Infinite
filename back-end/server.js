@@ -23,6 +23,10 @@ app.use(router);
 async function initialize_database() {
     console.log("Inicializando banco de dados...");
     var _db = await(db.init_db());
+
+    // Setup cache
+    console.log("Inicializando cache...");
+    await require('./users/db').get_users();
 }
 
 app.listen(3000, () => {

@@ -42,6 +42,11 @@ router.post('/new', (req,res) => {
       valid = false;
     }
 
+    if (!new_user.name){
+      res.status(400).json({"Message":"Campo de nome vazio"});
+      valid = false;
+    }
+
     if (!new_user.admin){
       new_user['admin'] = false;
     }
@@ -76,9 +81,8 @@ router.post('/new', (req,res) => {
 router.post('/:id', async(req,res) => {
 
 
-
   let req_user = req.body;
-
+  req_user['_id'] = req.params.id;
 
   let db_user = cache.get("users").filter((user_obj) => {
       return user_obj._id == req_user._id;

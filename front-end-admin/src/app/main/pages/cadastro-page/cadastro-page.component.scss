@@ -1,0 +1,8 @@
+button {
+  box-shadow:none !important;
+}
+input[type="text"], textarea, [type="password"] {
+  outline: none;
+  box-shadow:#27416F 0 2px 4px !important;
+  border:1px solid #ccc !important;
+}

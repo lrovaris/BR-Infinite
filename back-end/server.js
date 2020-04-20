@@ -7,9 +7,6 @@ const cache = require('./memoryCache');
 const cors = require('cors');
 
 //Mudanças de ambiente
-
-console.log(process.argv);
-
 if(process.argv[2] === 'dev'){
   global.env = 'dev';
 }
@@ -18,6 +15,8 @@ if(process.argv[2] === 'prod'){
   global.env = 'prod';
 }
 
+
+//Inicializando middleware
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');

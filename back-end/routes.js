@@ -15,7 +15,7 @@ router.get('/', (req,res) => {
 //Carregar rotas de usuário
 router.use('/auth', require('./auth/routes'))
 
-router.use(auth)
+// router.use(auth)
 
 router.use('/users', require('./users/routes'))
 

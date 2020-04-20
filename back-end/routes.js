@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 var cache = require('./memoryCache');
 
-
+const auth = require('./auth/utils.js').authenticate;
 
 router.get('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
@@ -13,7 +13,11 @@ router.get('/', (req,res) => {
 
 
 //Carregar rotas de usuário
-router.use('/user', require('./users/routes'))
+router.use('/auth', require('./auth/routes'))
+
+router.use(auth)
+
+router.use('/users', require('./users/routes'))
 
 
 

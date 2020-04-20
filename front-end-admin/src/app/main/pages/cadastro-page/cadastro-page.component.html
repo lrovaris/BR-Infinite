@@ -1,0 +1,62 @@
+<!--Login Page Starts-->
+<section id="login">
+  <div class="container-fluid">
+    <div class="row full-height-vh m-0">
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card" style="box-shadow: 0 4px 8px #27416F">
+          <div class="card-header pb-2">
+            <h4 class="card-title" id="basic-layout-form">Cadastro de Usuários</h4>
+            <p class="mb-0">Está página será utilizada pelo Administrador para criar novos usúarios que poderam acessar a ferramenta principal.</p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form" [formGroup]="cliente" role="form" class="login-form" (ngSubmit)="onSubmit()" >
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-user"></i> Informção de Cadastro</h4>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label for="projectinput1">Nome completo do colaborador</label>
+                        <input formControlName="name" type="text" id="projectinput1" class="form-control" name="fname">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label for="projectinput2">Usuário</label>
+                        <input formControlName="login" type="text" id="projectinput2" class="form-control" name="lname">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label for="projectinput3">Senha</label>
+                        <input formControlName="password" type="password" id="projectinput3" class="form-control" name="email">
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label for="projectinput4">Confirmar Senha</label>
+                        <input formControlName="resenha" type="password" id="projectinput4" class="form-control" name="phone">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="button" class="btn btn-raised btn-raised btn-danger mr-1">
+                    <i class="ft-x"></i> Cancelar
+                  </button>
+                  <button type="submit" class="btn btn-raised btn-raised" style=" background-color: #27416F; color: white">
+                    <i class="fa fa-check-square-o"></i> Salvar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Login Page Ends-->

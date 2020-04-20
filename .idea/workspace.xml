@@ -2,13 +2,455 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="572ecc54-64ef-4e0e-a9f2-fc7ba95b0f69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front-end/src/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/app.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/demo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/hopscotch.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/perfect-scrollbar.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/prism.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/quill.bubble.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/quill.snow.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/css/wizard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/data-table.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/data-table.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/data-table.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/data-table.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/fonts/feather.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/fonts/feather.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/fonts/feather.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/fonts/feather.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/feather/style.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/fonts/Simple-Line-Icons.dev.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/fonts/Simple-Line-Icons.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/fonts/Simple-Line-Icons.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/fonts/Simple-Line-Icons.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/fonts/Simple-Line-Icons.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/style-origin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/simple-line-icons/style.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/weathericons/weathericons-regular-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/weathericons/weathericons-regular-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/weathericons/weathericons-regular-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/weathericons/weathericons-regular-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/fonts/weathericons/weathericons-regular-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/i18n/de.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/i18n/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/i18n/es.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/i18n/pt.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/crop-pic.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/elements/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/flags/br.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/flags/de.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/flags/es.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/flags/us.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/15.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/16.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/17.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/18.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/19.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/20.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/21.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/22.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/23.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/24.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/25.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/26.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/27.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/28.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/29.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/30.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/31.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/32.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/33.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/auth-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/bg-glass-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/bg-glass-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/bg-glass-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/bg-glass-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/coming-soon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/dark-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/error.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/forgot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/light-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/lock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/maintenance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/register.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/gallery/rocket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/ico/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/logo-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/logos/logo-big-black.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/logos/logo-big-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/logos/logo-color-big.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/oval.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/pages/cd-arrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/pages/signature-scan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/08.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/13.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/15.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/16.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/17.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/weather-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/weather-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/photos/weather-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/avatars/avatar-10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-25.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/medium/avatar-m-9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/portrait/small/avatar-s-9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/sidebar-bg/06.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/svg/cd-arrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/tour/cross.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/tour/sprite-green.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/tour/sprite-orange.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/width-600/portfolio-14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/img/width-600/portfolio-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/app.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/_core.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/_custom-bootstrap-rtl.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/_custom-bootstrap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/app-variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_carousel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_popover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/bootstrap/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_app-colors.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_components.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_gallery.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_helper.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_horizontal-timeline.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_layout-dark.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_layout-transparent.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_misc.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_palette.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_profile.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_responsive.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_sidebar-content.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/_vertical-timeline.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/bootstrap-social.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/chat.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/coming-soon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/email.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/fixed-navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/partials/_layout.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/partials/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/partials/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/core/search.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/demo.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-beaufort.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-day.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-direction.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-misc.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-moon-aliases.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-moon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-neutral.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-night.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-time.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-wind-aliases.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-wind-degrees.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-classes/classes-wind.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-beaufort.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-day.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-direction.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-misc.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-moon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-neutral.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-night.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-time.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/icon-variables/variables-wind-names.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/mappings/wi-forecast-io.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/mappings/wi-owm.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/mappings/wi-wmo4680.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/mappings/wi-wunderground.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/mappings/wi-yahoo.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons-classes.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons-core.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons-variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons-wind.min.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons-wind.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons.min.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/fonts/weather-icons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/gradient-variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_chartist.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_colors.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_gradient.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_shadows.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_typography.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/mixins/_vendor-prefixes.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/_chartist.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/_datatables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/_plugin-nouislider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/perfect-scrollbar/_main.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/perfect-scrollbar/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/perfect-scrollbar/_ps-custom.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/perfect-scrollbar/_themes.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/sass/scss/plugins/perfect-scrollbar/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/.bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/bower.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/install.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/pace.coffee" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/pace.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/pace.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/black/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/blue/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/green/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/orange/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/pink/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/purple/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/red/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/silver/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/white/pace-theme-minimal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-barber-shop.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-big-counter.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-bounce.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-center-atom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-center-circle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-center-radar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-center-simple.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-corner-indicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-fill-left.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-flash.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-flat-top.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-loading-bar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-mac-osx.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front-end-admin/src/assets/vendor/pace/themes/yellow/pace-theme-minimal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,38 +464,69 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/app.component.html">
+        <entry file="file://$PROJECT_DIR$/front-end/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="71" column="4" selection-start-line="12" selection-start-column="2" selection-end-line="71" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end-admin/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="851">
+              <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end-admin/angular.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-169">
+              <caret line="129" column="13" lean-forward="true" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/app.component.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/src/styles.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="46">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <caret line="2" lean-forward="true" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end-admin/src/styles.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/app-routing.module.ts">
+        <entry file="file://$PROJECT_DIR$/front-end-admin/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+            <state relative-caret-position="92">
+              <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/assets/logo.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/favicon.ico">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/index.html">
+        <entry file="file://$PROJECT_DIR$/front-end/angular.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            <state relative-caret-position="643">
+              <caret line="48" column="13" selection-start-line="29" selection-start-column="12" selection-end-line="48" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -73,6 +546,11 @@
         <option value="$PROJECT_DIR$/front-end/src/index.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/front-end-admin/package.json" />
+        <option value="$PROJECT_DIR$/front-end-admin/angular.json" />
+        <option value="$PROJECT_DIR$/front-end-admin/src/app/app.component.html" />
+        <option value="$PROJECT_DIR$/front-end-admin/src/styles.scss" />
+        <option value="$PROJECT_DIR$/front-end-admin/src/index.html" />
       </list>
     </option>
   </component>
@@ -95,11 +573,6 @@
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="back-end" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -111,33 +584,20 @@
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -158,6 +618,9 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/front-end/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front-end-admin/src/assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front-end/src/assets" />
     </key>
@@ -184,15 +647,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587391781954</updated>
-      <workItem from="1587391783641" duration="1707000" />
+      <workItem from="1587391783641" duration="2667000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1707000" />
+    <option name="totallyTimeSpent" value="2667000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
@@ -200,11 +664,11 @@
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.03685504" />
+      <window_info anchor="bottom" id="Terminal" weight="0.03685504" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32923833" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -218,29 +682,8 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/front-end/angular.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2852">
-          <caret line="124" column="41" selection-start-line="124" selection-start-column="41" selection-end-line="124" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1587">
-          <caret line="69" column="74" selection-start-line="69" selection-start-column="74" selection-end-line="69" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/app.component.scss">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/styles.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/assets/logo.png">
       <provider selected="true" editor-type-id="images" />
@@ -255,6 +698,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/src/assets/css/demo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-678" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/app.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -262,10 +717,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/app-routing.module.ts">
+    <entry file="file://$PROJECT_DIR$/front-end/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="71" column="4" selection-start-line="12" selection-start-column="2" selection-end-line="71" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="48" column="13" selection-start-line="29" selection-start-column="12" selection-end-line="48" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="129" column="13" lean-forward="true" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/styles.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
-          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+          <caret line="2" lean-forward="true" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/src/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end-admin/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
         </state>
       </provider>
     </entry>

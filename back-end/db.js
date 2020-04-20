@@ -32,6 +32,7 @@ function get_users() {
                 reject(err);
             }
             else {
+                console.log(result);
                 cache.set("users", result);
                 resolve(result);
             }
@@ -72,7 +73,6 @@ function update_user(user) {
 
 module.exports = {
     init_db,
-    get_users,
     register_user,
     update_user
 };

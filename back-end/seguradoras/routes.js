@@ -29,6 +29,25 @@ router.post('/new', async(req,res) => {
     if (!new_seguradora.name){
       res.status(400).json({"Message":"Campo de nome vazio"});
       valid = false;
+      return;
+    }
+
+    if (!new_seguradora.cnpj){
+      res.status(400).json({"Message":"Campo de CNPJ vazio"});
+      valid = false;
+      return;
+    }
+
+    if (!new_seguradora.telephone){
+      res.status(400).json({"Message":"Campo de telefone vazio"});
+      valid = false;
+      return;
+    }
+
+    if (!new_seguradora.address){
+      res.status(400).json({"Message":"Campo de endereço vazio"});
+      valid = false;
+      return;
     }
 
     if (valid) {

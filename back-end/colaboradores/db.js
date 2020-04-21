@@ -9,7 +9,6 @@ function get_colaboradores() {
                 reject(err);
             }
             else {
-                // console.log(result);
                 cache.set("colaboradores", result);
                 resolve(result);
             }

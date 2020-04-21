@@ -9,7 +9,7 @@ function get_colaboradores() {
                 reject(err);
             }
             else {
-              console.log(result);
+                // console.log(result);
                 cache.set("colaboradores", result);
                 resolve(result);
             }
@@ -27,7 +27,7 @@ function register_colaborador(new_colaborador) {
                 let new_colaborador_list = cache.get("colaboradores");
                 new_colaborador_list.push(new_colaborador);
                 cache.set("colaboradores",new_colaborador_list);
-                console.log("Colaborador novo cadastrada");
+                console.log("Colaborador novo cadastradp");
                 resolve(result);
             }
         });

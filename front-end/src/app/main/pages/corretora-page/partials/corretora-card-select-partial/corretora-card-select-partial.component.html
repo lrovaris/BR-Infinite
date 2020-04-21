@@ -1,0 +1,15 @@
+
+<div (click)="condition = !condition; modifyArray()" class="card border-primary" [ngClass]="[condition ? 'bg-white' : 'bg-primary' , condition ? 'border-primary':'']" style="cursor: pointer">
+  <div class="card-content">
+    <div class="px-3 py-3">
+      <div class="media">
+        <div class="media-left align-self-center">
+          <i class=" font-large-2 float-left" [ngClass]="[condition ? 'text-primary' : 'text-white', condition ? 'ft-check':'ft-square']"></i>
+        </div>
+        <div class="media-body text-right" [ngClass]="[condition ? 'text-primary' : 'text-white']">
+          <h3>{{nome}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Colaborador } from "../pages/colaborador-page/Colaborador";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,9 @@ export class ColaboradorService {
   isSeguradora: boolean = false;
   isCorretora: boolean = false;
   localDeTrabalho: string = '';
+  colaboradorBackEnd: any;
 
-  ColaboradorResponsavel: Colaborador = {
-    name: '',
-    telephone: '',
-    email: '',
-    birthday: '',
-    job: '',
-    corretora: '',
-    seguradora: '',
-    active: true
-  };
+  ColaboradorResponsavel: any;
 
  // TODO ------------------------------ GET SET
   setIsSeguradoraTrue() {
@@ -48,8 +41,10 @@ export class ColaboradorService {
     return this.isResponsible;
   }
 
-  setColaboradorResponsavel(colaborador: Colaborador) {
+  setColaboradorResponsavel(colaborador, newColaborador) {
+    this.colaboradorBackEnd = newColaborador;
     this.ColaboradorResponsavel = colaborador;
+    this.router.navigate(['corretora']);
     console.log(this.ColaboradorResponsavel);
   }
 
@@ -64,6 +59,6 @@ export class ColaboradorService {
     console.log(colaborador);
     }
   // TODO END METODOS DE BACK END ________________________________________________________________
-  constructor() { }
+  constructor(private router: Router) { }
 
 }

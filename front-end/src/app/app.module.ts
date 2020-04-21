@@ -13,6 +13,8 @@ import { ColaboradorPageComponent } from './main/pages/colaborador-page/colabora
 import { SeguradoraPageComponent } from './main/pages/seguradora-page/seguradora-page.component';
 import { PipelinePageComponent } from './main/pages/pipeline-page/pipeline-page.component';
 import { ProducaoPageComponent } from './main/pages/producao-page/producao-page.component';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { CorretoraCardSelectPartialComponent } from './main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import { ProducaoPageComponent } from './main/pages/producao-page/producao-page.
     ColaboradorPageComponent,
     SeguradoraPageComponent,
     PipelinePageComponent,
-    ProducaoPageComponent
+    ProducaoPageComponent,
+    CorretoraCardSelectPartialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

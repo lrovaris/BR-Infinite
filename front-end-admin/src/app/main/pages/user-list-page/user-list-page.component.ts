@@ -34,7 +34,15 @@ export class UserListPageComponent implements OnInit {
   //  For confirm action On Delete
   onDeleteConfirm(event) {
     if (window.confirm('Tem certeza que deseja deletar?')) {
-      event.confirm.resolve();
+      console.log(event);
+      let data = event.data;
+      data.active = false;
+      this.loginService.updateCadastro(data);
+      this.loginService.getUsers().subscribe(() => {
+        this.loginService.getUsers();
+        event.confirm.resolve();
+      });
+
     } else {
       event.confirm.reject();
     }
@@ -43,22 +51,17 @@ export class UserListPageComponent implements OnInit {
   //  For confirm action On Save
   onSaveConfirm(event) {
     if (window.confirm('Tem certeza que deseja salvar?')) {
-      event.newData['name'] += ' + added in code';
-      event.confirm.resolve(event.newData);
+      this.loginService.updateCadastro(event.newData);
+      this.loginService.getUsers().subscribe(() => {
+        this.loginService.getUsers();
+        event.confirm.resolve();
+      });
+
     } else {
       event.confirm.reject();
     }
   }
 
-  //  For confirm action On Create
-  onCreateConfirm(event) {
-    if (window.confirm('Are you sure you want to create?')) {
-      event.newData['name'] += ' + added in code';
-      event.confirm.resolve(event.newData);
-    } else {
-      event.confirm.reject();
-    }
-  }
 
   ngOnInit() {
     this.loginService.getUsers().subscribe((data: any) => {

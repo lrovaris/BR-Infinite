@@ -1,8 +1,6 @@
 // Smart DataTable
 export var settings = {
-
   columns: {
-
     name: {
       title: 'Nome Completo',
     },
@@ -10,15 +8,18 @@ export var settings = {
       title: 'Usuário',
     },
     active: {
-      title: 'Ativo',
+      title: 'Ativos',
       filter: {
-        type: 'checkbox',
+        type: 'list',
         config: {
-          true: 'ativo',
-          false: 'desativado',
-        },
+          selectText: 'Selecione',
+          list: [
+            { value: 'false', title: 'Desativado' },
+            { value: 'true', title: 'Ativado' },
+          ],
+        }
       },
-    }
+    },
   },
   attr: {
     class: "table table-responsive"
@@ -27,7 +28,7 @@ export var settings = {
     editButtonContent: ''
   },
   delete:{
-    deleteButtonContent: '<i class="icon-user-follow danger font-medium-1 mr-2"></i>'
+    deleteButtonContent: ''
   }
 };
 
@@ -47,52 +48,7 @@ export var filtersettings = {
       },
     },
     active: {
-      title: 'Passed',
-      filter: {
-        type: 'checkbox',
-        config: {
-          true: 'Yes',
-          false: 'No',
-          resetText: 'clear',
-        },
-      },
-    },
-  },
-  attr: {
-    class: "table table-responsive"
-  },
-  edit:{
-    editButtonContent: ''
-  },
-  delete:{
-    deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-2"></i>'
-  }
-};
-
-export var alertsettings = {
-  actions: {
-    add: false,
-  },
-  delete: {
-    confirmDelete: true,
-    deleteButtonContent: '<i style="margin-left: 4px" class="ft-x danger font-medium-1 mr-2"></i>'
-  },
-  add: {
-    confirmCreate: true,
-  },
-  edit: {
-    confirmSave: true,
-    editButtonContent: '<i style="margin-right: 4px" class="ft-edit-2 info font-medium-1 mr-2"></i>'
-  },
-  columns: {
-    name: {
-      title: 'Nome Completo',
-    },
-    login: {
-      title: 'Usuário',
-    },
-    active: {
-      title: 'Desativados',
+      title: 'Ativos',
       filter: {
         type: 'list',
         config: {
@@ -103,6 +59,66 @@ export var alertsettings = {
           ],
         }
       },
+    },
+  },
+  attr: {
+    class: "table table-responsive"
+  },
+  edit:{
+    editButtonContent: ''
+  },
+  delete:{
+    deleteButtonContent: ''
+  }
+};
+
+export var alertsettings = {
+
+  actions: {
+    add: false,
+  },
+  delete: {
+    confirmDelete: true,
+    deleteButtonContent: ''
+  },
+  add: {
+    confirmCreate: true,
+  },
+  edit: {
+    confirmSave: true,
+    editButtonContent: '<i style="margin-right: 4px" class="ft-edit-2 info font-medium-1 mr-2"></i>',
+    saveButtonContent: '<i style="margin-right: 4px" class="ft-save info font-medium-1 mr-2"></i>',
+    cancelButtonContent: '<i style="margin-left: 4px" class="ft-x danger font-medium-1 mr-2"></i>'
+  },
+  columns: {
+    name: {
+      title: 'Nome Completo',
+    },
+    login: {
+      title: 'Usuário',
+    },
+    active: {
+      title: 'Ativos',
+      filter: {
+        type: 'list',
+        config: {
+          selectText: 'Selecione',
+          list: [
+            { value: 'false', title: 'Desativado' },
+            { value: 'true', title: 'Ativado' },
+          ],
+        }
+      },
+      editor: {
+        type: 'list',
+        config: {
+          selectText: 'Selecione',
+          list: [
+            { value: 'false', title: 'Desativado' },
+            { value: 'true', title: 'Ativado' },
+          ],
+        }
+      }
     },
   },
   attr: {

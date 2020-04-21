@@ -79,12 +79,13 @@ export class LoginService {
 
   updateCadastro(updatedUser) {
 
-    let updatedUserWithID = updatedUser;
-    updatedUserWithID ["_id"] = this.user.id;
+
+
     const options = {
-      headers: new HttpHeaders().append('Content-Type\'', 'application/x-www-form-urlencoded'),
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}update-user/${this.user.id}`, updatedUserWithID, options).subscribe((log: any) => {
+    console.log(updatedUser);
+    return this.http.post(`${this.url}users/${updatedUser._id}/edit`, updatedUser, options).subscribe((log: any) => {
       this.user = log.ops[0];
     })
   }
@@ -95,7 +96,7 @@ export class LoginService {
       password: password
     };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"login",
+      .post<{Token: string, Message: string}>(this.url+"auth/login",
         authData
       )
       .subscribe(response => {
@@ -111,7 +112,7 @@ export class LoginService {
         }
         console.log(this.user);
         if(this.isAuthenticated) {
-          this.router.navigate([""]);
+          this.router.navigate(["lista"]);
         }
       }, (error) =>{
         console.log(error);

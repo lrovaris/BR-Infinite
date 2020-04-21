@@ -1,6 +1,7 @@
 <!--Login Page Starts-->
+<form [formGroup]="login" class="login-form" (ngSubmit)="loginMethod(login.value.login,login.value.password)">
 <section id="login" >
-  <div class="container-fluid" >
+  <div class="container-fluid" style="margin-top: -5rem">
     <div class="row full-height-vh m-0">
       <div class="col-12 d-flex align-items-center justify-content-center">
         <div class="card" style="box-shadow: 0 4px 8px #27416F">
@@ -24,11 +25,13 @@
                     Bem-vindo de volta Admin
                   </p>
                   <input
+                    formControlName="login"
                     type="text"
                     class="form-control mb-3"
                     placeholder="Usuário"
                   />
                   <input
+                    formControlName="password"
                     type="password"
                     class="form-control mb-3"
                     placeholder="Senha"
@@ -50,3 +53,4 @@
   </div>
 </section>
 <!--Login Page Ends-->
+</form>

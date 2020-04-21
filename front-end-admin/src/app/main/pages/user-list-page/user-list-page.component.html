@@ -11,13 +11,13 @@
                   <div class="col-sm-12">
                     <div class="card">
                       <div class="card-header">
-                        <h4 class="card-title">built-in column filter types</h4>
+                        <h4 class="card-title">Lista de Usúarios</h4>
                       </div>
                       <div class="card-content">
                         <div class="card-body">
                           <div class="table-responsive">
-                            <ng2-smart-table (delete)="log()" [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="log($event) "
-                                             (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                            <ng2-smart-table  [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event) "
+                                             (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
                           </div>
                         </div>
                       </div>

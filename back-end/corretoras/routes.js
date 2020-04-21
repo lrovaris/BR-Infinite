@@ -22,6 +22,54 @@ router.get ('/all', async (req,res) => {
   }
 });
 
+router.get('/:id', async(req,res) => {
+
+  let db_corretora = cache.get("corretoras").filter((corretora_obj) => {
+      return corretora_obj._id == req.params.id;
+  })[0];
+
+  if(!db_corretora){
+    res.status(400).json({"Message":"Corretora inválida, verifique o ID"});
+  }else{
+    if(!db_corretora.colaboradores){
+      db_corretora.colaboradores = [];
+    }
+
+    let colaboradores_list = cache.get("colaboradores");
+
+    new_colab = [];
+
+    for (var i = 0; i < db_corretora.colaboradores.length; i++) {
+      if(db_corretora.colaboradores[i]._id){
+        new_colab.push(db_corretora.colaboradores[i]);
+        continue;
+      }
+
+      let id_colab = db_corretora.colaboradores[i];
+
+      new_colab.push(colaboradores_list.filter((colaborador_obj) => {
+        return colaborador_obj._id + "" == id_colab + "";
+      })[0]);
+    }
+
+    db_corretora.colaboradores = new_colab;
+
+    if(db_corretora.colaboradores.length > 0 && db_corretora.manager._id === undefined){
+
+
+      db_corretora.manager = db_corretora.colaboradores.filter((colaborador_obj) => {
+        return colaborador_obj._id + "" == db_corretora.manager + "";
+      })[0]
+
+    }
+
+
+    await res.json(db_corretora);
+  }
+});
+
+
+
 router.post('/new', async(req,res) => {
     let corretora_valid = true;
 
@@ -112,11 +160,17 @@ router.post('/new', async(req,res) => {
     if (corretora_valid && corretor_valid) {
       let new_corr = await db.register_corretora(new_corretora).catch(err => console.error(err));
 
-      console.log(new_corr.insertedId);
-
       corretor_responsavel.corretora = new_corr.insertedId;
 
-      await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {console.log(err);});
+      let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {console.log(err);});
+
+      let db_corretora = new_corr.ops[0];
+
+      db_corretora["colaboradores"] = [ new_colab.insertedId ];
+
+      db_corretora["manager"] = new_colab.insertedId;
+
+      await db.update_corretora(db_corretora).catch(err => console.error(err));
 
       res.status(200).json({"Message":"Corretora e gerente cadastrados com sucesso!"});
     }

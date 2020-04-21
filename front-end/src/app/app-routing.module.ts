@@ -1,10 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './main/pages/home-page/home-page.component';
+import { LoginPageComponent } from "./main/pages/login-page/login-page.component";
+import { CorretoraPageComponent } from "./main/pages/corretora-page/corretora-page.component";
+import { SeguradoraPageComponent } from "./main/pages/seguradora-page/seguradora-page.component";
+import { PipelinePageComponent } from "./main/pages/pipeline-page/pipeline-page.component";
+import { ColaboradorPageComponent } from "./main/pages/colaborador-page/colaborador-page.component";
+import { ProducaoPageComponent } from "./main/pages/producao-page/producao-page.component";
+
+
+// TODO O Projeto está estruturado em divisão por páginas
 
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent}
+  { path: '', component: LoginPageComponent },
+  { path: 'home', component: HomePageComponent },
+  { path: 'corretora', component: CorretoraPageComponent },
+  { path: 'seguradora', component: SeguradoraPageComponent },
+  { path: 'pipeline', component: PipelinePageComponent },
+  { path: 'colaborador', component: ColaboradorPageComponent },
+  { path: 'producao', component: ProducaoPageComponent }
+
 ];
 
 @NgModule({

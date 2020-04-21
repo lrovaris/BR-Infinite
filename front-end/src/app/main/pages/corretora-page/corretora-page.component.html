@@ -1,0 +1,156 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header pb-2">
+            <h4 class="card-title" id="basic-layout-colored-form-control">Cadastro de Corretora</h4>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form" [formGroup]="corretora" role="form" class="login-form">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-info"></i>Informções da Corretora</h4>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput1">Nome da corretora</label>
+                        <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput2">CNPJ</label>
+                        <input type="text" id="userinput2" class="form-control border-primary" formControlName="cnpj">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput3">Email</label>
+                        <input type="email" id="userinput3" class="form-control border-primary" formControlName="email">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput4">Telefone</label>
+                        <input type="text" id="userinput4" class="form-control border-primary" formControlName="telephone">
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-mail"></i> Endereço </h4>
+
+
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput9">UF</label>
+                        <input type="text" id="userinput9" class="form-control border-primary" #uf [ngbTypeahead]="searchEstado" (change)="SelectCidade(uf.value)" formControlName="uf">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput10">Cidade</label>
+                        <input type="text" id="userinput10" class="form-control border-primary" [ngbTypeahead]="searchCidade" formControlName="city">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="userinput5">Rua</label>
+                    <input class="form-control border-primary" type="text" id="userinput5" formControlName="street">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="userinput8">Bairro</label>
+                        <input type="text" id="userinput8" class="form-control border-primary" formControlName="neighborhood">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="userinput6">Número</label>
+                        <input type="email" id="userinput6" class="form-control border-primary" formControlName="number">
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="userinput7">Complemento</label>
+                        <input type="text" id="userinput7" class="form-control border-primary" formControlName="complement">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <div class="card bg-primary" style="cursor: pointer" (click)="navigateColaborador(corretora)">
+                        <div class="card-content">
+                          <div class="px-3 py-3">
+                            <div class="media">
+                              <div class="media-left align-self-center">
+                                <i class="icon-user-follow white font-large-2 float-left"></i>
+                              </div>
+                              <div class="media-body white text-right">
+                                <h3>Adicionar Corretor Responsavel</h3>
+                                <span>irá para tela de cadastro de colaborador</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-info"></i>Preencher por último</h4>
+
+                  <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-6">
+                      <app-corretora-card-select-partial [nome]="'Amil'"></app-corretora-card-select-partial>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-6">
+                      <app-corretora-card-select-partial [nome]="'Sampo'"></app-corretora-card-select-partial>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-6">
+                      <app-corretora-card-select-partial [nome]="'Suhai'"></app-corretora-card-select-partial>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-6">
+                      <app-corretora-card-select-partial [nome]="'Tokyo Marine'"></app-corretora-card-select-partial>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-6">
+                      <app-corretora-card-select-partial [nome]="'Mitsui'"></app-corretora-card-select-partial>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions right">
+                  <button type="button" class="btn btn-raised  mr-1 btn-header-cancel">
+                    <i class="ft-x"></i> <a>Voltar</a>
+                  </button>
+                  <button type="button" class="btn btn-raised  btn-header">
+                    <i class="fa fa-check-square-o"></i> <a>Salvar</a>
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

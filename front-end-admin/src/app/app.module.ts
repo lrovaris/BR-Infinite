@@ -10,6 +10,7 @@ import { UserListPageComponent } from './main/pages/user-list-page/user-list-pag
 import { Ng2SmartTableModule }  from "ng2-smart-table";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     Ng2SmartTableModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

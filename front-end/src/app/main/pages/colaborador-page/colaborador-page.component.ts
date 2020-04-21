@@ -1,0 +1,110 @@
+import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../../../../../../front-end-admin/src/app/main/services/login.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {MustMatch} from "../../../../../../front-end-admin/src/app/main/pages/cadastro-page/partials/must-match.validator";
+import {ColaboradorService} from "../../services/colaborador.service";
+import {Colaborador} from "./Colaborador";
+
+@Component({
+  selector: 'app-colaborador-page',
+  templateUrl: './colaborador-page.component.html',
+  styleUrls: ['./colaborador-page.component.scss']
+})
+export class ColaboradorPageComponent implements OnInit {
+
+  selectIndex: number = 0;
+  selectTriggered: boolean = false;
+  checkSelect: boolean = null;
+  checkIsResonponsible: boolean = false;
+
+  submitted = false;
+  colaborador: FormGroup;
+
+
+
+  onSelectTrabalho(index) {
+    this.selectTriggered = true;
+    if (index === 'seguradora') {
+      this.checkSelect = false;
+      return
+    } else if (index === 'corretora') {
+      this.checkSelect = true;
+      return
+    } else {
+      return
+    }
+  }
+
+
+  constructor(private formbuilder: FormBuilder, public colaboradorService: ColaboradorService, private router: Router) {
+    this.colaborador = this.formbuilder.group({
+        name: [null, Validators.required],
+        email: [null, Validators.required],
+        telephone: [null, Validators.required],
+        birthday: [null, Validators.required],
+        job: [null, Validators.required],
+        corretora: [''],
+        seguradora: [''],
+      })
+  }
+
+  get f() { return this.colaborador.controls; }
+
+  onReset() {
+    this.submitted = false;
+    this.colaborador.reset();
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.colaborador.invalid) {
+      console.log('invalid-retornando');
+
+      return;
+    }
+    let newColaborador: Colaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: this.colaborador.value.corretora,
+      seguradora: this.colaborador.value.seguradora,
+      active: true
+    };
+    this.colaboradorService.cadastro(newColaborador);
+    this.onReset();
+  }
+
+  onFinish() {
+    this.submitted = true;
+    if (this.colaborador.invalid) {
+      console.log('invalid-retornando');
+      console.log(this.colaborador);
+      return;
+    }
+    let newColaborador: Colaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: this.colaborador.value.corretora,
+      seguradora: this.colaborador.value.seguradora,
+      active: true
+    };
+    this.colaboradorService.setColaboradorResponsavel(newColaborador);
+    this.onReset();
+  }
+
+  navigateLista() {
+    this.router.navigate(['lista'])
+  }
+
+  ngOnInit() {
+    this.colaboradorService.setIsResponsibleTrue();
+    this.checkIsResonponsible = this.colaboradorService.getIsResponsible();
+  }
+
+}

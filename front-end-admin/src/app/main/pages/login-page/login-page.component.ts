@@ -10,18 +10,14 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
 
-
   checkMinhaConta = false;
   login: FormGroup;
   isAuth = false;
   submitted = false;
 
-
   logout() {
     this.servico.logout();
   }
-
-
 
   onHover() {
     this.checkMinhaConta = !this.checkMinhaConta;
@@ -45,7 +41,6 @@ export class LoginPageComponent implements OnInit {
   navigateCadastro() {
     this.router.navigate(['cadastro']);
   }
-
   navigatehome(){
     this.router.navigate(['']);
   }

@@ -27,7 +27,7 @@ function register_colaborador(new_colaborador) {
                 let new_colaborador_list = cache.get("colaboradores");
                 new_colaborador_list.push(new_colaborador);
                 cache.set("colaboradores",new_colaborador_list);
-                console.log("Colaborador novo cadastradp");
+                console.log("Colaborador novo cadastrado");
                 resolve(result);
             }
         });

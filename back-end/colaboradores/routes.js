@@ -50,8 +50,8 @@ router.post('/new', async(req,res) => {
       return;
     }
 
-    if (!new_colaborador.corretora){
-      res.status(400).json({"Message":"Campo de corretora vazio"});
+    if (!new_colaborador.job){
+      res.status(400).json({"Message":"Campo de cargo vazio"});
       valid = false;
       return;
     }

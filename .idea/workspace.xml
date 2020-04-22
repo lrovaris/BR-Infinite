@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="572ecc54-64ef-4e0e-a9f2-fc7ba95b0f69" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="141" column="20" selection-start-line="141" selection-start-column="20" selection-end-line="141" selection-end-column="20" />
+            <state relative-caret-position="324">
+              <caret line="100" column="108" selection-start-line="100" selection-start-column="104" selection-end-line="100" selection-end-column="108" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -32,40 +32,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+            <state relative-caret-position="513">
+              <caret line="5819" column="72" selection-start-line="5819" selection-start-column="72" selection-end-line="5819" selection-end-column="72" />
               <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="386">
+              <caret line="87" column="113" selection-start-line="87" selection-start-column="113" selection-end-line="87" selection-end-column="113" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component.html">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="50" selection-start-line="1" selection-start-column="50" selection-end-line="1" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="920">
-              <caret line="40" lean-forward="true" selection-end-line="40" />
+            <state relative-caret-position="351">
+              <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,6 +95,7 @@
       <find>auth</find>
       <find>value</find>
       <find>console</find>
+      <find>corr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,12 +144,12 @@
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/services/corretora.service.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/header/header.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.scss" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html" />
       </list>
     </option>
@@ -297,7 +307,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41496000" />
+    <option name="totallyTimeSpent" value="42879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -696,37 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="5818" column="51" selection-start-line="5818" selection-start-column="51" selection-end-line="5818" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-            <element signature="e#204#122437#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/header/header.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -753,10 +732,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="50" selection-start-line="1" selection-start-column="50" selection-end-line="1" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="5819" column="72" selection-start-line="5819" selection-start-column="72" selection-end-line="5819" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="87" column="113" selection-start-line="87" selection-start-column="113" selection-end-line="87" selection-end-column="113" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="141" column="20" selection-start-line="141" selection-start-column="20" selection-end-line="141" selection-end-column="20" />
+        <state relative-caret-position="324">
+          <caret line="100" column="108" selection-start-line="100" selection-start-column="104" selection-end-line="100" selection-end-column="108" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#6;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
@@ -765,18 +781,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+        <state relative-caret-position="351">
+          <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="50" selection-start-line="1" selection-start-column="50" selection-end-line="1" selection-end-column="50" />
         </state>
       </provider>
     </entry>

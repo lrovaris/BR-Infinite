@@ -21,6 +21,7 @@ export class ColaboradorPageComponent implements OnInit {
   submitted = false;
   colaborador: FormGroup;
 
+  name: string = '';
 
 
   onSelectTrabalho(index) {
@@ -71,7 +72,6 @@ export class ColaboradorPageComponent implements OnInit {
       seguradora: this.colaborador.value.seguradora,
       active: true
     };
-
     if (this.colaboradorService.getIsResponsible()) {
       this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
     } else {
@@ -84,6 +84,9 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    let isCorretora = this.colaboradorService.getIsCorretora();
+    if (isCorretora.isCorretora) {this.selectIndex = 1; this.selectTriggered = true; this.name = isCorretora.name}
+    if (this.colaboradorService.getIsSeguradora()) {this.selectIndex = 2; this.selectTriggered = true;}
     if (this.colaboradorService.getColaboradorResponsavel()) {
       this.colaborador = this.colaboradorService.getColaboradorResponsavel();
     }

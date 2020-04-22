@@ -14,6 +14,7 @@ export class ColaboradorService {
   isCorretora: boolean = false;
   localDeTrabalho: string = '';
   colaboradorBackEnd: any;
+  name: string = '';
 
   ColaboradorResponsavel: any;
 
@@ -21,7 +22,8 @@ export class ColaboradorService {
   setIsSeguradoraTrue() {
     this.isSeguradora = true;
   }
-  setIsCorretoraTrue() {
+  setIsCorretoraTrue(name) {
+    this.name = name;
     this.isCorretora = true;
   }
   setIsSeguradoraFalse() {
@@ -29,6 +31,18 @@ export class ColaboradorService {
   }
   setIsCorretoraFalse() {
     this.isCorretora = false;
+  }
+
+  getIsCorretora() {
+  let corretora = {
+      name: this.name,
+      isCorretora: this.isCorretora,
+    };
+    return corretora;
+  }
+
+  getIsSeguradora() {
+    return this.isSeguradora;
   }
 
   setIsResponsibleFalse() {

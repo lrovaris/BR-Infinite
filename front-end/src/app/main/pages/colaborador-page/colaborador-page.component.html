@@ -71,7 +71,7 @@
                     <label for="issueinput5">Selecione Corretora</label>
                     <select [selectedIndex]="selectIndex" id="issueinput6" formControlName="corretora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
                             data-placement="top" data-title="Priority">
-                      <option value="corretora">Corretora</option>
+                      <option [value]="name">{{name}}</option>
                     </select>
                   </div>
 

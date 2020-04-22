@@ -5817,6 +5817,7 @@ export class CorretoraPageComponent implements OnInit {
     this.corretoraService.resetArray();
     this.corretoraService.saveCorretoraInfo(corretora);
     this.colaboradorService.setIsResponsibleTrue();
+    this.colaboradorService.setIsCorretoraTrue(this.corretora.value.name);
     this.router.navigate(['colaborador'])
   }
 

@@ -1,9 +1,11 @@
 const ObjectId = require('mongodb').ObjectId;
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const controller = require('./controller')
+const logger = require('../logger');
 
 
 function get_colaboradores() {
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
         global.db.collection("colaboradores").find({}).toArray((err, result) =>{
             if(err){
                 reject(err);
@@ -17,16 +19,16 @@ function get_colaboradores() {
 }
 
 
-function register_colaborador(new_colaborador) {
+async function register_colaborador(new_colaborador) {
     return new Promise((resolve, reject) => {
-        global.db.collection("colaboradores").insertOne(new_colaborador, (err, result) => {
+        global.db.collection("colaboradores").insertOne(new_colaborador, async(err, result) => {
             if(err){
                 reject(err);
             }else {
-                let new_colaborador_list = cache.get("colaboradores");
+              let new_colaborador_list = await controller.get_colaboradores();
                 new_colaborador_list.push(new_colaborador);
                 cache.set("colaboradores",new_colaborador_list);
-                console.log("Colaborador novo cadastrado");
+                logger.log("Colaborador novo cadastrado");
                 resolve(result);
             }
         });
@@ -41,7 +43,7 @@ function update_colaborador(colaborador) {
       if(err){
           reject(err);
       }else{
-        console.log(`Modificados ${result.result.nModified} elementos`);
+        logger.log(`Modificados ${result.result.nModified} elementos`);
 
         resolve(result);
       }

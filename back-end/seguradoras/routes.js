@@ -108,7 +108,7 @@ router.post('/new', async(req,res) => {
 
       await db.update_seguradora(db_seguradora).catch(err => console.error(err));
 
-      res.status(200).json({"Message":"Segudoradora e gerente cadastrados com sucesso!"});
+      res.status(200).json({"Message":"Seguradora e gerente cadastrados com sucesso!"});
     }
 });
 

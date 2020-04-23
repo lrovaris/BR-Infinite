@@ -1,10 +1,15 @@
 const ObjectId = require('mongodb').ObjectId;
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const logger = require('../logger');
+
+const db_utils = require('../db.js');
 
 
-function get_seguradoras() {
+async function get_seguradoras() {
+  let db_conn = await db_utils.get_db();
+
     return new Promise((resolve, reject) => {
-        global.db.collection("seguradoras").find({}).toArray((err, result) =>{
+        db_conn.collection("seguradoras").find({}).toArray((err, result) =>{
             if(err){
                 reject(err);
             }
@@ -17,31 +22,35 @@ function get_seguradoras() {
 }
 
 
-function register_seguradora(new_seguradora) {
+async function register_seguradora(new_seguradora) {
+  let db_conn = await db_utils.get_db();
+
     return new Promise((resolve, reject) => {
-        global.db.collection("seguradoras").insertOne(new_seguradora, (err, result) => {
+        db_conn.collection("seguradoras").insertOne(new_seguradora, (err, result) => {
             if(err){
                 reject(err);
             }else {
                 let new_seguradora_list = cache.get("seguradoras");
                 new_seguradora_list.push(new_seguradora);
                 cache.set("seguradoras",new_seguradora_list);
-                console.log("Seguradora nova cadastrada");
+                logger.log("Seguradora nova cadastrada");
                 resolve(result);
             }
         });
     });
 }
 
-function update_seguradora(seguradora) {
-   seguradora._id = new ObjectId(seguradora._id);
+async function update_seguradora(seguradora) {
+  let db_conn = await db_utils.get_db();
+
+  seguradora._id = new ObjectId(seguradora._id);
 
   return new Promise((resolve, reject) => {
-    global.db.collection("seguradoras").replaceOne({_id: seguradora._id }, seguradora,{w: "majority", upsert: false} ,(err, result) =>{
+    db_conn.collection("seguradoras").replaceOne({_id: seguradora._id }, seguradora,{w: "majority", upsert: false} ,(err, result) =>{
       if(err){
           reject(err);
       }else{
-        console.log(`Modificados ${result.result.nModified} elementos`);
+        logger.log(`Modificados ${result.result.nModified} elementos`);
 
         resolve(result);
       }

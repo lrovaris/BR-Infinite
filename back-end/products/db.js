@@ -1,10 +1,13 @@
 const ObjectId = require('mongodb').ObjectId;
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const logger = require('../logger')
+const db_utils = require('../db.js');
 
+async function get_produtos() {
+    let db_conn = await db_utils.get_db();
 
-function get_produtos() {
     return new Promise((resolve, reject) => {
-        global.db.collection("produtos").find({}).toArray((err, result) =>{
+        db_conn.collection("produtos").find({}).toArray((err, result) =>{
             if(err){
                 reject(err);
             }
@@ -17,31 +20,40 @@ function get_produtos() {
 }
 
 
-function register_produto(new_produto) {
-    return new Promise((resolve, reject) => {
-        global.db.collection("produtos").insertOne(new_produto, (err, result) => {
-            if(err){
-                reject(err);
-            }else {
-                let new_produto_list = cache.get("produtos");
-                new_produto_list.push(new_produto);
-                cache.set("produtos",new_produto_list);
-                console.log("Produto novo cadastrado");
-                resolve(result);
-            }
-        });
+async function register_produto(new_produto) {
+  let db_conn = await db_utils.get_db();
+
+  if(cache.get('produtos') === undefined){
+    await get_produtos();
+  }
+
+
+  return new Promise((resolve, reject) => {
+    db_conn.collection("produtos").insertOne(new_produto, (err, result) => {
+      if(err){
+        reject(err);
+      }else {
+        let new_produto_list = cache.get("produtos");
+        new_produto_list.push(new_produto);
+        cache.set("produtos",new_produto_list);
+        logger.log("Produto novo cadastrado");
+        resolve(result);
+      }
     });
+  });
 }
 
-function update_produto(produto) {
+async function update_produto(produto) {
+  let db_conn = await db_utils.get_db();
+
    produto._id = new ObjectId(produto._id);
 
   return new Promise((resolve, reject) => {
-    global.db.collection("produtos").replaceOne({_id: produto._id }, produto,{w: "majority", upsert: false} ,(err, result) =>{
+    db_conn.collection("produtos").replaceOne({_id: produto._id }, produto,{w: "majority", upsert: false} ,(err, result) =>{
       if(err){
           reject(err);
       }else{
-        console.log(`Modificados ${result.result.nModified} elementos`);
+        logger.log(`Modificados ${result.result.nModified} elementos`);
 
         resolve(result);
       }

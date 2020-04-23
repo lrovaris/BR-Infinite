@@ -9,6 +9,26 @@ export class SeguradoraService {
   seguradoraInfo: any;
   url = 'http://localhost:3000';
   telefones = [];
+  seguradoras = [];
+  resetArray() {
+    this.seguradoras = [];
+  }
+
+  addArray(nome) {
+    this.seguradoras.push(nome);
+  }
+  removeArray(nome) {
+    let index = this.seguradoras.indexOf(nome);
+    if (index !== -1) this.seguradoras.splice(index, 1);
+    console.log(this.seguradoras);
+  }
+  getSeguradoras() {
+    return this.seguradoras;
+  }
+
+  getAllSeguradoras() {
+    return this.http.get(`${this.url}/seguradoras/all`);
+  }
 
   constructor(private http: HttpClient) { }
 

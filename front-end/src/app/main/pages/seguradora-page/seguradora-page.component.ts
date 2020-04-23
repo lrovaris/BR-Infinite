@@ -5843,7 +5843,6 @@ export class SeguradoraPageComponent implements OnInit {
     }
     let newSeguradora = {
       name: this.seguradora.value.name,
-      email: this.seguradora.value.email,
       telephone: this.seguradora.value.telephone,
       cnpj: this.seguradora.value.cnpj,
       address: {

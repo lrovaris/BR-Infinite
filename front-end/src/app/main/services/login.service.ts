@@ -93,9 +93,12 @@ export class LoginService {
       login: login,
       password: password
     };
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"auth/login",
-        authData
+      .post<{Token: string, Message: string}>(this.url+"users/login",
+        authData, options
       )
       .subscribe(response => {
         this.token = response.Token;

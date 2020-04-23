@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CorretoraService} from "../../../../services/corretora.service";
+import {SeguradoraService} from "../../../../services/seguradora.service";
 
 @Component({
   selector: 'app-corretora-card-select-partial',
@@ -19,7 +19,7 @@ export class CorretoraCardSelectPartialComponent implements OnInit {
     }
   }
 
-  constructor(private service: CorretoraService) { }
+  constructor(private service: SeguradoraService) { }
 
   ngOnInit() {
   }

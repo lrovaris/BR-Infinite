@@ -5,10 +5,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Router} from "@angular/router";
 import {CorretoraService} from "../../services/corretora.service";
-import {Colaborador} from "../colaborador-page/Colaborador";
+import {SeguradoraService} from "../../services/seguradora.service";
 
 const estados = [];
-
 const Estados = [
   {
     sigla: 'AC',
@@ -5786,6 +5785,7 @@ export class CorretoraPageComponent implements OnInit {
   submitted = false;
   seguradoras = [];
   responsavel: any;
+  allSeguradoras: Array<any> = [];
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5800,7 +5800,8 @@ export class CorretoraPageComponent implements OnInit {
               private formbuilder: FormBuilder,
               public colaboradorService: ColaboradorService,
               private router: Router,
-              private corretoraService: CorretoraService) {
+              private corretoraService: CorretoraService,
+              private seguradoraService: SeguradoraService) {
 
     this.corretora = this.formbuilder.group({
       name: [null, Validators.required],
@@ -5817,7 +5818,7 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   navigateColaborador(corretora) {
-    this.corretoraService.resetArray();
+    this.seguradoraService.resetArray();
     this.corretoraService.saveCorretoraInfo(corretora);
     this.colaboradorService.setIsResponsibleTrue();
     this.colaboradorService.setIsCorretoraTrue(this.corretora.value.name);
@@ -5828,6 +5829,11 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getCorretoraInfo()) {
       this.corretora =  this.corretoraService.getCorretoraInfo();
     }
+
+    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
+      this.allSeguradoras = data;
+    })
+
   }
 
   onFinish() {
@@ -5837,7 +5843,7 @@ export class CorretoraPageComponent implements OnInit {
       console.log(this.corretora.value);
       return;
     }
-      this.seguradoras = this.corretoraService.getSeguradoras();
+      this.seguradoras = this.seguradoraService.getSeguradoras();
     let newCorretora = {
       name: this.corretora.value.name,
       email: this.corretora.value.email,

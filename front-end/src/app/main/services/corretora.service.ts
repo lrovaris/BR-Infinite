@@ -8,22 +8,10 @@ export class CorretoraService {
 
   url = 'http://localhost:3000';
 
-  seguradoras = [];
+
   corretoraInfo: any;
   responsavel: any;
 
-  resetArray() {
-    this.seguradoras = [];
-  }
-
-  addArray(nome) {
-    this.seguradoras.push(nome);
-  }
-  removeArray(nome) {
-    let index = this.seguradoras.indexOf(nome);
-    if (index !== -1) this.seguradoras.splice(index, 1);
-    console.log(this.seguradoras);
-  }
 
   saveCorretoraInfo(corretora) {
     this.corretoraInfo = corretora;
@@ -31,9 +19,7 @@ export class CorretoraService {
   getCorretoraInfo() {
     return this.corretoraInfo;
   }
-  getSeguradoras() {
-    return this.seguradoras;
-  }
+
   postCorretora(corretora, responsavel){
     console.log(corretora);
     console.log(responsavel.value);

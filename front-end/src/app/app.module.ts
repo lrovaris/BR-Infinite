@@ -15,6 +15,8 @@ import { PipelinePageComponent } from './main/pages/pipeline-page/pipeline-page.
 import { ProducaoPageComponent } from './main/pages/producao-page/producao-page.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CorretoraCardSelectPartialComponent } from './main/pages/corretora-page/partials/corretora-card-select-partial/corretora-card-select-partial.component';
+import { ProdutosPageComponent } from './main/pages/produtos-page/produtos-page.component';
+import { SeguradoraCardPartialComponent } from './main/pages/seguradora-page/partials/seguradora-card-partial/seguradora-card-partial.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CorretoraCardSelectPartialComponent } from './main/pages/corretora-page
     SeguradoraPageComponent,
     PipelinePageComponent,
     ProducaoPageComponent,
-    CorretoraCardSelectPartialComponent
+    CorretoraCardSelectPartialComponent,
+    ProdutosPageComponent,
+    SeguradoraCardPartialComponent
   ],
   imports: [
     BrowserModule,

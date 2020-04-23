@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('./db');
 const cache = require('../memoryCache');
 const logger = require('../logger');
+const colaborador_db = require('../colaboradores/db')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});

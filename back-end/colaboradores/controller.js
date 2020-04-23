@@ -9,7 +9,6 @@ async function get_colaboradores() {
   }else {
     all_colaboradores = await db.get_colaboradores();
 
-
     return all_colaboradores;
   }
 }

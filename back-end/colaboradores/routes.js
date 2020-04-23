@@ -59,8 +59,14 @@ router.post('/new', async(req,res) => {
     new_colaborador['active'] = true;
 
     if (valid) {
-      await db.register_colaborador(new_colaborador).catch(err => console.error(err));
-      res.status(200).json({"Message":"Colaborador cadastrado com sucesso!"});
+      let db_response = await db.register_colaborador(new_colaborador).catch(err => console.error(err));
+
+      let to_send = {
+        message: "Colaborador cadastrado com sucesso!",
+        colaborador: db_response.ops[0]
+      }
+
+      res.status(200).json(to_send);
     }
 });
 

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const logger = require('../logger');
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
@@ -45,8 +46,8 @@ router.post('/new', async(req,res) => {
     }
 
     if (valid) {
-      console.log(new_produto);
-      await db.register_produto(new_produto).catch(err => console.error(err));
+      logger.log(new_produto);
+      await db.register_produto(new_produto).catch(err => logger.error(err));
       res.status(200).json({"Message":"Produto cadastrado com sucesso!"});
     }
 });
@@ -69,7 +70,7 @@ router.post('/:id/edit', async(req,res) => {
     db_produto[key] = val;
   });
 
-  let edited_produto = await db.update_produto(db_produto).catch(err => console.error(err));
+  let edited_produto = await db.update_produto(db_produto).catch(err => logger.error(err));
 
   await res.json(edited_produto);
 });

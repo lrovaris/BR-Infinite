@@ -1,6 +1,8 @@
 const request = require('supertest')
 const app = require('../server')
 const routes = require('./routes');
+const db = require('../db');
+const controller = require('./controller')
 
 describe('Corretoras Routes', () => {
   it('deveria retornar um json maneiro :)', async () => {
@@ -46,9 +48,11 @@ describe('Corretoras Routes', () => {
 
   it('deveria pegar o nome da corretora do banco de dados e modificar', async () => {
 
-    const corretoras_req = await request(app).get('/corretoras/all');
+    const corretoras_req = await controller.get_corretoras();
 
-    corretinha = corretoras_req.body[0];
+    let corretoras_num = corretoras_req.length;
+
+    corretinha = corretoras_req[0];
 
     expect(corretinha.name).toEqual("corretinha");
 
@@ -58,11 +62,11 @@ describe('Corretoras Routes', () => {
 
     expect(res.statusCode).toEqual(200);
 
-    const corretoras_req2 = await request(app).get('/corretoras/all');
+    const corretoras_req2 = await controller.get_corretoras();
 
-    expect(corretoras_req2.body.length).toEqual(1);
+    expect(corretoras_req2.length).toEqual(corretoras_num);
 
-    corretinha2 = corretoras_req2.body[0];
+    corretinha2 = corretoras_req2[0];
 
     expect(corretinha2.name = "corretona");
   })

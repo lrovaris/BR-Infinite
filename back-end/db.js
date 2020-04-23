@@ -4,21 +4,33 @@ const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology:
 const cache = require('./memoryCache');
 const logger = require('./logger')
 
-function init_db(){
+let brinfinite;
+
+
+async function init_db(){
     return new Promise((resolve, reject) => {
-        client.connect(err => {
+        client.connect( err => {
             if(err){
                 reject(err);
             }
             else {
                 logger.log("Conectado");
-                global.db = client.db("brinfinite");
-                resolve(global.db);
+                brinfinite = client.db("brinfinite");
+                resolve(brinfinite);
             }
         });
     });
 }
 
+async function get_db() {
+  if(brinfinite !== undefined){
+    return brinfinite;
+  }else {
+    return{};
+  }
+}
+
 module.exports = {
-    init_db
+    init_db,
+    get_db
 };

@@ -2,10 +2,13 @@ const ObjectId = require('mongodb').ObjectId;
 var cache = require('../memoryCache');
 var logger = require('../logger');
 
+const db_utils = require('../db.js');
 
-function get_users() {
+async function get_users() {
+  let db_conn = await db_utils.get_db();
+
     return new Promise((resolve, reject) => {
-        global.db.collection("users").find({}).toArray((err, result) =>{
+        db_conn.collection("users").find({}).toArray((err, result) =>{
             if(err){
                 reject(err);
             }
@@ -18,27 +21,31 @@ function get_users() {
 }
 
 
-function register_user(new_user) {
-    return new Promise((resolve, reject) => {
-        global.db.collection("users").insertOne(new_user, (err, result) => {
-            if(err){
-                reject(err);
-            }else {
-                let new_user_list = cache.get("users");
-                new_user_list.push(new_user);
-                cache.set("users",new_user_list);
-                logger.log("Usuário novo criado");
-                resolve(result);
-            }
-        });
-    });
-}
-
-function update_user(user) {
-   user._id = new ObjectId(user._id);
+async function register_user(new_user) {
+  let db_conn = await db_utils.get_db();
 
   return new Promise((resolve, reject) => {
-    global.db.collection("users").replaceOne({_id: user._id }, user,{w: "majority", upsert: false} ,(err, result) =>{
+      db_conn.collection("users").insertOne(new_user, (err, result) => {
+          if(err){
+              reject(err);
+          }else {
+              let new_user_list = cache.get("users");
+              new_user_list.push(new_user);
+              cache.set("users",new_user_list);
+              logger.log("Usuário novo criado");
+              resolve(result);
+          }
+      });
+  });
+}
+
+async function update_user(user) {
+  user._id = new ObjectId(user._id);
+
+  let db_conn = await db_utils.get_db();
+
+  return new Promise((resolve, reject) => {
+    db_conn.collection("users").replaceOne({_id: user._id }, user,{w: "majority", upsert: false} ,(err, result) =>{
       if(err){
           reject(err);
       }else{

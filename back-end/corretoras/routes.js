@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
+const cache = require('../memoryCache');
+const logger = require('../logger')
+
 const colaborador_db = require('../colaboradores/db');
-var cache = require('../memoryCache');
+const controlador_controller = require('../colaboradores/controller');
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
@@ -35,7 +38,7 @@ router.get('/:id', async(req,res) => {
       db_corretora.colaboradores = [];
     }
 
-    let colaboradores_list = cache.get("colaboradores");
+    let colaboradores_list = controlador_controller.get_colaboradores();
 
     new_colab = [];
 
@@ -72,7 +75,7 @@ router.get('/:id', async(req,res) => {
 
 router.post('/new', async(req,res) => {
 
-    console.log(req.body);
+    logger.log(req.body);
 
     let corretora_valid = true;
 
@@ -161,11 +164,11 @@ router.post('/new', async(req,res) => {
     }
 
     if (corretora_valid && corretor_valid) {
-      let new_corr = await db.register_corretora(new_corretora).catch(err => console.error(err));
+      let new_corr = await db.register_corretora(new_corretora).catch(err => logger.error(err));
 
       corretor_responsavel.corretora = new_corr.insertedId;
 
-      let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {console.log(err);});
+      let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
 
       let db_corretora = new_corr.ops[0];
 
@@ -173,7 +176,7 @@ router.post('/new', async(req,res) => {
 
       db_corretora["manager"] = new_colab.insertedId;
 
-      await db.update_corretora(db_corretora).catch(err => console.error(err));
+      await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
       res.status(200).json({"Message":"Corretora e gerente cadastrados com sucesso!"});
     }
@@ -197,7 +200,7 @@ router.post('/:id/edit', async(req,res) => {
     db_corretora[key] = val;
   });
 
-  let edited_corretora = await db.update_corretora(db_corretora).catch(err => console.error(err));
+  let edited_corretora = await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
   await res.json(edited_corretora);
 });

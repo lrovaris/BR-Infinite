@@ -1,12 +1,15 @@
 const ObjectId = require('mongodb').ObjectId;
 const cache = require('../memoryCache');
-const controller = require('./controller')
 const logger = require('../logger');
 
+const db_utils = require('../db.js');
 
-function get_colaboradores() {
+
+async function get_colaboradores() {
+  let db_conn = await db_utils.get_db();
+
   return new Promise((resolve, reject) => {
-        global.db.collection("colaboradores").find({}).toArray((err, result) =>{
+        db_conn.collection("colaboradores").find({}).toArray((err, result) =>{
             if(err){
                 reject(err);
             }
@@ -20,12 +23,20 @@ function get_colaboradores() {
 
 
 async function register_colaborador(new_colaborador) {
-    return new Promise((resolve, reject) => {
-        global.db.collection("colaboradores").insertOne(new_colaborador, async(err, result) => {
+
+  let db_conn = await db_utils.get_db();
+
+  if(cache.get('colaboradores') === undefined){
+    await get_colaboradores();
+  }
+
+  return new Promise((resolve, reject) => {
+        db_conn.collection("colaboradores").insertOne(new_colaborador, async(err, result) => {
             if(err){
                 reject(err);
             }else {
-              let new_colaborador_list = await controller.get_colaboradores();
+              let new_colaborador_list = cache.get('colaboradores');
+
                 new_colaborador_list.push(new_colaborador);
                 cache.set("colaboradores",new_colaborador_list);
                 logger.log("Colaborador novo cadastrado");
@@ -35,11 +46,13 @@ async function register_colaborador(new_colaborador) {
     });
 }
 
-function update_colaborador(colaborador) {
+async function update_colaborador(colaborador) {
    colaborador._id = new ObjectId(colaborador._id);
 
+   let db_conn = await db_utils.get_db();
+
   return new Promise((resolve, reject) => {
-    global.db.collection("colaboradores").replaceOne({_id: colaborador._id }, colaborador,{w: "majority", upsert: false} ,(err, result) =>{
+    db_conn.collection("colaboradores").replaceOne({_id: colaborador._id }, colaborador,{w: "majority", upsert: false} ,(err, result) =>{
       if(err){
           reject(err);
       }else{

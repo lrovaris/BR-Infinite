@@ -79,8 +79,6 @@ export class LoginService {
 
   updateCadastro(updatedUser) {
 
-
-
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };

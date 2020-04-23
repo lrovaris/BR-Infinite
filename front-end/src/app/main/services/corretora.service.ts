@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CorretoraService {
 
+  url = 'http://localhost:3000';
+
   seguradoras = [];
   corretoraInfo: any;
+  responsavel: any;
 
   resetArray() {
     this.seguradoras = [];
@@ -27,9 +31,23 @@ export class CorretoraService {
   getCorretoraInfo() {
     return this.corretoraInfo;
   }
+  getSeguradoras() {
+    return this.seguradoras;
+  }
+  postCorretora(corretora, responsavel){
+    console.log(corretora);
+    console.log(responsavel.value);
+    let manager = responsavel.value;
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
+    return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options).subscribe(data => {
+      console.log(data);
+    })
+  }
 
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
 }

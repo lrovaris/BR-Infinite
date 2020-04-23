@@ -79,7 +79,7 @@
                     <label for="issueinput5">Selecione Seguradora</label>
                     <select [selectedIndex]="selectIndex" id="issueinput7" formControlName="seguradora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
                             data-placement="top" data-title="Priority">
-                      <option value="seguradora">Seguradora</option>
+                      <option [value]="name">{{name}}</option>
                     </select>
                   </div>
 
@@ -94,10 +94,10 @@
                   <button type="button" class="btn btn-raised  mr-1 btn-header-cancel">
                     <a>Voltar</a>
                   </button>
-                  <button *ngIf="!checkIsResonponsible" type="button" class="btn btn-raised  btn-header">
+                  <button *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
                     <i class="fa fa-check-square-o"></i> <a>Salvar</a>
                   </button>
-                  <button (click)="onFinish()" *ngIf="checkIsResonponsible" type="button" class="btn btn-raised  btn-header">
+                  <button *ngIf="(checkIsResonponsible)" type="submit" class="btn btn-raised  btn-header">
                     <i class="fa fa-check-square-o"></i> <a>Retornar ao Form</a>
                   </button>
                 </div>

@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Router} from "@angular/router";
 import {CorretoraService} from "../../services/corretora.service";
+import {Colaborador} from "../colaborador-page/Colaborador";
 
 const estados = [];
 
@@ -5782,6 +5783,9 @@ export class CorretoraPageComponent implements OnInit {
   cidades = [];
   corretora: FormGroup;
   condition = false;
+  submitted = false;
+  seguradoras = [];
+  responsavel: any;
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5808,7 +5812,6 @@ export class CorretoraPageComponent implements OnInit {
       street: [null, Validators.required],
       number: [null, Validators.required],
       complement: [null, Validators.required],
-      uf: [null, Validators.required],
       neighborhood: [null, Validators.required],
     })
   }
@@ -5827,7 +5830,40 @@ export class CorretoraPageComponent implements OnInit {
     }
   }
 
+  onFinish() {
+    this.submitted = true;
+    if (this.corretora.invalid) {
+      console.log('form invalid');
+      console.log(this.corretora.value);
+      return;
+    }
+      this.seguradoras = this.corretoraService.getSeguradoras();
+    let newCorretora = {
+      name: this.corretora.value.name,
+      email: this.corretora.value.email,
+      telephone: this.corretora.value.telephone,
+      cnpj: this.corretora.value.cnpj,
+      address: {
+        estate: this.corretora.value.estate,
+        city: this.corretora.value.city,
+        street: this.corretora.value.street,
+        number: this.corretora.value.number,
+        complement: this.corretora.value.complement,
+        uf: this.corretora.value.uf,
+        neighborhood: this.corretora.value.neighborhood,
+      },
+      seguradoras: this.seguradoras
+    };
+    console.log('asdasdasd');
+    this.responsavel = this.colaboradorService.getColaboradorResponsavel();
 
+    this.corretoraService.postCorretora(newCorretora, this.responsavel);
+
+  };
+
+  log() {
+    console.log('asd');
+  }
 
   searchEstado = (text$: Observable<string>) =>
     text$.pipe(

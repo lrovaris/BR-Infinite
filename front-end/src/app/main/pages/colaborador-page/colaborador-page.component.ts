@@ -72,7 +72,9 @@ export class ColaboradorPageComponent implements OnInit {
       seguradora: this.colaborador.value.seguradora,
       active: true
     };
-    if (this.colaboradorService.getIsResponsible()) {
+    if ((this.colaboradorService.getIsResponsible())&&(this.checkSelect)) {
+      this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
+    } else if ((this.colaboradorService.getIsResponsible())&&(!this.checkSelect)){
       this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
     } else {
       this.colaboradorService.cadastro(newColaborador);
@@ -85,8 +87,9 @@ export class ColaboradorPageComponent implements OnInit {
 
   ngOnInit() {
     let isCorretora = this.colaboradorService.getIsCorretora();
-    if (isCorretora.isCorretora) {this.selectIndex = 1; this.selectTriggered = true; this.name = isCorretora.name}
-    if (this.colaboradorService.getIsSeguradora()) {this.selectIndex = 2; this.selectTriggered = true;}
+    let isSeguradora = this.colaboradorService.getIsSeguradora();
+    if (isCorretora.isCorretora) {this.selectIndex = 1; this.selectTriggered = true; this.checkSelect = true; this.name = isCorretora.name}
+    if (this.colaboradorService.getIsSeguradora()) {this.selectIndex = 2; this.checkSelect = false; this.selectTriggered = true;this.name = isSeguradora.name}
     if (this.colaboradorService.getColaboradorResponsavel()) {
       this.colaborador = this.colaboradorService.getColaboradorResponsavel();
     }

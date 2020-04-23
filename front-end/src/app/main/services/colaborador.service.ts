@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Colaborador } from "../pages/colaborador-page/Colaborador";
+import {Injectable} from '@angular/core';
+import {Colaborador} from "../pages/colaborador-page/Colaborador";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 
@@ -19,7 +19,8 @@ export class ColaboradorService {
   ColaboradorResponsavel: any;
 
  // TODO ------------------------------ GET SET
-  setIsSeguradoraTrue() {
+  setIsSeguradoraTrue(name) {
+    this.name = name;
     this.isSeguradora = true;
   }
   setIsCorretoraTrue(name) {
@@ -34,15 +35,17 @@ export class ColaboradorService {
   }
 
   getIsCorretora() {
-  let corretora = {
+    return {
       name: this.name,
       isCorretora: this.isCorretora,
     };
-    return corretora;
   }
 
   getIsSeguradora() {
-    return this.isSeguradora;
+    return {
+      name: this.name,
+      isSeguradora: this.isSeguradora,
+    };
   }
 
   setIsResponsibleFalse() {
@@ -58,7 +61,11 @@ export class ColaboradorService {
   setColaboradorResponsavel(colaborador, newColaborador) {
     this.colaboradorBackEnd = newColaborador;
     this.ColaboradorResponsavel = colaborador;
-    this.router.navigate(['corretora']);
+    if (this.isCorretora) {
+      this.router.navigate(['corretora']);
+    } else if (this.isSeguradora) {
+      this.router.navigate(['seguradora']);
+    }
     console.log(this.ColaboradorResponsavel);
   }
 

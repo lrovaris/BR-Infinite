@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../../../../../front-end-admin/src/app/main/services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {MustMatch} from "../../../../../../front-end-admin/src/app/main/pages/cadastro-page/partials/must-match.validator";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Colaborador} from "./Colaborador";
 

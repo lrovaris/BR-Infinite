@@ -1,0 +1,49 @@
+
+
+
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+       <div class="row" style="margin: 1rem">
+         <div class="col-12">
+           <button class="btn btn-primary text-white" (click)="navigateCadastroSeguradora()">Incluir Seguradora</button>
+         </div>
+       </div>
+    </div>
+    <div class="content-body">
+      <section id="simple-table">
+        <div class="row text-left">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Seguradora</th>
+                      <th>Telefone Filial</th>
+                      <th>Gerente Filial</th>
+                      <th>Telefone Gerente</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let seguradora of seguradoras">
+                      <td>{{seguradora.name}}</td>
+                      <td>{{seguradora.telephone}}</td>
+                      <td>email@mail.com</td>
+                      <td>78461287461</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

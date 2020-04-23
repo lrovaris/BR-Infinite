@@ -1,0 +1,65 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header pb-2">
+            <h4 class="card-title" id="basic-layout-colored-form-control">Cadastro de Produto</h4>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form" [formGroup]="produto" role="form" class="login-form" (ngSubmit)="onFinish()">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-info"></i>Informções do Produto</h4>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label for="userinput1">Nome do produto</label>
+                        <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label for="userinput2">Descriçāo</label>
+                        <textarea rows="3" type="text" id="userinput2" class="form-control border-primary" formControlName="description"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-info"></i>Preencher por último</h4>
+
+                  <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of allSeguradoras">
+                      <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions right">
+                  <button type="button" class="btn btn-raised  mr-1 btn-header-cancel">
+                    <a>Voltar</a>
+                  </button>
+                  <button  type="submit" class="btn btn-raised  btn-header">
+                    <a>Salvar</a>
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+
+
+
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="row" style="margin: 1rem">
+        <div class="col-12">
+          <button class="btn btn-primary text-white" (click)="navigateCadastroCorretora()">Incluir Corretora</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+      <section id="simple-table">
+        <div class="row text-left">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Corretora</th>
+                      <th>Telefone</th>
+                      <th>Email</th>
+                      <th>Seguradoras que trabalha</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let corretora of corretoras">
+                      <td>{{corretora.name}}</td>
+                      <td>{{corretora.telephone}}</td>
+                      <td>{{corretora.email}}</td>
+                      <td *ngFor="let seguradorass of corretora.seguradoras">{{seguradorass.name}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

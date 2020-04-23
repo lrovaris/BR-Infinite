@@ -66,7 +66,7 @@ export class ColaboradorService {
     } else if (this.isSeguradora) {
       this.router.navigate(['seguradora']);
     }
-    console.log(this.ColaboradorResponsavel);
+
   }
 
   getColaboradorResponsavel() {
@@ -76,9 +76,7 @@ export class ColaboradorService {
   // TODO ------------------------------ END GET SET
 
   // TODO METODOS DE BACK END ____________________________________________________________________
-    cadastro(colaborador) {
-    console.log(colaborador);
-    }
+
   // TODO END METODOS DE BACK END ________________________________________________________________
   constructor(private router: Router) { }
 

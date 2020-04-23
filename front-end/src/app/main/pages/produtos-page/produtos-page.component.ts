@@ -34,8 +34,7 @@ export class ProdutosPageComponent implements OnInit {
   onFinish() {
     this.submitted = true;
     if (this.produto.invalid) {
-      console.log('form invalid');
-      console.log(this.produto.value);
+      alert('Formulário invalido, por favor verifique os campos');
       return;
     }
     this.seguradoras = this.seguradoraService.getSeguradoras();
@@ -44,9 +43,8 @@ export class ProdutosPageComponent implements OnInit {
         description: this.produto.value.description,
         seguradoras: this.seguradoras
       };
-
     this.produtoService.postProduto(newProduto);
-
+    this.produto.reset();
   };
 
   ngOnInit() {

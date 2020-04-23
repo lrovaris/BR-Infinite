@@ -105,13 +105,11 @@ export class LoginService {
         const helper = new JwtHelperService();
         this.user = helper.decodeToken(this.token);
         this.id = this.user.id;
-        console.log(this.user.id);
 
         if(this.id.length > 0) {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
         }
-        console.log(this.user);
         if(this.isAuthenticated) {
           this.router.navigate(["home"]);
         }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../../../../../front-end-admin/src/app/main/services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {MustMatch} from "../../../../../../front-end-admin/src/app/main/pages/cadastro-page/partials/must-match.validator";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Colaborador} from "./Colaborador";
 
@@ -72,13 +70,7 @@ export class ColaboradorPageComponent implements OnInit {
       seguradora: this.colaborador.value.seguradora,
       active: true
     };
-    if ((this.colaboradorService.getIsResponsible())&&(this.checkSelect)) {
-      this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
-    } else if ((this.colaboradorService.getIsResponsible())&&(!this.checkSelect)){
-      this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
-    } else {
-      this.colaboradorService.cadastro(newColaborador);
-    }
+    this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
   }
 
   navigateLista() {
@@ -88,13 +80,27 @@ export class ColaboradorPageComponent implements OnInit {
   ngOnInit() {
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
-    if (isCorretora.isCorretora) {this.selectIndex = 1; this.selectTriggered = true; this.checkSelect = true; this.name = isCorretora.name}
-    if (this.colaboradorService.getIsSeguradora()) {this.selectIndex = 2; this.checkSelect = false; this.selectTriggered = true;this.name = isSeguradora.name}
+
+    if (isCorretora.isCorretora) {
+      this.selectIndex = 1;
+      this.selectTriggered = true;
+      this.checkSelect = true;
+      this.name = isCorretora.name
+    }
+    if (isSeguradora.isSeguradora) {
+      this.selectIndex = 2;
+      this.selectTriggered = true;
+      this.checkSelect = false;
+      this.name = isSeguradora.name
+    }
+
     if (this.colaboradorService.getColaboradorResponsavel()) {
       this.colaborador = this.colaboradorService.getColaboradorResponsavel();
     }
+
     this.colaboradorService.setIsResponsibleTrue();
     this.checkIsResonponsible = this.colaboradorService.getIsResponsible();
+
   }
 
 }

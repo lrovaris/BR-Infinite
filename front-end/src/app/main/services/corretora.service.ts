@@ -21,14 +21,12 @@ export class CorretoraService {
   }
 
   postCorretora(corretora, responsavel){
-    console.log(corretora);
-    console.log(responsavel.value);
     let manager = responsavel.value;
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options).subscribe(data => {
-      console.log(data);
+    return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options).subscribe((data:any) => {
+alert(data.Message)
     })
   }
 

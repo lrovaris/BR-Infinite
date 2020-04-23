@@ -5822,6 +5822,7 @@ export class CorretoraPageComponent implements OnInit {
     this.corretoraService.saveCorretoraInfo(corretora);
     this.colaboradorService.setIsResponsibleTrue();
     this.colaboradorService.setIsCorretoraTrue(this.corretora.value.name);
+    this.colaboradorService.setIsSeguradoraFalse();
     this.router.navigate(['colaborador'])
   }
 
@@ -5839,8 +5840,7 @@ export class CorretoraPageComponent implements OnInit {
   onFinish() {
     this.submitted = true;
     if (this.corretora.invalid) {
-      console.log('form invalid');
-      console.log(this.corretora.value);
+      alert('Formulário Inválido, por favor verifique ');
       return;
     }
       this.seguradoras = this.seguradoraService.getSeguradoras();
@@ -5860,15 +5860,13 @@ export class CorretoraPageComponent implements OnInit {
       },
       seguradoras: this.seguradoras
     };
-    console.log('asdasdasd');
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
-
     this.corretoraService.postCorretora(newCorretora, this.responsavel);
-
+    this.corretora.reset();
   };
 
   log() {
-    console.log('asd');
+    console.log('');
   }
 
   searchEstado = (text$: Observable<string>) =>

@@ -5,7 +5,8 @@ const md5 = require('md5');
 const db = require('./db');
 const controller = require('./controller');
 const auth = require('./utils').authenticate;
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const logger = require('../logger');
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
@@ -108,8 +109,8 @@ router.post('/new', async(req,res) => {
 
     if (valid) {
       new_user.password = md5(new_user.password);
-      // console.log(new_user);
-      await db.register_user(new_user).catch(err => console.error(err));
+      logger.log(new_user);
+      await db.register_user(new_user).catch(err => logger.error(err));
       res.status(200).json({"Message":"Usuário criado com sucesso!"});
     }
 });
@@ -136,7 +137,7 @@ router.post('/:id/edit', async(req,res) => {
     }
   });
 
-  let edited_user = await db.update_user(db_user).catch(err => console.error(err));
+  let edited_user = await db.update_user(db_user).catch(err => logger.error(err));
 
   await res.json(edited_user);
 });

@@ -71,6 +71,9 @@ router.get('/:id', async(req,res) => {
 
 
 router.post('/new', async(req,res) => {
+
+    console.log(req.body);
+
     let corretora_valid = true;
 
     let new_corretora = req.body.corretora;

@@ -1,0 +1,197 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header pb-2">
+            <h4 class="card-title" id="basic-layout-colored-form-control">Cadastro de Seguradora</h4>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form" [formGroup]="seguradora" role="form" class="login-form" (ngSubmit)="onFinish()">
+                <div class="form-body">
+                  <h4 class="form-section"><i class="ft-info"></i>Informções da Corretora</h4>
+                  <div class="row">
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 col-sm-12"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput1">Nome da seguradora</label>
+                        <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="userinput2">CNPJ</label>
+                        <input type="text" id="userinput2" class="form-control border-primary" formControlName="cnpj">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="userinput4">Telefone</label>
+                        <input type="text" id="userinput4" class="form-control border-primary" formControlName="telephone">
+                      </div>
+                    </div>
+                  </div>
+                  <h4 class="form-section"><i class="ft-phone"></i> Telefones Centrais </h4>
+
+                  <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="assunto">Assunto</label>
+                          <input type="text" id="assunto" class="form-control border-primary" formControlName="assunto">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="telefone">Telefone</label>
+                          <input type="text" id="telefone" class="form-control border-primary" formControlName="telefone">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" id="email" class="form-control border-primary" formControlName="email">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="float-right" style="float: right">
+                        <button  (click)="resetTelefones()" type="button" class="btn border-primary btn-raised  mr-1 btn-header-cancel">
+                          <a>Resetar</a>
+                        </button>
+                        <button (click)="addTelefone()"  type="button" class="btn border-primary btn-raised  btn-header">
+                          <a>Adicionar</a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="telefones.length > 0">
+                    <div class="row">
+                      <section id="simple-table">
+                        <div class="row text-left">
+                          <div class="col-12">
+                            <div class="card" style="margin-left: 2rem;">
+                              <div class="card-header">
+                                <h4 class="card-title">Tabela de telefones</h4>
+                                <p>Caso seja necessario utilize o botao de reset para reiniciar a inserção de telefones</p>
+
+                              </div>
+                              <div class="card-content">
+                                <div class="card-body">
+                                  <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>Assunto</th>
+                                      <th>Email</th>
+                                      <th>Telefone</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let telefone of telefones; let  i = index">
+                                      <th scope="row">{{i+1}}</th>
+                                      <td>{{telefone.assunto}}</td>
+                                      <td>{{telefone.email}}</td>
+                                      <td>{{telefone.telefone}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-mail"></i> Endereço </h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput9">UF</label>
+                        <input type="text" id="userinput9" class="form-control border-primary" #uf [ngbTypeahead]="searchEstado" (change)="SelectCidade(uf.value)" formControlName="estate">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="userinput10">Cidade</label>
+                        <input type="text" id="userinput10" class="form-control border-primary" [ngbTypeahead]="searchCidade" formControlName="city">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="userinput5">Rua</label>
+                    <input class="form-control border-primary" type="text" id="userinput5" formControlName="street">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="userinput8">Bairro</label>
+                        <input type="text" id="userinput8" class="form-control border-primary" formControlName="neighborhood">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="userinput6">Número</label>
+                        <input type="email" id="userinput6" class="form-control border-primary" formControlName="number">
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="userinput7">Complemento</label>
+                        <input type="text" id="userinput7" class="form-control border-primary" formControlName="complement">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12">
+                      <div class="card bg-primary" style="cursor: pointer" (click)="navigateColaborador(seguradora)">
+                        <div class="card-content">
+                          <div class="px-3 py-3">
+                            <div class="media">
+                              <div class="media-left align-self-center">
+                                <i class="icon-user-follow white font-large-2 float-left"></i>
+                              </div>
+                              <div class="media-body white text-right">
+                                <h3>Adicionar Gerente</h3>
+                                <span>irá para tela de cadastro de colaborador</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions right">
+                  <button  type="button" class="btn border-primary btn-raised  mr-1 btn-header-cancel">
+                    <a>Voltar</a>
+                  </button>
+                  <button   type="submit" class="btn border-primary btn-raised  btn-header">
+                    <a>Salvar</a>
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

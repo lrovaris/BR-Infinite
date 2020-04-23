@@ -92,8 +92,21 @@ router.post('/new', async(req,res) => {
     }
 
     if (valid && gerente_valid) {
-      logger.log(new_seguradora);
-      await db.register_seguradora(new_seguradora).catch(err => logger.error(err));
+
+      let new_seg = await db.register_seguradora(new_seguradora).catch(err => logger.error(err));
+
+      gerente.seguradora = new_seg.insertedId;
+
+      let new_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
+
+      let db_seguradora = new_seg.ops[0];
+
+      db_seguradora["colaboradores"] = [ new_colab.insertedId ];
+
+      db_seguradora["manager"] = new_colab.insertedId;
+
+      await db.update_seguradora(db_seguradora).catch(err => console.error(err));
+
       res.status(200).json({"Message":"Segudoradora e gerente cadastrados com sucesso!"});
     }
 });

@@ -5860,6 +5860,10 @@ export class SeguradoraPageComponent implements OnInit {
     this.seguradora.reset();
   };
 
+  navigateList() {
+   this.router.navigate(['seguradora'])
+  }
+
   navigateColaborador(seguradora) {
     this.seguradoraService.setTelefones(this.telefones);
     this.seguradoraService.saveSeguradoraInfo(seguradora);

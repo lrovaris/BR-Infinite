@@ -30,6 +30,9 @@ alert(data.Message)
     })
   }
 
+  getAllCorretoras() {
+    return this.http.get(`${this.url}/corretoras/all`);
+  }
 
   constructor(private http: HttpClient) { }
 

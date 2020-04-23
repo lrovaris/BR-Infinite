@@ -20,4 +20,8 @@ export class ProdutoService {
     })
   }
 
+  getAllProducts() {
+    return this.http.get(`${this.url}/products/all`);
+  }
+
 }

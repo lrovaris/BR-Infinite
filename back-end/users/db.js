@@ -1,5 +1,6 @@
 const ObjectId = require('mongodb').ObjectId;
 var cache = require('../memoryCache');
+var logger = require('../logger');
 
 
 function get_users() {
@@ -9,7 +10,6 @@ function get_users() {
                 reject(err);
             }
             else {
-                //console.log(result);
                 cache.set("users", result);
                 resolve(result);
             }
@@ -27,7 +27,7 @@ function register_user(new_user) {
                 let new_user_list = cache.get("users");
                 new_user_list.push(new_user);
                 cache.set("users",new_user_list);
-                console.log("Usuário novo criado");
+                logger.log("Usuário novo criado");
                 resolve(result);
             }
         });
@@ -42,7 +42,7 @@ function update_user(user) {
       if(err){
           reject(err);
       }else{
-        console.log(`Modificados ${result.result.nModified} elementos`);
+        logger.log(`Modificados ${result.result.nModified} elementos`);
 
         resolve(result);
       }

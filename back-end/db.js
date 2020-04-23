@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://luizfelipe:123456qwe@ds141410.mlab.com:41410/brinfinite";
+const url = process.env.MONGO_URL || "mongodb://luizfelipe:123456qwe@ds141410.mlab.com:41410/brinfinite";
 const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true  });
-const assert = require('assert');
 const cache = require('./memoryCache');
+const logger = require('./logger')
 
 function init_db(){
     return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ function init_db(){
                 reject(err);
             }
             else {
-                console.log("Conectado");
+                logger.log("Conectado");
                 global.db = client.db("brinfinite");
                 resolve(global.db);
             }

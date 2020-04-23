@@ -119,21 +119,10 @@
                   <h4 class="form-section"><i class="ft-info"></i>Preencher por último</h4>
 
                   <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-6">
-                      <app-corretora-card-select-partial [nome]="'Amil'"></app-corretora-card-select-partial>
+                    <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of allSeguradoras">
+                      <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-6">
-                      <app-corretora-card-select-partial [nome]="'Sampo'"></app-corretora-card-select-partial>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-6">
-                      <app-corretora-card-select-partial [nome]="'Suhai'"></app-corretora-card-select-partial>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-6">
-                      <app-corretora-card-select-partial [nome]="'Tokyo Marine'"></app-corretora-card-select-partial>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-6">
-                      <app-corretora-card-select-partial [nome]="'Mitsui'"></app-corretora-card-select-partial>
-                    </div>
+
                   </div>
                 </div>
 

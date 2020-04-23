@@ -5837,13 +5837,11 @@ export class SeguradoraPageComponent implements OnInit {
   onFinish() {
     this.submitted = true;
     if (this.seguradora.invalid) {
-      console.log('form invalid');
-      console.log(this.seguradora.value);
+      alert('Formul[ario Inválido, por favor ferifique');
       return;
     }
     let newSeguradora = {
       name: this.seguradora.value.name,
-      email: this.seguradora.value.email,
       telephone: this.seguradora.value.telephone,
       cnpj: this.seguradora.value.cnpj,
       address: {
@@ -5857,17 +5855,21 @@ export class SeguradoraPageComponent implements OnInit {
       },
       telefones: this.telefones
     };
-    console.log('asdasdasd');
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
     this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
-
+    this.seguradora.reset();
   };
+
+  navigateList() {
+   this.router.navigate(['seguradora'])
+  }
 
   navigateColaborador(seguradora) {
     this.seguradoraService.setTelefones(this.telefones);
     this.seguradoraService.saveSeguradoraInfo(seguradora);
     this.colaboradorService.setIsResponsibleTrue();
     this.colaboradorService.setIsSeguradoraTrue(this.seguradora.value.name);
+    this.colaboradorService.setIsCorretoraFalse();
     this.router.navigate(['colaborador'])
   }
 

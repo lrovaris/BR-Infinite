@@ -93,22 +93,23 @@ export class LoginService {
       login: login,
       password: password
     };
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"auth/login",
-        authData
+      .post<{Token: string, Message: string}>(this.url+"users/login",
+        authData, options
       )
       .subscribe(response => {
         this.token = response.Token;
         const helper = new JwtHelperService();
         this.user = helper.decodeToken(this.token);
         this.id = this.user.id;
-        console.log(this.user.id);
 
         if(this.id.length > 0) {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
         }
-        console.log(this.user);
         if(this.isAuthenticated) {
           this.router.navigate(["home"]);
         }

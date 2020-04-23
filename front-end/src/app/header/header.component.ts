@@ -31,6 +31,9 @@ export class HeaderComponent implements OnInit {
   navigateProducao() {
     this.router.navigate(['producao'])
   }
+  navigateProdutos() {
+    this.router.navigate(['produtos'])
+  }
 
   ngOnInit() {
   }

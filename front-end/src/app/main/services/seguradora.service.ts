@@ -9,6 +9,25 @@ export class SeguradoraService {
   seguradoraInfo: any;
   url = 'http://localhost:3000';
   telefones = [];
+  seguradoras = [];
+  resetArray() {
+    this.seguradoras = [];
+  }
+
+  addArray(nome) {
+    this.seguradoras.push(nome);
+  }
+  removeArray(nome) {
+    let index = this.seguradoras.indexOf(nome);
+    if (index !== -1) this.seguradoras.splice(index, 1);
+  }
+  getSeguradoras() {
+    return this.seguradoras;
+  }
+
+  getAllSeguradoras() {
+    return this.http.get(`${this.url}/seguradoras/all`);
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -27,15 +46,15 @@ export class SeguradoraService {
   }
 
   postSeguradora(seguradora, responsavel){
-    console.log(seguradora);
-    console.log(responsavel.value);
     let manager = responsavel.value;
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe(data => {
-      console.log(data);
+    return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
+      alert(data.Message);
     })
   }
+
+
 
 }

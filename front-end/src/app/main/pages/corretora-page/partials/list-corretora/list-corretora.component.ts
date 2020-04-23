@@ -1,0 +1,31 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { CorretoraService } from "../../../../services/corretora.service";
+import {SeguradoraService} from "../../../../services/seguradora.service";
+
+@Component({
+  selector: 'app-list-corretora',
+  templateUrl: './list-corretora.component.html',
+  styleUrls: ['./list-corretora.component.scss']
+})
+export class ListCorretoraComponent implements OnInit {
+
+  corretoras = [];
+  seguradoras = [];
+
+  constructor(private corretoraService: CorretoraService, private router: Router, private seguradoraService: SeguradoraService) { }
+
+  navigateCadastroCorretora() {
+    this.router.navigate(['corretora/cadastro'])
+  }
+
+  ngOnInit() {
+    this.corretoraService.getAllCorretoras().subscribe((data:any) => {
+      this.corretoras = data;
+    });
+    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
+      this.seguradoras = data;
+    });
+  }
+
+}

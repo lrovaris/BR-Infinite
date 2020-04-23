@@ -1,24 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
-var cache = require('../memoryCache');
+const cache = require('../memoryCache');
+const controller = require('./controller')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
-  let all_colaboradores = cache.get("colaboradores");
+  let all_colaboradores = await controller.get_colaboradores()
 
-  if (all_colaboradores !== undefined){
-      res.status(200).json(cache.get("colaboradores"));
-  }
+  res.status(200).json(all_colaboradores);
+});
 
-  else {
-    all_colaboradores = await db.get_colaboradores();
+router.get ('/:id', async (req,res) => {
+  let all_colaboradores = await controller.get_colaboradores()
 
-    res.status(200).json(cache.get("colaboradores"));
-  }
+  let to_send = all_colaboradores.filter(colab =>{
+    return (colab._id.toString() === req.params.id.toString())
+  })[0]
+
+  res.status(200).json(to_send);
 });
 
 router.post('/new', async(req,res) => {

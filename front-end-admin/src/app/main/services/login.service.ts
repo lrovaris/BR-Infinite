@@ -10,7 +10,7 @@ import { catchError, retry} from "rxjs/operators";
 })
 export class LoginService {
 
-  url = 'http://localhost:3000/';
+  url = 'http://162.214.89.17:3000/';
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;

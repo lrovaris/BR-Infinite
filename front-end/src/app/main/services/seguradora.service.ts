@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class SeguradoraService {
 
   seguradoraInfo: any;
-  url = 'http://localhost:3000';
+  url = 'http://162.214.89.17:3000';
   telefones = [];
   seguradoras = [];
   resetArray() {

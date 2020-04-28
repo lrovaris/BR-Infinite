@@ -23,7 +23,13 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
+
+  if ('OPTIONS' == req.method) {
+    res.sendStatus(200);
+    }
+    else {
+      next();
+    }
 });
 
 app.use(body_parser.urlencoded({ extended: true }));
@@ -37,7 +43,7 @@ async function initialize_database() {
     var _db = await(db.init_db());
 
     // Inicializando cache
-    //logger.log("Inicializando cache...");
+    logger.log("Inicializando cache...");
     await require('./users/db').get_users();
     await require('./seguradoras/db').get_seguradoras();
     await require('./colaboradores/db').get_colaboradores();

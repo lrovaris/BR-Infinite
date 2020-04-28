@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="572ecc54-64ef-4e0e-a9f2-fc7ba95b0f69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/data/smart-data-table.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end-admin/src/app/main/services/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end-admin/src/app/main/services/login.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/services/corretora.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/services/corretora.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,31 +27,43 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.html">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="27" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="72" column="75" selection-start-line="72" selection-start-column="75" selection-end-line="72" selection-end-column="75" />
+            <state relative-caret-position="3703">
+              <caret line="161" column="95" lean-forward="true" selection-start-line="161" selection-start-column="95" selection-end-line="161" selection-end-column="95" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#8;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/back-end/seguradoras/routes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2951" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="74" column="47" lean-forward="true" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+            <state relative-caret-position="502">
+              <caret line="36" column="50" lean-forward="true" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -58,59 +72,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/data/smart-data-table.ts">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-              <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
-              <caret line="89" column="19" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+            <state relative-caret-position="1441">
+              <caret line="5860" lean-forward="true" selection-start-line="5860" selection-end-line="5860" />
               <folding>
-                <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.ts">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="73" column="3" lean-forward="true" selection-start-line="13" selection-start-column="2" selection-end-line="73" selection-end-column="3" />
+            <state relative-caret-position="138">
+              <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
               <folding>
-                <element signature="e#0#69#0" expanded="true" />
+                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/app.module.ts">
+        <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="25" column="23" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="23" />
+            <state relative-caret-position="478">
+              <caret line="81" column="51" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
               <folding>
-                <element signature="e#0#58#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/src/app/app.module.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end-admin/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="67" column="16" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -121,6 +113,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -135,6 +128,7 @@
       <find>uf</find>
       <find>seguradoras</find>
       <find>console</find>
+      <find>navi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,8 +137,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/front-end-admin/src/app/header/header.component.ts" />
-        <option value="$PROJECT_DIR$/front-end-admin/src/app/header/header.component.html" />
         <option value="$PROJECT_DIR$/front-end-admin/src/app/main/pages/cadastro-page/cadastro-page.component.ts" />
         <option value="$PROJECT_DIR$/front-end-admin/src/app/main/pages/cadastro-page/cadastro-page.component.html" />
         <option value="$PROJECT_DIR$/front-end-admin/src/app/app-routing.module.ts" />
@@ -173,27 +165,29 @@
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/seguradora-card-partial/seguradora-card-partial.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/produtos-page/produtos-page.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.html" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/produtos-page/produtos-page.component.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/produtos-page/partials/list-produtos/list-produtos.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/list-corretora/list-corretora.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/partials/list-corretora/list-corretora.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/produtos-page/partials/list-produtos/list-produtos.component.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/services/login.service.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/services/produto.service.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts" />
         <option value="$PROJECT_DIR$/front-end-admin/src/app/main/services/login.service.ts" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/services/corretora.service.ts" />
         <option value="$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.html" />
-        <option value="$PROJECT_DIR$/front-end/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/data/smart-data-table.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/front-end/package.json" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html" />
+        <option value="$PROJECT_DIR$/front-end/src/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html" />
         <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/copy.js" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts" />
+        <option value="$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts" />
       </list>
     </option>
   </component>
@@ -223,6 +217,12 @@
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
+              <item name="back-end" type="462c0819:PsiDirectoryNode" />
+              <item name="seguradoras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -230,21 +230,6 @@
               <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
@@ -252,122 +237,6 @@
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="seguradora-page" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="seguradora-page" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="seguradora-page" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
-              <item name="list-seguradora" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="seguradora-page" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
-              <item name="list-seguradora" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="user-list-page" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BR-Infinite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BR-Infinite" type="462c0819:PsiDirectoryNode" />
-              <item name="front-end-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -425,12 +294,12 @@
       <workItem from="1587436943152" duration="595000" />
       <workItem from="1587579158115" duration="6867000" />
       <workItem from="1587698800633" duration="37000" />
-      <workItem from="1587736747473" duration="5616000" />
+      <workItem from="1587736747473" duration="14970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70105000" />
+    <option name="totallyTimeSpent" value="79459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -476,42 +345,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/cadastro-page/cadastro-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/cadastro-page/cadastro-page.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#div#1;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/corretoras/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/header/header.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -641,16 +474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="72" column="88" selection-start-line="72" selection-start-column="88" selection-end-line="72" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/corretora-page/corretora-page.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -738,16 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/login-page/login-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -770,26 +583,6 @@
           <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1541">
-          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -817,28 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="5863" column="36" selection-start-line="5863" selection-start-column="36" selection-end-line="5863" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1623">
-          <caret line="181" column="42" lean-forward="true" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#8;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/main/pages/user-list-page/user-list-page.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -856,41 +627,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front-end-admin/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="67" column="16" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="72" column="75" selection-start-line="72" selection-start-column="75" selection-end-line="72" selection-end-column="75" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/data/smart-data-table.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
-          <caret line="89" column="19" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -904,12 +644,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts">
+    <entry file="file://$PROJECT_DIR$/front-end-admin/src/app/app-routing.module.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="74" column="47" lean-forward="true" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/data/smart-data-table.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2047">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+          <caret line="89" column="19" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" column="58" lean-forward="true" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="25" column="71" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/copy.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/colaborador.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="81" column="51" selection-start-line="81" selection-start-column="51" selection-end-line="81" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back-end/seguradoras/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2951" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/colaborador-page/colaborador-page.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="87" column="25" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3703">
+          <caret line="161" column="95" lean-forward="true" selection-start-line="161" selection-start-column="95" selection-end-line="161" selection-end-column="95" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#div#4;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#8;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/seguradora-page.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1441">
+          <caret line="5860" lean-forward="true" selection-start-line="5860" selection-end-line="5860" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="36" column="50" lean-forward="true" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/src/app/main/services/seguradora.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

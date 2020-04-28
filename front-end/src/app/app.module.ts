@@ -20,6 +20,7 @@ import { SeguradoraCardPartialComponent } from './main/pages/seguradora-page/par
 import { ListCorretoraComponent } from './main/pages/corretora-page/partials/list-corretora/list-corretora.component';
 import { ListSeguradoraComponent } from './main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component';
 import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-produtos/list-produtos.component';
+import { Ng2SmartTableModule } from "ng2-smart-table";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-
     AppRoutingModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    Ng2SmartTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

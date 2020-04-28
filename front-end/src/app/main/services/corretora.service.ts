@@ -8,10 +8,8 @@ export class CorretoraService {
 
   url = 'http://162.214.89.17:3000';
 
-
   corretoraInfo: any;
   responsavel: any;
-
 
   saveCorretoraInfo(corretora) {
     this.corretoraInfo = corretora;

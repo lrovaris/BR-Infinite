@@ -21,6 +21,7 @@ import { ListCorretoraComponent } from './main/pages/corretora-page/partials/lis
 import { ListSeguradoraComponent } from './main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component';
 import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-produtos/list-produtos.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

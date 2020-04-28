@@ -49,14 +49,20 @@ async function register_corretora(new_corretora) {
 async function update_corretora(corretora) {
   db_conn = await db_utils.get_db();
 
+  if(cache.get('corretoras') === undefined){
+    await get_corretoras();
+  }
+
    corretora._id = new ObjectId(corretora._id);
 
   return new Promise((resolve, reject) => {
-    db_conn.collection("corretoras").replaceOne({_id: corretora._id }, corretora,{w: "majority", upsert: false} ,(err, result) =>{
+    db_conn.collection("corretoras").replaceOne({_id: corretora._id }, corretora,{w: "majority", upsert: false} , async(err, result) =>{
       if(err){
           reject(err);
       }else{
         logger.log(`Modificados ${result.result.nModified} elementos`);
+
+        await get_corretoras();
 
         resolve(result);
       }

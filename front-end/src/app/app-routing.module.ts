@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'corretora/cadastro', component: CorretoraPageComponent },
   { path: 'seguradora', component: ListSeguradoraComponent },
   { path: 'seguradora/cadastro', component: SeguradoraPageComponent },
+  { path: 'seguradora/visualizacao', component: SeguradoraPageComponent },
   { path: 'pipeline', component: PipelinePageComponent },
   { path: 'produtos', component: ListProdutosComponent },
   { path: 'produtos/cadastro', component: ProdutosPageComponent },

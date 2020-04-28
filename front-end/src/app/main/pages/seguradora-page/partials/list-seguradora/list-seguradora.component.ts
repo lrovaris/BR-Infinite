@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
+import * as tableData from "./data/smart-data-table";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-list-seguradora',
@@ -9,18 +11,37 @@ import {Router} from "@angular/router";
 })
 export class ListSeguradoraComponent implements OnInit {
 
-  seguradoras = [];
+  seguradoras: any;
+  seguradorasObject: any;
+  seguradorasFormatada: any;
 
-  constructor(private seguradoraService: SeguradoraService, private router: Router) { }
+  constructor(private seguradoraService: SeguradoraService, private router: Router) {
+
+  }
+  settings = tableData.settings;
+  filtersettings = tableData.filtersettings;
+  alertsettings = tableData.alertsettings;
 
   navigateCadastroSeguradora() {
     this.router.navigate(['seguradora/cadastro'])
   }
 
+  log(event){
+    console.log(event.data);
+  }
+
+
+
+  editSeguradora(id) {
+    this.seguradoraService.getSeguradora(id).subscribe((data: any) => {
+      this.seguradoraService.editSeguradora(data);
+    })
+  }
+
   ngOnInit() {
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-     this.seguradoras = data;
-    })
+      this.seguradoras = data;
+    });
   }
 
 }

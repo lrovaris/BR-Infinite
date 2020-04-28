@@ -50,7 +50,7 @@ router.get ('/:id', async (req,res) => {
 
   this_seg.colaboradores = colaboradores_ext;
 
-  console.log(this_seg);
+  logger.log(this_seg);
 
   res.status(200).json(this_seg);
 });
@@ -90,37 +90,37 @@ router.post('/new', async(req,res) => {
 
     if(!gerente){
       res.status(400).json({"Message":"Colaborador inválido"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
     if (!gerente.name){
       res.status(400).json({"Message":"Campo de nome do colaborador vazio"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
     if (!gerente.telephone){
       res.status(400).json({"Message":"Campo de telefone do colaborador vazio"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
     if (!gerente.email){
       res.status(400).json({"Message":"Campo de email do colaborador vazio"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
     if (!gerente.birthday){
       res.status(400).json({"Message":"Campo de aniversário vazio"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
     if (!gerente.job){
       res.status(400).json({"Message":"Campo de cargo vazio"});
-      corretor_valid = false;
+      gerente_valid = false;
       return;
     }
 
@@ -136,9 +136,13 @@ router.post('/new', async(req,res) => {
 
       db_seguradora["colaboradores"] = [ new_colab.insertedId ];
 
-      db_seguradora["manager"] = new_colab.insertedId;
+      db_seguradora["manager"] = {
+        "id": new_colab.insertedId,
+        "name": new_colab.ops[0].name,
+        "email": new_colab.ops[0].email
+      }
 
-      await db.update_seguradora(db_seguradora).catch(err => console.error(err));
+      await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
 
       res.status(200).json({"Message":"Seguradora e gerente cadastrados com sucesso!"});
     }
@@ -148,6 +152,7 @@ router.post('/new', async(req,res) => {
 //Alterar o objeto da seguradora
 
 router.post('/:id/edit', async(req,res) => {
+  
 
   let req_seguradora = req.body;
 

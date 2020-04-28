@@ -1,6 +1,5 @@
 
 
-
 <div class="apex-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -30,11 +29,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let seguradora of seguradoras">
+                    <tr *ngFor="let seguradora of seguradoras" style="cursor: pointer" (click)="editSeguradora(seguradora._id)">
                       <td>{{seguradora.name}}</td>
                       <td>{{seguradora.telephone}}</td>
-                      <td>email@mail.com</td>
-                      <td>78461287461</td>
+                      <td>{{seguradora.manager.name}}</td>
+                      <td>{{seguradora.manager.email}}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -47,3 +46,7 @@
     </div>
   </div>
 </div>
+
+<!--
+[settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event) "
+(editConfirm)="onSaveConfirm($event)"-->

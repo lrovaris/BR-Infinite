@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Colaborador} from "./Colaborador";
+import {SeguradoraService} from "../../services/seguradora.service";
 
 @Component({
   selector: 'app-colaborador-page',
@@ -15,6 +16,7 @@ export class ColaboradorPageComponent implements OnInit {
   selectTriggered: boolean = false;
   checkSelect: boolean = null;
   checkIsResonponsible: boolean = false;
+  localDeTrabalho: any;
 
   submitted = false;
   colaborador: FormGroup;
@@ -36,7 +38,7 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
 
-  constructor(private formbuilder: FormBuilder, public colaboradorService: ColaboradorService, private router: Router) {
+  constructor(private formbuilder: FormBuilder, public colaboradorService: ColaboradorService, private router: Router, private seguradoraService: SeguradoraService) {
     this.colaborador = this.formbuilder.group({
         name: [null, Validators.required],
         email: [null, Validators.required],
@@ -78,8 +80,28 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
+    console.log(isSeguradora);
+    if (isCorretora.isCorretora) {
+console.log('is corretora')
+    } else if (isSeguradora.isSeguradora) {
+       this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
+       console.log(this.localDeTrabalho);
+    }
+      if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
+      this.colaboradorService.getColaborador(this.localDeTrabalho.manager.id).subscribe((data: any) => {
+        this.colaborador.controls['name'].setValue(data.name);
+        this.colaborador.controls['telephone'].setValue(data.telephone);
+        this.colaborador.controls['email'].setValue(data.email);
+        this.colaborador.controls['birthday'].setValue(data.birthday);
+        this.colaborador.controls['job'].setValue(data.job);
+        this.colaborador.controls['corretora'].setValue(data.corretora);
+        this.colaborador.controls['seguradora'].setValue(data.seguradora);
+      });
+    }
+
 
     if (isCorretora.isCorretora) {
       this.selectIndex = 1;
@@ -93,13 +115,15 @@ export class ColaboradorPageComponent implements OnInit {
       this.checkSelect = false;
       this.name = isSeguradora.name
     }
-
     if (this.colaboradorService.getColaboradorResponsavel()) {
       this.colaborador = this.colaboradorService.getColaboradorResponsavel();
     }
-
     this.colaboradorService.setIsResponsibleTrue();
     this.checkIsResonponsible = this.colaboradorService.getIsResponsible();
+
+
+/*    */
+
 
   }
 

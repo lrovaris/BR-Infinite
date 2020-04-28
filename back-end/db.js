@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = process.env.MONGO_URL || "mongodb://luizfelipe:123456qwe@ds141410.mlab.com:41410/brinfinite"; // "mongodb://luizfelipe:123456qwe@127.0.0.1:27017" //
+const url = process.env.MONGO_URL || "mongodb://luizfelipe:123456qwe@127.0.0.1:27017"// "mongodb://luizfelipe:123456qwe@ds141410.mlab.com:41410/brinfinite"; //  //
 const client = new MongoClient(url, { useNewUrlParser: true  });
 const cache = require('./memoryCache');
 const logger = require('./logger')

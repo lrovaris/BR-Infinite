@@ -82,7 +82,7 @@ export class LoginService {
 
 
     const options = {
-      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      headers: new HttpHeaders().append('Content-Type', 'application/application/json'),
     };
     console.log(updatedUser);
     return this.http.post(`${this.url}users/${updatedUser._id}/edit`, updatedUser, options).subscribe((log: any) => {
@@ -91,15 +91,20 @@ export class LoginService {
   }
 
   login(login: string, password: string) {
+    console.log('asd');
     const authData= {
       login: login,
       password: password
     };
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/application/json'),
+    };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"auth/login",
-        authData
+      .post<{Token: string, Message: string}>(this.url+"users/login",
+        authData, options
       )
       .subscribe(response => {
+        console.log(response);
         this.token = response.Token;
         const helper = new JwtHelperService();
         this.user = helper.decodeToken(this.token);

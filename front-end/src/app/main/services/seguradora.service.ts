@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,16 @@ export class SeguradoraService {
   url = 'http://162.214.89.17:3000';
   telefones = [];
   seguradoras = [];
+  seguradoraInfoWithOutFormGroup: any;
+
+  isEdit = false;
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  getIsEdit() {
+    return this.isEdit;
+  }
+
   resetArray() {
     this.seguradoras = [];
   }
@@ -24,12 +35,25 @@ export class SeguradoraService {
   getSeguradoras() {
     return this.seguradoras;
   }
+  getseguradoraInfoWithOutFormGroup() {
+    return this.seguradoraInfoWithOutFormGroup;
+  }
+  editSeguradora(seguradora) {
+    this.seguradoraInfoWithOutFormGroup = seguradora;
+    this.isEdit = true;
+    this.router.navigate(['seguradora/visualizacao'])
+  }
+
+
+
+  getSeguradora(id) {
+    return this.http.get(`${this.url}/seguradoras/${id}`)
+  }
 
   getAllSeguradoras() {
     return this.http.get(`${this.url}/seguradoras/all`);
   }
 
-  constructor(private http: HttpClient) { }
 
   setTelefones(telefones) {
     this.telefones = telefones;
@@ -55,6 +79,15 @@ export class SeguradoraService {
     })
   }
 
+  editPostSeguradora(id, seguradora, responsavel){
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
+    return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options).subscribe((data:any) => {
+      alert(data.Message);
+      this.isEdit = false;
+    })
+  }
 
 
 }

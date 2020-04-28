@@ -4,6 +4,7 @@ const db = require('./db');
 const cache = require('../memoryCache');
 const logger = require('../logger');
 const colaborador_db = require('../colaboradores/db')
+const colab_controller = require('../colaboradores/controller')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
@@ -21,6 +22,37 @@ router.get ('/all', async (req,res) => {
 
     res.status(200).json(cache.get("seguradoras"));
   }
+});
+
+router.get ('/:id', async (req,res) => {
+  let all_seguradoras = cache.get("seguradoras");
+
+  let this_seg = all_seguradoras.filter(seg =>{
+    return seg._id == req.params.id
+  })[0]
+
+  let colaboradores = await colab_controller.get_colaboradores();
+
+  let colaboradores_ext = [];
+
+  for (var i = 0; i < this_seg.colaboradores.length; i++) {
+      if(this_seg.colaboradores[i]._id){
+        colaboradores_ext.push(this_seg.colaboradores[i]);
+        continue;
+      }
+
+      let id_colab = this_seg.colaboradores[i];
+
+      colaboradores_ext.push(colaboradores.filter(colab_obj =>{
+        return colab_obj._id + "" === id_colab + ""
+      })[0])
+  }
+
+  this_seg.colaboradores = colaboradores_ext;
+
+  console.log(this_seg);
+
+  res.status(200).json(this_seg);
 });
 
 router.post('/new', async(req,res) => {

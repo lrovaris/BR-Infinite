@@ -152,6 +152,7 @@ router.post('/new', async(req,res) => {
 //Alterar o objeto da seguradora
 
 router.post('/:id/edit', async(req,res) => {
+  
 
   let req_seguradora = req.body;
 

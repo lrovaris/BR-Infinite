@@ -5856,9 +5856,19 @@ export class SeguradoraPageComponent implements OnInit {
       telefones: this.telefones
     };
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
-    this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
+
+    console.log(this.seguradoraService.isEdit);
+
+    if (this.seguradoraService.isEdit) {
+      let seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
+      this.seguradoraService.editPostSeguradora(seguradora.id, newSeguradora, this.responsavel);
+    } else {
+      this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
+    }
     this.seguradora.reset();
   };
+
+
 
   navigateList() {
    this.router.navigate(['seguradora'])
@@ -5874,10 +5884,32 @@ export class SeguradoraPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.seguradoraService.getSeguradoraInfo()) {
-      this.seguradora =  this.seguradoraService.getSeguradoraInfo();
-      this.telefones = this.seguradoraService.getTelefones();
+
+
+
+
+      if (this.seguradoraService.getSeguradoraInfo()) {
+        this.seguradora = this.seguradoraService.getSeguradoraInfo();
+        this.telefones = this.seguradoraService.getTelefones();
+      }
+
+    if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
+      console.log('asd');
+      let data = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
+      this.seguradora.controls['name'].setValue(data.name);
+      this.seguradora.controls['telephone'].setValue(data.telephone);
+      this.seguradora.controls['cnpj'].setValue(data.cnpj);
+      this.seguradora.controls['assunto'].setValue(data.assunto);
+      this.seguradora.controls['email'].setValue(data.email);
+      this.seguradora.controls['estate'].setValue(data.address.estate);
+      this.seguradora.controls['number'].setValue(data.address.number);
+      this.seguradora.controls['city'].setValue(data.address.city);
+      this.seguradora.controls['street'].setValue(data.address.street);
+      this.seguradora.controls['complement'].setValue(data.address.complement);
+      this.seguradora.controls['neighborhood'].setValue(data.address.neighborhood);
+      this.telefones = data.telefones;
     }
+
   }
 
   searchEstado = (text$: Observable<string>) =>

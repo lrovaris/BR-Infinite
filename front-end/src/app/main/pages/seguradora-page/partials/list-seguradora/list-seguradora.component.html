@@ -1,4 +1,3 @@
-<!--
 
 
 <div class="apex-content content container-fluid">
@@ -30,11 +29,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let seguradora of seguradoras">
+                    <tr *ngFor="let seguradora of seguradoras" style="cursor: pointer" (click)="editSeguradora(seguradora._id)">
                       <td>{{seguradora.name}}</td>
                       <td>{{seguradora.telephone}}</td>
-                      <td>email@mail.com</td>
-                      <td>78461287461</td>
+                      <td>{{seguradora.manager.name}}</td>
+                      <td>{{seguradora.manager.email}}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -46,41 +45,8 @@
       </section>
     </div>
   </div>
-</div>-->
-
-
-<div class="apex-content content container-fluid">
-  <div class="content-wrapper">
-    <div class="content-header row">
-      <div class="row" style="margin: 1rem">
-        <div class="col-12">
-          <button class="btn btn-primary text-white" (click)="navigateCadastroSeguradora()">Incluir Seguradora</button>
-        </div>
-      </div>
-    </div>
-    <div class="content-body">
-      <section id="filter">
-        <div class="row text-left">
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Lista de Seguradoras</h4>
-              </div>
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <ng2-smart-table  [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event) "
-                                      (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
 </div>
+
 <!--
 [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event) "
 (editConfirm)="onSaveConfirm($event)"-->

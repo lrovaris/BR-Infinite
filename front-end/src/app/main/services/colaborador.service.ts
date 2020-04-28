@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Colaborador} from "../pages/colaborador-page/Colaborador";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class ColaboradorService {
   localDeTrabalho: string = '';
   colaboradorBackEnd: any;
   name: string = '';
+  url = 'http://162.214.89.17:3000';
 
   ColaboradorResponsavel: any;
 
@@ -62,9 +64,9 @@ export class ColaboradorService {
     this.colaboradorBackEnd = newColaborador;
     this.ColaboradorResponsavel = colaborador;
     if (this.isCorretora) {
-      this.router.navigate(['corretora']);
+      this.router.navigate(['corretora/cadastro']);
     } else if (this.isSeguradora) {
-      this.router.navigate(['seguradora']);
+      this.router.navigate(['seguradora/cadastro']);
     }
 
   }
@@ -76,8 +78,10 @@ export class ColaboradorService {
   // TODO ------------------------------ END GET SET
 
   // TODO METODOS DE BACK END ____________________________________________________________________
-
+    getColaborador(id) {
+    return this.http.get(`${this.url}/colaboradores/${id}`)
+    }
   // TODO END METODOS DE BACK END ________________________________________________________________
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
 }

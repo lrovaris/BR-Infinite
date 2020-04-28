@@ -25,7 +25,11 @@ async function get_seguradoras() {
 async function register_seguradora(new_seguradora) {
   let db_conn = await db_utils.get_db();
 
-    return new Promise((resolve, reject) => {
+  if(cache.get('seguradoras') === undefined){
+    await get_seguradoras();
+  }
+
+  return new Promise((resolve, reject) => {
         db_conn.collection("seguradoras").insertOne(new_seguradora, (err, result) => {
             if(err){
                 reject(err);
@@ -43,14 +47,20 @@ async function register_seguradora(new_seguradora) {
 async function update_seguradora(seguradora) {
   let db_conn = await db_utils.get_db();
 
+  if(cache.get('seguradoras') === undefined){
+    await get_seguradoras();
+  }
+
   seguradora._id = new ObjectId(seguradora._id);
 
   return new Promise((resolve, reject) => {
-    db_conn.collection("seguradoras").replaceOne({_id: seguradora._id }, seguradora,{w: "majority", upsert: false} ,(err, result) =>{
+    db_conn.collection("seguradoras").replaceOne({_id: seguradora._id }, seguradora,{w: "majority", upsert: false} , async(err, result) =>{
       if(err){
           reject(err);
       }else{
         logger.log(`Modificados ${result.result.nModified} elementos`);
+
+        await get_seguradoras();
 
         resolve(result);
       }

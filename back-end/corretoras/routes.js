@@ -174,7 +174,12 @@ router.post('/new', async(req,res) => {
 
       db_corretora["colaboradores"] = [ new_colab.insertedId ];
 
-      db_corretora["manager"] = new_colab.insertedId;
+      db_corretora["manager"] = {
+        "id": new_colab.insertedId,
+        "name": new_colab.ops[0].name,
+        "email": new_colab.ops[0].email
+      }
+
 
       await db.update_corretora(db_corretora).catch(err => logger.error(err));
 

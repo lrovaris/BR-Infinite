@@ -1,0 +1,136 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <div style="margin-left: 1rem" class="col-12">
+        <div class="card" style="padding-bottom: 2rem">
+          <div class="card-header pb-2">
+            <h4 style="margin-top: 1rem" class="form-section"><i class="ft-info"></i> Informações da Seguradora </h4>
+            <div class="row"><h4 class="form-section"></h4></div>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form">
+                <div class="form-body">
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-4">
+                        <label for="userinput1">Nome da seguradora</label>
+                        <p type="text" id="userinput1" class=" " >
+                          {{seguradora.name}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                        <label for="userinput2">CNPJ</label>
+                        <p type="text" id="userinput2" class=" " >
+                        {{seguradora.cnpj}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-3">
+                        <label for="userinput4">Telefone</label>
+                        <p type="text" id="userinput4" class=" " >
+                        {{seguradora.telephone}}
+                        </p>
+                    </div>
+                  </div>
+                  </div>
+                  <div >
+                    <div class="row">
+                      <section id="simple-table">
+                        <div class="row text-left">
+                          <div style="margin-left: 1rem" class="col-12">
+                            <div class="card" style="margin-left: 2rem;">
+                              <div class="card-header">
+                                <h4 class="card-title">Tabela de telefones</h4>
+                                <p>Caso seja necessario utilize o botao de reset para reiniciar a inserção de telefones</p>
+
+                              </div>
+                              <div class="card-content">
+                                <div class="card-body">
+                                  <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>Assunto</th>
+                                      <th>Email</th>
+                                      <th>Telefone</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let telefone of seguradora.telefones">
+                                      <th scope="row"></th>
+                                      <td >{{telefone.assunto}}</td>
+                                      <td>{{telefone.email}}</td>
+                                      <td style="color: #1D2671">{{telefone.telefone}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+                  <h4 class="form-section"><i class="ft-file-text"></i> Endereço </h4>
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                        <label for="userinput9">UF</label>
+                        <p type="text" id="userinput9">
+                        {{seguradora.address.estate}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                        <label for="userinput10">Cidade</label>
+                        <p type="text" id="userinput10" class=" ">
+
+                        {{seguradora.address.city}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput5">Rua</label>
+                      <p class=" " type="text" id="userinput5">
+                        {{seguradora.address.street}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                        <label for="userinput8">Bairro</label>
+                        <p type="text" id="userinput8" class=" ">
+                          {{seguradora.address.neighborhood}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-2">
+                        <label for="userinput6">Número</label>
+                        <p type="email" id="userinput6" class=" ">
+                          {{seguradora.address.number}}
+                        </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <div class="col">
+                        <label for="userinput7">Complemento</label>
+                        <p type="text" id="userinput7" class=" ">
+                        {{seguradora.address.complement}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                <h4 class="form-section"></h4>
+                <div class="row">
+                  <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

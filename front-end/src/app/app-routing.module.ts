@@ -11,6 +11,7 @@ import { ProdutosPageComponent } from "./main/pages/produtos-page/produtos-page.
 import { ListSeguradoraComponent } from "./main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component";
 import { ListCorretoraComponent } from "./main/pages/corretora-page/partials/list-corretora/list-corretora.component";
 import { ListProdutosComponent } from "./main/pages/produtos-page/partials/list-produtos/list-produtos.component";
+import {SeguradoraViewComponent} from "./main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component";
 
 
 // TODO O Projeto está estruturado em divisão por páginas
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'corretora/cadastro', component: CorretoraPageComponent },
   { path: 'seguradora', component: ListSeguradoraComponent },
   { path: 'seguradora/cadastro', component: SeguradoraPageComponent },
-  { path: 'seguradora/visualizacao', component: SeguradoraPageComponent },
+  { path: 'seguradora/visualizacao', component: SeguradoraViewComponent },
   { path: 'pipeline', component: PipelinePageComponent },
   { path: 'produtos', component: ListProdutosComponent },
   { path: 'produtos/cadastro', component: ProdutosPageComponent },

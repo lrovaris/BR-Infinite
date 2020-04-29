@@ -75,7 +75,7 @@ export class SeguradoraService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
-      alert(data.Message);
+      alert(data.message);
     })
   }
 
@@ -84,7 +84,7 @@ export class SeguradoraService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options).subscribe((data:any) => {
-      alert(data.Message);
+      alert(data.message);
       this.isEdit = false;
      this.getSeguradora(id).subscribe((data: any) => {
        this.seguradoraInfoWithOutFormGroup = data;

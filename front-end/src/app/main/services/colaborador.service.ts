@@ -16,7 +16,7 @@ export class ColaboradorService {
   localDeTrabalho: string = '';
   colaboradorBackEnd: any;
   name: string = '';
-  url = 'http://162.214.89.17:3000';
+  url = 'http://localhost:3000'; // 162.214.89.17:3000/
 
   ColaboradorResponsavel: any;
 

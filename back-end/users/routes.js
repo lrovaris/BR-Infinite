@@ -14,6 +14,8 @@ router.get ('/', (req,res) => {
 
 router.post('/login', async(req,res) => {
 
+  console.log(req.body);
+
   let all_users = await controller.get_users();
 
   if(all_users.length === 0){

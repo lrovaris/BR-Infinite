@@ -10,7 +10,7 @@ import { catchError, retry} from "rxjs/operators";
 })
 export class LoginService {
 
-  url = 'http://162.214.89.17:3000/';
+  url = 'http://localhost:3000/'; // 162.214.89.17:3000/
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;
@@ -89,6 +89,7 @@ export class LoginService {
   }
 
   login(login: string, password: string) {
+
     const authData= {
       login: login,
       password: password

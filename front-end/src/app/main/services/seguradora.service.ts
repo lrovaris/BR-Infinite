@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 export class SeguradoraService {
 
   seguradoraInfo: any;
-  url = 'http://162.214.89.17:3000';
+  url = 'http://localhost:3000'; // 162.214.89.17:3000
   telefones = [];
   seguradoras = [];
   seguradoraInfoWithOutFormGroup: any;

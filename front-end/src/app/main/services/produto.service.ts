@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
 })
 export class ProdutoService {
 
-  url = 'http://localhost:3000'; // 162.214.89.17:3000
+  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000
 
   constructor(private http: HttpClient, private router: Router) {}
 

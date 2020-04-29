@@ -5787,6 +5787,8 @@ export class SeguradoraPageComponent implements OnInit {
   responsavel: any;
   telefones = [];
 
+  isEdit = false;
+
   SelectCidade(estado) {
     this.cidades = [];
     for (let i = 0; i < Estados.length; i++) {
@@ -5884,16 +5886,13 @@ export class SeguradoraPageComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
-
-
       if (this.seguradoraService.getSeguradoraInfo()) {
         this.seguradora = this.seguradoraService.getSeguradoraInfo();
         this.telefones = this.seguradoraService.getTelefones();
       }
 
     if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
+      this.isEdit = true;
       console.log('asd');
       let data = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
       this.seguradora.controls['name'].setValue(data.name);

@@ -86,6 +86,10 @@ export class SeguradoraService {
     return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options).subscribe((data:any) => {
       alert(data.Message);
       this.isEdit = false;
+     this.getSeguradora(id).subscribe((data: any) => {
+       this.seguradoraInfoWithOutFormGroup = data;
+       this.router.navigate(['seguradora/visualizacao'])
+     });
     })
   }
 

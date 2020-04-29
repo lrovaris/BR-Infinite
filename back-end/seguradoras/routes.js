@@ -172,7 +172,12 @@ router.post('/:id/edit', async(req,res) => {
 
   let edited_seguradora = await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
 
-  await res.json(edited_seguradora);
+  let to_send= {
+    "message":"Seguradora editada com sucesso!",
+    "seguradora": edited_seguradora
+  }
+
+  await res.json(to_send);
 });
 
 module.exports = router;

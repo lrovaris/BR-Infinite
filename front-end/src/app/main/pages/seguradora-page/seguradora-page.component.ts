@@ -5861,7 +5861,7 @@ export class SeguradoraPageComponent implements OnInit {
 
     if (this.seguradoraService.isEdit) {
       let seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-      this.seguradoraService.editPostSeguradora(seguradora.id, newSeguradora, this.responsavel);
+      this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora, this.responsavel);
     } else {
       this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
     }

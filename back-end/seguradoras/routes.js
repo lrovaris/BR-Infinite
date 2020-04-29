@@ -50,7 +50,7 @@ router.get ('/:id', async (req,res) => {
 
   this_seg.colaboradores = colaboradores_ext;
 
-  logger.log(this_seg);
+  // logger.log(this_seg);
 
   res.status(200).json(this_seg);
 });
@@ -152,18 +152,21 @@ router.post('/new', async(req,res) => {
 //Alterar o objeto da seguradora
 
 router.post('/:id/edit', async(req,res) => {
-  
+
 
   let req_seguradora = req.body;
 
-  req_seguradora['_id'] = req.params.id;
+  this_id = req.params.id;
 
   let db_seguradora = cache.get("seguradoras").filter((seguradora_obj) => {
-      return seguradora_obj._id == req_seguradora._id;
+      return seguradora_obj._id == this_id;
   })[0];
+
+  console.log(req_seguradora);
 
   Object.keys(req_seguradora).forEach(function(key) {
     let val = req_seguradora[key];
+    console.log(key, val);
     db_seguradora[key] = val;
   });
 

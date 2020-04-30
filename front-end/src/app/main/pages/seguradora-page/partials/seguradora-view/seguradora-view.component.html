@@ -1,6 +1,11 @@
 <div class="apex-content content container-fluid" id="parentdiv" #parentdiv>
   <div class="content-wrapper">
     <div class="content-header row">
+      <div class="row" style="margin-left: 1rem">
+        <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
+        <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>pdf completo</button>
+        <button (click)="downloadPDFReduzido()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>pdf reduzido</button>
+      </div>
     </div>
     <div class="content-body">
       <div style="margin-left: 1rem" class="col-12">
@@ -15,6 +20,8 @@
             <div class="px-3">
               <form class="form">
                 <div class="form-body">
+                  <h4 class="form-section"></h4>
+
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-4">
                         <label for="userinput1">Nome da seguradora</label>
@@ -35,48 +42,70 @@
                         </p>
                     </div>
                   </div>
-                  </div>
-                  <div >
-                    <div class="row">
-                      <section id="simple-table">
-                        <div class="row text-left">
-                          <div style="margin-left: 1rem" class="col-12">
-                            <div class="card" style="margin-left: 2rem;">
-                              <div class="card-header">
-                                <h4 class="card-title">Tabela de telefones</h4>
-                                <p>Caso seja necessario utilize o botao de reset para reiniciar a inserção de telefones</p>
-
-                              </div>
-                              <div class="card-content">
-                                <div class="card-body">
-                                  <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                      <th></th>
-                                      <th>Assunto</th>
-                                      <th>Email</th>
-                                      <th>Telefone</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr *ngFor="let telefone of seguradora.telefones">
-                                      <th scope="row"></th>
-                                      <td >{{telefone.assunto}}</td>
-                                      <td>{{telefone.email}}</td>
-                                      <td style="color: #1D2671">{{telefone.telefone}}</td>
-                                    </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
+                  <h4 class="form-section"><i class="ft-file-text"></i> Colaboradores </h4>
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="gerenteNome">Nome do Responsável</label>
+                      <p type="text" id="gerenteNome" class=" " >
+                        {{seguradora.manager.name}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="gerenteTelefone">Telefone do Responsável</label>
+                      <p type="text" id="gerenteTelefone" class=" " >
+                        {{seguradora.manager.telephone}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="gerenteEmail">Email do Responsável</label>
+                      <p type="text" id="gerenteEmail" class=" " >
+                        {{seguradora.manager.email}}
+                      </p>
                     </div>
                   </div>
+                  </div>
+                <div class="row" *ngIf="checkColaboradores">
+                  teste
+                </div>
+                <div class="row" style="margin-bottom: 1rem">
+                  <div class="col" style="margin-left: 1rem">
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="!checkColaboradores" (click)="setColaboradoresTrue()">ver mais</a>
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="checkColaboradores" (click)="setColaboradoresFalse()">ver menos</a>
+                  </div>
+                </div>
+                  <h4 class="form-section"><i class="ft-file-text"></i> Telefones </h4>
+                <div class="row">
+                  <div style="margin-left: 1rem" class="col-md-4">
+                    <label >Assunto</label>
+                    <p type="text"  class=" " >
+                      {{seguradora.telefones[0].assunto}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-4">
+                    <label >Email</label>
+                    <p type="text"  class=" " >
+                      {{seguradora.telefones[0].email}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-3">
+                    <label >Telefone</label>
+                    <p type="text"  class=" " >
+                      {{seguradora.telefones[0].telefone}}
+                    </p>
+                  </div>
+                </div>
+                <div class="row" *ngIf="checkTelefones">
+                  teste
+                </div>
+                <div class="row" style="margin-bottom: 1rem">
+                  <div class="col" style="margin-left: 1rem">
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="!checkTelefones" (click)="setTelefonesTrue()">ver mais</a>
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="checkTelefones" (click)="setTelefonesFalse()">ver menos</a>
+                  </div>
+                </div>
 
                   <h4 class="form-section"><i class="ft-file-text"></i> Endereço </h4>
+
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-3">
                         <label for="userinput9">UF</label>
@@ -121,11 +150,7 @@
                       </div>
                     </div>
                   </div>
-                <h4 class="form-section"></h4>
-                <div class="row">
-                  <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
-                  <button (click)="downloadPDF()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>pdf</button>
-                </div>
+
               </form>
 
             </div>

@@ -4,6 +4,7 @@ import * as jsPDF from 'jspdf';
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
 import {delay} from "rxjs/operators";
+import {ColaboradorService} from "../../../../services/colaborador.service";
 
 @Component({
   selector: 'app-seguradora-view',
@@ -31,15 +32,24 @@ export class SeguradoraViewComponent implements OnInit {
   return  this.checkColaboradores = false;
   }
 
+  navigateSeguradora() {
+    this.router.navigate(['seguradora'])
+  }
 
-  constructor(private seguradoraService: SeguradoraService, private router: Router) { }
+  constructor(private seguradoraService: SeguradoraService, private router: Router, private colaboradorService: ColaboradorService) { }
 
   navigateEdit() {
     this.router.navigate(['seguradora/cadastro'])
   }
+  navigateColaborador() {
+    this.colaboradorService.setCameFromSeguradoraTrue();
+    this.colaboradorService.setWorkId(this.seguradora._id);
+    this.router.navigate(['colaborador'])
+  }
 
   ngOnInit() {
     this.seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
+    console.log(this.seguradora);
   }
 
    async downloadPDFCompleto()

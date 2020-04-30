@@ -18,6 +18,7 @@ export class ColaboradorPageComponent implements OnInit {
   checkIsResonponsible: boolean = false;
   localDeTrabalho: any;
 
+
   submitted = false;
   colaborador: FormGroup;
 
@@ -50,6 +51,16 @@ export class ColaboradorPageComponent implements OnInit {
       })
   }
 
+  navigateBack() {
+    if (this.colaboradorService.getCameFromSeguradora()) {
+      this.seguradoraService.getSeguradora(this.colaboradorService.workId).subscribe((data: any) => {
+        this.seguradoraService.editSeguradora(data)
+      });
+    } else if (this.colaboradorService.getCameFromCorretora()) {
+
+    }
+  }
+
   get f() { return this.colaborador.controls; }
 
   onReset() {
@@ -75,17 +86,38 @@ export class ColaboradorPageComponent implements OnInit {
     this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
   }
 
+  postColaborador() {
+    console.log(this.colaboradorService.workId);
+    this.submitted = true;
+    if (this.colaborador.invalid) {
+      return;
+    }
+    let newColaborador: Colaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: '',
+      seguradora: this.colaboradorService.workId,
+      active: true
+    };
+    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+      alert(data.message);
+      this.colaborador.reset();
+    })
+  }
+
   navigateLista() {
     this.router.navigate(['lista'])
   }
 
   ngOnInit() {
-
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
     console.log(isSeguradora);
     if (isCorretora.isCorretora) {
-console.log('is corretora')
+      console.log('is corretora')
     } else if (isSeguradora.isSeguradora) {
        this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
        console.log(this.localDeTrabalho);
@@ -101,8 +133,6 @@ console.log('is corretora')
         this.colaborador.controls['seguradora'].setValue(data.seguradora);
       });
     }
-
-
     if (isCorretora.isCorretora) {
       this.selectIndex = 1;
       this.selectTriggered = true;
@@ -120,11 +150,6 @@ console.log('is corretora')
     }
     this.colaboradorService.setIsResponsibleTrue();
     this.checkIsResonponsible = this.colaboradorService.getIsResponsible();
-
-
-/*    */
-
-
   }
 
 }

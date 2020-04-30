@@ -75,7 +75,7 @@ export class SeguradoraService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
-      alert(data.message);
+      alert(data.Message);
     })
   }
 

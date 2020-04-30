@@ -55,7 +55,7 @@
                     </div>
                   </div>
 
-                  <h4 class="form-section"><i class="ft-mail"></i> Informação de Trabalho </h4>
+                  <!--<h4 class="form-section"><i class="ft-mail"></i> Informação de Trabalho </h4>
 
                   <div class="form-group">
                     <label for="issueinput5">Selecione</label>
@@ -81,7 +81,7 @@
                             data-placement="top" data-title="Priority">
                       <option [value]="name">{{name}}</option>
                     </select>
-                  </div>
+                  </div>-->
 
                   <div class="form-group">
                     <label for="userinput5">Cargo</label>
@@ -91,11 +91,11 @@
                 </div>
 
                 <div class="form-actions right">
-                  <!--<button type="button" class="btn btn-raised  mr-1 btn-header-cancel">
+                  <button (click)="navigateBack()" *ngIf="!checkIsResonponsible" type="button" class="btn btn-raised  mr-1 btn-header-cancel">
                     <a>Voltar</a>
-                  </button>-->
-                  <button *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
-                    <i class="fa fa-check-square-o"></i> <a>Salvar</a>
+                  </button>
+                  <button (click)="postColaborador()" *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
+                    <i class="fa fa-check-square-o"></i> <a>Adicionar</a>
                   </button>
                   <button *ngIf="(checkIsResonponsible)" type="submit" class="btn btn-raised  btn-header">
                     <i class="fa fa-check-square-o"></i> <a>Retornar ao Form</a>

@@ -3,6 +3,7 @@ import domtoimage from 'dom-to-image';
 import * as jsPDF from 'jspdf';
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-seguradora-view',
@@ -13,9 +14,23 @@ export class SeguradoraViewComponent implements OnInit {
 
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
 
-
-
+  checkTelefones = false;
+  checkColaboradores = false;
   seguradora: any;
+
+  setTelefonesTrue() {
+   return this.checkTelefones = true;
+  }
+  setTelefonesFalse() {
+  return  this.checkTelefones = false;
+  }
+  setColaboradoresTrue() {
+   return this.checkColaboradores = true;
+  }
+  setColaboradoresFalse() {
+  return  this.checkColaboradores = false;
+  }
+
 
   constructor(private seguradoraService: SeguradoraService, private router: Router) { }
 
@@ -27,8 +42,20 @@ export class SeguradoraViewComponent implements OnInit {
     this.seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
   }
 
-  downloadPDF()
+   async downloadPDFCompleto()
   {
+  await  this.setColaboradoresTrue();
+  await  this.setTelefonesTrue();
+    setTimeout(this.downloadPDF, 0)
+  }
+ async downloadPDFReduzido()
+  {
+  await this.setTelefonesFalse();
+  await this.setColaboradoresFalse();
+    setTimeout(this.downloadPDF, 0)
+  }
+
+  downloadPDF() {
     var node = document.getElementById('parentdiv');
     var img;
     var filename;

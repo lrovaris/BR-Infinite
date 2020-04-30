@@ -7,27 +7,21 @@ const logger = require('../logger')
 const colaborador_db = require('../colaboradores/db');
 const controlador_controller = require('../colaboradores/controller');
 
+const controller = require('./controller');
+
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
-  let all_corretoras = cache.get("corretoras");
+  let all_corretoras = await controller.get_corretoras();
 
-  if (all_corretoras !== undefined){
-      res.status(200).json(cache.get("corretoras"));
-  }
-
-  else {
-    all_corretoras = await db.get_corretoras();
-
-    res.status(200).json(cache.get("corretoras"));
-  }
+  res.status(200).json(all_corretoras);
 });
 
 router.get('/:id', async(req,res) => {
 
-  let db_corretora = cache.get("corretoras").filter((corretora_obj) => {
+  let db_corretora = await controller.get_corretoras().filter((corretora_obj) => {
       return corretora_obj._id == req.params.id;
   })[0];
 
@@ -196,7 +190,7 @@ router.post('/:id/edit', async(req,res) => {
 
   req_corretora['_id'] = req.params.id;
 
-  let db_corretora = cache.get("corretoras").filter((corretora_obj) => {
+  let db_corretora = await controller.get_corretoras().filter((corretora_obj) => {
       return corretora_obj._id == req_corretora._id;
   })[0];
 

@@ -13,4 +13,47 @@ async function get_colaboradores() {
   }
 }
 
-module.exports = { get_colaboradores };
+async function get_colaboradores_by_id(colab_id) {
+  let all_colab = await get_colaboradores();
+
+  let colaborador = all_colab.filter(colab_obj =>{
+    return (colab_obj._id + "" == colab_id +"")
+  })[0]
+
+  return colaborador;
+}
+
+async function get_colaboradores_corretora(id_corretora){
+  let all_colab = await get_colaboradores();
+
+  this_corretora_colabs = all_colab.filter(colab_obj =>{
+    if (colab_obj.corretora+"" == "" || colab_obj.corretora == undefined){
+      return false;
+    }
+
+    return colab_obj.corretora + "" == id_corretora + ""
+  })
+
+  return this_corretora_colabs;
+}
+
+async function get_colaboradores_seguradora(id_seguradora, id_manager){
+  let all_colab = await get_colaboradores();
+
+  let this_seguradora_colabs = all_colab.filter(colab_obj =>{
+    if(colab_obj.seguradora+"" == "" || colab_obj.seguradora == undefined){
+      return false;
+    }
+    
+    return ((colab_obj.seguradora.toString() == id_seguradora.toString()) && !(colab_obj._id.toString() == id_manager.toString()))
+  });
+
+  let this_seg_manager = await get_colaboradores_by_id(id_manager);
+
+  return {
+    colaboradores: this_seguradora_colabs,
+    manager: this_seg_manager
+  };
+}
+
+module.exports = { get_colaboradores, get_colaboradores_corretora, get_colaboradores_seguradora };

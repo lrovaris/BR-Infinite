@@ -4,6 +4,8 @@ const db = require('./db');
 const cache = require('../memoryCache');
 const controller = require('./controller')
 
+const seguradoras_controller = require('../seguradoras/controller')
+
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 });

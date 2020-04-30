@@ -5,52 +5,38 @@ const cache = require('../memoryCache');
 const logger = require('../logger');
 const colaborador_db = require('../colaboradores/db')
 const colab_controller = require('../colaboradores/controller')
+const controller = require('./controller')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
-  let all_seguradoras = cache.get("seguradoras");
+  let all_seguradoras = await controller.get_seguradoras();
 
-  if (all_seguradoras !== undefined){
-      res.status(200).json(cache.get("seguradoras"));
-  }
-
-  else {
-    all_seguradoras = await db.get_seguradoras();
-
-    res.status(200).json(cache.get("seguradoras"));
-  }
+  res.status(200).json(all_seguradoras);
 });
 
 router.get ('/:id', async (req,res) => {
-  let all_seguradoras = cache.get("seguradoras");
+  let all_seguradoras = await controller.get_seguradoras();
 
   let this_seg = all_seguradoras.filter(seg =>{
     return seg._id == req.params.id
   })[0]
 
-  let colaboradores = await colab_controller.get_colaboradores();
+  let manager_id;
 
-  let colaboradores_ext = [];
-
-  for (var i = 0; i < this_seg.colaboradores.length; i++) {
-      if(this_seg.colaboradores[i]._id){
-        colaboradores_ext.push(this_seg.colaboradores[i]);
-        continue;
-      }
-
-      let id_colab = this_seg.colaboradores[i];
-
-      colaboradores_ext.push(colaboradores.filter(colab_obj =>{
-        return colab_obj._id + "" === id_colab + ""
-      })[0])
+  if(this_seg.manager._id){
+    manager_id = this_seg.manager._id
+  }else {
+    manager_id = this_seg.manager
   }
 
-  this_seg.colaboradores = colaboradores_ext;
+  let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, manager_id);
 
-  // logger.log(this_seg);
+  this_seg.colaboradores = colab_info.colaboradores;
+
+  this_seg.manager = colab_info.manager;
 
   res.status(200).json(this_seg);
 });
@@ -134,13 +120,7 @@ router.post('/new', async(req,res) => {
 
       let db_seguradora = new_seg.ops[0];
 
-      db_seguradora["colaboradores"] = [ new_colab.insertedId ];
-
-      db_seguradora["manager"] = {
-        "id": new_colab.insertedId,
-        "name": new_colab.ops[0].name,
-        "email": new_colab.ops[0].email
-      }
+      db_seguradora["manager"] = new_colab.insertedId;
 
       await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
 
@@ -158,7 +138,7 @@ router.post('/:id/edit', async(req,res) => {
 
   this_id = req.params.id;
 
-  let db_seguradora = cache.get("seguradoras").filter((seguradora_obj) => {
+  let db_seguradora = await controller.get_seguradoras().filter((seguradora_obj) => {
       return seguradora_obj._id == this_id;
   })[0];
 

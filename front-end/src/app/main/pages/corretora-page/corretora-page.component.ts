@@ -5786,6 +5786,7 @@ export class CorretoraPageComponent implements OnInit {
   seguradoras = [];
   responsavel: any;
   allSeguradoras: Array<any> = [];
+  isEdit = false;
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5833,7 +5834,32 @@ export class CorretoraPageComponent implements OnInit {
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
-    })
+    });
+
+
+    if (this.corretoraService.getCorretoraInfo()) {
+
+      this.corretora = this.corretoraService.getCorretoraInfo();
+    }
+
+    if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
+      console.log('daqui que ta pegando');
+      this.isEdit = true;
+      let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+      this.corretora.controls['name'].setValue(data.name);
+      this.corretora.controls['telephone'].setValue(data.telephone);
+      this.corretora.controls['cnpj'].setValue(data.cnpj);
+      this.corretora.controls['email'].setValue(data.email);
+      this.corretora.controls['estate'].setValue(data.address.estate);
+      this.corretora.controls['number'].setValue(data.address.number);
+      this.corretora.controls['city'].setValue(data.address.city);
+      this.corretora.controls['street'].setValue(data.address.street);
+      this.corretora.controls['complement'].setValue(data.address.complement);
+      this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
+    }
+
+    console.log(this.isEdit);
+
 
   }
 
@@ -5860,8 +5886,17 @@ export class CorretoraPageComponent implements OnInit {
       },
       seguradoras: this.seguradoras
     };
-    this.responsavel = this.colaboradorService.getColaboradorResponsavel();
-    this.corretoraService.postCorretora(newCorretora, this.responsavel);
+    if (this.isEdit) {
+      console.log('isedit');
+      let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+      console.log(corretora);
+      this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel);
+
+    } else if (!this.isEdit){
+      console.log('isnotedit');
+      this.corretoraService.postCorretora(newCorretora, this.responsavel);
+    }
+
     this.corretora.reset();
   };
 

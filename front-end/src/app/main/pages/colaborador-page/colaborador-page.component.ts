@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ColaboradorService} from "../../services/colaborador.service";
 import {Colaborador} from "./Colaborador";
 import {SeguradoraService} from "../../services/seguradora.service";
+import {CorretoraService} from "../../services/corretora.service";
 
 @Component({
   selector: 'app-colaborador-page',
@@ -39,7 +40,13 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
 
-  constructor(private formbuilder: FormBuilder, public colaboradorService: ColaboradorService, private router: Router, private seguradoraService: SeguradoraService) {
+  constructor(
+              private formbuilder: FormBuilder,
+              public colaboradorService: ColaboradorService,
+              private router: Router,
+              private seguradoraService: SeguradoraService,
+              private corretoraService: CorretoraService) {
+
     this.colaborador = this.formbuilder.group({
         name: [null, Validators.required],
         email: [null, Validators.required],
@@ -57,7 +64,9 @@ export class ColaboradorPageComponent implements OnInit {
         this.seguradoraService.editSeguradora(data)
       });
     } else if (this.colaboradorService.getCameFromCorretora()) {
-
+      this.corretoraService.getCorretora(this.colaboradorService.workId).subscribe((data: any) => {
+        this.corretoraService.editCorretora(data)
+      });
     }
   }
 
@@ -115,7 +124,6 @@ export class ColaboradorPageComponent implements OnInit {
   ngOnInit() {
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
-    console.log(isSeguradora);
     if (isCorretora.isCorretora) {
       console.log('is corretora')
     } else if (isSeguradora.isSeguradora) {
@@ -150,6 +158,14 @@ export class ColaboradorPageComponent implements OnInit {
     }
     this.colaboradorService.setIsResponsibleTrue();
     this.checkIsResonponsible = this.colaboradorService.getIsResponsible();
+
+    if((this.colaboradorService.checkCameFromCorretoraList) || (this.colaboradorService.checkCameFromSeguradoraList)) {
+      this.checkIsResonponsible = false;
+    }
+
   }
+
+
+
 
 }

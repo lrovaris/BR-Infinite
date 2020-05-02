@@ -5904,6 +5904,10 @@ export class CorretoraPageComponent implements OnInit {
     console.log('');
   }
 
+  navigateCorretora() {
+    this.router.navigate(['corretora'])
+  }
+
   searchEstado = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),

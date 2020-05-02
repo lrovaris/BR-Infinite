@@ -5798,6 +5798,10 @@ export class SeguradoraPageComponent implements OnInit {
     }
   }
 
+  navigateSeguradora() {
+    this.router.navigate(['seguradora'])
+  }
+
   addTelefone() {
     let telefone = {
       assunto: this.seguradora.value.assunto,

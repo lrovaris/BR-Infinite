@@ -13,6 +13,7 @@ import { ListCorretoraComponent } from "./main/pages/corretora-page/partials/lis
 import { ListProdutosComponent } from "./main/pages/produtos-page/partials/list-produtos/list-produtos.component";
 import { SeguradoraViewComponent } from "./main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component";
 import { CorretoraViewComponent } from "./main/pages/corretora-page/partials/corretora-view/corretora-view.component";
+import { ProdutoViewComponent } from "./main/pages/produtos-page/partials/produto-view/produto-view.component";
 
 
 // TODO O Projeto está estruturado em divisão por páginas
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'pipeline', component: PipelinePageComponent },
   { path: 'produtos', component: ListProdutosComponent },
   { path: 'produtos/cadastro', component: ProdutosPageComponent },
+  { path: 'produtos/visualizacao', component: ProdutoViewComponent },
   { path: 'colaborador', component: ColaboradorPageComponent },
   { path: 'producao', component: ProducaoPageComponent }
 

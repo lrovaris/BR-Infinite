@@ -34,6 +34,7 @@ export class ListSeguradoraComponent implements OnInit {
 
   editSeguradora(id) {
     this.seguradoraService.getSeguradora(id).subscribe((data: any) => {
+      console.log(data);
       this.seguradoraService.editSeguradora(data);
     })
   }

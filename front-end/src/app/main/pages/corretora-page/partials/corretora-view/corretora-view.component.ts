@@ -1,67 +1,66 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {CorretoraService} from "../../../../services/corretora.service";
+import {Router} from "@angular/router";
+import {ColaboradorService} from "../../../../services/colaborador.service";
 import domtoimage from 'dom-to-image';
 import * as jsPDF from 'jspdf';
-import {SeguradoraService} from "../../../../services/seguradora.service";
-import {Router} from "@angular/router";
-import {delay} from "rxjs/operators";
-import {ColaboradorService} from "../../../../services/colaborador.service";
 
 @Component({
-  selector: 'app-seguradora-view',
-  templateUrl: './seguradora-view.component.html',
-  styleUrls: ['./seguradora-view.component.scss']
+  selector: 'app-corretora-view',
+  templateUrl: './corretora-view.component.html',
+  styleUrls: ['./corretora-view.component.scss']
 })
-export class SeguradoraViewComponent implements OnInit {
+export class CorretoraViewComponent implements OnInit {
 
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
 
   checkTelefones = false;
   checkColaboradores = false;
-  seguradora: any;
+  corretora: any;
 
   setTelefonesTrue() {
-   return this.checkTelefones = true;
+    return this.checkTelefones = true;
   }
   setTelefonesFalse() {
-  return  this.checkTelefones = false;
+    return  this.checkTelefones = false;
   }
   setColaboradoresTrue() {
-   return this.checkColaboradores = true;
+    return this.checkColaboradores = true;
   }
   setColaboradoresFalse() {
-  return  this.checkColaboradores = false;
+    return  this.checkColaboradores = false;
   }
 
-  navigateSeguradora() {
-    this.router.navigate(['seguradora'])
+  navigateCorretora() {
+    this.router.navigate(['corretora'])
   }
 
-  constructor(private seguradoraService: SeguradoraService, private router: Router, private colaboradorService: ColaboradorService) { }
+  constructor(private corretoraService: CorretoraService, private router: Router, private colaboradorService: ColaboradorService) { }
 
   navigateEdit() {
-    this.router.navigate(['seguradora/cadastro'])
+    this.router.navigate(['corretora/cadastro'])
   }
   navigateColaborador() {
-    this.colaboradorService.setCameFromSeguradoraTrue();
-    this.colaboradorService.setWorkId(this.seguradora._id);
+    this.colaboradorService.setCameFromCorretoraTrue();
+    this.colaboradorService.setWorkId(this.corretora._id);
     this.router.navigate(['colaborador'])
   }
 
   ngOnInit() {
-    this.seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-    console.log(this.seguradora);
+    this.corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+    console.log(this.corretora);
   }
 
-   async downloadPDFCompleto()
+  async downloadPDFCompleto()
   {
-  await  this.setColaboradoresTrue();
-  await  this.setTelefonesTrue();
+    await  this.setColaboradoresTrue();
+    await  this.setTelefonesTrue();
     setTimeout(this.downloadPDF, 0)
   }
- async downloadPDFReduzido()
+  async downloadPDFReduzido()
   {
-  await this.setTelefonesFalse();
-  await this.setColaboradoresFalse();
+    await this.setTelefonesFalse();
+    await this.setColaboradoresFalse();
     setTimeout(this.downloadPDF, 0)
   }
 

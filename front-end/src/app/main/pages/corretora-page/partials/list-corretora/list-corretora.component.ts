@@ -19,6 +19,13 @@ export class ListCorretoraComponent implements OnInit {
     this.router.navigate(['corretora/cadastro'])
   }
 
+  editSeguradora(id) {
+    this.corretoraService.getCorretora(id).subscribe((data: any) => {
+      console.log(data);
+      this.corretoraService.editCorretora(data);
+    })
+  }
+
   ngOnInit() {
     this.corretoraService.getAllCorretoras().subscribe((data:any) => {
       this.corretoras = data;

@@ -21,6 +21,7 @@ import { ListCorretoraComponent } from './main/pages/corretora-page/partials/lis
 import { ListSeguradoraComponent } from './main/pages/seguradora-page/partials/list-seguradora/list-seguradora.component';
 import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-produtos/list-produtos.component';
 import { SeguradoraViewComponent } from './main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component';
+import { CorretoraViewComponent } from './main/pages/corretora-page/partials/corretora-view/corretora-view.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SeguradoraViewComponent } from './main/pages/seguradora-page/partials/s
     ListCorretoraComponent,
     ListSeguradoraComponent,
     ListProdutosComponent,
-    SeguradoraViewComponent
+    SeguradoraViewComponent,
+    CorretoraViewComponent
   ],
   imports: [
     BrowserModule,

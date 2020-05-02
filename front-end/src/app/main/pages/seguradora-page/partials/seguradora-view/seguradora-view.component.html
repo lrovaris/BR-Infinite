@@ -3,8 +3,9 @@
     <div class="content-header row">
       <div class="row" style="margin-left: 1rem">
         <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
-        <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>pdf completo</button>
-        <button (click)="downloadPDFReduzido()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>pdf reduzido</button>
+        <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Completo</button>
+        <button (click)="downloadPDFReduzido()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Reduzido</button>
+        <button (click)="navigateSeguradora()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
       </div>
     </div>
     <div class="content-body">
@@ -42,7 +43,10 @@
                         </p>
                     </div>
                   </div>
-                  <h4 class="form-section"><i class="ft-file-text"></i> Colaboradores </h4>
+                  <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
+                  <div class="row">
+                    <button (click)="navigateColaborador()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-bottom: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-user-plus"></i>Adicionar Novo Colaborador</button>
+                  </div>
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-4">
                       <label for="gerenteNome">Nome do Responsável</label>
@@ -65,7 +69,40 @@
                   </div>
                   </div>
                 <div class="row" *ngIf="checkColaboradores">
-                  teste
+                 <div class="col">
+                   <section id="simple-table">
+                     <div class="row text-left">
+                       <div class="col-sm-12">
+                         <div class="card">
+                           <div class="card-content">
+                             <div class="card-body">
+                               <table class="table">
+                                 <thead>
+                                 <tr>
+                                   <th>#</th>
+                                   <th>Nome</th>
+                                   <th>Email</th>
+                                   <th>Telefone</th>
+                                   <th>Aniversario</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 <tr *ngFor="let colaboradores of seguradora.colaboradores; let i = index">
+                                   <th>{{i+1}}</th>
+                                   <td>{{colaboradores.name}}</td>
+                                   <td>{{colaboradores.email}}</td>
+                                   <td>{{colaboradores.telephone}}</td>
+                                   <td>{{colaboradores.birthday}}</td>
+                                 </tr>
+                                 </tbody>
+                               </table>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </section>
+                 </div>
                 </div>
                 <div class="row" style="margin-bottom: 1rem">
                   <div class="col" style="margin-left: 1rem">
@@ -73,7 +110,7 @@
                     <a style="color: dodgerblue; cursor: pointer" *ngIf="checkColaboradores" (click)="setColaboradoresFalse()">ver menos</a>
                   </div>
                 </div>
-                  <h4 class="form-section"><i class="ft-file-text"></i> Telefones </h4>
+                  <h4 class="form-section"><i class="ft-phone"></i> Telefones </h4>
                 <div class="row">
                   <div style="margin-left: 1rem" class="col-md-4">
                     <label >Assunto</label>
@@ -95,7 +132,36 @@
                   </div>
                 </div>
                 <div class="row" *ngIf="checkTelefones">
-                  teste
+                  <div class="col">
+                    <section id="simple-table3">
+                      <div class="row text-left">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                <table class="table">
+                                  <thead>
+                                  <tr>
+                                    <th>Assunto</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr *ngFor="let telefone of seguradora.telefones.slice(1); let i = index">
+                                    <td>{{telefone.assunto}}</td>
+                                    <td>{{telefone.email}}</td>
+                                    <td>{{telefone.telefone}}</td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
                 </div>
                 <div class="row" style="margin-bottom: 1rem">
                   <div class="col" style="margin-left: 1rem">
@@ -104,7 +170,7 @@
                   </div>
                 </div>
 
-                  <h4 class="form-section"><i class="ft-file-text"></i> Endereço </h4>
+                  <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
 
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-3">

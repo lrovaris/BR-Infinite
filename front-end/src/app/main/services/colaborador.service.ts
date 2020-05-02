@@ -9,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class ColaboradorService {
 
+  workId: any;
   isResponsible: boolean = false;
   colaborador$ = new Observable<Colaborador>();
   isSeguradora: boolean = false;
@@ -18,9 +19,31 @@ export class ColaboradorService {
   name: string = '';
   url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
 
+  checkCameFromSeguradoraList = false;
+  checkCameFromCorretoraList = false;
+
   ColaboradorResponsavel: any;
 
+
+
  // TODO ------------------------------ GET SET
+
+  setCameFromCorretoraTrue() {
+    this.checkCameFromCorretoraList = true;
+  }
+  getCameFromCorretora() {
+   return this.checkCameFromCorretoraList;
+  }
+  setCameFromSeguradoraTrue() {
+    this.checkCameFromSeguradoraList = true;
+  }
+  getCameFromSeguradora() {
+    return this.checkCameFromSeguradoraList;
+  }
+
+  setWorkId(id) {
+    this.workId = id;
+  }
   setIsSeguradoraTrue(name) {
     this.name = name;
     this.isSeguradora = true;
@@ -83,5 +106,9 @@ export class ColaboradorService {
     }
   // TODO END METODOS DE BACK END ________________________________________________________________
   constructor(private router: Router, private http: HttpClient) { }
+
+  postColaborador(colaborador) {
+    return this.http.post(`${this.url}/colaboradores/new`, colaborador)
+  }
 
 }

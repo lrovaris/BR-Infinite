@@ -1,0 +1,175 @@
+<div class="apex-content content container-fluid" id="parentdiv" #parentdiv>
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="row" style="margin-left: 1rem">
+        <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
+        <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Completo</button>
+        <button (click)="downloadPDFReduzido()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Reduzido</button>
+        <button (click)="navigateCorretora()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
+      </div>
+    </div>
+    <div class="content-body">
+      <div style="margin-left: 1rem" class="col-12">
+        <div class="card" style="padding-bottom: 2rem">
+          <div class="card-header pb-2">
+            <h4 style="margin-top: 1rem" class="form-section"><i class="ft-info"></i> Informações da Corretora </h4>
+            <div class="row"><h4 class="form-section"></h4></div>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form">
+                <div class="form-body">
+                  <h4 class="form-section"></h4>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-6">
+                      <label for="userinput1">Nome da Corretora</label>
+                      <p type="text" id="userinput1" class=" " >
+                        {{corretora.name}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <label for="userinput2">CNPJ</label>
+                      <p type="text" id="userinput2" class=" " >
+                        {{corretora.cnpj}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-6">
+                      <label for="userinput1">Email</label>
+                      <p type="text" id="userinput3" class=" " >
+                        {{corretora.email}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <label for="userinput2">Telefone</label>
+                      <p type="text" id="userinput4" class=" " >
+                        {{corretora.telephone}}
+                      </p>
+                    </div>
+                  </div>
+                  <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
+                  <div class="row">
+                    <button (click)="navigateColaborador()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-bottom: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-user-plus"></i>Adicionar Novo Colaborador</button>
+                  </div>
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="gerenteNome">Nome do Responsável</label>
+                      <p type="text" id="gerenteNome" class=" " >
+                        {{corretora.manager.name}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="gerenteTelefone">Telefone do Responsável</label>
+                      <p type="text" id="gerenteTelefone" class=" " >
+                        {{corretora.manager.telephone}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="gerenteEmail">Email do Responsável</label>
+                      <p type="text" id="gerenteEmail" class=" " >
+                        {{corretora.manager.email}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="checkColaboradores">
+                  <div class="col">
+                    <section id="simple-table">
+                      <div class="row text-left">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                <table class="table">
+                                  <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Aniversario</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr *ngFor="let colaboradores of corretora.colaboradores; let i = index">
+                                    <th>{{i+1}}</th>
+                                    <td>{{colaboradores.name}}</td>
+                                    <td>{{colaboradores.email}}</td>
+                                    <td>{{colaboradores.telephone}}</td>
+                                    <td>{{colaboradores.birthday}}</td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <div class="row" style="margin-bottom: 1rem">
+                  <div class="col" style="margin-left: 1rem">
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="!checkColaboradores" (click)="setColaboradoresTrue()">ver mais</a>
+                    <a style="color: dodgerblue; cursor: pointer" *ngIf="checkColaboradores" (click)="setColaboradoresFalse()">ver menos</a>
+                  </div>
+                </div>
+                <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
+
+                <div class="row">
+                  <div style="margin-left: 1rem" class="col-md-3">
+                    <label for="userinput9">UF</label>
+                    <p type="text" id="userinput9">
+                      {{corretora.address.estate}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-4">
+                    <label for="userinput10">Cidade</label>
+                    <p type="text" id="userinput10" class=" ">
+                      {{corretora.address.city}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-4">
+                    <label for="userinput5">Rua</label>
+                    <p class=" " type="text" id="userinput5">
+                      {{corretora.address.street}}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div style="margin-left: 1rem" class="col-md-3">
+                    <label for="userinput8">Bairro</label>
+                    <p type="text" id="userinput8" class=" ">
+                      {{corretora.address.neighborhood}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-2">
+                    <label for="userinput6">Número</label>
+                    <p type="email" id="userinput6" class=" ">
+                      {{corretora.address.number}}
+                    </p>
+                  </div>
+                  <div style="margin-left: 1rem" class="col-md-5">
+                    <div class="col">
+                      <label for="userinput7">Complemento</label>
+                      <p type="text" id="userinput7" class=" ">
+                        {{corretora.address.complement}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

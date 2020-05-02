@@ -3,23 +3,22 @@ const router = express.Router();
 const db = require('./db');
 const cache = require('../memoryCache');
 const logger = require('../logger');
+const controller = require('./controller')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"Message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
-  let all_produtos = cache.get("produtos");
+  let all_produtos = await controller.get_produtos();
 
-  if (all_produtos !== undefined){
-      res.status(200).json(cache.get("produtos"));
-  }
+  res.status(200).json(all_produtos);
+});
 
-  else {
-    all_produtos = await db.get_produtos();
+router.get('/:id', async(req,res)=>{
+  to_send = await controller.get_produto_by_id(req.params.id);
 
-    res.status(200).json(cache.get("produtos"));
-  }
+  res.status(200).json(to_send);
 });
 
 router.post('/new', async(req,res) => {
@@ -72,7 +71,12 @@ router.post('/:id/edit', async(req,res) => {
 
   let edited_produto = await db.update_produto(db_produto).catch(err => logger.error(err));
 
-  await res.json(edited_produto);
+  to_send = {
+    message: "Produto editado com sucesso!",
+    product: edited_produto.ops[0]
+  }
+
+  res.status(200).json(to_send);
 });
 
 module.exports = router;

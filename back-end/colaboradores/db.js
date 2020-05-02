@@ -21,7 +21,6 @@ async function get_colaboradores() {
     });
 }
 
-
 async function register_colaborador(new_colaborador) {
 
   let db_conn = await db_utils.get_db();

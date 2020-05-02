@@ -18,18 +18,18 @@ router.get ('/all', async (req,res) => {
 });
 
 router.get ('/:id', async (req,res) => {
-  let all_seguradoras = await controller.get_seguradoras();
+  let this_seg = await controller.get_seguradora_by_id(req.params.id);
 
-  let this_seg = all_seguradoras.filter(seg =>{
-    return seg._id == req.params.id
-  })[0]
+  console.log(this_seg);
 
   let manager_id;
 
-  if(this_seg.manager._id){
-    manager_id = this_seg.manager._id
-  }else {
-    manager_id = this_seg.manager
+  if(this_seg.manager){
+    if(this_seg.manager._id){
+      manager_id = this_seg.manager._id
+    }else {
+      manager_id = this_seg.manager
+    }
   }
 
   let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, manager_id);
@@ -133,20 +133,14 @@ router.post('/new', async(req,res) => {
 
 router.post('/:id/edit', async(req,res) => {
 
-
   let req_seguradora = req.body;
 
-  this_id = req.params.id;
+  let db_seguradora = await controller.get_seguradora_by_id(req.params.id);
 
-  let db_seguradora = await controller.get_seguradoras().filter((seguradora_obj) => {
-      return seguradora_obj._id == this_id;
-  })[0];
-
-  console.log(req_seguradora);
+  logger.log(req_seguradora);
 
   Object.keys(req_seguradora).forEach(function(key) {
     let val = req_seguradora[key];
-    console.log(key, val);
     db_seguradora[key] = val;
   });
 

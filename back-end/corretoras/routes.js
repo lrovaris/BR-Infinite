@@ -3,10 +3,8 @@ const router = express.Router();
 const db = require('./db');
 const cache = require('../memoryCache');
 const logger = require('../logger')
-
 const colaborador_db = require('../colaboradores/db');
 const controlador_controller = require('../colaboradores/controller');
-
 const controller = require('./controller');
 
 router.get ('/', (req,res) => {
@@ -20,52 +18,24 @@ router.get ('/all', async (req,res) => {
 });
 
 router.get('/:id', async(req,res) => {
+  let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
-  let db_corretora = await controller.get_corretoras().filter((corretora_obj) => {
-      return corretora_obj._id == req.params.id;
-  })[0];
+  let manager_id;
 
-  if(!db_corretora){
-    res.status(400).json({"Message":"Corretora inválida, verifique o ID"});
-  }else{
-    if(!db_corretora.colaboradores){
-      db_corretora.colaboradores = [];
-    }
-
-    let colaboradores_list = controlador_controller.get_colaboradores();
-
-    new_colab = [];
-
-    for (var i = 0; i < db_corretora.colaboradores.length; i++) {
-      if(db_corretora.colaboradores[i]._id){
-        new_colab.push(db_corretora.colaboradores[i]);
-        continue;
-      }
-
-      let id_colab = db_corretora.colaboradores[i];
-
-      new_colab.push(colaboradores_list.filter((colaborador_obj) => {
-        return colaborador_obj._id + "" == id_colab + "";
-      })[0]);
-    }
-
-    db_corretora.colaboradores = new_colab;
-
-    if(db_corretora.colaboradores.length > 0 && db_corretora.manager._id === undefined){
-
-
-      db_corretora.manager = db_corretora.colaboradores.filter((colaborador_obj) => {
-        return colaborador_obj._id + "" == db_corretora.manager + "";
-      })[0]
-
-    }
-
-
-    await res.json(db_corretora);
+  if(db_corretora.manager._id){
+    manager_id = db_corretora.manager._id
+  }else {
+    manager_id = db_corretora.manager
   }
+
+  let colab_info = await controlador_controller.get_colaboradores_corretora(req.params.id, manager_id);
+
+  db_corretora.colaboradores = colab_info.colaboradores;
+
+  db_corretora.manager = colab_info.manager;
+
+  res.status(200).json(db_corretora);
 });
-
-
 
 router.post('/new', async(req,res) => {
 
@@ -166,14 +136,7 @@ router.post('/new', async(req,res) => {
 
       let db_corretora = new_corr.ops[0];
 
-      db_corretora["colaboradores"] = [ new_colab.insertedId ];
-
-      db_corretora["manager"] = {
-        "id": new_colab.insertedId,
-        "name": new_colab.ops[0].name,
-        "email": new_colab.ops[0].email
-      }
-
+      db_corretora["manager"] = new_colab.insertedId;
 
       await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
@@ -190,9 +153,7 @@ router.post('/:id/edit', async(req,res) => {
 
   req_corretora['_id'] = req.params.id;
 
-  let db_corretora = await controller.get_corretoras().filter((corretora_obj) => {
-      return corretora_obj._id == req_corretora._id;
-  })[0];
+  let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
   Object.keys(req_corretora).forEach(function(key) {
     let val = req_corretora[key];
@@ -201,7 +162,12 @@ router.post('/:id/edit', async(req,res) => {
 
   let edited_corretora = await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
-  await res.json(edited_corretora);
+  let to_send ={
+    "message":"Corretora editada com sucesso!",
+    "corretora": edited_corretora
+  }
+
+  await res.json(to_send);
 });
 
 module.exports = router;

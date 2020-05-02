@@ -12,4 +12,14 @@ async function get_corretoras() {
   }
 }
 
-module.exports = { get_corretoras };
+async function get_corretora_by_id(corr_id) {
+  let all_corr = await get_corretoras();
+
+  let corretora = all_corr.filter(corr_obj =>{
+    return (corr_obj._id.toString() == corr_id.toString());
+  })[0];
+
+  return corretora;
+}
+
+module.exports = { get_corretoras, get_corretora_by_id };

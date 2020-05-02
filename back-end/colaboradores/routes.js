@@ -17,11 +17,7 @@ router.get ('/all', async (req,res) => {
 });
 
 router.get ('/:id', async (req,res) => {
-  let all_colaboradores = await controller.get_colaboradores()
-
-  let to_send = all_colaboradores.filter(colab =>{
-    return (colab._id.toString() === req.params.id.toString())
-  })[0]
+  to_send = await controller.get_colaboradores_by_id(req.params.id);
 
   res.status(200).json(to_send);
 });

@@ -12,4 +12,14 @@ async function get_produtos() {
   }
 }
 
-module.exports = { get_produtos };
+async function get_produto_by_id(corr_id) {
+  let all_prod = await get_produtos();
+
+  let produto = all_prod.filter(corr_obj =>{
+    return (corr_obj._id.toString() == corr_id.toString());
+  })[0];
+
+  return produto;
+}
+
+module.exports = { get_produtos, get_produto_by_id };

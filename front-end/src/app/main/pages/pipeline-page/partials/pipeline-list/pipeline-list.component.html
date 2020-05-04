@@ -1,0 +1,51 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="row" style="margin: 1rem">
+        <div class="col-12">
+          <button class="btn btn-primary text-white" (click)="navigateCadastro()">Incluir Pipeline</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+      <section id="simple-table">
+        <div class="row text-left">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Data de Inclusao</th>
+                      <th>Proponente</th>
+                      <th>Produto</th>
+                      <th>Descrição</th>
+                      <th>Corretora</th>
+                      <th>Seguradora</th>
+                      <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let oportunidade of oportunidade" style="cursor: pointer" (click)="edit(oportunidade._id)">
+                      <td>oportunidade.data</td>
+                      <td>oportunidade.proponente</td>
+                      <td>oportunidade.produto</td>
+                      <td>oportunidade.descrição</td>
+                      <td>oportunidade.corretora</td>
+                      <td>oportunidade.seguradora</td>
+                      <td>oportunidade.status</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

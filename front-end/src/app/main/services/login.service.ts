@@ -126,8 +126,8 @@ export class LoginService {
     return this.http.get(`${this.url}users/all`).pipe(
       retry(2),
       catchError( (err: any) => {
-        console.log(err.error.Message);
-        alert(err.error.Message);
+        console.log(err.error.message);
+        alert(err.error.message);
         return throwError(err);
       })
     )

@@ -46,7 +46,7 @@ export class ProdutoService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/products/new`, produto, options).subscribe((data:any) => {
-  alert(data.Message)
+  alert(data.message)
     })
   }
 

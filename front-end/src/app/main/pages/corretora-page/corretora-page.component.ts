@@ -5891,12 +5891,10 @@ export class CorretoraPageComponent implements OnInit {
       let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
       console.log(corretora);
       this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel);
-
     } else if (!this.isEdit){
       console.log('isnotedit');
       this.corretoraService.postCorretora(newCorretora, this.responsavel);
     }
-
     this.corretora.reset();
   };
 

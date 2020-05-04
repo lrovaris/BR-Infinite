@@ -23,6 +23,8 @@ import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-
 import { SeguradoraViewComponent } from './main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component';
 import { CorretoraViewComponent } from './main/pages/corretora-page/partials/corretora-view/corretora-view.component';
 import { ProdutoViewComponent } from './main/pages/produtos-page/partials/produto-view/produto-view.component';
+import { PipelineViewComponent } from './main/pages/pipeline-page/partials/pipeline-view/pipeline-view.component';
+import { PipelineListComponent } from './main/pages/pipeline-page/partials/pipeline-list/pipeline-list.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { ProdutoViewComponent } from './main/pages/produtos-page/partials/produt
     ListProdutosComponent,
     SeguradoraViewComponent,
     CorretoraViewComponent,
-    ProdutoViewComponent
+    ProdutoViewComponent,
+    PipelineViewComponent,
+    PipelineListComponent
   ],
   imports: [
     BrowserModule,

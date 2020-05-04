@@ -14,6 +14,8 @@ import { ListProdutosComponent } from "./main/pages/produtos-page/partials/list-
 import { SeguradoraViewComponent } from "./main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component";
 import { CorretoraViewComponent } from "./main/pages/corretora-page/partials/corretora-view/corretora-view.component";
 import { ProdutoViewComponent } from "./main/pages/produtos-page/partials/produto-view/produto-view.component";
+import { PipelineListComponent} from "./main/pages/pipeline-page/partials/pipeline-list/pipeline-list.component";
+import { PipelineViewComponent } from "./main/pages/pipeline-page/partials/pipeline-view/pipeline-view.component";
 
 
 // TODO O Projeto está estruturado em divisão por páginas
@@ -28,7 +30,9 @@ const routes: Routes = [
   { path: 'seguradora', component: ListSeguradoraComponent },
   { path: 'seguradora/cadastro', component: SeguradoraPageComponent },
   { path: 'seguradora/visualizacao', component: SeguradoraViewComponent },
-  { path: 'pipeline', component: PipelinePageComponent },
+  { path: 'pipeline', component: PipelineListComponent },
+  { path: 'pipeline/cadastro', component: PipelinePageComponent },
+  { path: 'pipeline/visualizacao', component: PipelineViewComponent },
   { path: 'produtos', component: ListProdutosComponent },
   { path: 'produtos/cadastro', component: ProdutosPageComponent },
   { path: 'produtos/visualizacao', component: ProdutoViewComponent },

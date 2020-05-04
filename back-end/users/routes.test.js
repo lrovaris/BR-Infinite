@@ -8,7 +8,7 @@ describe('User Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"Message":"Funcionando"});
+    expect(res.body).toEqual({"message":"Funcionando"});
 
   })
 
@@ -20,7 +20,7 @@ describe('User Routes', () => {
 
     expect(res.statusCode).toEqual(503)
 
-    expect(res.body).toEqual({"Message":"Servidor inicializando"});
+    expect(res.body).toEqual({"message":"Servidor inicializando"});
   })
 
 
@@ -42,7 +42,7 @@ describe('User Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"Message":"Usuário criado com sucesso!"});
+    expect(res.body).toEqual({"message":"Usuário criado com sucesso!"});
   })
 
   it('deveria retornar vazio', async () => {

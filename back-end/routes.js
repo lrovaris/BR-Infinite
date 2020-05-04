@@ -20,5 +20,6 @@ router.use('/seguradoras', require('./seguradoras/routes'));
 router.use('/colaboradores', require('./colaboradores/routes'));
 router.use('/corretoras', require('./corretoras/routes'));
 router.use('/products', require('./products/routes'));
+router.use('/opportunities', require('./opportunities/routes'));
 
 module.exports = router;

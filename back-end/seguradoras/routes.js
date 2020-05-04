@@ -8,7 +8,7 @@ const colab_controller = require('../colaboradores/controller')
 const controller = require('./controller')
 
 router.get ('/', (req,res) => {
-  res.status(200).json({"Message":"Funcionando"});
+  res.status(200).json({"message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
@@ -47,25 +47,25 @@ router.post('/new', async(req,res) => {
     var new_seguradora = req.body.seguradora;
 
     if (!new_seguradora.name){
-      res.status(400).json({"Message":"Campo de nome vazio"});
+      res.status(400).json({"message":"Campo de nome vazio"});
       valid = false;
       return;
     }
 
     if (!new_seguradora.cnpj){
-      res.status(400).json({"Message":"Campo de CNPJ vazio"});
+      res.status(400).json({"message":"Campo de CNPJ vazio"});
       valid = false;
       return;
     }
 
     if (!new_seguradora.telephone){
-      res.status(400).json({"Message":"Campo de telefone vazio"});
+      res.status(400).json({"message":"Campo de telefone vazio"});
       valid = false;
       return;
     }
 
     if (!new_seguradora.address){
-      res.status(400).json({"Message":"Campo de endereço vazio"});
+      res.status(400).json({"message":"Campo de endereço vazio"});
       valid = false;
       return;
     }
@@ -75,37 +75,37 @@ router.post('/new', async(req,res) => {
     let gerente_valid = true;
 
     if(!gerente){
-      res.status(400).json({"Message":"Colaborador inválido"});
+      res.status(400).json({"message":"Colaborador inválido"});
       gerente_valid = false;
       return;
     }
 
     if (!gerente.name){
-      res.status(400).json({"Message":"Campo de nome do colaborador vazio"});
+      res.status(400).json({"message":"Campo de nome do colaborador vazio"});
       gerente_valid = false;
       return;
     }
 
     if (!gerente.telephone){
-      res.status(400).json({"Message":"Campo de telefone do colaborador vazio"});
+      res.status(400).json({"message":"Campo de telefone do colaborador vazio"});
       gerente_valid = false;
       return;
     }
 
     if (!gerente.email){
-      res.status(400).json({"Message":"Campo de email do colaborador vazio"});
+      res.status(400).json({"message":"Campo de email do colaborador vazio"});
       gerente_valid = false;
       return;
     }
 
     if (!gerente.birthday){
-      res.status(400).json({"Message":"Campo de aniversário vazio"});
+      res.status(400).json({"message":"Campo de aniversário vazio"});
       gerente_valid = false;
       return;
     }
 
     if (!gerente.job){
-      res.status(400).json({"Message":"Campo de cargo vazio"});
+      res.status(400).json({"message":"Campo de cargo vazio"});
       gerente_valid = false;
       return;
     }
@@ -124,7 +124,7 @@ router.post('/new', async(req,res) => {
 
       await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
 
-      res.status(200).json({"Message":"Seguradora e gerente cadastrados com sucesso!"});
+      res.status(200).json({"message":"Seguradora e gerente cadastrados com sucesso!"});
     }
 });
 

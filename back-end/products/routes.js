@@ -6,7 +6,7 @@ const logger = require('../logger');
 const controller = require('./controller')
 
 router.get ('/', (req,res) => {
-  res.status(200).json({"Message":"Funcionando"});
+  res.status(200).json({"message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
@@ -27,19 +27,19 @@ router.post('/new', async(req,res) => {
     var new_produto = req.body;
 
     if (!new_produto.name){
-      res.status(400).json({"Message":"Campo de nome vazio"});
+      res.status(400).json({"message":"Campo de nome vazio"});
       valid = false;
       return;
     }
 
     if (!new_produto.description){
-      res.status(400).json({"Message":"Campo de descrição vazio"});
+      res.status(400).json({"message":"Campo de descrição vazio"});
       valid = false;
       return;
     }
 
     if (!new_produto.seguradoras){
-      res.status(400).json({"Message":"Nenhuma seguradora selecionada"});
+      res.status(400).json({"message":"Nenhuma seguradora selecionada"});
       valid = false;
       return;
     }
@@ -47,7 +47,7 @@ router.post('/new', async(req,res) => {
     if (valid) {
       logger.log(new_produto);
       await db.register_produto(new_produto).catch(err => logger.error(err));
-      res.status(200).json({"Message":"Produto cadastrado com sucesso!"});
+      res.status(200).json({"message":"Produto cadastrado com sucesso!"});
     }
 });
 

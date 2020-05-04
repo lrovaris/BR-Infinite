@@ -9,17 +9,15 @@ const cache = require('../memoryCache');
 const logger = require('../logger');
 
 router.get ('/', (req,res) => {
-  res.status(200).json({"Message":"Funcionando"});
+  res.status(200).json({"message":"Funcionando"});
 });
 
 router.post('/login', async(req,res) => {
 
-  console.log(req.body);
-
   let all_users = await controller.get_users();
 
   if(all_users.length === 0){
-    res.status(503).json({"Message":"Servidor inicializando"});
+    res.status(503).json({"message":"Servidor inicializando"});
     return;
   }
 
@@ -46,18 +44,18 @@ router.post('/login', async(req,res) => {
 
         let token = jwt.sign(response_json, "s3nh453Cr3T4d4Ap1", {"expiresIn": "1h"});
         res.status(200).json({
-          "Message":"Login efetuado com sucesso!",
-          "Token": token
+          "message":"Login efetuado com sucesso!",
+          "token": token
         });
       }else {
-        res.status(401).json({"Message":"As credenciais de login são inválidas"})
+        res.status(401).json({"message":"As credenciais de login são inválidas"})
       }
     }else {
-      res.status(401).json({"Message":"Este usuário está invativo"})
+      res.status(401).json({"message":"Este usuário está invativo"})
     }
   }
   else {
-      res.status(401).json({"Message":"As credenciais de login são inválidas"})
+      res.status(401).json({"message":"As credenciais de login são inválidas"})
   }
 });
 
@@ -75,17 +73,17 @@ router.post('/new', async(req,res) => {
     var new_user = req.body;
 
     if (!new_user.login){
-      res.status(400).json({"Message":"Campo de login vazio"});
+      res.status(400).json({"message":"Campo de login vazio"});
       valid = false;
     }
 
     if (!new_user.password){
-      res.status(400).json({"Message":"Campo de senha vazio"});
+      res.status(400).json({"message":"Campo de senha vazio"});
       valid = false;
     }
 
     if (!new_user.name){
-      res.status(400).json({"Message":"Campo de nome vazio"});
+      res.status(400).json({"message":"Campo de nome vazio"});
       valid = false;
     }
 
@@ -102,7 +100,7 @@ router.post('/new', async(req,res) => {
     if (all_users !== undefined) {
         for (var i = 0; i < all_users.length; i++) {
             if(all_users[i].login === new_user.login){
-                res.status(400).json({"Message":"Este nome de usuário já está em uso"});
+                res.status(400).json({"message":"Este nome de usuário já está em uso"});
                 valid = false;
                 break;
             }
@@ -113,7 +111,7 @@ router.post('/new', async(req,res) => {
       new_user.password = md5(new_user.password);
       logger.log(new_user);
       await db.register_user(new_user).catch(err => logger.error(err));
-      res.status(200).json({"Message":"Usuário criado com sucesso!"});
+      res.status(200).json({"message":"Usuário criado com sucesso!"});
     }
 });
 

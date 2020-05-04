@@ -8,7 +8,7 @@ const controlador_controller = require('../colaboradores/controller');
 const controller = require('./controller');
 
 router.get ('/', (req,res) => {
-  res.status(200).json({"Message":"Funcionando"});
+  res.status(200).json({"message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
@@ -46,43 +46,43 @@ router.post('/new', async(req,res) => {
     let new_corretora = req.body.corretora;
 
     if(!new_corretora){
-      res.status(400).json({"Message":"Corretora inválida"});
+      res.status(400).json({"message":"Corretora inválida"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.name){
-      res.status(400).json({"Message":"Campo de nome da corretora vazio"});
+      res.status(400).json({"message":"Campo de nome da corretora vazio"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.cnpj){
-      res.status(400).json({"Message":"Campo de CNPJ vazio"});
+      res.status(400).json({"message":"Campo de CNPJ vazio"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.telephone){
-      res.status(400).json({"Message":"Campo de telefone da corretora vazio"});
+      res.status(400).json({"message":"Campo de telefone da corretora vazio"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.email){
-      res.status(400).json({"Message":"Campo de email da corretora vazio"});
+      res.status(400).json({"message":"Campo de email da corretora vazio"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.address){
-      res.status(400).json({"Message":"Campo de endereço vazio"});
+      res.status(400).json({"message":"Campo de endereço vazio"});
       corretora_valid = false;
       return;
     }
 
     if (!new_corretora.seguradoras){
-      res.status(400).json({"Message":"Campo de seguradoras vazio"});
+      res.status(400).json({"message":"Campo de seguradoras vazio"});
       corretora_valid = false;
       return;
     }
@@ -92,37 +92,37 @@ router.post('/new', async(req,res) => {
     let corretor_valid = true;
 
     if(!corretor_responsavel){
-      res.status(400).json({"Message":"Colaborador inválido"});
+      res.status(400).json({"message":"Colaborador inválido"});
       corretor_valid = false;
       return;
     }
 
     if (!corretor_responsavel.name){
-      res.status(400).json({"Message":"Campo de nome do colaborador vazio"});
+      res.status(400).json({"message":"Campo de nome do colaborador vazio"});
       corretor_valid = false;
       return;
     }
 
     if (!corretor_responsavel.telephone){
-      res.status(400).json({"Message":"Campo de telefone do colaborador vazio"});
+      res.status(400).json({"message":"Campo de telefone do colaborador vazio"});
       corretor_valid = false;
       return;
     }
 
     if (!corretor_responsavel.email){
-      res.status(400).json({"Message":"Campo de email do colaborador vazio"});
+      res.status(400).json({"message":"Campo de email do colaborador vazio"});
       corretor_valid = false;
       return;
     }
 
     if (!corretor_responsavel.birthday){
-      res.status(400).json({"Message":"Campo de aniversário vazio"});
+      res.status(400).json({"message":"Campo de aniversário vazio"});
       corretor_valid = false;
       return;
     }
 
     if (!corretor_responsavel.job){
-      res.status(400).json({"Message":"Campo de cargo vazio"});
+      res.status(400).json({"message":"Campo de cargo vazio"});
       corretor_valid = false;
       return;
     }
@@ -140,7 +140,7 @@ router.post('/new', async(req,res) => {
 
       await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
-      res.status(200).json({"Message":"Corretora e gerente cadastrados com sucesso!"});
+      res.status(200).json({"message":"Corretora e gerente cadastrados com sucesso!"});
     }
 });
 

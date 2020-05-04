@@ -49,6 +49,7 @@ async function initialize_database() {
     await require('./colaboradores/db').get_colaboradores();
     await require('./corretoras/db').get_corretoras();
     await require('./products/db').get_produtos();
+    await require('./opportunities/db').get_opportunities();
 }
 
 app.listen(3000, async () => {

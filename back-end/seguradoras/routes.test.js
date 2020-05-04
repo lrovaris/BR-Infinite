@@ -10,7 +10,7 @@ describe('Seguradoras Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"Message":"Funcionando"});
+    expect(res.body).toEqual({"message":"Funcionando"});
   })
 
   it('deveria retornar vazio', async () => {
@@ -42,7 +42,7 @@ describe('Seguradoras Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"Message":"Seguradora e gerente cadastrados com sucesso!"});
+    expect(res.body).toEqual({"message":"Seguradora e gerente cadastrados com sucesso!"});
   })
 
 

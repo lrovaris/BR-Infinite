@@ -10,7 +10,7 @@ describe('colaboradores Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"Message":"Funcionando"});
+    expect(res.body).toEqual({"message":"Funcionando"});
   })
 
   it('deveria criar um colaborador novo', async () => {

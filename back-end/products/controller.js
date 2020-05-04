@@ -12,11 +12,11 @@ async function get_produtos() {
   }
 }
 
-async function get_produto_by_id(corr_id) {
+async function get_produto_by_id(prod_id) {
   let all_prod = await get_produtos();
 
-  let produto = all_prod.filter(corr_obj =>{
-    return (corr_obj._id.toString() == corr_id.toString());
+  let produto = all_prod.filter(prod_obj =>{
+    return (prod_obj._id.toString() == prod_id.toString());
   })[0];
 
   return produto;

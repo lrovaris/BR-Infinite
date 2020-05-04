@@ -7,7 +7,7 @@ const controller = require('./controller')
 const seguradoras_controller = require('../seguradoras/controller')
 
 router.get ('/', (req,res) => {
-  res.status(200).json({"Message":"Funcionando"});
+  res.status(200).json({"message":"Funcionando"});
 });
 
 router.get ('/all', async (req,res) => {
@@ -28,31 +28,31 @@ router.post('/new', async(req,res) => {
     var new_colaborador = req.body;
 
     if (!new_colaborador.name){
-      res.status(400).json({"Message":"Campo de nome vazio"});
+      res.status(400).json({"message":"Campo de nome vazio"});
       valid = false;
       return;
     }
 
     if (!new_colaborador.telephone){
-      res.status(400).json({"Message":"Campo de telefone vazio"});
+      res.status(400).json({"message":"Campo de telefone vazio"});
       valid = false;
       return;
     }
 
     if (!new_colaborador.email){
-      res.status(400).json({"Message":"Campo de email vazio"});
+      res.status(400).json({"message":"Campo de email vazio"});
       valid = false;
       return;
     }
 
     if (!new_colaborador.birthday){
-      res.status(400).json({"Message":"Campo de aniversário vazio"});
+      res.status(400).json({"message":"Campo de aniversário vazio"});
       valid = false;
       return;
     }
 
     if (!new_colaborador.job){
-      res.status(400).json({"Message":"Campo de cargo vazio"});
+      res.status(400).json({"message":"Campo de cargo vazio"});
       valid = false;
       return;
     }

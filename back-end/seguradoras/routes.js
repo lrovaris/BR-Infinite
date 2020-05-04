@@ -20,19 +20,9 @@ router.get ('/all', async (req,res) => {
 router.get ('/:id', async (req,res) => {
   let this_seg = await controller.get_seguradora_by_id(req.params.id);
 
-  console.log(this_seg);
+  logger.log(this_seg);
 
-  let manager_id;
-
-  if(this_seg.manager){
-    if(this_seg.manager._id){
-      manager_id = this_seg.manager._id
-    }else {
-      manager_id = this_seg.manager
-    }
-  }
-
-  let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, manager_id);
+  let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, this_seg.manager._id || this_seg.manager);
 
   this_seg.colaboradores = colab_info.colaboradores;
 
@@ -42,90 +32,52 @@ router.get ('/:id', async (req,res) => {
 });
 
 router.post('/new', async(req,res) => {
-    var valid = true;
+    let new_seguradora = req.body.seguradora;
 
-    var new_seguradora = req.body.seguradora;
-
+    //Validação dos campos da seguradora
     if (!new_seguradora.name){
-      res.status(400).json({"message":"Campo de nome vazio"});
-      valid = false;
-      return;
+      return res.status(400).json({"message":"Campo de nome vazio"});
     }
 
     if (!new_seguradora.cnpj){
-      res.status(400).json({"message":"Campo de CNPJ vazio"});
-      valid = false;
-      return;
+      return res.status(400).json({"message":"Campo de CNPJ vazio"});
     }
 
     if (!new_seguradora.telephone){
-      res.status(400).json({"message":"Campo de telefone vazio"});
-      valid = false;
-      return;
+      return res.status(400).json({"message":"Campo de telefone vazio"});
     }
 
     if (!new_seguradora.address){
-      res.status(400).json({"message":"Campo de endereço vazio"});
-      valid = false;
-      return;
+      return res.status(400).json({"message":"Campo de endereço vazio"});
     }
 
+
+    // Validação dos campos do gerente
     let gerente = req.body.manager;
 
-    let gerente_valid = true;
+    let validacao_gerente = colab_controller.validate_colaborador(gerente);
 
-    if(!gerente){
-      res.status(400).json({"message":"Colaborador inválido"});
-      gerente_valid = false;
-      return;
+    if (!validacao_gerente.valid){
+      return res.status(400).json({"message": validacao_gerente.message});
     }
 
-    if (!gerente.name){
-      res.status(400).json({"message":"Campo de nome do colaborador vazio"});
-      gerente_valid = false;
-      return;
-    }
+    // Registrando a seguradora no banco de dados
+    let new_seg = await db.register_seguradora(new_seguradora).catch(err => logger.error(err));
 
-    if (!gerente.telephone){
-      res.status(400).json({"message":"Campo de telefone do colaborador vazio"});
-      gerente_valid = false;
-      return;
-    }
+    // Editando o objeto do gerente para receber o ID da seguradora
+    gerente.seguradora = new_seg.insertedId;
 
-    if (!gerente.email){
-      res.status(400).json({"message":"Campo de email do colaborador vazio"});
-      gerente_valid = false;
-      return;
-    }
 
-    if (!gerente.birthday){
-      res.status(400).json({"message":"Campo de aniversário vazio"});
-      gerente_valid = false;
-      return;
-    }
+    // Registrando o gerente no banco de dados
+    let new_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
 
-    if (!gerente.job){
-      res.status(400).json({"message":"Campo de cargo vazio"});
-      gerente_valid = false;
-      return;
-    }
+    // Modificando o objeto da seguradora com as informações do gerente
+    let db_seguradora = new_seg.ops[0];
+    db_seguradora["manager"] = new_colab.insertedId;
+    await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
 
-    if (valid && gerente_valid) {
-
-      let new_seg = await db.register_seguradora(new_seguradora).catch(err => logger.error(err));
-
-      gerente.seguradora = new_seg.insertedId;
-
-      let new_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
-
-      let db_seguradora = new_seg.ops[0];
-
-      db_seguradora["manager"] = new_colab.insertedId;
-
-      await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
-
-      res.status(200).json({"message":"Seguradora e gerente cadastrados com sucesso!"});
-    }
+    // Enviando resposta de operação bem-sucedida
+    res.status(200).json({"message":"Seguradora e gerente cadastrados com sucesso!"});
 });
 
 
@@ -137,21 +89,16 @@ router.post('/:id/edit', async(req,res) => {
 
   let db_seguradora = await controller.get_seguradora_by_id(req.params.id);
 
-  logger.log(req_seguradora);
+  let obj_editado = Object.fromEntries(Object.entries(db_seguradora).map(([key, value]) =>{
+    return [key, req_seguradora[key] || value];
+  }));
 
-  Object.keys(req_seguradora).forEach(function(key) {
-    let val = req_seguradora[key];
-    db_seguradora[key] = val;
-  });
+  let edited_seguradora = await db.update_seguradora(obj_editado).catch(err => logger.error(err));
 
-  let edited_seguradora = await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
-
-  let to_send= {
+  await res.json({
     "message":"Seguradora editada com sucesso!",
     "seguradora": edited_seguradora
-  }
-
-  await res.json(to_send);
+  });
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const db = require('./db');
 const cache = require('../memoryCache');
 const logger = require('../logger')
 const colaborador_db = require('../colaboradores/db');
-const controlador_controller = require('../colaboradores/controller');
+const colaborador_controller = require('../colaboradores/controller');
 const controller = require('./controller');
 
 router.get ('/', (req,res) => {
@@ -20,15 +20,7 @@ router.get ('/all', async (req,res) => {
 router.get('/:id', async(req,res) => {
   let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
-  let manager_id;
-
-  if(db_corretora.manager._id){
-    manager_id = db_corretora.manager._id
-  }else {
-    manager_id = db_corretora.manager
-  }
-
-  let colab_info = await controlador_controller.get_colaboradores_corretora(req.params.id, manager_id);
+  let colab_info = await colaborador_controller.get_colaboradores_corretora(req.params.id, db_corretora.manager._id || db_corretora.manager);
 
   db_corretora.colaboradores = colab_info.colaboradores;
 
@@ -39,135 +31,63 @@ router.get('/:id', async(req,res) => {
 
 router.post('/new', async(req,res) => {
 
-    logger.log(req.body);
-
     let corretora_valid = true;
 
     let new_corretora = req.body.corretora;
 
-    if(!new_corretora){
-      res.status(400).json({"message":"Corretora inválida"});
-      corretora_valid = false;
-      return;
-    }
+    let validacao_corr = controller.validate_corretora(new_corretora);
 
-    if (!new_corretora.name){
-      res.status(400).json({"message":"Campo de nome da corretora vazio"});
-      corretora_valid = false;
-      return;
-    }
-
-    if (!new_corretora.cnpj){
-      res.status(400).json({"message":"Campo de CNPJ vazio"});
-      corretora_valid = false;
-      return;
-    }
-
-    if (!new_corretora.telephone){
-      res.status(400).json({"message":"Campo de telefone da corretora vazio"});
-      corretora_valid = false;
-      return;
-    }
-
-    if (!new_corretora.email){
-      res.status(400).json({"message":"Campo de email da corretora vazio"});
-      corretora_valid = false;
-      return;
-    }
-
-    if (!new_corretora.address){
-      res.status(400).json({"message":"Campo de endereço vazio"});
-      corretora_valid = false;
-      return;
-    }
-
-    if (!new_corretora.seguradoras){
-      res.status(400).json({"message":"Campo de seguradoras vazio"});
-      corretora_valid = false;
-      return;
+    if(!validacao_corr.valid){
+      return res.status(400).json({"message":validacao_corr.message});
     }
 
     let corretor_responsavel = req.body.manager;
 
-    let corretor_valid = true;
+    let validacao_colab = colaborador_controller.validate_colaborador(corretor_responsavel);
 
-    if(!corretor_responsavel){
-      res.status(400).json({"message":"Colaborador inválido"});
-      corretor_valid = false;
-      return;
+    if(!validacao_colab.valid){
+      return res.status(400).json({"message": validacao_colab.message});
     }
 
-    if (!corretor_responsavel.name){
-      res.status(400).json({"message":"Campo de nome do colaborador vazio"});
-      corretor_valid = false;
-      return;
-    }
+    let new_corr = await db.register_corretora(new_corretora).catch(err => logger.error(err));
 
-    if (!corretor_responsavel.telephone){
-      res.status(400).json({"message":"Campo de telefone do colaborador vazio"});
-      corretor_valid = false;
-      return;
-    }
+    corretor_responsavel.corretora = new_corr.insertedId;
 
-    if (!corretor_responsavel.email){
-      res.status(400).json({"message":"Campo de email do colaborador vazio"});
-      corretor_valid = false;
-      return;
-    }
+    let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
 
-    if (!corretor_responsavel.birthday){
-      res.status(400).json({"message":"Campo de aniversário vazio"});
-      corretor_valid = false;
-      return;
-    }
+    let db_corretora = new_corr.ops[0];
 
-    if (!corretor_responsavel.job){
-      res.status(400).json({"message":"Campo de cargo vazio"});
-      corretor_valid = false;
-      return;
-    }
+    db_corretora["manager"] = new_colab.insertedId;
 
-    if (corretora_valid && corretor_valid) {
-      let new_corr = await db.register_corretora(new_corretora).catch(err => logger.error(err));
+    await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
-      corretor_responsavel.corretora = new_corr.insertedId;
-
-      let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
-
-      let db_corretora = new_corr.ops[0];
-
-      db_corretora["manager"] = new_colab.insertedId;
-
-      await db.update_corretora(db_corretora).catch(err => logger.error(err));
-
-      res.status(200).json({"message":"Corretora e gerente cadastrados com sucesso!"});
-    }
+    res.status(200).json({"message":"Corretora e gerente cadastrados com sucesso!"});
 });
 
 
 //Alterar o objeto da corretora
 
 router.post('/:id/edit', async(req,res) => {
-
   let req_corretora = req.body;
-
-  req_corretora['_id'] = req.params.id;
 
   let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
-  Object.keys(req_corretora).forEach(function(key) {
-    let val = req_corretora[key];
-    db_corretora[key] = val;
-  });
+  let obj_editado = Object.fromEntries(Object.entries(db_corretora).map(([key, value]) =>{
+    return [key, req_corretora[key] || value];
+  }));
 
-  let edited_corretora = await db.update_corretora(db_corretora).catch(err => logger.error(err));
+  let validacao = await controller.validate_corretora(obj_editado);
 
-  let to_send ={
-    "message":"Corretora editada com sucesso!",
-    "corretora": edited_corretora
+  if(!validacao.valid){
+    return res.status(400).json({"message": validacao.message});
   }
 
-  await res.json(to_send);
+  let edited_corretora = await db.update_corretora(obj_editado).catch(err => logger.error(err));
+
+  await res.status(200).json({
+    "message":"Corretora editada com sucesso!",
+    "corretora": edited_corretora
+  });
 });
 
 module.exports = router;

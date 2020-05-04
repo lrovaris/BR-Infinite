@@ -14,49 +14,37 @@ router.get ('/', (req,res) => {
 
 router.post('/login', async(req,res) => {
 
-  let all_users = await controller.get_users();
+  let this_user = await controller.get_user_by_login(req.body.login)
 
-  if(all_users.length === 0){
-    res.status(503).json({"message":"Servidor inicializando"});
-    return;
+  if(!this_user.login){
+    return res.status(401).json({"message": "As credenciais de login são inválidas"})
   }
 
-  let this_user = all_users.filter((user) => {
-      return user.login === req.body.login.toLowerCase();
-  })[0];
-
-  if (this_user){
-    let valid = false;
-
-    valid = (this_user.active)
-
-    if(valid){
-
-      valid = (this_user.password === md5(req.body.password));
-
-      if (valid) {
-        let response_json = {
-          "id":this_user._id,
-          "nome":this_user.nome,
-          "admin": this_user.admin,
-          "login": this_user.login
-        };
-
-        let token = jwt.sign(response_json, "s3nh453Cr3T4d4Ap1", {"expiresIn": "1h"});
-        res.status(200).json({
-          "message":"Login efetuado com sucesso!",
-          "token": token
-        });
-      }else {
-        res.status(401).json({"message":"As credenciais de login são inválidas"})
-      }
-    }else {
-      res.status(401).json({"message":"Este usuário está invativo"})
-    }
+  if (this_user === undefined){
+    return res.status(401).json({"message": "As credenciais de login são inválidas"})
   }
-  else {
-      res.status(401).json({"message":"As credenciais de login são inválidas"})
+
+  if(!this_user.active){
+    return res.status(401).json({"message":"Este usuário está invativo"})
   }
+
+  if(!this_user.password === md5(req.body.password)){
+    return res.status(401).json({"message":"As credenciais de login são inválidas"});
+  }
+
+  let response_json = {
+    "id":this_user._id,
+    "nome":this_user.nome,
+    "admin": this_user.admin,
+    "login": this_user.login
+  };
+
+  let token = jwt.sign(response_json, "s3nh453Cr3T4d4Ap1", {"expiresIn": "1h"});
+  res.status(200).json({
+    "message":"Login efetuado com sucesso!",
+    "token": token
+  });
+
 });
 
 router.use(auth);
@@ -68,23 +56,18 @@ router.get ('/all', async (req,res) => {
 });
 
 router.post('/new', async(req,res) => {
-    var valid = true;
-
     var new_user = req.body;
 
     if (!new_user.login){
-      res.status(400).json({"message":"Campo de login vazio"});
-      valid = false;
+      return res.status(400).json({"message":"Campo de login vazio"});
     }
 
     if (!new_user.password){
-      res.status(400).json({"message":"Campo de senha vazio"});
-      valid = false;
+      return res.status(400).json({"message":"Campo de senha vazio"});
     }
 
     if (!new_user.name){
-      res.status(400).json({"message":"Campo de nome vazio"});
-      valid = false;
+      return res.status(400).json({"message":"Campo de nome vazio"});
     }
 
     if (!new_user.admin){
@@ -95,24 +78,17 @@ router.post('/new', async(req,res) => {
 
     new_user.login = new_user.login.toLowerCase();
 
-    var all_users = cache.get("users");
-
-    if (all_users !== undefined) {
-        for (var i = 0; i < all_users.length; i++) {
-            if(all_users[i].login === new_user.login){
-                res.status(400).json({"message":"Este nome de usuário já está em uso"});
-                valid = false;
-                break;
-            }
-        }
+    if(await controller.get_user_by_login(new_user.login) !== undefined){
+      return res.status(400).json({"message":"Este nome de usuário já está em uso"});
     }
 
-    if (valid) {
-      new_user.password = md5(new_user.password);
-      logger.log(new_user);
-      await db.register_user(new_user).catch(err => logger.error(err));
-      res.status(200).json({"message":"Usuário criado com sucesso!"});
-    }
+    new_user.password = md5(new_user.password);
+
+    logger.log(new_user);
+
+    await db.register_user(new_user).catch(err => logger.error(err));
+
+    res.status(200).json({"message":"Usuário criado com sucesso!"});
 });
 
 
@@ -122,11 +98,11 @@ router.post('/:id/edit', async(req,res) => {
 
   let req_user = req.body;
 
-  req_user['_id'] = req.params.id;
+  db_user = await controller.get_user_by_id(req.params.id);
 
-  let db_user = cache.get("users").filter((user_obj) => {
-      return user_obj._id == req_user._id;
-  })[0];
+  if(db_user === undefined){
+    return res.status(400).json({"message":"Usuário inválido"})
+  }
 
   Object.keys(req_user).forEach(function(key) {
     let val = req_user[key];
@@ -139,7 +115,7 @@ router.post('/:id/edit', async(req,res) => {
 
   let edited_user = await db.update_user(db_user).catch(err => logger.error(err));
 
-  await res.json(edited_user);
+  res.status(200).json(edited_user);
 });
 
 module.exports = router;

@@ -4,45 +4,37 @@ const logger = require('../logger');
 
 const db_utils = require('../db.js');
 
-
+// Função para pegar todos os colaboradores do banco de dados
 async function get_colaboradores() {
+  // Pegando a conexão com o banco de dados
   let db_conn = await db_utils.get_db();
 
-  return new Promise((resolve, reject) => {
-        db_conn.collection("colaboradores").find({}).toArray((err, result) =>{
-            if(err){
-                reject(err);
-            }
-            else {
-                cache.set("colaboradores", result);
-                resolve(result);
-            }
-        });
-    });
+  // Pedindo todos os colaboradores para o banco de dados
+  const colabs = await db_conn.collection("colaboradores").find({}).toArray();
+
+  // Listando o cache como todos os colaboradores
+  cache.set("colaboradores", colabs);
+
+  // Retornando o valor pego do banco de dados
+  return colabs;
 }
 
+// Função para registrar um colaborador novo
 async function register_colaborador(new_colaborador) {
-
+  // Pegando a conexão com o banco de dados
   let db_conn = await db_utils.get_db();
 
-  if(cache.get('colaboradores') === undefined){
-    await get_colaboradores();
-  }
+  // Fazendo a operação de inserir o novo colaborador, passando o parâmetro recebido na invocação da função
+  const new_colab = await db_conn.collection("colaboradores").insertOne(new_colaborador);
 
-  return new Promise((resolve, reject) => {
-        db_conn.collection("colaboradores").insertOne(new_colaborador, async(err, result) => {
-            if(err){
-                reject(err);
-            }else {
-              let new_colaborador_list = cache.get('colaboradores');
+  // Resetando o cache
+  await get_colaboradores();
 
-                new_colaborador_list.push(new_colaborador);
-                cache.set("colaboradores",new_colaborador_list);
-                logger.log("Colaborador novo cadastrado");
-                resolve(result);
-            }
-        });
-    });
+  // Logando o cadastro
+  logger.log("Colaborador novo cadastrado");
+
+  // Retornando o novo colaborador
+  return new_colab;
 }
 
 async function update_colaborador(colaborador) {
@@ -50,17 +42,13 @@ async function update_colaborador(colaborador) {
 
    let db_conn = await db_utils.get_db();
 
-  return new Promise((resolve, reject) => {
-    db_conn.collection("colaboradores").replaceOne({_id: colaborador._id }, colaborador,{w: "majority", upsert: false} ,(err, result) =>{
-      if(err){
-          reject(err);
-      }else{
-        logger.log(`Modificados ${result.result.nModified} elementos`);
+   let edited_colab = await db_conn.collection("colaboradores").replaceOne({_id: colaborador._id }, colaborador,{w: "majority", upsert: false});
 
-        resolve(result);
-      }
-    });
-  });
+   logger.log(`Modificados ${edited_colab.result.nModified} elementos`);
+
+   await get_colaboradores();
+
+   return edited_colab;
 }
 
 module.exports = { get_colaboradores, update_colaborador, register_colaborador };

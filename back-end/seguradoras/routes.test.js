@@ -21,6 +21,47 @@ describe('Seguradoras Routes', () => {
     expect(res.body).toEqual([]);
   })
 
+  it('deveria falhar em criar uma seguradora nova', async () => {
+    const res = await request(app).post('/seguradoras/new').send({
+      seguradora: {
+        name:"segurinha",
+        cnpj:"2",
+        telephone:"5",
+        email:"contato@segurinha.com.br",
+        address:"lugar desconhecido",
+        seguradoras:[1,2,3]
+      }
+    })
+
+    expect(res.statusCode).toEqual(400)
+
+    expect(res.body).toEqual({"message":"Colaborador inválido"});
+
+  })
+
+  it('deveria falhar em criar uma seguradora nova', async () => {
+    const res = await request(app).post('/seguradoras/new').send({
+      seguradora: {
+        name:"segurinha",
+        cnpj:"2",
+        telephone:"5",
+        email:"contato@segurinha.com.br",
+        address:"lugar desconhecido",
+        seguradoras:[1,2,3]
+      },
+      manager: {
+        name:"afonso colaborante",
+        telephone:"999219075",
+        birthday: "today",
+        job:"meter o loco"
+      }
+    })
+
+    expect(res.statusCode).toEqual(400)
+
+    expect(res.body).toEqual({"message":"Campo de email do colaborador vazio"});
+  })
+
   it('deveria criar uma seguradora nova com um gerente', async () => {
     const res = await request(app).post('/seguradoras/new').send({
       seguradora: {
@@ -69,6 +110,24 @@ describe('Seguradoras Routes', () => {
     segurinha2 = seguradoras_req2[0];
 
     expect(segurinha2.name = "segurona");
+
+  })
+
+
+  it('deveria pegar os dados de uma única seguradora junto com seus colaboradores', async () => {
+
+    const seguradoras_req = await controller.get_seguradoras();
+
+    let seguradoras_num = seguradoras_req.length;
+
+    segurinha = seguradoras_req[0];
+
+    const res = await request(app).get(`/seguradoras/${segurinha._id}`)
+
+    expect(res.statusCode).toEqual(200);
+
+    expect(res.body.manager.name).toEqual("afonso colaborante");
+
   })
 
 })

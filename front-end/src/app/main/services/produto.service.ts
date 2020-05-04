@@ -8,15 +8,45 @@ import {Router} from "@angular/router";
 export class ProdutoService {
 
   url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000
+  produto: any;
+  isEdit = false;
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  saveProductInfo(produto) {
+    this.produto = produto;
+  }
+  getProduto() {
+    return this.produto;
+  }
+
+  goingToEdit() {
+    this.isEdit = true;
+  }
+
+  getIsEdit() {
+    return this.isEdit;
+  }
+
+  setIsEditFalse() {
+    this.isEdit = false;
+  }
+
+  editPostProduto(produto,id){
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
+    return this.http.post(`${this.url}/products/${id}/edit`, produto, options).subscribe((data:any) => {
+      alert(data.message)
+    })
+  }
 
   postProduto(produto){
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/products/new`, produto, options).subscribe((data:any) => {
-  alert(data.Message)
+  alert(data.message)
     })
   }
 

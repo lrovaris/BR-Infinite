@@ -101,20 +101,40 @@ export class ColaboradorPageComponent implements OnInit {
     if (this.colaborador.invalid) {
       return;
     }
-    let newColaborador: Colaborador = {
-      name: this.colaborador.value.name,
-      telephone: this.colaborador.value.telephone,
-      email: this.colaborador.value.email,
-      birthday: this.colaborador.value.birthday,
-      job: this.colaborador.value.job,
-      corretora: '',
-      seguradora: this.colaboradorService.workId,
-      active: true
-    };
-    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
-      alert(data.message);
-      this.colaborador.reset();
-    })
+
+    if (this.colaboradorService.getCameFromCorretora()) {
+      let newColaborador: Colaborador = {
+        name: this.colaborador.value.name,
+        telephone: this.colaborador.value.telephone,
+        email: this.colaborador.value.email,
+        birthday: this.colaborador.value.birthday,
+        job: this.colaborador.value.job,
+        corretora: this.colaboradorService.workId,
+        seguradora: '',
+        active: true
+      };
+      this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+        alert(data.message);
+        this.colaborador.reset();
+      })
+    } else if (this.colaboradorService.getCameFromSeguradora()) {
+      let newColaborador: Colaborador = {
+        name: this.colaborador.value.name,
+        telephone: this.colaborador.value.telephone,
+        email: this.colaborador.value.email,
+        birthday: this.colaborador.value.birthday,
+        job: this.colaborador.value.job,
+        corretora: '',
+        seguradora: this.colaboradorService.workId,
+        active: true
+      };
+      this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+        alert(data.message);
+        this.colaborador.reset();
+      })
+    }
+
+
   }
 
   navigateLista() {

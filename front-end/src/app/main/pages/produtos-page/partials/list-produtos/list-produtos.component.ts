@@ -18,6 +18,11 @@ export class ListProdutosComponent implements OnInit {
     this.router.navigate(['produtos/cadastro'])
   }
 
+  navigateView(produto) {
+    this.produtoService.saveProductInfo(produto);
+    this.router.navigate(['produtos/visualizacao'])
+  }
+
   ngOnInit() {
     this.produtoService.getAllProducts().subscribe((data:any) => {
       this.produtos = data;

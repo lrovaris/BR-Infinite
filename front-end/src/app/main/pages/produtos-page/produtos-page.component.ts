@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {CorretoraService} from "../../services/corretora.service";
-import {SeguradoraService} from "../../services/seguradora.service";
-import {ProdutoService} from "../../services/produto.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { CorretoraService } from "../../services/corretora.service";
+import { SeguradoraService } from "../../services/seguradora.service";
+import { ProdutoService } from "../../services/produto.service";
 
 @Component({
   selector: 'app-produtos-page',
@@ -16,6 +16,7 @@ export class ProdutosPageComponent implements OnInit {
   seguradoras = [];
   submitted = false;
   allSeguradoras: Array<any> = [];
+  editProduto: any;
 
 
   constructor(
@@ -43,14 +44,32 @@ export class ProdutosPageComponent implements OnInit {
         description: this.produto.value.description,
         seguradoras: this.seguradoras
       };
-    this.produtoService.postProduto(newProduto);
+
+    if (this.produtoService.getIsEdit()) {
+      this.produtoService.setIsEditFalse();
+      this.produtoService.editPostProduto(newProduto, this.editProduto._id);
+    } else {
+      this.produtoService.postProduto(newProduto);
+    }
     this.produto.reset();
   };
+
+  navigateProduto() {
+    this.router.navigate(['produtos'])
+  }
 
   ngOnInit() {
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data
-    })
+    });
+    if (this.produtoService.getIsEdit()) {
+      this.editProduto = this.produtoService.getProduto();
+      this.produto.controls['name'].setValue(this.editProduto.name);
+      this.produto.controls['description'].setValue(this.editProduto.description);
+      this.produto.controls['seguradoras'].setValue(this.editProduto.seguradoras);
+    }
   }
+
+
 
 }

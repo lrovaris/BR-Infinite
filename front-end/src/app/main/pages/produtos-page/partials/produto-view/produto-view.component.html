@@ -1,0 +1,49 @@
+<div class="apex-content content container-fluid" id="parentdiv" #parentdiv>
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="row" style="margin-left: 1rem">
+        <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
+        <button (click)="downloadPDF()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Download</button>
+        <button (click)="navigateProdutos()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
+      </div>
+    </div>
+    <div class="content-body">
+      <div style="margin-left: 1rem" class="col-12">
+        <div class="card" style="padding-bottom: 2rem">
+          <div class="card-header pb-2">
+            <h4 style="margin-top: 1rem" class="form-section"><i class="ft-info"></i> Informações do Produto </h4>
+            <div class="row"><h4 class="form-section"></h4></div>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form">
+                <div class="form-body">
+                  <h4 class="form-section"></h4>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-6">
+                      <label for="userinput1">Nome do Produto</label>
+                      <p type="text" id="userinput1" class=" " >
+                        {{produto.name}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-6">
+                      <label for="userinput1">Descriçao do Produto</label>
+                      <p type="text" id="userinput3" class=" " >
+                        {{produto.description}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

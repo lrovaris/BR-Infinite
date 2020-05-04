@@ -31,7 +31,7 @@ export class CorretoraService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options).subscribe((data:any) => {
-alert(data.Message)
+alert(data.message)
     })
   }
 

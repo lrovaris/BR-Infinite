@@ -22,6 +22,9 @@ import { ListSeguradoraComponent } from './main/pages/seguradora-page/partials/l
 import { ListProdutosComponent } from './main/pages/produtos-page/partials/list-produtos/list-produtos.component';
 import { SeguradoraViewComponent } from './main/pages/seguradora-page/partials/seguradora-view/seguradora-view.component';
 import { CorretoraViewComponent } from './main/pages/corretora-page/partials/corretora-view/corretora-view.component';
+import { ProdutoViewComponent } from './main/pages/produtos-page/partials/produto-view/produto-view.component';
+import { PipelineViewComponent } from './main/pages/pipeline-page/partials/pipeline-view/pipeline-view.component';
+import { PipelineListComponent } from './main/pages/pipeline-page/partials/pipeline-list/pipeline-list.component';
 
 
 @NgModule({
@@ -42,7 +45,10 @@ import { CorretoraViewComponent } from './main/pages/corretora-page/partials/cor
     ListSeguradoraComponent,
     ListProdutosComponent,
     SeguradoraViewComponent,
-    CorretoraViewComponent
+    CorretoraViewComponent,
+    ProdutoViewComponent,
+    PipelineViewComponent,
+    PipelineListComponent
   ],
   imports: [
     BrowserModule,

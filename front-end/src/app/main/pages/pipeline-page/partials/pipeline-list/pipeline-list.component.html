@@ -1,12 +1,9 @@
-
-
-
 <div class="apex-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="row" style="margin: 1rem">
         <div class="col-12">
-          <button class="btn btn-primary text-white" (click)="navigateCadastroProduto()">Incluir Produto</button>
+          <button class="btn btn-primary text-white" (click)="navigateCadastro()">Incluir Pipeline</button>
         </div>
       </div>
     </div>
@@ -22,16 +19,24 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Produtos</th>
+                      <th>Data de Inclusao</th>
+                      <th>Proponente</th>
+                      <th>Produto</th>
                       <th>Descrição</th>
-                      <th>Seguradoras que trabalha</th>
+                      <th>Corretora</th>
+                      <th>Seguradora</th>
+                      <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr style="cursor: pointer" *ngFor="let produto of produtos" (click)="navigateView(produto)">
-                      <td>{{produto.name}}</td>
-                      <td>{{produto.description}}</td>
-                      <td *ngFor="let seguradorass of produto.seguradoras">{{seguradorass.name}}</td>
+                    <tr *ngFor="let oportunidade of oportunidade" style="cursor: pointer" (click)="edit(oportunidade._id)">
+                      <td>oportunidade.data</td>
+                      <td>oportunidade.proponente</td>
+                      <td>oportunidade.produto</td>
+                      <td>oportunidade.descrição</td>
+                      <td>oportunidade.corretora</td>
+                      <td>oportunidade.seguradora</td>
+                      <td>oportunidade.status</td>
                     </tr>
                     </tbody>
                   </table>

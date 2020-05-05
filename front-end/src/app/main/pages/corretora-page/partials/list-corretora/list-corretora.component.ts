@@ -16,6 +16,7 @@ export class ListCorretoraComponent implements OnInit {
   constructor(private corretoraService: CorretoraService, private router: Router, private seguradoraService: SeguradoraService) { }
 
   navigateCadastroCorretora() {
+    this.corretoraService.setCorretoraInfoWithOutFormGroupNull();
     this.router.navigate(['corretora/cadastro'])
   }
 

@@ -23,6 +23,7 @@ export class ListSeguradoraComponent implements OnInit {
   alertsettings = tableData.alertsettings;
 
   navigateCadastroSeguradora() {
+    this.seguradoraService.setseguradoraInfoWithOutFormGroupNull();
     this.router.navigate(['seguradora/cadastro'])
   }
 
@@ -44,5 +45,4 @@ export class ListSeguradoraComponent implements OnInit {
       this.seguradoras = data;
     });
   }
-
 }

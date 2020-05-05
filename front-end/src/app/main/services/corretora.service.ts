@@ -21,6 +21,10 @@ export class CorretoraService {
     return this.corretoraInfo;
   }
 
+  setCorretoraInfoWithOutFormGroupNull() {
+    this.corretoraInfoWithOutFormGroup = null
+  }
+
   getcorretoraInfoWithOutFormGroup() {
     return this.corretoraInfoWithOutFormGroup;
   }

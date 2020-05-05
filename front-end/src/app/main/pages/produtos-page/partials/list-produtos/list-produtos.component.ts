@@ -15,6 +15,8 @@ export class ListProdutosComponent implements OnInit {
   constructor(private produtoService: ProdutoService, private router: Router, private seguradoraService: SeguradoraService) { }
 
   navigateCadastroProduto() {
+    this.produtoService.setProdutoNull();
+    this.produtoService.setIsEditFalse();
     this.router.navigate(['produtos/cadastro'])
   }
 

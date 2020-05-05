@@ -5798,10 +5798,6 @@ export class SeguradoraPageComponent implements OnInit {
     }
   }
 
-  navigateSeguradora() {
-    this.router.navigate(['seguradora'])
-  }
-
   addTelefone() {
     let telefone = {
       assunto: this.seguradora.value.assunto,
@@ -5897,7 +5893,6 @@ export class SeguradoraPageComponent implements OnInit {
 
     if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
       this.isEdit = true;
-      console.log('asd');
       let data = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
       this.seguradora.controls['name'].setValue(data.name);
       this.seguradora.controls['telephone'].setValue(data.telephone);

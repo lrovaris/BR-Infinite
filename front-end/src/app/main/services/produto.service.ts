@@ -28,6 +28,10 @@ export class ProdutoService {
     return this.isEdit;
   }
 
+  setProdutoNull() {
+    this.produto = null;
+  }
+
   setIsEditFalse() {
     this.isEdit = false;
   }

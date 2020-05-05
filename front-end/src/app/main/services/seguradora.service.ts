@@ -38,6 +38,11 @@ export class SeguradoraService {
   getseguradoraInfoWithOutFormGroup() {
     return this.seguradoraInfoWithOutFormGroup;
   }
+
+  setseguradoraInfoWithOutFormGroupNull() {
+    this.seguradoraInfoWithOutFormGroup = null
+  }
+
   editSeguradora(seguradora) {
     this.seguradoraInfoWithOutFormGroup = seguradora;
     this.isEdit = true;

@@ -98,11 +98,11 @@ export class LoginService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"users/login",
+      .post<{token: string, message: string}>(this.url+"users/login",
         authData, options
       )
       .subscribe(response => {
-        this.token = response.Token;
+        this.token = response.token;
         const helper = new JwtHelperService();
         this.user = helper.decodeToken(this.token);
         this.id = this.user.id;

@@ -23,75 +23,55 @@ router.get ('/:id', async (req,res) => {
 });
 
 router.post('/new', async(req,res) => {
-    var valid = true;
+    let new_colaborador = req.body;
 
-    var new_colaborador = req.body;
+    let validacao = controller.validate_colaborador(new_colaborador);
 
-    if (!new_colaborador.name){
-      res.status(400).json({"message":"Campo de nome vazio"});
-      valid = false;
-      return;
-    }
-
-    if (!new_colaborador.telephone){
-      res.status(400).json({"message":"Campo de telefone vazio"});
-      valid = false;
-      return;
-    }
-
-    if (!new_colaborador.email){
-      res.status(400).json({"message":"Campo de email vazio"});
-      valid = false;
-      return;
-    }
-
-    if (!new_colaborador.birthday){
-      res.status(400).json({"message":"Campo de aniversário vazio"});
-      valid = false;
-      return;
-    }
-
-    if (!new_colaborador.job){
-      res.status(400).json({"message":"Campo de cargo vazio"});
-      valid = false;
-      return;
+    if(!validacao.valid){
+      return res.status(400).json({"message":validacao.message});
     }
 
     new_colaborador['active'] = true;
 
-    if (valid) {
-      let db_response = await db.register_colaborador(new_colaborador).catch(err => console.error(err));
+    let db_response = await db.register_colaborador(new_colaborador).catch(err => console.error(err));
 
-      let to_send = {
-        message: "Colaborador cadastrado com sucesso!",
-        colaborador: db_response.ops[0]
-      }
-
-      res.status(200).json(to_send);
-    }
+    res.status(200).json({
+      message: "Colaborador cadastrado com sucesso!",
+      colaborador: db_response.ops[0]
+    });
 });
 
 
-//Alterar o objeto da colaborador
-
+// Rota para alterar o objeto da colaborador
 router.post('/:id/edit', async(req,res) => {
 
+  // Extraindo objeto editado do corpo da mensagem
   let req_colaborador = req.body;
 
-  req_colaborador['_id'] = req.params.id;
+  // Procurando o objeto atual no banco de dados / cache
+  let db_colaborador = await controller.get_colaboradores_by_id(req.params.id);
 
-  let db_colaborador = cache.get("colaboradores").filter((colaborador_obj) => {
-      return colaborador_obj._id == req_colaborador._id;
-  })[0];
+  // Editando o objeto
+  let obj_editado = Object.fromEntries(Object.entries(db_colaborador).map(([key, value]) =>{
+    return [key, req_colaborador[key] || value];
+  }));
 
-  Object.keys(req_colaborador).forEach(function(key) {
-    let val = req_colaborador[key];
-    db_colaborador[key] = val;
+  // Validando o objeto editado
+  let validacao = await controller.validate_colaborador(obj_editado);
+
+  // Respondendo se há erros na validação
+  if(!validacao.valid){
+    return res.status(400).json({"message": validacao.message});
+  }
+
+  // Editando o valor no banco de dados
+  let edited_colaborador = await db.update_colaborador(obj_editado).catch(err => console.error(err));
+
+  // Respondendo operação bem-sucedida
+  res.status(200).json({
+    "message": "Colaborador editado com sucesso!",
+    "colaborador": edited_colaborador
   });
-
-  let edited_colaborador = await db.update_colaborador(db_colaborador).catch(err => console.error(err));
-
-  await res.json(edited_colaborador);
 });
 
 module.exports = router;

@@ -7,67 +7,36 @@ const db_utils = require('../db.js');
 async function get_corretoras() {
   db_conn = await db_utils.get_db();
 
-  return new Promise((resolve, reject) => {
+  let all_corr = await db_conn.collection("corretoras").find({}).toArray();
 
+  cache.set("corretoras", all_corr);
 
-    db_conn.collection("corretoras").find({}).toArray((err, result) =>{
-      if(err){
-        reject(err);
-      }
-      else {
-        cache.set("corretoras", result);
-        resolve(result);
-      }
-    });
-  });
+  return all_corr;
 }
 
 
 async function register_corretora(new_corretora) {
   db_conn = await db_utils.get_db();
 
-  if(cache.get('corretoras') === undefined){
-    await get_corretoras();
-  }
+  let new_corr = await db_conn.collection("corretoras").insertOne(new_corretora);
 
-  return new Promise((resolve, reject) => {
-    db_conn.collection("corretoras").insertOne(new_corretora, async(err, result) => {
-      if(err){
-        reject(err);
-      }else {
+  await get_corretoras();
 
-        let new_corretora_list = cache.get('corretoras');
-        new_corretora_list.push(new_corretora);
-        cache.set("corretoras",new_corretora_list);
-        logger.log("Corretora nova cadastrada");
-        resolve(result);
-      }
-    });
-  });
+  logger.log("Corretora nova cadastrada");
+
+  return new_corr;
 }
 
 async function update_corretora(corretora) {
   db_conn = await db_utils.get_db();
 
-  if(cache.get('corretoras') === undefined){
-    await get_corretoras();
-  }
+  let updated_corr = await db_conn.collection("corretoras").replaceOne({_id: new ObjectId(corretora._id) }, corretora,{w: "majority", upsert: false})
 
-   corretora._id = new ObjectId(corretora._id);
+  logger.log(`Modificados ${updated_corr.result.nModified} elementos`);
 
-  return new Promise((resolve, reject) => {
-    db_conn.collection("corretoras").replaceOne({_id: corretora._id }, corretora,{w: "majority", upsert: false} , async(err, result) =>{
-      if(err){
-          reject(err);
-      }else{
-        logger.log(`Modificados ${result.result.nModified} elementos`);
+  await get_corretoras();
 
-        await get_corretoras();
-
-        resolve(result);
-      }
-    });
-  });
+  return updated_corr;
 }
 
 module.exports = { get_corretoras, update_corretora, register_corretora };

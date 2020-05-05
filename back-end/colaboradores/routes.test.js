@@ -13,6 +13,19 @@ describe('colaboradores Routes', () => {
     expect(res.body).toEqual({"message":"Funcionando"});
   })
 
+  it('deveria falhar em criar um colaborador', async () => {
+    const res = await request(app).post('/colaboradores/new').send({
+      name:"afonso tavarex",
+      telephone:"999",
+      email:"email@legal.com",
+      birthday: "today"
+    })
+
+    expect(res.statusCode).toEqual(400)
+
+    expect(res.body.message).toEqual("Campo de cargo vazio");
+  })
+
   it('deveria criar um colaborador novo', async () => {
     const res = await request(app).post('/colaboradores/new').send({
       name:"afonso tavarex",
@@ -34,9 +47,9 @@ describe('colaboradores Routes', () => {
 
     let numero_colab = list_colab.length;
 
-    afonso = list_colab.filter(a =>  {
+    afonso = list_colab.find(a =>  {
       return a.telephone === "999"
-    })[0];
+    });
 
     expect(afonso.name).toEqual("afonso tavarex");
 
@@ -50,9 +63,11 @@ describe('colaboradores Routes', () => {
 
     expect(colaboradores_req2.body.length).toEqual(list_colab.length);
 
-    afonso2 = colaboradores_req2.body[0];
+    afonso2 = colaboradores_req2.body.find(a =>  {
+      return a.telephone === "999"
+    });
 
-    expect(afonso2.name = "afonso tavares");
+    expect(afonso2.name).toEqual("afonso tavares");
   })
 
 })

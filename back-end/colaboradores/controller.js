@@ -2,22 +2,15 @@ const db = require('./db');
 let cache = require('../memoryCache');
 
 async function get_colaboradores() {
-  let all_colaboradores = cache.get('colaboradores');
-
-  if(all_colaboradores !== undefined){
-    return all_colaboradores;
-  }else {
-    all_colaboradores = await db.get_colaboradores();
-    return all_colaboradores;
-  }
+  return cache.get('colaboradores') || await db.get_colaboradores();
 }
 
 async function get_colaboradores_by_id(colab_id) {
   let all_colab = await get_colaboradores();
 
-  let colaborador = all_colab.filter(colab_obj =>{
+  let colaborador = all_colab.find(colab_obj =>{
     return (colab_obj._id.toString() == colab_id.toString())
-  })[0];
+  });
 
   return colaborador;
 }
@@ -60,4 +53,56 @@ async function get_colaboradores_seguradora(id_seguradora, id_manager){
   };
 }
 
-module.exports = { get_colaboradores, get_colaboradores_corretora, get_colaboradores_seguradora };
+function validate_colaborador(colaborador){
+  if (colaborador === undefined){
+    return{
+      "valid": false,
+      "message": "Colaborador inválido"
+    }
+  }
+
+  if (!colaborador.name){
+    return {
+      "valid": false,
+      "message":"Campo de nome do colaborador vazio"
+    };
+  }
+
+  if (!colaborador.telephone){
+    return {
+      "valid": false,
+      "message":"Campo de telefone do colaborador vazio"
+    };
+  }
+
+  if (!colaborador.email){
+    return {
+      "valid": false,
+      "message":"Campo de email do colaborador vazio"
+    };
+  }
+
+  if (!colaborador.birthday){
+    return {
+      "valid": false,
+      "message":"Campo de aniversário vazio"
+    };
+  }
+
+  if (!colaborador.job){
+    return {
+      "valid": false,
+      "message":"Campo de cargo vazio"
+    };
+  }
+
+  return{ valid: true }
+}
+
+module.exports = {
+  get_colaboradores,
+  get_colaboradores_by_id,
+  get_colaboradores_corretora,
+  get_colaboradores_seguradora,
+  validate_colaborador
+};

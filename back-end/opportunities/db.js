@@ -6,59 +6,38 @@ const db_utils = require('../db.js');
 async function get_opportunities() {
     let db_conn = await db_utils.get_db();
 
-    return new Promise((resolve, reject) => {
-        db_conn.collection("opportunities").find({}).toArray((err, result) =>{
-            if(err){
-                reject(err);
-            }
-            else {
-                cache.set("opportunities", result);
-                resolve(result);
-            }
-        });
-    });
+    let all_opps = await db_conn.collection("opportunities").find({}).toArray();
+
+    cache.set("opportunities", all_opps)
+
+    return all_opps;
 }
 
 
 async function register_opportunity(new_opportunity) {
   let db_conn = await db_utils.get_db();
 
-  if(cache.get('opportunities') === undefined){
-    await get_opportunities();
-  }
+  let new_opp = await db_conn.collection("opportunities").insertOne(new_opportunity)
 
+  await get_opportunities();
 
-  return new Promise((resolve, reject) => {
-    db_conn.collection("opportunities").insertOne(new_opportunity, (err, result) => {
-      if(err){
-        reject(err);
-      }else {
-        let new_opportunity_list = cache.get("opportunities");
-        new_opportunity_list.push(new_opportunity);
-        cache.set("opportunities",new_opportunity_list);
-        logger.log("Oportunidade nova cadastrada");
-        resolve(result);
-      }
-    });
-  });
+  logger.log("Oportunidade nova cadastrada");
+
+  return new_opp;
+
+  resolve(result);
 }
 
 async function update_opportunity(opportunity) {
   let db_conn = await db_utils.get_db();
 
-   opportunity._id = new ObjectId(opportunity._id);
+  let edited_opp = await db_conn.collection("opportunities").replaceOne({_id: new ObjectId(opportunity._id)}, opportunity,{w: "majority", upsert: false});
 
-  return new Promise((resolve, reject) => {
-    db_conn.collection("opportunities").replaceOne({_id: opportunity._id }, opportunity,{w: "majority", upsert: false} ,(err, result) =>{
-      if(err){
-          reject(err);
-      }else{
-        logger.log(`Modificados ${result.result.nModified} elementos`);
+  logger.log(`Modificados ${edited_opp.result.nModified} elementos`);
 
-        resolve(result);
-      }
-    });
-  });
+  await get_opportunities();
+
+  return edited_opp;
 }
 
 module.exports = { get_opportunities, update_opportunity, register_opportunity };

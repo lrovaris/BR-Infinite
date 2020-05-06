@@ -12,9 +12,9 @@ let brinfinite;
 async function init_db(){
   await client.connect();
 
-  logger.log("Conectado");
-
   brinfinite = await client.db('brinfinite');
+
+  logger.log("Conectado");
 
   return brinfinite;
 }

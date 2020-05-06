@@ -29,14 +29,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let oportunidade of oportunidade" style="cursor: pointer" (click)="edit(oportunidade._id)">
-                      <td>oportunidade.data</td>
-                      <td>oportunidade.proponente</td>
-                      <td>oportunidade.produto</td>
-                      <td>oportunidade.descrição</td>
-                      <td>oportunidade.corretora</td>
-                      <td>oportunidade.seguradora</td>
-                      <td>oportunidade.status</td>
+                    <tr *ngFor="let oportunidade of oportunidade" style="cursor: pointer" (click)="saveOportunidade(oportunidade)">
+                      <td>{{oportunidade.inclusionDate}}</td>
+                      <td>{{oportunidade.proponente}}</td>
+                      <td>{{oportunidade.product}}</td>
+                      <td>{{oportunidade.description}}</td>
+                      <td>{{oportunidade.corretora}}</td>
+                      <td>{{oportunidade.seguradora}}</td>
+                      <td>{{oportunidade.status}}</td>
                     </tr>
                     </tbody>
                   </table>

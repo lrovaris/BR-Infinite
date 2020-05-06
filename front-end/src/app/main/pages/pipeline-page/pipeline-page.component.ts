@@ -23,6 +23,9 @@ export class PipelinePageComponent implements OnInit {
   Colaboradores: any;
   Produtos: any;
   CongenereList = [];
+  Files = [];
+  filesToUpload: Array<File> = [];
+  formData: any = new FormData();
 
   constructor(private formbuilder: FormBuilder,
               public pipelineService: PipelineService,
@@ -49,6 +52,7 @@ export class PipelinePageComponent implements OnInit {
       comissao1: [null],
       comissao2: [null],
       brInfinite: [null],
+      upload: [null],
       vigencia: [null]
     })
   }
@@ -56,6 +60,7 @@ export class PipelinePageComponent implements OnInit {
   clickVerCongenere() {
     this.checkCongenere = !this.checkCongenere;
   }
+
 
   navigatePipeline() {
     this.router.navigate(['pipeline'])
@@ -68,6 +73,17 @@ export class PipelinePageComponent implements OnInit {
   removeCongenere(nome) {
     let index = this.CongenereList.indexOf(nome);
     if (index !== -1) this.CongenereList.splice(index, 1);
+  }
+
+  removeFile(nome){
+    let index = this.filesToUpload.indexOf(nome);
+    if (index !== -1) this.filesToUpload.splice(index, 1);
+  }
+
+
+  upload(event: any) {
+    let newFile = event.target.files[0];
+    this.filesToUpload.push(newFile);
   }
 
   onFinish() {
@@ -89,6 +105,8 @@ export class PipelinePageComponent implements OnInit {
       dd,
       yyyy
     };
+
+
 
     const inclusionDate = this.date.now;
 
@@ -117,7 +135,18 @@ export class PipelinePageComponent implements OnInit {
       let oportunidade = this.pipelineService.getOportunidadeWIthOutForm();
       this.pipelineService.editPostOportunidade(oportunidade._id, newOportunidade);
     } else if (!this.isEdit){
-      this.pipelineService.postOportunidade(newOportunidade);
+      const files: Array<File> = this.filesToUpload;
+      for(let i =0; i < files.length; i++){
+        this.formData.append('docs', files[i]);
+      }
+      this.pipelineService.postUpload(this.formData).subscribe((data: any) => {
+        console.log(data);
+        newOportunidade['files'] = data.info_files;
+        this.pipelineService.postOportunidade(newOportunidade).subscribe((data:any) => {
+          alert(data.message)
+        })
+      });
+
     }
    // this.oportunidade.reset();
   };

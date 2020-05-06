@@ -177,6 +177,43 @@
                 </div>
                 </div>
 
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row" *ngIf=" (oportunidade.files.length > 0)">
+                      <div class="col">
+                        <section id="simple">
+                          <div class="row text-left">
+                            <div class="col-sm-6">
+                              <div class="card">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <table class="table">
+                                      <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Download</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr *ngFor="let file of oportunidade.files; let i = index">
+                                        <th>{{i+1}}</th>
+                                        <td>{{file.nome}}</td>
+                                        <td style="cursor: pointer" (click)="download(file)"><i class="icon-cloud-download text-primary text-bold-700"></i></td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </form>
 
             </div>

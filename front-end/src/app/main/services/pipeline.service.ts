@@ -35,9 +35,15 @@ export class PipelineService {
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/opportunities/new`, oportunidade, options).subscribe((data:any) => {
-      alert(data.message)
-    })
+    return this.http.post(`${this.url}/opportunities/new`, oportunidade, options);
+  }
+
+  postUpload(file) {
+   return this.http.post(`${this.url}/opportunities/upload`, file);
+  }
+
+  downloadFile(path) {
+    return this.http.post(`${this.url}/opportunities/download`, {path: path}, {responseType: 'blob'});
   }
 
   editPostOportunidade(id, oportunidade) {

@@ -220,12 +220,60 @@
                      </div>
                    </div>
                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset class="form-group">
+                        <label for="upload">Upload de Arquivos</label>
+                        <div class="custom-file  mx-auto d-block ">
+                          <input  (change)="upload($event)" type="file" class="custom-file-input" id="upload">
+                          <label class="custom-file-label" for="upload">Escolha um arquivo</label>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+
+                  <div class="row" *ngIf=" (filesToUpload.length > 0)">
+                    <div class="col">
+                      <section id="simple">
+                        <div class="row text-left">
+                          <div class="col-sm-6">
+                            <div class="card">
+                              <div class="card-content">
+                                <div class="card-body">
+                                  <table class="table">
+                                    <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Nome</th>
+                                      <th>Remover</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let file of filesToUpload; let i = index">
+                                      <th>{{i+1}}</th>
+                                      <td>{{file.name}}</td>
+                                      <td style="cursor: pointer" (click)="removeFile(file)"><i class="icon-trash text-danger text-bold-700"></i></td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+
+
                 </div>
                 <div class="form-actions right">
-                  <button (click)="navigatePipeline()" type="button" class="btn btn-raised  mr-1 btn-header-cancel">
+                  <button (click)="navigatePipeline()" type="button" class="btn btn-raised border-primary mr-1 btn-header-cancel">
                     <a>Voltar</a>
                   </button>
-                  <button  type="submit" class="btn btn-raised  btn-header">
+                  <button  type="submit" class="btn btn-raised border-primary btn-header">
                     <a>Salvar</a>
                   </button>
                 </div>

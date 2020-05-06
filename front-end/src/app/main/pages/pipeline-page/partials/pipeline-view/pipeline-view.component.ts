@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { CorretoraService} from "../../../../services/corretora.service";
 import { Router} from "@angular/router";
-import { ColaboradorService} from "../../../../services/colaborador.service";
 import domtoimage from 'dom-to-image';
 import * as jsPDF from 'jspdf';
 import { PipelineService} from "../../../../services/pipeline.service";
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-pipeline-view',
@@ -19,6 +18,14 @@ export class PipelineViewComponent implements OnInit {
 
   navigatePipeline() {
     this.router.navigate(['pipeline'])
+  }
+
+  download(file) {
+
+    this.oportunidadeService.downloadFile(file.path).subscribe((data: any) => {
+      console.log(file);
+      saveAs(data, file.nome)
+    })
   }
 
   constructor(private oportunidadeService: PipelineService, private router: Router) { }

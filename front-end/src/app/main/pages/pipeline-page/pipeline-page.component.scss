@@ -1,0 +1,6 @@
+.custom-file-label {
+  border: 1px solid #428bca;
+  &::after {
+    content: 'Pesqusiar' !important;
+  }
+}

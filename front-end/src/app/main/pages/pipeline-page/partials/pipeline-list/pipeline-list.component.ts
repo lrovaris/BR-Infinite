@@ -13,11 +13,14 @@ export class PipelineListComponent implements OnInit {
 
   constructor(private pipelineService: PipelineService, private router: Router) { }
 
-  navigateCadastro(){
-    this.router.navigate(['pipeline/cadastro'])
+  saveOportunidade(oportundiade) {
+    this.pipelineService.setOportunidade(oportundiade);
+    this.router.navigate(['pipeline/visualizacao'])
   }
-  edit(id) {
 
+  navigateCadastro(){
+    this.pipelineService.setIsEditFalse();
+    this.router.navigate(['pipeline/cadastro'])
   }
 
   ngOnInit() {

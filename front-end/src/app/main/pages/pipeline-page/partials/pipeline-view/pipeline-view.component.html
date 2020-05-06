@@ -1,1 +1,225 @@
-<p>pipeline-view works!</p>
+<!--
+      corretora: this.oportunidade.value.corretora,
+      colaborador: this.oportunidade.value.solicitante,
+      proponente: this.oportunidade.value.proponente,
+      dealType: this.oportunidade.value.tipoNegocio,
+      seguradora: this.oportunidade.value.seguradora,
+      detentor: this.oportunidade.value.detentor,
+      cadastroNacional: this.oportunidade.value.cadastroNacional,
+      product: this.oportunidade.value.produto,
+      description: this.oportunidade.value.descricao,
+      congenereRenewal: this.oportunidade.value.congenere,
+      congenereList: this.CongenereList,
+      seguradoraPrice: this.oportunidade.value.preco2,
+      seguradoraComission: this.oportunidade.value.comissao2,
+      vigencia: this.oportunidade.value.vigencia,
+      status: this.oportunidade.value.status,
+      statusObs: this.oportunidade.value.observacao,
+-->
+
+<div class="apex-content content container-fluid" id="parentdiv" #parentdiv>
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="row" style="margin-left: 1rem">
+        <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
+        <button (click)="downloadPDF()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Download</button>
+        <button (click)="navigatePipeline()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
+      </div>
+    </div>
+    <div class="content-body">
+      <div style="margin-left: 1rem" class="col-12">
+        <div class="card" style="padding-bottom: 2rem">
+          <div class="card-header pb-2">
+            <h4 style="margin-top: 1rem" class="form-section"><i class="ft-info"></i> Informações Pipeline</h4>
+            <div class="row"><h4 class="form-section"></h4></div>
+            <p class="mb-0">
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="px-3">
+              <form class="form">
+                <div class="form-body">
+                  <h4 class="form-section"></h4>
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                      <label for="name">Corretora</label>
+                      <p type="text" id="name" class=" " >
+                        {{oportunidade.corretora}}
+                      </p>
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                      <label for="colaborador">Solicitante</label>
+                      <p type="text" id="colaborador" class=" " >
+                        {{oportunidade.colaborador}}
+                      </p>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                      <label for="detentor">Detentor</label>
+                      <p type="text" id="detentor" class=" " >
+                        {{oportunidade.detentor}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                      <label for="proponente">Proponente</label>
+                      <p type="text" id="proponente" class=" " >
+                        {{oportunidade.proponente}}
+                      </p>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                      <label for="cadastroNacional">CPF/CNPJ</label>
+                      <p type="text" id="cadastroNacional" class=" " >
+                        {{oportunidade.cadastroNacional}}
+                      </p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4">
+                      <label for="seguradora">Seguradora</label>
+                      <p type="text" id="seguradora" class=" " >
+                        {{oportunidade.seguradora}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-12 col-md-3">
+                    <label for="product">Produto</label>
+                    <p type="text" id="product" class=" " >
+                      {{oportunidade.product}}
+                    </p>
+                  </div>
+                  <div class="" [ngClass]="[oportunidade.dealType == 'Renovação' ? 'col-sm-12 col-md-3' : 'col-sm-12 col-md-7']">
+                    <label for="description">Breve Descrição</label>
+                    <p type="text" id="description" class=" " >
+                      {{oportunidade.description}}
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-2">
+                    <label for="dealType">Tipo de Negócio</label>
+                    <p type="text" id="dealType" class=" " >
+                      {{oportunidade.dealType}}
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-2" *ngIf="oportunidade.dealType == 'Renovação'">
+                    <label for="congenereRenewal">Congênere</label>
+                    <p type="text" id="congenereRenewal" class=" " >
+                      {{oportunidade.congenereRenewal}}
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-2" *ngIf="oportunidade.dealType == 'Renovação'">
+                    <label for="vigencia">Vigência</label>
+                    <p type="text" id="vigencia" class=" " >
+                      {{oportunidade.vigencia}}
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col">
+                    <section id="simple-table">
+                      <div class="row text-left">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                <table class="table">
+                                  <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th>Comissão</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr *ngFor="let congenere of oportunidade.congenereList; let i = index">
+                                    <th>{{i+1}}</th>
+                                    <td>{{congenere.name}}</td>
+                                    <td>{{congenere.price}}</td>
+                                    <td>{{congenere.comission}}</td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+
+
+
+                <div class="row">
+                  <div class="col-sm-12 col-md-5">
+                    <label for="seguradora2">Br Infinite</label>
+                    <p class=" " type="text" id="seguradora2">
+                    {{oportunidade.seguradora}}
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-2">
+                    <label for="seguradoraPrice">Preço</label>
+                    <p class=" " type="text" id="seguradoraPrice">
+                      {{oportunidade.seguradoraPrice}}
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                    <label for="seguradoraComission">Comissão</label>
+                    <p class=" " type="text" id="seguradoraComission">
+                      {{oportunidade.seguradoraComission}}
+                    </p>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row" *ngIf=" (oportunidade.files.length > 0)">
+                      <div class="col">
+                        <section id="simple">
+                          <div class="row text-left">
+                            <div class="col-sm-6">
+                              <div class="card">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <table class="table">
+                                      <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Download</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr *ngFor="let file of oportunidade.files; let i = index">
+                                        <th>{{i+1}}</th>
+                                        <td>{{file.nome}}</td>
+                                        <td style="cursor: pointer" (click)="download(file)"><i class="icon-cloud-download text-primary text-bold-700"></i></td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

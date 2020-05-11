@@ -20,6 +20,7 @@
                     <thead>
                     <tr>
                       <th>Data de Inclusao</th>
+                      <th>Vigência</th>
                       <th>Proponente</th>
                       <th>Produto</th>
                       <th>Descrição</th>
@@ -31,11 +32,12 @@
                     <tbody>
                     <tr *ngFor="let oportunidade of oportunidade" style="cursor: pointer" (click)="saveOportunidade(oportunidade)">
                       <td>{{oportunidade.inclusionDate}}</td>
+                      <td>{{oportunidade.vigencia}}</td>
                       <td>{{oportunidade.proponente}}</td>
-                      <td>{{oportunidade.product}}</td>
+                      <td>{{oportunidade.product.name}}</td>
                       <td>{{oportunidade.description}}</td>
-                      <td>{{oportunidade.corretora}}</td>
-                      <td>{{oportunidade.seguradora}}</td>
+                      <td>{{oportunidade.corretora.name}}</td>
+                      <td>{{oportunidade.seguradora.name}}</td>
                       <td>{{oportunidade.status}}</td>
                     </tr>
                     </tbody>

@@ -24,14 +24,12 @@
                     <tr>
                       <th>Produtos</th>
                       <th>Descrição</th>
-                      <th>Seguradoras que trabalha</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr style="cursor: pointer" *ngFor="let produto of produtos" (click)="navigateView(produto)">
                       <td>{{produto.name}}</td>
                       <td>{{produto.description}}</td>
-                      <td *ngFor="let seguradorass of produto.seguradoras">{{seguradorass.name}}</td>
                     </tr>
                     </tbody>
                   </table>

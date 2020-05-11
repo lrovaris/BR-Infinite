@@ -5811,23 +5811,23 @@ export class CorretoraPageComponent implements OnInit {
 
     this.corretora = this.formbuilder.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      telephone: [null, Validators.required],
-      cnpj: [null, Validators.required],
-      estate: [null, Validators.required],
-      city: [null, Validators.required],
-      street: [null, Validators.required],
-      number: [null, Validators.required],
-      complement: [null, Validators.required],
-      neighborhood: [null, Validators.required],
+      email: [null],
+      telephone: [null],
+      cnpj: [null],
+      estate: [null],
+      city: [null],
+      street: [null],
+      number: [null],
+      complement: [null],
+      neighborhood: [null],
     })
 
     this.colaborador = this.formbuilder.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      telephone: [null, Validators.required],
-      birthday: [null, Validators.required],
-      job: [null, Validators.required],
+      email: [null],
+      telephone: [null],
+      birthday: [null],
+      job: [null],
       corretora: [''],
       seguradora: [''],
     })
@@ -5862,6 +5862,7 @@ export class CorretoraPageComponent implements OnInit {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
       this.id = data._id;
+      this.colaboradores = data.colaboradores;
       this.corretora.controls['name'].setValue(data.name);
       this.corretora.controls['telephone'].setValue(data.telephone);
       this.corretora.controls['cnpj'].setValue(data.cnpj);

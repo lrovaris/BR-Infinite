@@ -5844,10 +5844,10 @@ export class SeguradoraPageComponent implements OnInit {
 
     this.colaborador = this.formbuilder.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      telephone: [null, Validators.required],
-      birthday: [null, Validators.required],
-      job: [null, Validators.required],
+      email: [null],
+      telephone: [null],
+      birthday: [null],
+      job: [null],
       corretora: [''],
       seguradora: [''],
     })

@@ -95,8 +95,7 @@
                       </div>
                     </div>
                   </div>
-
-                  <div class="row" *ngIf="!isEdit">
+                  <!--<div class="row" *ngIf="!isEdit">
                     <div class="col-xl-4 col-lg-6 col-12">
                       <div class="card bg-primary" style="cursor: pointer" (click)="navigateColaborador(corretora)">
                         <div class="card-content">
@@ -114,17 +113,65 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  <h4 class="form-section"><i class="ft-info"></i>Preencher por último</h4>
-
-                  <div class="row">
+                  </div>-->
+                  <!--<div class="row">
                     <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of allSeguradoras">
-                      <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
+                    &lt;!&ndash; TODO:CHANGE&ndash;&gt;  <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
                     </div>
+                  </div>-->
+                </div><!--FORM-BODY-->
 
+                <div class="row">
+                  <div class="col-sm-12 col-md-4">
+                    <fieldset class="form-group">
+                      <label for="seguradora">Seguradora</label>
+                      <select #seguradoraSelect class="form-control border-primary" id="seguradora">
+                        <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-sm-12 col-md-2" style="margin-top: 12px">
+                    <div class="form-group"><button type="button" (click)="addSeguradora(seguradoraSelect.value)" class="btn btn-header border-primary"><a>adicioanar</a></button></div>
                   </div>
                 </div>
+
+                <div class="row" *ngIf="(seguradorasTable.length > 0)">
+                  <div class="col">
+                    <section id="simple-table">
+                      <div class="row text-left">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                <table class="table table-hover">
+                                  <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th>Remover</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr *ngFor="let seguradora of seguradorasTable; let i = index">
+                                    <th>{{i+1}}</th>
+                                    <td>{{seguradora.name}}</td>
+                                    <td>{{seguradora.telephone}}</td>
+                                    <td>{{seguradora.email}}</td>
+                                    <td style="cursor: pointer" (click)="removeSeguradora(seguradora)"><i class="icon-trash text-danger text-bold-700"></i></td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+
 
                 <div class="form-actions right">
                   <button (click)="navigateCorretora()" type="button" class="btn btn-raised  mr-1 btn-header-cancel">
@@ -138,7 +185,8 @@
 
             </div>
           </div>
-        </div>
+        </div><!--CARD-->
+        <app-colaborador-page></app-colaborador-page>
       </div>
     </div>
   </div>

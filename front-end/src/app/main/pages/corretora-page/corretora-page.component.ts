@@ -5786,6 +5786,7 @@ export class CorretoraPageComponent implements OnInit {
   seguradoras = [];
   responsavel: any;
   allSeguradoras: Array<any> = [];
+  seguradorasTable = [];
   isEdit = false;
 
   SelectCidade(estado) {
@@ -5869,7 +5870,9 @@ export class CorretoraPageComponent implements OnInit {
       alert('Formulário Inválido, por favor verifique ');
       return;
     }
+    if(this.isEdit) {
       this.seguradoras = this.seguradoraService.getSeguradoras();
+    }
     let newCorretora = {
       name: this.corretora.value.name,
       email: this.corretora.value.email,
@@ -5902,8 +5905,26 @@ export class CorretoraPageComponent implements OnInit {
     console.log('');
   }
 
+  searchSeguradoraChange() {
+    console.log(this.allSeguradoras)
+    console.log((this.seguradorasTable))
+  }
+
   navigateCorretora() {
     this.router.navigate(['corretora'])
+  }
+
+  addSeguradora(seguradora) {
+    this.seguradoraService.getSeguradora(seguradora).subscribe((data: any) => {
+      this.seguradorasTable.push(data);
+    });
+    this.seguradoras.push(seguradora)
+  }
+
+  removeSeguradora(seguradora) {
+    console.log(seguradora);
+    /*let index = this.seguradoras.indexOf(seguradora);
+    if (index !== -1) this.seguradoras.splice(index, 1);*/
   }
 
   searchEstado = (text$: Observable<string>) =>
@@ -5913,6 +5934,7 @@ export class CorretoraPageComponent implements OnInit {
       map(term => term === '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
+
   searchCidade = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),

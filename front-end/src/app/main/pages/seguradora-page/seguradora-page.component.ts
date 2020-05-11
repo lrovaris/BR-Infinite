@@ -5802,11 +5802,11 @@ export class SeguradoraPageComponent implements OnInit {
     let telefone = {
       assunto: this.seguradora.value.assunto,
       telefone: this.seguradora.value.telefone,
-      email: this.seguradora.value.email
+      email: this.seguradora.value.email2
     };
     this.telefones.push(telefone);
     this.seguradora.controls['assunto'].reset();
-    this.seguradora.controls['email'].reset();
+    this.seguradora.controls['email2'].reset();
     this.seguradora.controls['telefone'].reset();
   }
 
@@ -5822,17 +5822,19 @@ export class SeguradoraPageComponent implements OnInit {
   ) {
     this.seguradora = this.formbuilder.group({
       name: [null, Validators.required],
-      telephone: [null, Validators.required],
-      cnpj: [null, Validators.required],
-      estate: [null, Validators.required],
+      telephone: [null],
+      cnpj: [null],
+      estate: [null],
       assunto: [null],
       telefone: [null],
       email: [null],
-      city: [null, Validators.required],
-      street: [null, Validators.required],
-      number: [null, Validators.required],
-      complement: [null, Validators.required],
-      neighborhood: [null, Validators.required],
+      email2: [null],
+      city: [null],
+      street: [null],
+      number: [null],
+      complement: [null],
+      neighborhood: [null],
+      cep: [null]
     })
   }
 
@@ -5840,12 +5842,14 @@ export class SeguradoraPageComponent implements OnInit {
     this.submitted = true;
     if (this.seguradora.invalid) {
       alert('Formul[ario Inválido, por favor ferifique');
+      console.log(this.seguradora.value)
       return;
     }
     let newSeguradora = {
       name: this.seguradora.value.name,
       telephone: this.seguradora.value.telephone,
       cnpj: this.seguradora.value.cnpj,
+      email: this.seguradora.value.email,
       address: {
         estate: this.seguradora.value.estate,
         city: this.seguradora.value.city,
@@ -5854,6 +5858,7 @@ export class SeguradoraPageComponent implements OnInit {
         complement: this.seguradora.value.complement,
         uf: this.seguradora.value.uf,
         neighborhood: this.seguradora.value.neighborhood,
+        cep: this.seguradora.value.cep
       },
       telefones: this.telefones
     };
@@ -5863,7 +5868,7 @@ export class SeguradoraPageComponent implements OnInit {
 
     if (this.seguradoraService.isEdit) {
       let seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-      this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora, this.responsavel);
+      this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora);
     } else {
       this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
     }
@@ -5908,6 +5913,11 @@ export class SeguradoraPageComponent implements OnInit {
       this.telefones = data.telefones;
     }
 
+  }
+
+  removeTelefone(telefone){
+    let index = this.telefones.indexOf(telefone);
+    if (index !== -1) this.telefones.splice(index, 1);
   }
 
   searchEstado = (text$: Observable<string>) =>

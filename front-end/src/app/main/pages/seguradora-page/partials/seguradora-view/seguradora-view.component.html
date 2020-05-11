@@ -4,7 +4,6 @@
       <div class="row" style="margin-left: 1rem">
         <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
         <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Completo</button>
-        <button (click)="downloadPDFReduzido()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Reduzido</button>
         <button (click)="navigateSeguradora()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
       </div>
     </div>
@@ -111,26 +110,7 @@
                   </div>
                 </div>
                   <h4 class="form-section"><i class="ft-phone"></i> Telefones </h4>
-                <div class="row">
-                  <div style="margin-left: 1rem" class="col-md-4">
-                    <label >Assunto</label>
-                    <p type="text"  class=" " >
-                      {{seguradora.telefones[0].assunto}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-4">
-                    <label >Email</label>
-                    <p type="text"  class=" " >
-                      {{seguradora.telefones[0].email}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-3">
-                    <label >Telefone</label>
-                    <p type="text"  class=" " >
-                      {{seguradora.telefones[0].telefone}}
-                    </p>
-                  </div>
-                </div>
+
                 <div class="row" *ngIf="checkTelefones">
                   <div class="col">
                     <section id="simple-table3">
@@ -148,7 +128,7 @@
                                   </tr>
                                   </thead>
                                   <tbody>
-                                  <tr *ngFor="let telefone of seguradora.telefones.slice(1); let i = index">
+                                  <tr *ngFor="let telefone of seguradora.telefones; let i = index">
                                     <td>{{telefone.assunto}}</td>
                                     <td>{{telefone.email}}</td>
                                     <td>{{telefone.telefone}}</td>

@@ -6,6 +6,7 @@ const logger = require('../logger')
 const colaborador_db = require('../colaboradores/db');
 const colaborador_controller = require('../colaboradores/controller');
 const controller = require('./controller');
+const multer  = require('multer')
 
 router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
@@ -87,5 +88,49 @@ router.post('/:id/edit', async(req,res) => {
     "corretora": edited_corretora
   });
 });
+
+
+//  Upload / Download
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/corretoras');
+     },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+
+        cb(null , uniqueSuffix+file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage })
+
+router.post('/upload', upload.array('docs'), async(req,res) =>{
+  if(!req.files){
+    res.stats(400).json({ message: "Arquivos inválidos" })
+  }
+
+  let this_files = req.files.map(file_obj =>{
+    return{
+      nome: file_obj.originalname,
+      path: file_obj.filename
+    }
+  })
+
+  res.status(200).json({
+    message: "Upload concluído!",
+    info_files: this_files
+  })
+})
+
+router.post('/download', async(req,res)=>{
+  let to_download = req.body;
+
+  if(!to_download.path){
+    res.status(400).json({message: "Caminho para imagem inválido"})
+  }
+
+  res.download(`./uploads/corretoras/${to_download.path}`)
+})
 
 module.exports = router;

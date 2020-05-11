@@ -121,7 +121,7 @@ router.post('/:id/edit', async(req,res) => {
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads');
+        cb(null, './uploads/oportunidades');
      },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -157,7 +157,7 @@ router.post('/download', async(req,res)=>{
     res.status(400).json({message: "Caminho para imagem inválido"})
   }
 
-  res.download(`./uploads/${to_download.path}`)
+  res.download(`./uploads/oportunidades/${to_download.path}`)
 })
 
 module.exports = router;

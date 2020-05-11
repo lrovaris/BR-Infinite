@@ -86,12 +86,7 @@ export class ColaboradorService {
   setColaboradorResponsavel(colaborador, newColaborador) {
     this.colaboradorBackEnd = newColaborador;
     this.ColaboradorResponsavel = colaborador;
-    if (this.isCorretora) {
-      this.router.navigate(['corretora/cadastro']);
-    } else if (this.isSeguradora) {
-      this.router.navigate(['seguradora/cadastro']);
-    }
-
+    alert('colaborador responsável salvo!')
   }
 
   getColaboradorResponsavel() {

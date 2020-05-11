@@ -82,6 +82,7 @@ export class ColaboradorPageComponent implements OnInit {
     if (this.colaborador.invalid) {
       return;
     }
+
     let newColaborador: Colaborador = {
       name: this.colaborador.value.name,
       telephone: this.colaborador.value.telephone,
@@ -144,14 +145,16 @@ export class ColaboradorPageComponent implements OnInit {
   ngOnInit() {
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
-    if (isCorretora.isCorretora) {
-      console.log('is corretora')
-    } else if (isSeguradora.isSeguradora) {
+    console.log(isSeguradora);
+    if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
+      this.localDeTrabalho = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+    } else if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
        this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
        console.log(this.localDeTrabalho);
     }
       if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
-      this.colaboradorService.getColaborador(this.localDeTrabalho.manager.id).subscribe((data: any) => {
+        console.log(this.localDeTrabalho);
+      this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
         this.colaborador.controls['name'].setValue(data.name);
         this.colaborador.controls['telephone'].setValue(data.telephone);
         this.colaborador.controls['email'].setValue(data.email);

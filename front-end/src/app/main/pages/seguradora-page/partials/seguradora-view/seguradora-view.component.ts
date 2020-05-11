@@ -39,7 +39,8 @@ export class SeguradoraViewComponent implements OnInit {
   constructor(private seguradoraService: SeguradoraService, private router: Router, private colaboradorService: ColaboradorService) { }
 
   navigateEdit() {
-    this.router.navigate(['seguradora/cadastro'])
+    this.colaboradorService.setIsCorretoraTrue(this.seguradora.name);
+    this.seguradoraService.editSeguradora(this.seguradora)
   }
   navigateColaborador() {
     this.colaboradorService.setCameFromSeguradoraTrue();

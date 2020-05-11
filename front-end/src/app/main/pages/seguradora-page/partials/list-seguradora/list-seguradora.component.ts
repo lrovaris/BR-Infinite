@@ -3,6 +3,7 @@ import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
 import * as tableData from "./data/smart-data-table";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ColaboradorService} from "../../../../services/colaborador.service";
 
 @Component({
   selector: 'app-list-seguradora',
@@ -15,7 +16,9 @@ export class ListSeguradoraComponent implements OnInit {
   seguradorasObject: any;
   seguradorasFormatada: any;
 
-  constructor(private seguradoraService: SeguradoraService, private router: Router) {
+  constructor(private seguradoraService: SeguradoraService,
+              private router: Router,
+              private colaboradorService: ColaboradorService) {
 
   }
   settings = tableData.settings;
@@ -23,6 +26,7 @@ export class ListSeguradoraComponent implements OnInit {
   alertsettings = tableData.alertsettings;
 
   navigateCadastroSeguradora() {
+    this.colaboradorService.setColaboradorResponsavelNull();
     this.seguradoraService.setseguradoraInfoWithOutFormGroupNull();
     this.router.navigate(['seguradora/cadastro'])
   }

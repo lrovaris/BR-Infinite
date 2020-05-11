@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ColaboradorService} from "../../services/colaborador.service";
 import { Router} from "@angular/router";
 import {SeguradoraService} from "../../services/seguradora.service";
+import {Colaborador} from "../colaborador-page/Colaborador";
 
 const Estados = [
   {
@@ -5786,6 +5787,10 @@ export class SeguradoraPageComponent implements OnInit {
   submitted = false;
   responsavel: any;
   telefones = [];
+  colaboradores = [];
+  checkColaborador = false;
+  colaborador: FormGroup;
+  id: any;
 
   isEdit = false;
 
@@ -5836,6 +5841,17 @@ export class SeguradoraPageComponent implements OnInit {
       neighborhood: [null],
       cep: [null]
     })
+
+    this.colaborador = this.formbuilder.group({
+      name: [null, Validators.required],
+      email: [null, Validators.required],
+      telephone: [null, Validators.required],
+      birthday: [null, Validators.required],
+      job: [null, Validators.required],
+      corretora: [''],
+      seguradora: [''],
+    })
+
   }
 
   onFinish() {
@@ -5875,19 +5891,44 @@ export class SeguradoraPageComponent implements OnInit {
     this.seguradora.reset();
   };
 
+  postColaborador() {
+      this.submitted = true;
+      if (this.colaborador.invalid) {
+        return;
+      }
+      let newColaborador = {
+        name: this.colaborador.value.name,
+        telephone: this.colaborador.value.telephone,
+        email: this.colaborador.value.email,
+        birthday: this.colaborador.value.birthday,
+        job: this.colaborador.value.job,
+        corretora: '',
+        seguradora: this.id,
+        active: true
+      };
+      this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+        alert(data.message);
+        this.colaborador.reset();
+        this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {
+          this.seguradoraService.putSeguradora(data);
+          this.colaboradores = data.colaboradores;
+        });
+      })
 
+  }
 
   navigateList() {
    this.router.navigate(['seguradora'])
   }
 
-  navigateColaborador(seguradora) {
-    this.seguradoraService.setTelefones(this.telefones);
+  openColaborador(seguradora) {
+    this.checkColaborador = !this.checkColaborador;
+/*    this.seguradoraService.setTelefones(this.telefones);
     this.seguradoraService.saveSeguradoraInfo(seguradora);
     this.colaboradorService.setIsResponsibleTrue();
     this.colaboradorService.setIsSeguradoraTrue(this.seguradora.value.name);
-    this.colaboradorService.setIsCorretoraFalse();
-    this.router.navigate(['colaborador'])
+    this.colaboradorService.setIsCorretoraFalse();*/
+
   }
 
   ngOnInit() {
@@ -5911,6 +5952,8 @@ export class SeguradoraPageComponent implements OnInit {
       this.seguradora.controls['complement'].setValue(data.address.complement);
       this.seguradora.controls['neighborhood'].setValue(data.address.neighborhood);
       this.telefones = data.telefones;
+      this.colaboradores = data.colaboradores;
+      this.id = data._id;
     }
 
   }

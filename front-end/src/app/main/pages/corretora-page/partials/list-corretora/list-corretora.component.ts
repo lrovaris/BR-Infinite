@@ -20,6 +20,7 @@ export class ListCorretoraComponent implements OnInit {
               private colaboradorService: ColaboradorService) { }
 
   navigateCadastroCorretora() {
+    this.colaboradorService.setColaboradorResponsavelNull();
     this.corretoraService.setCorretoraInfoWithOutFormGroupNull();
     this.router.navigate(['corretora/cadastro'])
   }

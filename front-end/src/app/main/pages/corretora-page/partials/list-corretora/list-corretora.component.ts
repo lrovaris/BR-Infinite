@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { CorretoraService } from "../../../../services/corretora.service";
 import {SeguradoraService} from "../../../../services/seguradora.service";
+import {ColaboradorService} from "../../../../services/colaborador.service";
 
 @Component({
   selector: 'app-list-corretora',
@@ -13,7 +14,10 @@ export class ListCorretoraComponent implements OnInit {
   corretoras = [];
   seguradoras = [];
 
-  constructor(private corretoraService: CorretoraService, private router: Router, private seguradoraService: SeguradoraService) { }
+  constructor(private corretoraService: CorretoraService,
+              private router: Router,
+              private seguradoraService: SeguradoraService,
+              private colaboradorService: ColaboradorService) { }
 
   navigateCadastroCorretora() {
     this.corretoraService.setCorretoraInfoWithOutFormGroupNull();
@@ -22,7 +26,6 @@ export class ListCorretoraComponent implements OnInit {
 
   editSeguradora(id) {
     this.corretoraService.getCorretora(id).subscribe((data: any) => {
-      console.log(data);
       this.corretoraService.editCorretora(data);
     })
   }

@@ -1,112 +1,102 @@
-<div class="apex-content content container-fluid">
-  <div class="content-wrapper">
-    <div class="content-header row">
-    </div>
-    <div class="content-body" style="width: 50%; margin: auto">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header pb-2">
-            <h4 class="card-title" id="basic-layout-colored-form-control">Cadastro de Colaborador</h4>
-            <p class="mb-0">
-            </p>
+<div class="card">
+  <div class="card-header pb-2">
+    <h4 class="card-title" id="basic-layout-colored-form-control">Cadastro de Colaborador Responsável</h4>
+    <p class="mb-0">
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="px-3">
+
+      <form class="form" [formGroup]="colaborador" role="form" class="login-form" (ngSubmit)="onFinish()">
+        <div class="form-body">
+          <h4 class="form-section"><i class="ft-info"></i> Sobre o Colaborador</h4>
+          <div class="row">
+            <div class="col-md-4 col-sm-12"></div>
+            <div class="col-md-4 col-sm-12"></div>
+            <div class="col-md-4 col-sm-12"></div>
           </div>
-          <div class="card-content">
-            <div class="px-3">
-
-              <form class="form" [formGroup]="colaborador" role="form" class="login-form" (ngSubmit)="onFinish()">
-                <div class="form-body">
-                  <h4 class="form-section"><i class="ft-info"></i> Sobre o Colaborador</h4>
-                  <div class="row">
-                    <div class="col-md-4 col-sm-12"></div>
-                    <div class="col-md-4 col-sm-12"></div>
-                    <div class="col-md-4 col-sm-12"></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="userinput1">Nome Completo Colaborador</label>
-                        <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="userinput2">Telefone</label>
-                        <input type="text" id="userinput2" class="form-control border-primary" formControlName="telephone">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="userinput3">Email</label>
-                        <input type="email" id="userinput3" class="form-control border-primary" formControlName="email">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="timesheetinput3">Aniversário</label>
-                        <div class="position-relative has-icon-left">
-                          <input type="date" id="timesheetinput3" class="form-control border-primary" formControlName="birthday">
-                          <div class="form-control-position">
-                            <i class="ft-message-square"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--<h4 class="form-section"><i class="ft-mail"></i> Informação de Trabalho </h4>
-
-                  <div class="form-group">
-                    <label for="issueinput5">Selecione</label>
-                    <select (change)="onSelectTrabalho(selectTrabalho.value)" #selectTrabalho [selectedIndex]="selectIndex" id="issueinput5" name="priority" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
-                            data-placement="top" data-title="Priority">
-                      <option value="null">Local de Trabalho...</option>
-                      <option value="corretora">Corretora</option>
-                      <option value="seguradora">Seguradora</option>
-                    </select>
-                  </div>
-
-                  <div *ngIf="(selectTriggered) && (checkSelect)" class="form-group">
-                    <label for="issueinput5">Selecione Corretora</label>
-                    <select [selectedIndex]="selectIndex" id="issueinput6" formControlName="corretora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
-                            data-placement="top" data-title="Priority">
-                      <option [value]="name">{{name}}</option>
-                    </select>
-                  </div>
-
-                  <div *ngIf="(selectTriggered) && (!checkSelect)" class="form-group">
-                    <label for="issueinput5">Selecione Seguradora</label>
-                    <select [selectedIndex]="selectIndex" id="issueinput7" formControlName="seguradora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
-                            data-placement="top" data-title="Priority">
-                      <option [value]="name">{{name}}</option>
-                    </select>
-                  </div>-->
-
-                  <div class="form-group">
-                    <label for="userinput5">Cargo</label>
-                    <input class="form-control border-primary" type="text" id="userinput5" formControlName="job">
-                  </div>
-
-                </div>
-
-                <div class="form-actions right">
-                  <button (click)="navigateBack()" *ngIf="!checkIsResonponsible" type="button" class="btn btn-raised  mr-1 btn-header-cancel">
-                    <a>Voltar</a>
-                  </button>
-                  <button (click)="postColaborador()" *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
-                    <i class="fa fa-check-square-o"></i> <a>Adicionar</a>
-                  </button>
-                  <button *ngIf="(checkIsResonponsible)" type="submit" class="btn btn-raised  btn-header">
-                    <i class="fa fa-check-square-o"></i> <a>Retornar ao Form</a>
-                  </button>
-                </div>
-              </form>
-
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="userinput1">Nome Completo Colaborador</label>
+                <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="userinput2">Telefone</label>
+                <input type="text" id="userinput2" class="form-control border-primary" formControlName="telephone">
+              </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="userinput3">Email</label>
+                <input type="email" id="userinput3" class="form-control border-primary" formControlName="email">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="timesheetinput3">Aniversário</label>
+                <div class="position-relative has-icon-left">
+                  <input type="date" id="timesheetinput3" class="form-control border-primary" formControlName="birthday">
+                  <div class="form-control-position">
+                    <i class="ft-message-square"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<h4 class="form-section"><i class="ft-mail"></i> Informação de Trabalho </h4>
+
+          <div class="form-group">
+            <label for="issueinput5">Selecione</label>
+            <select (change)="onSelectTrabalho(selectTrabalho.value)" #selectTrabalho [selectedIndex]="selectIndex" id="issueinput5" name="priority" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
+                    data-placement="top" data-title="Priority">
+              <option value="null">Local de Trabalho...</option>
+              <option value="corretora">Corretora</option>
+              <option value="seguradora">Seguradora</option>
+            </select>
+          </div>
+
+          <div *ngIf="(selectTriggered) && (checkSelect)" class="form-group">
+            <label for="issueinput5">Selecione Corretora</label>
+            <select [selectedIndex]="selectIndex" id="issueinput6" formControlName="corretora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
+                    data-placement="top" data-title="Priority">
+              <option [value]="name">{{name}}</option>
+            </select>
+          </div>
+
+          <div *ngIf="(selectTriggered) && (!checkSelect)" class="form-group">
+            <label for="issueinput5">Selecione Seguradora</label>
+            <select [selectedIndex]="selectIndex" id="issueinput7" formControlName="seguradora" class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
+                    data-placement="top" data-title="Priority">
+              <option [value]="name">{{name}}</option>
+            </select>
+          </div>-->
+
+          <div class="form-group">
+            <label for="userinput5">Cargo</label>
+            <input class="form-control border-primary" type="text" id="userinput5" formControlName="job">
+          </div>
+
         </div>
-      </div>
+
+        <div class="form-actions right">
+          <button (click)="navigateBack()" *ngIf="!checkIsResonponsible" type="button" class="btn btn-raised  mr-1 btn-header-cancel">
+            <a>Voltar</a>
+          </button>
+          <button (click)="postColaborador()" *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
+            <i class="fa fa-check-square-o"></i> <a>Adicionar</a>
+          </button>
+          <button *ngIf="(checkIsResonponsible)" type="submit" class="btn btn-raised  btn-header">
+            <i class="fa fa-check-square-o"></i> <a>salvar</a>
+          </button>
+        </div>
+      </form>
+
     </div>
   </div>
 </div>

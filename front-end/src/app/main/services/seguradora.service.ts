@@ -43,13 +43,16 @@ export class SeguradoraService {
     this.seguradoraInfoWithOutFormGroup = null
   }
 
-  editSeguradora(seguradora) {
+  viewSeguradora(seguradora) {
     this.seguradoraInfoWithOutFormGroup = seguradora;
-    this.isEdit = true;
     this.router.navigate(['seguradora/visualizacao'])
   }
 
-
+  editSeguradora(seguradora) {
+    this.seguradoraInfoWithOutFormGroup = seguradora;
+    this.isEdit = true;
+    this.router.navigate(['seguradora/cadastro'])
+  }
 
   getSeguradora(id) {
     return this.http.get(`${this.url}/seguradoras/${id}`)
@@ -80,11 +83,11 @@ export class SeguradoraService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
-      alert(data.Message);
+      alert(data.message);
     })
   }
 
-  editPostSeguradora(id, seguradora, responsavel){
+  editPostSeguradora(id, seguradora){
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };

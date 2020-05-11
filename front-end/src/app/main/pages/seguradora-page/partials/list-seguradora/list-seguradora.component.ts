@@ -33,10 +33,9 @@ export class ListSeguradoraComponent implements OnInit {
 
 
 
-  editSeguradora(id) {
+  viewSeguradora(id) {
     this.seguradoraService.getSeguradora(id).subscribe((data: any) => {
-      console.log(data);
-      this.seguradoraService.editSeguradora(data);
+      this.seguradoraService.viewSeguradora(data);
     })
   }
 

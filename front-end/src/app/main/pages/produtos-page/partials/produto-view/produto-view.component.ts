@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 export class ProdutoViewComponent implements OnInit {
 
   produto: any;
+  seguradorasTable: any;
 
   constructor(private produtoService: ProdutoService, private router: Router) { }
 

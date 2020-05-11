@@ -38,11 +38,9 @@ async function register_colaborador(new_colaborador) {
 }
 
 async function update_colaborador(colaborador) {
-   colaborador._id = new ObjectId(colaborador._id);
-
    let db_conn = await db_utils.get_db();
 
-   let edited_colab = await db_conn.collection("colaboradores").replaceOne({_id: colaborador._id }, colaborador,{w: "majority", upsert: false});
+   let edited_colab = await db_conn.collection("colaboradores").replaceOne({_id: new ObjectId(colaborador._id) }, colaborador,{w: "majority", upsert: false});
 
    logger.log(`Modificados ${edited_colab.result.nModified} elementos`);
 

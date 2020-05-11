@@ -5,22 +5,6 @@ const db = require('../db');
 const controller = require('./controller')
 
 describe('Corretoras Routes', () => {
-  it('deveria retornar um json maneiro :)', async () => {
-    const res = await request(app).get('/corretoras')
-
-    expect(res.statusCode).toEqual(200)
-
-    expect(res.body).toEqual({"message":"Funcionando"});
-  })
-
-  it('deveria retornar vazio', async () => {
-    const res = await request(app).get('/corretoras/all')
-
-    expect(res.statusCode).toEqual(200)
-
-    expect(res.body).toEqual([]);
-  })
-
   it('deveria criar uma corretora nova com um gerente', async () => {
     const res = await request(app).post('/corretoras/new').send({
       corretora: {
@@ -50,11 +34,9 @@ describe('Corretoras Routes', () => {
 
     const corretoras_req = await controller.get_corretoras();
 
-    let corretoras_num = corretoras_req.length;
+    let corretinha = corretoras_req.find(corr => corr.name === "corretinha");
 
-    corretinha = corretoras_req[0];
-
-    expect(corretinha.name).toEqual("corretinha");
+    let corr_id = corretinha._id;
 
     const res = await request(app).post(`/corretoras/${corretinha._id}/edit`).send({
       name:"corretona"
@@ -64,9 +46,7 @@ describe('Corretoras Routes', () => {
 
     const corretoras_req2 = await controller.get_corretoras();
 
-    expect(corretoras_req2.length).toEqual(corretoras_num);
-
-    corretinha2 = corretoras_req2[0];
+    corretinha2 = corretoras_req2.find(corr => corr._id.toString() === corr_id.toString());
 
     expect(corretinha2.name = "corretona");
   })

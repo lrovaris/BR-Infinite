@@ -5,6 +5,7 @@ const db = require('../db');
 const controller = require('./controller')
 
 describe('Produtos Routes', () => {
+
   it('deveria retornar um json maneiro :)', async () => {
     const res = await request(app).get('/products')
 
@@ -32,7 +33,7 @@ describe('Produtos Routes', () => {
 
     let produtos_num = produtos_req.length;
 
-    produto_novo = produtos_req[0];
+    produto_novo = produtos_req.find(prod => prod.name === "produto legal");
 
     expect(produto_novo.name).toEqual("produto legal");
 

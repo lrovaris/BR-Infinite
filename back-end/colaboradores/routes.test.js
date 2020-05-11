@@ -2,17 +2,9 @@ const request = require('supertest')
 const app = require('../server')
 const routes = require('./routes');
 const controller = require('./controller')
+const db = require('../db')
 
 describe('colaboradores Routes', () => {
-
-  it('deveria retornar um json maneiro :)', async () => {
-    const res = await request(app).get('/colaboradores')
-
-    expect(res.statusCode).toEqual(200)
-
-    expect(res.body).toEqual({"message":"Funcionando"});
-  })
-
   it('deveria falhar em criar um colaborador', async () => {
     const res = await request(app).post('/colaboradores/new').send({
       name:"afonso tavarex",

@@ -69,6 +69,12 @@ export class PipelinePageComponent implements OnInit {
 
   pushCongenere(name, price, comission){
     this.CongenereList.push({name, price, comission})
+
+    console.log(this.oportunidade.controls);
+
+    this.oportunidade.controls["congeneres"].setValue("")
+    this.oportunidade.controls["preco1"].setValue("")
+    this.oportunidade.controls["comissao1"].setValue("")
   }
   removeCongenere(nome) {
     let index = this.CongenereList.indexOf(nome);
@@ -105,8 +111,6 @@ export class PipelinePageComponent implements OnInit {
       dd,
       yyyy
     };
-
-
 
     const inclusionDate = this.date.now;
 
@@ -159,39 +163,47 @@ export class PipelinePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.pipelineService.getIsEdit()) {
-        if(this.pipelineService.getOportunidadeWIthOutForm()) {
-          this.isEdit = true;
-          let data = this.pipelineService.getOportunidadeWIthOutForm();
-          this.CongenereList = data.congenereList;
-          this.oportunidade.controls['corretora'].setValue(data.corretora);
-          this.oportunidade.controls['solicitante'].setValue(data.colaborador);
-          this.oportunidade.controls['detentor'].setValue(data.detentor);
-          this.oportunidade.controls['cadastroNacional'].setValue(data.cadastroNacional);
-          this.oportunidade.controls['proponente'].setValue(data.proponente);
-          this.oportunidade.controls['tipoNegocio'].setValue(data.dealType);
-          this.oportunidade.controls['congenere'].setValue(data.congenereRenewal);
-          this.oportunidade.controls['status'].setValue(data.status);
-          this.oportunidade.controls['observacao'].setValue(data.statusObs);
-          this.oportunidade.controls['produto'].setValue(data.product);
-          this.oportunidade.controls['descricao'].setValue(data.description);
-          this.oportunidade.controls['seguradora'].setValue(data.seguradora);
-          this.oportunidade.controls['brInfinite'].setValue(data.seguradora);
-          this.oportunidade.controls['preco2'].setValue(data.seguradoraPrice);
-          this.oportunidade.controls['comissao2'].setValue(data.seguradoraComission);
-          this.oportunidade.controls['vigencia'].setValue(data.vigencia);
-        }
-    }
-    this.seguradoraService.getAllSeguradoras().subscribe((data: any) => {
-      this.Seguradoras = data;
-    });
-    this.corretoraService.getAllCorretoras().subscribe((data: any) => {
-      this.Corretoras = data;
-    });
-    this.produtoService.getAllProducts().subscribe((data: any) => {
-      this.Produtos = data;
-    })
 
+    this.seguradoraService.getAllSeguradoras().subscribe((seg_data: any) => {
+      this.Seguradoras = seg_data;
+      this.corretoraService.getAllCorretoras().subscribe((corr_data: any) => {
+        this.Corretoras = corr_data;
+        this.produtoService.getAllProducts().subscribe((prod_data: any) => {
+          this.Produtos = prod_data;
+
+
+          if (this.pipelineService.getIsEdit()) {
+              if(this.pipelineService.getOportunidadeWIthOutForm()) {
+                this.isEdit = true;
+                let data = this.pipelineService.getOportunidadeWIthOutForm();
+                console.log(data);
+
+                this.selectColaborador(data.corretora._id || data.corretora)
+
+                this.CongenereList = data.congenereList;
+                this.oportunidade.controls['corretora'].setValue(data.corretora._id || data.corretora);
+                this.oportunidade.controls['solicitante'].setValue(data.colaborador._id || data.colaborador);
+                this.oportunidade.controls['detentor'].setValue(data.detentor);
+                this.oportunidade.controls['cadastroNacional'].setValue(data.cadastroNacional);
+                this.oportunidade.controls['proponente'].setValue(data.proponente);
+                this.oportunidade.controls['tipoNegocio'].setValue(data.dealType);
+                this.oportunidade.controls['congenere'].setValue(data.congenereRenewal);
+                this.oportunidade.controls['status'].setValue(data.status);
+                this.oportunidade.controls['observacao'].setValue(data.statusObs);
+                this.oportunidade.controls['produto'].setValue(data.product._id || data.product);
+                this.oportunidade.controls['descricao'].setValue(data.description);
+                this.oportunidade.controls['seguradora'].setValue(data.seguradora._id ||data.seguradora);
+                // this.oportunidade.controls['brInfinite'].setValue(data.seguradora);
+                this.oportunidade.controls['preco2'].setValue(data.seguradoraPrice);
+                this.oportunidade.controls['comissao2'].setValue(data.seguradoraComission);
+                this.oportunidade.controls['vigencia'].setValue(data.vigencia);
+
+              }
+          }
+
+        })
+      });
+    });
   }
 
 }

@@ -45,13 +45,13 @@
                     <div class="col-sm-12 col-md-4">
                       <label for="name">Corretora</label>
                       <p type="text" id="name" class=" " >
-                        {{oportunidade.corretora}}
+                        {{oportunidade.corretora.name}}
                       </p>
                     </div>
                     <div class="col-sm-12 col-md-5">
                       <label for="colaborador">Solicitante</label>
                       <p type="text" id="colaborador" class=" " >
-                        {{oportunidade.colaborador}}
+                        {{oportunidade.colaborador.name}}
                       </p>
                     </div>
                     <div class="col-sm-12 col-md-3">
@@ -79,7 +79,7 @@
                     <div class="col-sm-12 col-md-4">
                       <label for="seguradora">Seguradora</label>
                       <p type="text" id="seguradora" class=" " >
-                        {{oportunidade.seguradora}}
+                        {{oportunidade.seguradora.name}}
                       </p>
                     </div>
                   </div>
@@ -89,7 +89,7 @@
                   <div class="col-sm-12 col-md-3">
                     <label for="product">Produto</label>
                     <p type="text" id="product" class=" " >
-                      {{oportunidade.product}}
+                      {{oportunidade.product.name}}
                     </p>
                   </div>
                   <div class="" [ngClass]="[oportunidade.dealType == 'Renovação' ? 'col-sm-12 col-md-3' : 'col-sm-12 col-md-7']">
@@ -158,9 +158,9 @@
 
                 <div class="row">
                   <div class="col-sm-12 col-md-5">
-                    <label for="seguradora2">Br Infinite</label>
+                    <label for="seguradora2">Br Infinite / Seguradora </label>
                     <p class=" " type="text" id="seguradora2">
-                    {{oportunidade.seguradora}}
+                    {{oportunidade.seguradora.name}}
                     </p>
                   </div>
                   <div class="col-sm-12 col-md-2">

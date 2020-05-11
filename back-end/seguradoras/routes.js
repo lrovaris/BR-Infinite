@@ -22,11 +22,13 @@ router.get ('/:id', async (req,res) => {
 
   logger.log(this_seg);
 
-  let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, this_seg.manager._id || this_seg.manager);
+  if(this_seg.manager){
+    let colab_info = await colab_controller.get_colaboradores_seguradora(req.params.id, this_seg.manager._id || this_seg.manager);
 
-  this_seg.colaboradores = colab_info.colaboradores;
+    this_seg.colaboradores = colab_info.colaboradores;
 
-  this_seg.manager = colab_info.manager;
+    this_seg.manager = colab_info.manager;
+  }
 
   res.status(200).json(this_seg);
 });
@@ -34,23 +36,11 @@ router.get ('/:id', async (req,res) => {
 router.post('/new', async(req,res) => {
     let new_seguradora = req.body.seguradora;
 
-    //Validação dos campos da seguradora
-    if (!new_seguradora.name){
-      return res.status(400).json({"message":"Campo de nome vazio"});
-    }
+    let validacao = await controller.validate_seguradora(new_seguradora);
 
-    if (!new_seguradora.cnpj){
-      return res.status(400).json({"message":"Campo de CNPJ vazio"});
+    if(!validacao.valid){
+      return res.status(400).json({"message":validacao.message});
     }
-
-    if (!new_seguradora.telephone){
-      return res.status(400).json({"message":"Campo de telefone vazio"});
-    }
-
-    if (!new_seguradora.address){
-      return res.status(400).json({"message":"Campo de endereço vazio"});
-    }
-
 
     // Validação dos campos do gerente
     let gerente = req.body.manager;
@@ -61,20 +51,15 @@ router.post('/new', async(req,res) => {
       return res.status(400).json({"message": validacao_gerente.message});
     }
 
-    // Registrando a seguradora no banco de dados
-    let new_seg = await db.register_seguradora(new_seguradora).catch(err => logger.error(err));
+    let db_seg = await controller.register_seguradora(new_seguradora);
 
-    // Editando o objeto do gerente para receber o ID da seguradora
-    gerente.seguradora = new_seg.insertedId;
+    gerente.seguradora = db_seg._id.toString();
 
-
-    // Registrando o gerente no banco de dados
-    let new_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
+    let db_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
 
     // Modificando o objeto da seguradora com as informações do gerente
-    let db_seguradora = new_seg.ops[0];
-    db_seguradora["manager"] = new_colab.insertedId;
-    await db.update_seguradora(db_seguradora).catch(err => logger.error(err));
+    db_seg["manager"] = db_colab.insertedId;
+    await db.update_seguradora(db_seg).catch(err => logger.error(err));
 
     // Enviando resposta de operação bem-sucedida
     res.status(200).json({"message":"Seguradora e gerente cadastrados com sucesso!"});

@@ -33,11 +33,11 @@ router.post('/new', async(req,res) => {
 
     new_colaborador['active'] = true;
 
-    let db_response = await db.register_colaborador(new_colaborador).catch(err => console.error(err));
+    let db_colab = controller.register_colaborador(new_colaborador);
 
     res.status(200).json({
       message: "Colaborador cadastrado com sucesso!",
-      colaborador: db_response.ops[0]
+      colaborador: db_colab
     });
 });
 

@@ -1,5 +1,6 @@
 const db = require('./db');
 let cache = require('../memoryCache');
+const logger = require('../logger')
 
 async function get_seguradoras() {
   return cache.get('seguradoras') || await db.get_seguradoras();
@@ -15,4 +16,28 @@ async function get_seguradora_by_id(seg_id){
   return seguradora;
 }
 
-module.exports = { get_seguradoras, get_seguradora_by_id };
+async function register_seguradora(new_seg){
+  let db_seg = await db.register_seguradora(new_seg).catch(err => logger.error(err));
+
+  return db_seg.ops[0];
+}
+
+async function validate_seguradora(seguradora){
+  if (seguradora === undefined){
+    return{
+      "valid": false,
+      "message": "Seguradora inválida"
+    }
+  }
+
+  if (!seguradora.name){
+    return {
+      "valid": false,
+      "message":"Campo de nome da seguradora vazio"
+    };
+  }
+
+  return{ valid: true }
+}
+
+module.exports = { get_seguradoras, get_seguradora_by_id, validate_seguradora, register_seguradora };

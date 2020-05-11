@@ -99,10 +99,17 @@ function validate_colaborador(colaborador){
   return{ valid: true }
 }
 
+async function register_colaborador(new_colab){
+  let db_colab = await db.register_colaborador(new_colab).catch(err => console.error(err));
+
+  return db_colab.ops[0];
+}
+
 module.exports = {
   get_colaboradores,
   get_colaboradores_by_id,
   get_colaboradores_corretora,
   get_colaboradores_seguradora,
-  validate_colaborador
+  validate_colaborador,
+  register_colaborador
 };

@@ -22,33 +22,19 @@ router.get('/:id', async(req,res)=>{
 });
 
 router.post('/new', async(req,res) => {
-    var valid = true;
-
     var new_produto = req.body;
 
-    if (!new_produto.name){
-      res.status(400).json({"message":"Campo de nome vazio"});
-      valid = false;
-      return;
+    let validacao_prod = controller.validate_produto(new_produto);
+
+    if(!validacao_prod.valid){
+      return res.status(400).json({"message":validacao_prod.message});
     }
 
-    if (!new_produto.description){
-      res.status(400).json({"message":"Campo de descrição vazio"});
-      valid = false;
-      return;
-    }
+    logger.log(new_produto);
 
-    if (!new_produto.seguradoras){
-      res.status(400).json({"message":"Nenhuma seguradora selecionada"});
-      valid = false;
-      return;
-    }
+    await controller.register_produto(new_produto);
 
-    if (valid) {
-      logger.log(new_produto);
-      await db.register_produto(new_produto).catch(err => logger.error(err));
-      res.status(200).json({"message":"Produto cadastrado com sucesso!"});
-    }
+    res.status(200).json({"message":"Produto cadastrado com sucesso!"});
 });
 
 

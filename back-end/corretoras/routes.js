@@ -49,13 +49,11 @@ router.post('/new', async(req,res) => {
       return res.status(400).json({"message": validacao_colab.message});
     }
 
-    let new_corr = await db.register_corretora(new_corretora).catch(err => logger.error(err));
+    let db_corretora = controller.register_corretora(new_corretora)
 
-    corretor_responsavel.corretora = new_corr.insertedId;
+    corretor_responsavel.corretora = db_corretora._id;
 
     let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
-
-    let db_corretora = new_corr.ops[0];
 
     db_corretora["manager"] = new_colab.insertedId;
 

@@ -15,11 +15,17 @@ async function get_corretora_by_id(corr_id) {
   return corretora;
 }
 
+async function register_corretora(new_corr){
+let db_corr = await db.register_corretora(new_corr).catch(err => logger.error(err));
+
+return db_corr.ops[0];
+}
+
 function validate_corretora(corretora) {
   if (corretora === undefined){
     return{
       "valid": false,
-      "message": "Corretora inválido"
+      "message": "Corretora inválida"
     }
   }
 
@@ -30,42 +36,7 @@ function validate_corretora(corretora) {
     };
   }
 
-  if (!corretora.cnpj){
-    return {
-      "message":"Campo de CNPJ vazio",
-      "valid":false
-    };
-  }
-
-  if (!corretora.telephone){
-    return {
-      "message":"Campo de telefone da corretora vazio",
-      "valid":false
-    };
-  }
-
-  if (!corretora.email){
-    return {
-      "message":"Campo de email da corretora vazio",
-      "valid":false
-    };
-  }
-
-  if (!corretora.address){
-    return {
-      "message":"Campo de endereço vazio",
-      "valid":false
-    };
-  }
-
-  if (!corretora.seguradoras){
-    return {
-      "message":"Campo de seguradoras vazio",
-      "valid":false
-    };
-  }
-
   return {"valid":true};
 }
 
-module.exports = { get_corretoras, get_corretora_by_id, validate_corretora};
+module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora};

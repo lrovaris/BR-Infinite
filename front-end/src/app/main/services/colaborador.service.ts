@@ -73,6 +73,10 @@ export class ColaboradorService {
     };
   }
 
+  setColaboradorResponsavelNull() {
+    this.ColaboradorResponsavel = null;
+  }
+
   setIsResponsibleFalse() {
     this.isResponsible = false;
   }
@@ -86,7 +90,6 @@ export class ColaboradorService {
   setColaboradorResponsavel(colaborador, newColaborador) {
     this.colaboradorBackEnd = newColaborador;
     this.ColaboradorResponsavel = colaborador;
-    alert('colaborador responsável salvo!')
   }
 
   getColaboradorResponsavel() {

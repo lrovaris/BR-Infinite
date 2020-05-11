@@ -3,7 +3,7 @@
     <div class="content-header row">
       <div class="row" style="margin-left: 1rem">
         <button (click)="navigateEdit()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-edit"></i>Editar</button>
-        <button (click)="downloadPDFCompleto()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Completo</button>
+        <button (click)="downloadPDF()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-download"></i>PDF Completo</button>
         <button (click)="navigateSeguradora()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-top: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-chevrons-left"></i>Voltar</button>
       </div>
     </div>
@@ -42,10 +42,66 @@
                         </p>
                     </div>
                   </div>
-                  <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
+
                   <div class="row">
-                    <button (click)="navigateColaborador()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-bottom: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-user-plus"></i>Adicionar Novo Colaborador</button>
+                    <div style="margin-left: 1rem" class="col-md-12">
+                      <label for="email">email</label>
+                      <p class=" " type="text" id="email">
+                        {{seguradora.email}}
+                      </p>
+                    </div>
                   </div>
+
+                  <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="userinput9">UF</label>
+                      <p type="text" id="userinput9">
+                        {{seguradora.address.estate}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput10">Cidade</label>
+                      <p type="text" id="userinput10" class=" ">
+
+                        {{seguradora.address.city}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput5">Rua</label>
+                      <p class=" " type="text" id="userinput5">
+                        {{seguradora.address.street}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="userinput8">Bairro</label>
+                      <p type="text" id="userinput8" class=" ">
+                        {{seguradora.address.neighborhood}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-2">
+                      <label for="userinput6">Número</label>
+                      <p type="email" id="userinput6" class=" ">
+                        {{seguradora.address.number}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <div class="col">
+                        <label for="userinput7">Complemento</label>
+                        <p type="text" id="userinput7" class=" ">
+                          {{seguradora.address.complement}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
+
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-4">
                       <label for="gerenteNome">Nome do Responsável</label>
@@ -67,7 +123,7 @@
                     </div>
                   </div>
                   </div>
-                <div class="row" *ngIf="checkColaboradores">
+                <div class="row">
                  <div class="col">
                    <section id="simple-table">
                      <div class="row text-left">
@@ -103,15 +159,8 @@
                    </section>
                  </div>
                 </div>
-                <div class="row" style="margin-bottom: 1rem">
-                  <div class="col" style="margin-left: 1rem">
-                    <a style="color: dodgerblue; cursor: pointer" *ngIf="!checkColaboradores" (click)="setColaboradoresTrue()">ver mais</a>
-                    <a style="color: dodgerblue; cursor: pointer" *ngIf="checkColaboradores" (click)="setColaboradoresFalse()">ver menos</a>
-                  </div>
-                </div>
-                  <h4 class="form-section"><i class="ft-phone"></i> Telefones </h4>
-
-                <div class="row" *ngIf="checkTelefones">
+                <h4 class="form-section"><i class="ft-phone"></i> Telefones </h4>
+                <div class="row" >
                   <div class="col">
                     <section id="simple-table3">
                       <div class="row text-left">
@@ -143,62 +192,7 @@
                     </section>
                   </div>
                 </div>
-                <div class="row" style="margin-bottom: 1rem">
-                  <div class="col" style="margin-left: 1rem">
-                    <a style="color: dodgerblue; cursor: pointer" *ngIf="!checkTelefones" (click)="setTelefonesTrue()">ver mais</a>
-                    <a style="color: dodgerblue; cursor: pointer" *ngIf="checkTelefones" (click)="setTelefonesFalse()">ver menos</a>
-                  </div>
-                </div>
-
-                  <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
-
-                  <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-3">
-                        <label for="userinput9">UF</label>
-                        <p type="text" id="userinput9">
-                        {{seguradora.address.estate}}
-                        </p>
-                    </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
-                        <label for="userinput10">Cidade</label>
-                        <p type="text" id="userinput10" class=" ">
-
-                        {{seguradora.address.city}}
-                        </p>
-                    </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
-                      <label for="userinput5">Rua</label>
-                      <p class=" " type="text" id="userinput5">
-                        {{seguradora.address.street}}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-3">
-                        <label for="userinput8">Bairro</label>
-                        <p type="text" id="userinput8" class=" ">
-                          {{seguradora.address.neighborhood}}
-                        </p>
-                    </div>
-                    <div style="margin-left: 1rem" class="col-md-2">
-                        <label for="userinput6">Número</label>
-                        <p type="email" id="userinput6" class=" ">
-                          {{seguradora.address.number}}
-                        </p>
-                    </div>
-                    <div style="margin-left: 1rem" class="col-md-5">
-                      <div class="col">
-                        <label for="userinput7">Complemento</label>
-                        <p type="text" id="userinput7" class=" ">
-                        {{seguradora.address.complement}}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
               </form>
-
             </div>
           </div>
         </div>

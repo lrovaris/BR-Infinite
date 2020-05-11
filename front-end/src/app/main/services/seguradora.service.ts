@@ -62,6 +62,9 @@ export class SeguradoraService {
     return this.http.get(`${this.url}/seguradoras/all`);
   }
 
+  putSeguradora(seguradora) {
+   this.seguradoraInfoWithOutFormGroup = seguradora;
+  }
 
   setTelefones(telefones) {
     this.telefones = telefones;
@@ -84,6 +87,7 @@ export class SeguradoraService {
     };
     return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
       alert(data.message);
+      this.router.navigate(['seguradora'])
     })
   }
 

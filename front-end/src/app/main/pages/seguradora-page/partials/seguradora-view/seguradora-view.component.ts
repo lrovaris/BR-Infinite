@@ -15,22 +15,8 @@ export class SeguradoraViewComponent implements OnInit {
 
   @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
 
-  checkTelefones = false;
-  checkColaboradores = false;
   seguradora: any;
 
-  setTelefonesTrue() {
-   return this.checkTelefones = true;
-  }
-  setTelefonesFalse() {
-  return  this.checkTelefones = false;
-  }
-  setColaboradoresTrue() {
-   return this.checkColaboradores = true;
-  }
-  setColaboradoresFalse() {
-  return  this.checkColaboradores = false;
-  }
 
   navigateSeguradora() {
     this.router.navigate(['seguradora'])
@@ -53,18 +39,6 @@ export class SeguradoraViewComponent implements OnInit {
     console.log(this.seguradora);
   }
 
-   async downloadPDFCompleto()
-  {
-  await  this.setColaboradoresTrue();
-  await  this.setTelefonesTrue();
-    setTimeout(this.downloadPDF, 0)
-  }
- async downloadPDFReduzido()
-  {
-  await this.setTelefonesFalse();
-  await this.setColaboradoresFalse();
-    setTimeout(this.downloadPDF, 0)
-  }
 
   downloadPDF() {
     var node = document.getElementById('parentdiv');

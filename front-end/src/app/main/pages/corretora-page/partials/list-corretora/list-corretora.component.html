@@ -19,18 +19,19 @@
                   <table class="table">
                     <thead>
                     <tr>
+                      <th>#</th>
                       <th>Corretora</th>
                       <th>Telefone</th>
                       <th>Email</th>
-                      <th>Seguradoras que trabalha</th>
+
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let corretora of corretoras" style="cursor: pointer" (click)="editSeguradora(corretora._id)">
+                    <tr *ngFor="let corretora of corretoras; let i = index" style="cursor: pointer" (click)="editSeguradora(corretora._id)">
+                      <td>{{i+1}}</td>
                       <td>{{corretora.name}}</td>
                       <td>{{corretora.telephone}}</td>
                       <td>{{corretora.email}}</td>
-                      <td *ngFor="let seguradorass of corretora.seguradoras">{{seguradorass.name}}</td>
                     </tr>
                     </tbody>
                   </table>

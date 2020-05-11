@@ -5844,7 +5844,6 @@ export class CorretoraPageComponent implements OnInit {
     }
 
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
-      console.log('daqui que ta pegando');
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
       this.corretora.controls['name'].setValue(data.name);
@@ -5858,9 +5857,6 @@ export class CorretoraPageComponent implements OnInit {
       this.corretora.controls['complement'].setValue(data.address.complement);
       this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
     }
-
-    console.log(this.isEdit);
-
 
   }
 
@@ -5890,12 +5886,10 @@ export class CorretoraPageComponent implements OnInit {
       seguradoras: this.seguradoras
     };
     if (this.isEdit) {
-      console.log('isedit');
       let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-      console.log(corretora);
       this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel);
     } else if (!this.isEdit){
-      console.log('isnotedit');
+      this.responsavel = this.colaboradorService.getColaboradorResponsavel();
       this.corretoraService.postCorretora(newCorretora, this.responsavel);
     }
     this.corretora.reset();
@@ -5905,10 +5899,6 @@ export class CorretoraPageComponent implements OnInit {
     console.log('');
   }
 
-  searchSeguradoraChange() {
-    console.log(this.allSeguradoras)
-    console.log((this.seguradorasTable))
-  }
 
   navigateCorretora() {
     this.router.navigate(['corretora'])
@@ -5922,9 +5912,8 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   removeSeguradora(seguradora) {
-    console.log(seguradora);
-    /*let index = this.seguradoras.indexOf(seguradora);
-    if (index !== -1) this.seguradoras.splice(index, 1);*/
+    let index = this.seguradorasTable.indexOf(seguradora);
+    if (index !== -1) this.seguradorasTable.splice(index, 1);
   }
 
   searchEstado = (text$: Observable<string>) =>

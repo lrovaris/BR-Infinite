@@ -14,8 +14,10 @@ export class ProdutosPageComponent implements OnInit {
 
   produto: FormGroup;
   seguradoras = [];
+  seguradorasTable = [];
   submitted = false;
   allSeguradoras: Array<any> = [];
+  selectableSeguradoras = [];
   editProduto: any;
 
 
@@ -42,8 +44,11 @@ export class ProdutosPageComponent implements OnInit {
     let newProduto = {
         name: this.produto.value.name,
         description: this.produto.value.description,
-        seguradoras: this.seguradoras
+        seguradoras: this.seguradorasTable.map(seg => seg._id.toString())
       };
+
+      console.log(newProduto);
+
 
     if (this.produtoService.getIsEdit()) {
       this.produtoService.setIsEditFalse();
@@ -61,13 +66,41 @@ export class ProdutosPageComponent implements OnInit {
   ngOnInit() {
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data
+      this.selectableSeguradoras = data;
+
+      if (this.produtoService.getIsEdit()) {
+        this.editProduto = this.produtoService.getProduto();
+
+        this.seguradorasTable = this.editProduto.seguradoras
+
+        this.produto.controls['name'].setValue(this.editProduto.name);
+        this.produto.controls['description'].setValue(this.editProduto.description);
+
+        this.filterSelectableSeguradoras();
+      }
     });
-    if (this.produtoService.getIsEdit()) {
-      this.editProduto = this.produtoService.getProduto();
-      this.produto.controls['name'].setValue(this.editProduto.name);
-      this.produto.controls['description'].setValue(this.editProduto.description);
-      this.produto.controls['seguradoras'].setValue(this.editProduto.seguradoras);
-    }
+  }
+
+  filterSelectableSeguradoras(){
+    let seg_id_list = this.seguradorasTable.map(seg => seg._id.toString());
+
+    this.selectableSeguradoras = this.allSeguradoras.filter(seg => {
+      return !seg_id_list.includes(seg._id.toString());
+    });
+  }
+
+  addSeguradora(seg){
+    let seguradora = this.allSeguradoras.find(seg_obj => seg_obj._id.toString() === seg.toString())
+
+    this.seguradorasTable.push(seguradora)
+
+    this.filterSelectableSeguradoras();
+  }
+
+  removeSeguradora(seg){
+    this.seguradorasTable.splice(this.seguradorasTable.indexOf(seg), 1 );
+
+    this.filterSelectableSeguradoras();
   }
 
 

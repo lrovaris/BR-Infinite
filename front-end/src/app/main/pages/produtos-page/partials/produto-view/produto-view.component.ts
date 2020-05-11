@@ -17,6 +17,8 @@ export class ProdutoViewComponent implements OnInit {
 
   ngOnInit() {
     this.produto = this.produtoService.getProduto();
+
+    this.seguradorasTable = this.produto.seguradoras
   }
 
   navigateProdutos() {

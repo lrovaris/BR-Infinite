@@ -26,11 +26,32 @@ export class ListProdutosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.produtoService.getAllProducts().subscribe((data:any) => {
-      this.produtos = data;
-    });
-    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-      this.seguradoras = data;
+    this.produtoService.getAllProducts().subscribe((prod_data:any) => {
+      this.produtos = prod_data;
+      this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
+        this.seguradoras = seg_data;
+
+        this.produtos = this.produtos.map(prod => {
+
+          prod.seguradoras = prod.seguradoras.map(prod_seg => {
+
+            let seg = this.seguradoras.find(seg_data => prod_seg.toString() === seg_data._id.toString())
+
+            return {
+              name: seg.name,
+              _id: seg._id,
+              telephone: seg.telephone,
+              email: seg.email
+            }
+          })
+
+          return prod;
+        })
+
+        console.log(this.produtos);
+
+
+      });
     });
   }
 

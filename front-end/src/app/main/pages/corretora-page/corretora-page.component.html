@@ -1,3 +1,4 @@
+<form class="form" [formGroup]="corretora" role="form" class="login-form" (ngSubmit)="onFinish()">
 <div class="apex-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -12,7 +13,7 @@
           </div>
           <div class="card-content">
             <div class="px-3">
-              <form class="form" [formGroup]="corretora" role="form" class="login-form" (ngSubmit)="onFinish()">
+
                 <div class="form-body">
                   <h4 class="form-section"><i class="ft-info"></i>Informções da Corretora</h4>
                   <div class="row">
@@ -92,25 +93,111 @@
                       </div>
                     </div>
                   </div>
-                  <!--<div class="row" *ngIf="!isEdit">
-                    <div class="col-xl-4 col-lg-6 col-12">
-                      <div class="card bg-primary" style="cursor: pointer" (click)="navigateColaborador(corretora)">
-                        <div class="card-content">
-                          <div class="px-3 py-3">
-                            <div class="media">
-                              <div class="media-left align-self-center">
-                                <i class="icon-user-follow white font-large-2 float-left"></i>
+                  <div class="card" *ngIf="isEdit">
+                    <div class="card-header">
+                      <div class="row">
+                        <button type="button" (click)="openColaborador()" class="btn" style="background-color: white; border: 1px solid #1a2a6c; margin-bottom: 1rem; margin-left: 2rem; color: #1a2a6c; font-size: 1.1rem"><i style="color: #1a2a6c; margin-right: 8px" class="ft-user-plus"></i>Adicionar Novo Colaborador</button>
+                      </div>
+                    </div>
+                    <div class="card-content" >
+                      <div class="row" *ngIf="checkColaborador" style="width: 98%; margin: auto">
+                        <div class="col-md-12" style="margin: auto; width: 98%">
+                          <form class="form" [formGroup]="colaborador" role="form" class="login-form" (ngSubmit)="onFinish()">
+                            <div class="form-body">
+                              <h4 class="form-section"><i class="ft-info"></i> Sobre o Colaborador</h4>
+                              <div class="row">
+                                <div class="col-md-4 col-sm-12"></div>
+                                <div class="col-md-4 col-sm-12"></div>
+                                <div class="col-md-4 col-sm-12"></div>
                               </div>
-                              <div class="media-body white text-right">
-                                <h3>Adicionar Corretor Responsavel</h3>
-                                <span>irá para tela de cadastro de colaborador</span>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="name">Nome Completo Colaborador</label>
+                                    <input type="text" id="name" class="form-control border-primary" formControlName="name">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="telephone">Telefone</label>
+                                    <input type="text" id="telephone" class="form-control border-primary" formControlName="telephone">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control border-primary" formControlName="email">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="birthday">Aniversário</label>
+                                    <div class="position-relative has-icon-left">
+                                      <input type="date" id="birthday" class="form-control border-primary" formControlName="birthday">
+                                      <div class="form-control-position">
+                                        <i class="ft-message-square"></i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="job">Cargo</label>
+                                <input class="form-control border-primary" type="text" id="job" formControlName="job">
+                              </div>
+
+                            </div>
+
+                            <div class="form-actions right">
+                              <button (click)="postColaborador()" type="button" class="btn btn-raised  btn-header">
+                                <i class="fa fa-check-square-o"></i> <a>Adicionar</a>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <section id="nice-table">
+                            <div class="row text-left">
+                              <div class="col-sm-12">
+                                <div class="card">
+                                  <div class="card-content">
+                                    <div class="card-body">
+                                      <table class="table">
+                                        <thead>
+                                        <tr>
+                                          <th>#</th>
+                                          <th>Nome</th>
+                                          <th>Email</th>
+                                          <th>Telefone</th>
+                                          <th>Aniversario</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let colaboradores of colaboradores; let i = index">
+                                          <th>{{i+1}}</th>
+                                          <td>{{colaboradores.name}}</td>
+                                          <td>{{colaboradores.email}}</td>
+                                          <td>{{colaboradores.telephone}}</td>
+                                          <td>{{colaboradores.birthday}}</td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </section>
                         </div>
                       </div>
                     </div>
-                  </div>-->
+                  </div>
                   <!--<div class="row">
                     <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of allSeguradoras">
                     &lt;!&ndash; TODO:CHANGE&ndash;&gt;  <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
@@ -171,7 +258,7 @@
 
 
 
-              </form>
+
 
             </div>
           </div>
@@ -198,3 +285,4 @@
     </div>
   </div>
 </div>
+</form>

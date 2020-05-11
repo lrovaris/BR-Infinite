@@ -5788,6 +5788,10 @@ export class CorretoraPageComponent implements OnInit {
   allSeguradoras: Array<any> = [];
   seguradorasTable = [];
   isEdit = false;
+  colaborador: FormGroup;
+  id: any;
+  colaboradores = [];
+  checkColaborador = false;
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5817,6 +5821,17 @@ export class CorretoraPageComponent implements OnInit {
       complement: [null, Validators.required],
       neighborhood: [null, Validators.required],
     })
+
+    this.colaborador = this.formbuilder.group({
+      name: [null, Validators.required],
+      email: [null, Validators.required],
+      telephone: [null, Validators.required],
+      birthday: [null, Validators.required],
+      job: [null, Validators.required],
+      corretora: [''],
+      seguradora: [''],
+    })
+
   }
 
   navigateColaborador(corretora) {
@@ -5846,6 +5861,7 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+      this.id = data._id;
       this.corretora.controls['name'].setValue(data.name);
       this.corretora.controls['telephone'].setValue(data.telephone);
       this.corretora.controls['cnpj'].setValue(data.cnpj);
@@ -5857,6 +5873,42 @@ export class CorretoraPageComponent implements OnInit {
       this.corretora.controls['complement'].setValue(data.address.complement);
       this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
     }
+
+  }
+
+  postColaborador() {
+    console.log('fui chamado')
+    this.submitted = true;
+    if (this.colaborador.invalid) {
+      return;
+    }
+    let newColaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: this.id,
+      seguradora: '',
+      active: true
+    };
+    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+      alert(data.message);
+      this.colaborador.reset();
+      this.corretoraService.getCorretora(this.id).subscribe((data: any) => {
+        this.colaboradores = data.colaboradores;
+      });
+    })
+
+  }
+
+  openColaborador() {
+    this.checkColaborador = !this.checkColaborador;
+    /*    this.seguradoraService.setTelefones(this.telefones);
+        this.seguradoraService.saveSeguradoraInfo(seguradora);
+        this.colaboradorService.setIsResponsibleTrue();
+        this.colaboradorService.setIsSeguradoraTrue(this.seguradora.value.name);
+        this.colaboradorService.setIsCorretoraFalse();*/
 
   }
 

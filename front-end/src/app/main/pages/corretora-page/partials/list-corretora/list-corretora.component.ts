@@ -26,6 +26,7 @@ export class ListCorretoraComponent implements OnInit {
   }
 
   editSeguradora(id) {
+    this.colaboradorService.setColaboradorResponsavelNull();
     this.corretoraService.getCorretora(id).subscribe((data: any) => {
       this.corretoraService.editCorretora(data);
     })

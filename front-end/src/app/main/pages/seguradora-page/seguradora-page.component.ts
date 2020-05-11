@@ -5892,34 +5892,35 @@ export class SeguradoraPageComponent implements OnInit {
   };
 
   postColaborador() {
-      this.submitted = true;
-      if (this.colaborador.invalid) {
-        return;
-      }
-      let newColaborador = {
-        name: this.colaborador.value.name,
-        telephone: this.colaborador.value.telephone,
-        email: this.colaborador.value.email,
-        birthday: this.colaborador.value.birthday,
-        job: this.colaborador.value.job,
-        corretora: '',
-        seguradora: this.id,
-        active: true
-      };
-      this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
-        alert(data.message);
-        this.colaborador.reset();
-        this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {
-          this.seguradoraService.putSeguradora(data);
-          this.colaboradores = data.colaboradores;
-        });
-      })
+    this.submitted = true;
+    if (this.colaborador.invalid) {
+      return;
+    }
+    let newColaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: '',
+      seguradora: this.id,
+      active: true
+    };
+    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+      alert(data.message);
+      this.colaborador.reset();
+      this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {
+        this.seguradoraService.putSeguradora(data);
+        this.colaboradores = data.colaboradores;
+      });
+    })
 
   }
 
   navigateList() {
    this.router.navigate(['seguradora'])
   }
+
 
   openColaborador(seguradora) {
     this.checkColaborador = !this.checkColaborador;

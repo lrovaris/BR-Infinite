@@ -33,7 +33,6 @@
                       <fieldset class="form-group">
                         <label for="solicitante">Solicitante</label>
                         <select class="form-control border-primary" id="solicitante" formControlName="solicitante">
-                          <!-- <option [value]="oportunidade.value.solicitante._id" *ngIf="isEdit">{{oportunidade.value.solicitante.name}}</option> -->
                           <option [value]="colaborador._id" *ngFor="let colaborador of Colaboradores">{{colaborador.name}}</option>
                         </select>
                       </fieldset>

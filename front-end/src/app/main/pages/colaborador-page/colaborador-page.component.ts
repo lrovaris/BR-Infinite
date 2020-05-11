@@ -96,6 +96,20 @@ export class ColaboradorPageComponent implements OnInit {
     this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador);
   }
 
+  saveColaborador() {
+    let newColaborador: Colaborador = {
+      name: this.colaborador.value.name,
+      telephone: this.colaborador.value.telephone,
+      email: this.colaborador.value.email,
+      birthday: this.colaborador.value.birthday,
+      job: this.colaborador.value.job,
+      corretora: this.colaborador.value.corretora,
+      seguradora: this.colaborador.value.seguradora,
+      active: true
+    };
+    this.colaboradorService.setColaboradorResponsavel(this.colaborador, newColaborador)
+  }
+
   postColaborador() {
     console.log(this.colaboradorService.workId);
     this.submitted = true;

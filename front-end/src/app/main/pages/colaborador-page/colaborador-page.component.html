@@ -19,13 +19,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="userinput1">Nome Completo Colaborador</label>
-                <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
+                <input  (change)="saveColaborador()" type="text" id="userinput1" class="form-control border-primary" formControlName="name">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="userinput2">Telefone</label>
-                <input type="text" id="userinput2" class="form-control border-primary" formControlName="telephone">
+                <input  (change)="saveColaborador()" type="text" id="userinput2" class="form-control border-primary" formControlName="telephone">
               </div>
             </div>
           </div>
@@ -33,14 +33,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="userinput3">Email</label>
-                <input type="email" id="userinput3" class="form-control border-primary" formControlName="email">
+                <input  (change)="saveColaborador()" type="email" id="userinput3" class="form-control border-primary" formControlName="email">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="timesheetinput3">Aniversário</label>
                 <div class="position-relative has-icon-left">
-                  <input type="date" id="timesheetinput3" class="form-control border-primary" formControlName="birthday">
+                  <input  (change)="saveColaborador()" type="date" id="timesheetinput3" class="form-control border-primary" formControlName="birthday">
                   <div class="form-control-position">
                     <i class="ft-message-square"></i>
                   </div>
@@ -79,7 +79,7 @@
 
           <div class="form-group">
             <label for="userinput5">Cargo</label>
-            <input class="form-control border-primary" type="text" id="userinput5" formControlName="job">
+            <input  (change)="saveColaborador()" class="form-control border-primary" type="text" id="userinput5" formControlName="job">
           </div>
 
         </div>
@@ -90,9 +90,6 @@
           </button>
           <button (click)="postColaborador()" *ngIf="!checkIsResonponsible" type="submit" class="btn btn-raised  btn-header">
             <i class="fa fa-check-square-o"></i> <a>Adicionar</a>
-          </button>
-          <button *ngIf="(checkIsResonponsible)" type="submit" class="btn btn-raised  btn-header">
-            <i class="fa fa-check-square-o"></i> <a>salvar</a>
           </button>
         </div>
       </form>

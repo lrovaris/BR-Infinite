@@ -5912,8 +5912,8 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   removeSeguradora(seguradora) {
-    let index = this.seguradoras.indexOf(seguradora);
-    if (index !== -1) this.seguradoras.splice(index, 1);
+    let index = this.seguradorasTable.indexOf(seguradora);
+    if (index !== -1) this.seguradorasTable.splice(index, 1);
   }
 
   searchEstado = (text$: Observable<string>) =>

@@ -87,6 +87,7 @@ export class SeguradoraService {
     };
     return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
       alert(data.message);
+      this.router.navigate(['seguradora'])
     })
   }
 

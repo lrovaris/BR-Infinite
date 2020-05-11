@@ -53,6 +53,7 @@ router.post('/new', async(req,res) => {
     let db_corretora = controller.register_corretora(new_corretora)
 
     corretor_responsavel.corretora = db_corretora._id;
+    corretor_responsavel.active = true;
 
     let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
 

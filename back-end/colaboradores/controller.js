@@ -23,7 +23,7 @@ async function get_colaboradores_corretora(id_corretora, id_manager){
       return false;
     }
 
-    return ((colab_obj.corretora.toString() == id_corretora.toString()) && !(colab_obj._id.toString() == id_manager.toString()))
+    return ((colab_obj.corretora.toString() == id_corretora.toString()) && !(colab_obj._id.toString() == id_manager.toString()) && colab_obj.active)
   });
 
   let this_corr_manager = await get_colaboradores_by_id(id_manager);
@@ -42,7 +42,7 @@ async function get_colaboradores_seguradora(id_seguradora, id_manager){
       return false;
     }
 
-    return ((colab_obj.seguradora.toString() == id_seguradora.toString()) && !(colab_obj._id.toString() == id_manager.toString()))
+    return ((colab_obj.seguradora.toString() == id_seguradora.toString()) && !(colab_obj._id.toString() == id_manager.toString()) && colab_obj.active)
   });
 
   let this_seg_manager = await get_colaboradores_by_id(id_manager);

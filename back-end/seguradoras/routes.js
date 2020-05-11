@@ -54,6 +54,7 @@ router.post('/new', async(req,res) => {
     let db_seg = await controller.register_seguradora(new_seguradora);
 
     gerente.seguradora = db_seg._id.toString();
+    gerente.active = true;
 
     let db_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
 

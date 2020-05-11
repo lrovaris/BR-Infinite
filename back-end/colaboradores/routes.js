@@ -74,4 +74,16 @@ router.post('/:id/edit', async(req,res) => {
   });
 });
 
+router.post('/:id/delete', async(req,res)=>{
+  let db_colaborador = await controller.get_colaboradores_by_id(req.params.id);
+
+  db_colaborador.active = false;
+
+  let inactive_colaborador = await db.update_colaborador(db_colaborador).catch(err => console.error(err));
+
+  res.status(200).json({
+    "message":"Colaborador deletado com sucesso"
+  })
+})
+
 module.exports = router;

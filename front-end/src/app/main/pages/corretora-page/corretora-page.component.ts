@@ -5792,6 +5792,10 @@ export class CorretoraPageComponent implements OnInit {
   id: any;
   colaboradores = [];
   checkColaborador = false;
+  Files = [];
+  filesToUpload: Array<File> = [];
+  formData: any = new FormData();
+  apelidos = [];
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5800,6 +5804,17 @@ export class CorretoraPageComponent implements OnInit {
         this.cidades = Estados[i].cidades;
       }
     }
+  }
+
+  removeFile(nome){
+    let index = this.filesToUpload.indexOf(nome);
+    if (index !== -1) this.filesToUpload.splice(index, 1);
+  }
+
+
+  upload(event: any) {
+    let newFile = event.target.files[0];
+    this.filesToUpload.push(newFile);
   }
 
   constructor(
@@ -5811,23 +5826,24 @@ export class CorretoraPageComponent implements OnInit {
 
     this.corretora = this.formbuilder.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      telephone: [null, Validators.required],
-      cnpj: [null, Validators.required],
-      estate: [null, Validators.required],
-      city: [null, Validators.required],
-      street: [null, Validators.required],
-      number: [null, Validators.required],
-      complement: [null, Validators.required],
-      neighborhood: [null, Validators.required],
+      nicknames: [null],
+      email: [null],
+      telephone: [null],
+      cnpj: [null],
+      estate: [null],
+      city: [null],
+      street: [null],
+      number: [null],
+      complement: [null],
+      neighborhood: [null],
     })
 
     this.colaborador = this.formbuilder.group({
       name: [null, Validators.required],
-      email: [null, Validators.required],
-      telephone: [null, Validators.required],
-      birthday: [null, Validators.required],
-      job: [null, Validators.required],
+      email: [null],
+      telephone: [null],
+      birthday: [null],
+      job: [null],
       corretora: [''],
       seguradora: [''],
     })
@@ -5861,7 +5877,9 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+      this.apelidos = data.nicknames;
       this.id = data._id;
+      this.colaboradores = data.colaboradores;
       this.corretora.controls['name'].setValue(data.name);
       this.corretora.controls['telephone'].setValue(data.telephone);
       this.corretora.controls['cnpj'].setValue(data.cnpj);
@@ -5877,7 +5895,7 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   postColaborador() {
-    console.log('fui chamado')
+    console.log('fui chamado');
     this.submitted = true;
     if (this.colaborador.invalid) {
       return;
@@ -5918,6 +5936,7 @@ export class CorretoraPageComponent implements OnInit {
       alert('Formulário Inválido, por favor verifique ');
       return;
     }
+
     if(this.isEdit) {
       this.seguradoras = this.seguradoraService.getSeguradoras();
     }
@@ -5926,6 +5945,7 @@ export class CorretoraPageComponent implements OnInit {
       email: this.corretora.value.email,
       telephone: this.corretora.value.telephone,
       cnpj: this.corretora.value.cnpj,
+      nicknames: this.apelidos,
       address: {
         estate: this.corretora.value.estate,
         city: this.corretora.value.city,
@@ -5937,15 +5957,37 @@ export class CorretoraPageComponent implements OnInit {
       },
       seguradoras: this.seguradoras
     };
-    if (this.isEdit) {
-      let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-      this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel);
-    } else if (!this.isEdit){
-      this.responsavel = this.colaboradorService.getColaboradorResponsavel();
-      this.corretoraService.postCorretora(newCorretora, this.responsavel);
+    this.responsavel = this.colaboradorService.getColaboradorResponsavel();
+    const files: Array<File> = this.filesToUpload;
+    for(let i =0; i < files.length; i++) {
+      this.formData.append('docs', files[i]);
     }
+      this.corretoraService.postUpload(this.formData).subscribe((data: any) => {
+        console.log(data);
+        for(let i = 0; i < data.info_files.length; i++) {
+          this.Files.push(data.info_files[i]);
+        }
+        newCorretora['files'] = this.Files;
+        if (this.isEdit) {
+          let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+          this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel)
+        } else if (!this.isEdit) {
+          console.log(this.responsavel);
+          this.corretoraService.postCorretora(newCorretora, this.responsavel)
+        }
+      });
     this.corretora.reset();
   };
+
+  adicionarApelido() {
+    this.apelidos.push(this.corretora.value.nicknames);
+    this.corretora.controls['nicknames'].setValue('');
+  }
+
+  removeApelido(apelido) {
+    let index = this.apelidos.indexOf(apelido);
+    if (index !== -1) this.apelidos.splice(index, 1);
+  }
 
   log() {
     console.log('');

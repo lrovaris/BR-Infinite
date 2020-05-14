@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ColaboradorService} from "../../../../services/colaborador.service";
 import domtoimage from 'dom-to-image';
 import * as jsPDF from 'jspdf';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-corretora-view',
@@ -44,6 +45,14 @@ export class CorretoraViewComponent implements OnInit {
     this.colaboradorService.setCameFromCorretoraTrue();
     this.colaboradorService.setWorkId(this.corretora._id);
     this.router.navigate(['colaborador'])
+  }
+
+  download(file) {
+
+    this.corretoraService.downloadFile(file.path).subscribe((data: any) => {
+      console.log(file);
+      saveAs(data, file.nome)
+    })
   }
 
   ngOnInit() {

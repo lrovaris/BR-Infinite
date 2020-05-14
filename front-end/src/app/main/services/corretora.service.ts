@@ -29,6 +29,15 @@ export class CorretoraService {
     return this.corretoraInfoWithOutFormGroup;
   }
 
+  postUpload(file) {
+    return this.http.post(`${this.url}/corretoras/upload`, file);
+  }
+
+  downloadFile(path) {
+    return this.http.post(`${this.url}/corretoras/download`, {path: path}, {responseType: 'blob'});
+  }
+
+
   postCorretora(corretora, responsavel){
     let manager = responsavel.value;
     const options = {

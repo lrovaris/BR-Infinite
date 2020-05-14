@@ -50,6 +50,53 @@
                       </p>
                     </div>
                   </div>
+
+                  <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="userinput9">UF</label>
+                      <p type="text" id="userinput9">
+                        {{corretora.address.estate}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput10">Cidade</label>
+                      <p type="text" id="userinput10" class=" ">
+                        {{corretora.address.city}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput5">Rua</label>
+                      <p class=" " type="text" id="userinput5">
+                        {{corretora.address.street}}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="userinput8">Bairro</label>
+                      <p type="text" id="userinput8" class=" ">
+                        {{corretora.address.neighborhood}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-2">
+                      <label for="userinput6">Número</label>
+                      <p type="email" id="userinput6" class=" ">
+                        {{corretora.address.number}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <div class="col">
+                        <label for="userinput7">Complemento</label>
+                        <p type="text" id="userinput7" class=" ">
+                          {{corretora.address.complement}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
                   <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-4">
@@ -108,51 +155,47 @@
                     </section>
                   </div>
                 </div>
-                <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
 
-                <div class="row">
-                  <div style="margin-left: 1rem" class="col-md-3">
-                    <label for="userinput9">UF</label>
-                    <p type="text" id="userinput9">
-                      {{corretora.address.estate}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-4">
-                    <label for="userinput10">Cidade</label>
-                    <p type="text" id="userinput10" class=" ">
-                      {{corretora.address.city}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-4">
-                    <label for="userinput5">Rua</label>
-                    <p class=" " type="text" id="userinput5">
-                      {{corretora.address.street}}
-                    </p>
-                  </div>
-                </div>
 
+                <h4 class="form-section"><i class="ft-cloud"></i> Arquivos na Nuvem </h4>
                 <div class="row">
-                  <div style="margin-left: 1rem" class="col-md-3">
-                    <label for="userinput8">Bairro</label>
-                    <p type="text" id="userinput8" class=" ">
-                      {{corretora.address.neighborhood}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-2">
-                    <label for="userinput6">Número</label>
-                    <p type="email" id="userinput6" class=" ">
-                      {{corretora.address.number}}
-                    </p>
-                  </div>
-                  <div style="margin-left: 1rem" class="col-md-5">
-                    <div class="col">
-                      <label for="userinput7">Complemento</label>
-                      <p type="text" id="userinput7" class=" ">
-                        {{corretora.address.complement}}
-                      </p>
+                  <div class="col-md-12">
+                    <div class="row" *ngIf=" (corretora.files.length > 0)">
+                      <div class="col">
+                        <section id="simple">
+                          <div class="row text-left">
+                            <div class="col-sm-6">
+                              <div class="card">
+                                <div class="card-content">
+                                  <div class="card-body">
+                                    <table class="table">
+                                      <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Download</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <tr *ngFor="let file of corretora.files; let i = index">
+                                        <th>{{i+1}}</th>
+                                        <td>{{file.nome}}</td>
+                                        <td style="cursor: pointer" (click)="download(file)"><i class="icon-cloud-download text-primary text-bold-700"></i></td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+
 
               </form>
 

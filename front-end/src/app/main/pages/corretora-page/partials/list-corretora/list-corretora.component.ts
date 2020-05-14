@@ -25,7 +25,7 @@ export class ListCorretoraComponent implements OnInit {
     this.router.navigate(['corretora/cadastro'])
   }
 
-  editSeguradora(id) {
+  editCorretora(id) {
     this.colaboradorService.setColaboradorResponsavelNull();
     this.corretoraService.getCorretora(id).subscribe((data: any) => {
       this.corretoraService.editCorretora(data);

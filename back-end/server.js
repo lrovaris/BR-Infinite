@@ -50,6 +50,7 @@ async function initialize_database() {
     await require('./corretoras/db').get_corretoras();
     await require('./products/db').get_produtos();
     await require('./opportunities/db').get_opportunities();
+    await require('./production/db').get_production_entries();
 }
 
 app.listen(3000, async () => {

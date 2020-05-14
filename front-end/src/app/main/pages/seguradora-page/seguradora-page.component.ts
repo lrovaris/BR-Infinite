@@ -5934,7 +5934,7 @@ export class SeguradoraPageComponent implements OnInit {
   }
 
 
-  openColaborador(seguradora) {
+  openColaborador() {
     this.checkColaborador = !this.checkColaborador;
 /*    this.seguradoraService.setTelefones(this.telefones);
     this.seguradoraService.saveSeguradoraInfo(seguradora);

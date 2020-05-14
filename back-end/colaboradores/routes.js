@@ -52,9 +52,22 @@ router.post('/:id/edit', async(req,res) => {
   let db_colaborador = await controller.get_colaboradores_by_id(req.params.id);
 
   // Editando o objeto
-  let obj_editado = Object.fromEntries(Object.entries(db_colaborador).map(([key, value]) =>{
-    return [key, req_colaborador[key] || value];
-  }));
+  let entradas_editadas = Object.entries(db_colaborador)
+  .map(([key, value]) =>{ return [key, req_colaborador[key] || value]; })
+
+  let entradas_novas = Object.entries(req_colaborador).filter(([key,value]) => {
+    let existente = entradas_editadas.find(([key_e, value_e]) => {
+      return key_e === key;
+    })
+    return existente === undefined;
+  })
+
+  for (var i = 0; i < entradas_novas.length; i++) {
+    entradas_editadas.push(entradas_novas[i])
+  }
+
+
+  let obj_editado = Object.fromEntries(entradas_editadas);
 
   // Validando o objeto editado
   let validacao = await controller.validate_colaborador(obj_editado);

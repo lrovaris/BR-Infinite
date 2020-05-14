@@ -50,11 +50,25 @@ router.post('/:id/edit', async(req,res) => {
       return produto_obj._id == req_produto._id;
   })[0];
 
-  Object.keys(req_produto).forEach(function(key) {
-    let val = req_produto[key];
-    db_produto[key] = val;
-  });
+  // Editando objeto
+  let entradas_editadas = Object.entries(db_produto)
+  .map(([key, value]) =>{ return [key, req_produto[key] || value]; })
 
+  let entradas_novas = Object.entries(req_produto).filter(([key,value]) => {
+    let existente = entradas_editadas.find(([key_e, value_e]) => {
+      return key_e === key;
+    })
+    return existente === undefined;
+  })
+
+  for (var i = 0; i < entradas_novas.length; i++) {
+    entradas_editadas.push(entradas_novas[i])
+  }
+
+
+  let obj_editado = Object.fromEntries(entradas_editadas);
+
+  // Salvando objeto editado
   let edited_produto = await db.update_produto(db_produto).catch(err => logger.error(err));
 
   to_send = {

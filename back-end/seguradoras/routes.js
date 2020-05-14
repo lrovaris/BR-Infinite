@@ -75,10 +75,25 @@ router.post('/:id/edit', async(req,res) => {
 
   let db_seguradora = await controller.get_seguradora_by_id(req.params.id);
 
-  let obj_editado = Object.fromEntries(Object.entries(db_seguradora).map(([key, value]) =>{
-    return [key, req_seguradora[key] || value];
-  }));
+  // Editando objeto
+  let entradas_editadas = Object.entries(db_seguradora)
+  .map(([key, value]) =>{ return [key, req_seguradora[key] || value]; })
 
+  let entradas_novas = Object.entries(req_seguradora).filter(([key,value]) => {
+    let existente = entradas_editadas.find(([key_e, value_e]) => {
+      return key_e === key;
+    })
+    return existente === undefined;
+  })
+
+  for (var i = 0; i < entradas_novas.length; i++) {
+    entradas_editadas.push(entradas_novas[i])
+  }
+
+
+  let obj_editado = Object.fromEntries(entradas_editadas);
+
+  // Salvando objeto editado
   let edited_seguradora = await db.update_seguradora(obj_editado).catch(err => logger.error(err));
 
   await res.json({

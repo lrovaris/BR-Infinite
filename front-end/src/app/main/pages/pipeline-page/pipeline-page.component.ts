@@ -68,13 +68,14 @@ export class PipelinePageComponent implements OnInit {
 
 
   pushCongenere(name, price, comission){
-    this.CongenereList.push({name, price, comission})
+    comission = comission + '%';
+    this.CongenereList.push({name, price, comission});
 
     console.log(this.oportunidade.controls);
 
-    this.oportunidade.controls["congeneres"].setValue("")
-    this.oportunidade.controls["preco1"].setValue("")
-    this.oportunidade.controls["comissao1"].setValue("")
+    this.oportunidade.controls["congeneres"].setValue("");
+    this.oportunidade.controls["preco1"].setValue("");
+    this.oportunidade.controls["comissao1"].setValue("");
   }
   removeCongenere(nome) {
     let index = this.CongenereList.indexOf(nome);
@@ -128,7 +129,7 @@ export class PipelinePageComponent implements OnInit {
       congenereRenewal: this.oportunidade.value.congenere,
       congenereList: this.CongenereList,
       seguradoraPrice: this.oportunidade.value.preco2,
-      seguradoraComission: this.oportunidade.value.comissao2,
+      seguradoraComission: (this.oportunidade.value.comissao2 + '%'),
       vigencia: this.oportunidade.value.vigencia,
       status: this.oportunidade.value.status,
       statusObs: this.oportunidade.value.observacao,

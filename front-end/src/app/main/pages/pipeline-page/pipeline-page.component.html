@@ -106,19 +106,27 @@
                         <input type="text" id="congeneres" class="form-control border-primary" formControlName="congeneres">
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-2">
+                    <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                         <label for="preco1">Preço</label>
                         <input type="email" id="preco1" class="form-control border-primary" formControlName="preco1">
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-5">
+                    <div class="col-sm-12 col-md-4">
                       <div class="form-group">
                         <label for="comissao">Comissão</label>
-                        <input type="text" id="comissao" class="form-control border-primary" formControlName="comissao1">
+                        <div class="input-group">
+                          <input type="text" id="comissao" class="form-control border-primary" formControlName="comissao1"  aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <span style="background-color: #27416F; color: white; font-weight: bolder;" class="input-group-text border-primary" id="basic-addon2">%</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+
+
                   <div class="row">
                     <div class="col-sm-12 col-md-2">
                       <button type="button" (click)="pushCongenere(oportunidade.value.congeneres, oportunidade.value.preco1, oportunidade.value.comissao1)" class="btn btn-header border-primary">
@@ -177,17 +185,22 @@
                         <input type="text" id="userinput8" class="form-control border-primary" formControlName="brInfinite">
                       </div>
                     </div> -->
-                    <div class="col-sm-12 col-md-2">
+                    <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                         <label for="userinput6">Preço</label>
                         <input type="email" id="userinput6" class="form-control border-primary" formControlName="preco2">
                       </div>
                     </div>
-                    <div class="col-sm-12 col-md-5">
+                    <div class="col-sm-12 col-md-4">
                       <div class="form-group">
                         <label for="comissao2">Comissão</label>
-                        <input type="text" id="comissao2" class="form-control border-primary" formControlName="comissao2">
+                        <div class="input-group">
+                          <input type="text" id="comissao2" class="form-control border-primary" formControlName="comissao2" aria-describedby="basic-addon3">
+                          <div class="input-group-append">
+                            <span style="background-color: #27416F; color: white; font-weight: bolder;" class="input-group-text border-primary" id="basic-addon3">%</span>
+                          </div>
                       </div>
+                    </div>
                     </div>
                   </div>
                   <h4 class="form-section"><i class="ft-info"></i>STATUS</h4>

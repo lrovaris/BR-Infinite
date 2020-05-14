@@ -38,3 +38,22 @@
 .border-primary {
   border-color: #306aa1 !important;
 }
+
+.input-group-text {
+  background-color: #27416F;
+  color: white;
+  font-weight: bolder;
+}
+
+.border-primary {
+  border: 1px solid #27416F;
+}
+
+.custom-file-label {
+  border: 1px solid #27416F;
+  &::after {
+    background-color: #27416F;
+    color: white;
+    content: 'Pesquisar' !important;
+  }
+}

@@ -1,6 +1,12 @@
 .custom-file-label {
-  border: 1px solid #428bca;
+  border: 1px solid #27416F;
   &::after {
-    content: 'Pesqusiar' !important;
+    background-color: #27416F;
+    color: white;
+    content: 'Pesquisar' !important;
   }
+}
+
+.border-primary {
+  border: 1px solid #27416F;
 }

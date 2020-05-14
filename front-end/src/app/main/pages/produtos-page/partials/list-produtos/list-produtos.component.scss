@@ -1,0 +1,17 @@
+.btn-header {
+  margin-right: 2rem;
+  margin-top: 1rem;
+  background-color: white;
+  border: solid 1px #27416F;
+  transition: 0.35s;
+}
+.btn-header a {
+  color: #27416F
+}
+.btn-header:hover {
+  background-color: #27416F;
+  border: solid 1px #27416F
+}
+.btn-header:hover a {
+  color: white;
+}

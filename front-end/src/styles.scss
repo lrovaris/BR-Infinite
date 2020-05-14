@@ -4,3 +4,16 @@
 
 @import "./assets/fonts/simple-line-icons/style.css";
 @import "./assets/fonts/feather/style.css";
+
+.border-primary {
+  border-color:  #27416F!important;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+

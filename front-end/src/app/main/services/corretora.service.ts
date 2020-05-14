@@ -39,6 +39,10 @@ export class CorretoraService {
 
 
   postCorretora(corretora, responsavel){
+    if (!responsavel) {
+      alert('Você não pode cadastrar uma corretora sem um corretor Responsável');
+      return
+    }
     let manager = responsavel.value;
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),

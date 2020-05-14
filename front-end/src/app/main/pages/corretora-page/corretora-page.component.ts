@@ -5836,7 +5836,7 @@ export class CorretoraPageComponent implements OnInit {
       number: [''],
       complement: [''],
       neighborhood: [''],
-    })
+    });
 
     this.colaborador = this.formbuilder.group({
       name: ['', Validators.required],
@@ -5850,14 +5850,6 @@ export class CorretoraPageComponent implements OnInit {
 
   }
 
-  navigateColaborador(corretora) {
-    this.seguradoraService.resetArray();
-    this.corretoraService.saveCorretoraInfo(corretora);
-    this.colaboradorService.setIsResponsibleTrue();
-    this.colaboradorService.setIsCorretoraTrue(this.corretora.value.name);
-    this.colaboradorService.setIsSeguradoraFalse();
-    this.router.navigate(['colaborador'])
-  }
 
   ngOnInit() {
     if (this.corretoraService.getCorretoraInfo()) {

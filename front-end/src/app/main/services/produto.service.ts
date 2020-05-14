@@ -41,7 +41,8 @@ export class ProdutoService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/products/${id}/edit`, produto, options).subscribe((data:any) => {
-      alert(data.message)
+      alert(data.message);
+      this.router.navigate(['produtos'])
     })
   }
 
@@ -50,7 +51,8 @@ export class ProdutoService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/products/new`, produto, options).subscribe((data:any) => {
-  alert(data.message)
+      alert(data.message);
+      this.router.navigate(['produtos'])
     })
   }
 

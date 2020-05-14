@@ -93,6 +93,15 @@ export class PipelinePageComponent implements OnInit {
     this.filesToUpload.push(newFile);
   }
 
+  FormataStringData(data) {
+    let ano  = data.split("-")[0];
+    let mes  = data.split("-")[1];
+    let dia  = data.split("-")[2];
+
+    return dia + '/' + (mes) + '/' + (ano)
+    // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
+  }
+
   onFinish() {
     this.submitted = true;
     if (this.oportunidade.invalid) {
@@ -105,13 +114,18 @@ export class PipelinePageComponent implements OnInit {
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
 
-    this.date = mm + '/' + dd + '/' + yyyy;
+    this.date = dd + '/' + mm + '/' + yyyy;
     this.date = {
-      now: mm + '/' + dd + '/' + yyyy,
+      now: dd + '/' + mm + '/' + yyyy,
       mm,
       dd,
       yyyy
     };
+
+    let dataVigencia = this.oportunidade.value.vigencia;
+    dataVigencia = this.FormataStringData(dataVigencia);
+
+    console.log(dataVigencia);
 
     const inclusionDate = this.date.now;
 
@@ -130,7 +144,7 @@ export class PipelinePageComponent implements OnInit {
       congenereList: this.CongenereList,
       seguradoraPrice: this.oportunidade.value.preco2,
       seguradoraComission: (this.oportunidade.value.comissao2 + '%'),
-      vigencia: this.oportunidade.value.vigencia,
+      vigencia: dataVigencia,
       status: this.oportunidade.value.status,
       statusObs: this.oportunidade.value.observacao,
 

@@ -36,18 +36,24 @@
                         </p>
                     </div>
                     <div style="margin-left: 1rem" class="col-md-3">
-                        <label for="userinput4">Telefone</label>
-                        <p type="text" id="userinput4" class=" " >
-                        {{seguradora.telephone}}
-                        </p>
+                      <label for="insEstadual">Inscrição Estadual</label>
+                      <p type="text" id="insEstadual" class=" " >
+                        {{seguradora.InscricaoEstadual}}
+                      </p>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-12">
+                    <div style="margin-left: 1rem" class="col-md-8">
                       <label for="email">email</label>
                       <p class=" " type="text" id="email">
                         {{seguradora.email}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="userinput4">Telefone</label>
+                      <p type="text" id="userinput4" class=" " >
+                        {{seguradora.telephone}}
                       </p>
                     </div>
                   </div>
@@ -55,23 +61,31 @@
                   <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
 
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-3">
+                    <div style="margin-left: 1rem" class="col-md-6">
                       <label for="userinput9">UF</label>
                       <p type="text" id="userinput9">
                         {{seguradora.address.estate}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
+                    <div style="margin-left: 1rem" class="col-md-5">
                       <label for="userinput10">Cidade</label>
                       <p type="text" id="userinput10" class=" ">
-
                         {{seguradora.address.city}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
+                  </div>
+
+                  <div class="row">
+                    <div style="margin-left: 1rem" class="col-md-6">
                       <label for="userinput5">Rua</label>
                       <p class=" " type="text" id="userinput5">
                         {{seguradora.address.street}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-5">
+                      <label for="cep">CEP</label>
+                      <p class=" " type="text" id="cep">
+                        {{seguradora.address.cep}}
                       </p>
                     </div>
                   </div>

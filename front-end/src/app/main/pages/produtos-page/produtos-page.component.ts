@@ -30,7 +30,7 @@ export class ProdutosPageComponent implements OnInit {
 
     this.produto = this.formbuilder.group({
       name: [null, Validators.required],
-      description: [null, Validators.required]
+      description: ['']
     })
   }
 
@@ -65,7 +65,7 @@ export class ProdutosPageComponent implements OnInit {
 
   ngOnInit() {
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-      this.allSeguradoras = data
+      this.allSeguradoras = data;
       this.selectableSeguradoras = data;
 
       if (this.produtoService.getIsEdit()) {

@@ -19,7 +19,7 @@
               </div>
               <div class="card-content">
                 <div class="card-body">
-                  <table class="table">
+                  <table class="table table-hover">
                     <thead>
                     <tr>
                       <th>Produtos</th>
@@ -31,11 +31,9 @@
                     <tr style="cursor: pointer" *ngFor="let produto of produtos" (click)="navigateView(produto)">
                       <td>{{produto.name}}</td>
                       <td>{{produto.description}}</td>
-                      <td>
-                        <div class="card" style="background-color: #27416F; color: white">
-                          <div class="card-content">
-                            <p style="margin: 8px" *ngFor="let seguradora of produto.seguradoras">{{seguradora.name}},</p>
-                          </div>
+                      <td style="max-width: 200px">
+                        <div class="col-md-12">
+                          <a style="margin: 2px" *ngFor="let seguradora of produto.seguradoras">{{seguradora.name}},</a>
                         </div>
                       </td>
                     </tr>

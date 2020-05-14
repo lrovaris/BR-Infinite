@@ -93,6 +93,54 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label for="nickname">Apelidos</label>
+                        <input type="text" id="nickname" class="form-control border-primary" formControlName="nicknames">
+                      </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top: 12px">
+                      <button class="btn btn-header btn-raised" type="button" (click)="adicionarApelido()"><a>Adicionar</a></button>
+                    </div>
+                  </div>
+
+
+                  <div class="row" *ngIf="apelidos.length > 0">
+                    <div class="col">
+                      <section id="apelidos-table">
+                        <div class="row text-left">
+                          <div class="col-sm-12">
+                            <div class="card">
+                              <div class="card-content">
+                                <div class="card-body">
+                                  <table class="table">
+                                    <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Apelido</th>
+                                      <th>Remover</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let apelido of apelidos; let i = index">
+                                      <th>{{i+1}}</th>
+                                      <td>{{apelido}}</td>
+                                      <td><i class="icon-trash text-danger" style="cursor: pointer" (click)="removeApelido(apelido)"></i></td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+
                   <div class="card" *ngIf="isEdit">
                     <div class="card-header">
                       <div class="row">

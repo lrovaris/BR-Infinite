@@ -5795,6 +5795,7 @@ export class CorretoraPageComponent implements OnInit {
   Files = [];
   filesToUpload: Array<File> = [];
   formData: any = new FormData();
+  apelidos = [];
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5825,6 +5826,7 @@ export class CorretoraPageComponent implements OnInit {
 
     this.corretora = this.formbuilder.group({
       name: [null, Validators.required],
+      nicknames: [null],
       email: [null],
       telephone: [null],
       cnpj: [null],
@@ -5875,6 +5877,7 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+      this.apelidos = data.nicknames;
       this.id = data._id;
       this.colaboradores = data.colaboradores;
       this.corretora.controls['name'].setValue(data.name);
@@ -5942,6 +5945,7 @@ export class CorretoraPageComponent implements OnInit {
       email: this.corretora.value.email,
       telephone: this.corretora.value.telephone,
       cnpj: this.corretora.value.cnpj,
+      nicknames: this.apelidos,
       address: {
         estate: this.corretora.value.estate,
         city: this.corretora.value.city,
@@ -5974,6 +5978,16 @@ export class CorretoraPageComponent implements OnInit {
       });
     this.corretora.reset();
   };
+
+  adicionarApelido() {
+    this.apelidos.push(this.corretora.value.nicknames);
+    this.corretora.controls['nicknames'].setValue('');
+  }
+
+  removeApelido(apelido) {
+    let index = this.apelidos.indexOf(apelido);
+    if (index !== -1) this.apelidos.splice(index, 1);
+  }
 
   log() {
     console.log('');

@@ -164,7 +164,13 @@ export class PipelinePageComponent implements OnInit {
 
   selectColaborador(id){
     this.corretoraService.getCorretora(id).subscribe((data: any) => {
-      this.Colaboradores = data.colaboradores;
+      console.log(data);
+      this.Colaboradores = []
+
+      for (let index = 0; index < data.colaboradores.length; index++) {
+        this.Colaboradores.push(data.colaboradores[index]);
+      }
+      this.Colaboradores.push(data.manager);
     })
   }
 

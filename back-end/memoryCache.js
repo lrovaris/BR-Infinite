@@ -9,6 +9,10 @@ module.exports = function () {
         set: function (key, val) {
           logger.log("Objeto " + key + " salvo na memória");
           cache[key] = val;
+        },
+        flush: function(){
+          logger.log("Cache wipado");
+          cache = {};
         }
     }
 }();

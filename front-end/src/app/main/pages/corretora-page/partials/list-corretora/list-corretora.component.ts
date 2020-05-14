@@ -20,6 +20,7 @@ export class ListCorretoraComponent implements OnInit {
               private colaboradorService: ColaboradorService) { }
 
   navigateCadastroCorretora() {
+    this.seguradoraService.setseguradoraInfoWithOutFormGroupNull();
     this.colaboradorService.setColaboradorResponsavelNull();
     this.corretoraService.setCorretoraInfoWithOutFormGroupNull();
     this.router.navigate(['corretora/cadastro'])
@@ -33,12 +34,31 @@ export class ListCorretoraComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.corretoraService.getAllCorretoras().subscribe((data:any) => {
-      this.corretoras = data;
-    });
-    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-      this.seguradoras = data;
+    this.corretoraService.getAllCorretoras().subscribe((prod_data:any) => {
+      this.corretoras = prod_data;
+      this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
+        this.seguradoras = seg_data;
+        console.log(this.seguradoras);
+        this.corretoras = this.corretoras.map(prod => {
+
+          prod.seguradoras = prod.seguradoras.map(prod_seg => {
+            console.log(prod_seg);
+            let seg = this.seguradoras.find(seg_data => prod_seg.toString() === seg_data._id.toString());
+
+            return {
+              name: seg.name,
+              _id: seg._id,
+              telephone: seg.telephone,
+              email: seg.email
+            }
+          });
+          return prod;
+        });
+        console.log(this.corretoras);
+      });
     });
   }
+
+
 
 }

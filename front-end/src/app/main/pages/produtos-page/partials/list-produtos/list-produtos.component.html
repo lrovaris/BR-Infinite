@@ -24,12 +24,20 @@
                     <tr>
                       <th>Produtos</th>
                       <th>Descrição</th>
+                      <th>Seguradoras</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr style="cursor: pointer" *ngFor="let produto of produtos" (click)="navigateView(produto)">
                       <td>{{produto.name}}</td>
                       <td>{{produto.description}}</td>
+                      <td>
+                        <div class="card" style="background-color: #27416F; color: white">
+                          <div class="card-content">
+                            <p style="margin: 8px" *ngFor="let seguradora of produto.seguradoras">{{seguradora.name}},</p>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                     </tbody>
                   </table>

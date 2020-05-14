@@ -36,10 +36,7 @@ export class SeguradoraViewComponent implements OnInit {
 
   ngOnInit() {
     this.seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-    console.log(this.seguradora);
   }
-
-
   downloadPDF() {
     var node = document.getElementById('parentdiv');
     var img;

@@ -23,7 +23,7 @@
                       <th>Corretora</th>
                       <th>Telefone</th>
                       <th>Email</th>
-
+                      <th>Seguradoras</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,6 +32,13 @@
                       <td>{{corretora.name}}</td>
                       <td>{{corretora.telephone}}</td>
                       <td>{{corretora.email}}</td>
+                      <td style="max-width: 300px">
+                        <div class="card" style="background-color: #27416F; color: white; max-width: 300px; margin: none">
+                        <div class="card-content">
+                          <a style="margin: 8px 2px 8px 8px" *ngFor="let seguradora of corretora.seguradoras">{{seguradora.name}},</a>
+                        </div>
+                        </div>
+                      </td>
                     </tr>
                     </tbody>
                   </table>

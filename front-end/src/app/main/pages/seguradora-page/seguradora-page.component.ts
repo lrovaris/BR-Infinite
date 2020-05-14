@@ -5841,7 +5841,7 @@ export class SeguradoraPageComponent implements OnInit {
       complement: [null],
       neighborhood: [null],
       cep: [null]
-    })
+    });
 
     this.colaborador = this.formbuilder.group({
       name: [null, Validators.required],

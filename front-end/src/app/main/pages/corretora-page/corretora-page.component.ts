@@ -5825,25 +5825,25 @@ export class CorretoraPageComponent implements OnInit {
               private seguradoraService: SeguradoraService) {
 
     this.corretora = this.formbuilder.group({
-      name: [null, Validators.required],
-      nicknames: [null],
-      email: [null],
-      telephone: [null],
-      cnpj: [null],
-      estate: [null],
-      city: [null],
-      street: [null],
-      number: [null],
-      complement: [null],
-      neighborhood: [null],
+      name: ['', Validators.required],
+      nicknames: [''],
+      email: [''],
+      telephone: [''],
+      cnpj: [''],
+      estate: [''],
+      city: [''],
+      street: [''],
+      number: [''],
+      complement: [''],
+      neighborhood: [''],
     })
 
     this.colaborador = this.formbuilder.group({
-      name: [null, Validators.required],
-      email: [null],
-      telephone: [null],
-      birthday: [null],
-      job: [null],
+      name: ['', Validators.required],
+      email: [''],
+      telephone: [''],
+      birthday: [''],
+      job: [''],
       corretora: [''],
       seguradora: [''],
     })
@@ -5863,17 +5863,12 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getCorretoraInfo()) {
       this.corretora =  this.corretoraService.getCorretoraInfo();
     }
-
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
     });
-
-
     if (this.corretoraService.getCorretoraInfo()) {
-
       this.corretora = this.corretoraService.getCorretoraInfo();
     }
-
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
@@ -5891,7 +5886,6 @@ export class CorretoraPageComponent implements OnInit {
       this.corretora.controls['complement'].setValue(data.address.complement);
       this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
     }
-
   }
 
   postColaborador() {

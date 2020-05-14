@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import * as tableData from "./data/smart-data-table";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ColaboradorService} from "../../../../services/colaborador.service";
+import {CorretoraService} from "../../../../services/corretora.service";
 
 @Component({
   selector: 'app-list-seguradora',
@@ -18,7 +19,8 @@ export class ListSeguradoraComponent implements OnInit {
 
   constructor(private seguradoraService: SeguradoraService,
               private router: Router,
-              private colaboradorService: ColaboradorService) {
+              private colaboradorService: ColaboradorService,
+              private corretoraService: CorretoraService) {
 
   }
   settings = tableData.settings;
@@ -26,6 +28,7 @@ export class ListSeguradoraComponent implements OnInit {
   alertsettings = tableData.alertsettings;
 
   navigateCadastroSeguradora() {
+    this.corretoraService.setCorretoraInfoWithOutFormGroupNull();
     this.colaboradorService.setColaboradorResponsavelNull();
     this.seguradoraService.setseguradoraInfoWithOutFormGroupNull();
     this.router.navigate(['seguradora/cadastro'])

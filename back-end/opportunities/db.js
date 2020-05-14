@@ -24,8 +24,6 @@ async function register_opportunity(new_opportunity) {
   logger.log("Oportunidade nova cadastrada");
 
   return new_opp;
-
-  resolve(result);
 }
 
 async function update_opportunity(opportunity) {

@@ -16,9 +16,9 @@ async function get_corretora_by_id(corr_id) {
 }
 
 async function register_corretora(new_corr){
-let db_corr = await db.register_corretora(new_corr).catch(err => logger.error(err));
+  let db_corr = await db.register_corretora(new_corr).catch(err => logger.error(err));
 
-return db_corr.ops[0];
+  return db_corr.ops[0];
 }
 
 function validate_corretora(corretora) {
@@ -39,4 +39,29 @@ function validate_corretora(corretora) {
   return {"valid":true};
 }
 
-module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora};
+async function get_corretora_by_nickname(nickname){
+  let cache_corr = cache.get(`nickname:${nickname}`);
+
+  if (cache_corr){
+    return cache_corr;
+  }else {
+    let all_corr = await get_corretoras();
+
+    let corretora = all_corr.find(corr_obj =>{
+      if(!corr_obj.nicknames){
+        return false;
+      }
+
+      return (corr_obj.nicknames.includes(nickname));
+    });
+
+    cache.set(`nickname:${nickname}`, corretora)
+
+    return corretora;
+  }
+}
+
+
+
+
+module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora, get_corretora_by_nickname};

@@ -100,10 +100,25 @@ router.post('/:id/edit', async(req,res) => {
 
   db_opportunity = await controller.get_opportunity_by_id(req.params.id);
 
-  let obj_editado = Object.fromEntries(Object.entries(db_opportunity).map(([key, value]) =>{
-    return [key, req_opportunity[key] || value];
-  }));
+  // Editando objeto
+  let entradas_editadas = Object.entries(db_opportunity)
+  .map(([key, value]) =>{ return [key, req_opportunity[key] || value]; })
 
+  let entradas_novas = Object.entries(req_opportunity).filter(([key,value]) => {
+    let existente = entradas_editadas.find(([key_e, value_e]) => {
+      return key_e === key;
+    })
+    return existente === undefined;
+  })
+
+  for (var i = 0; i < entradas_novas.length; i++) {
+    entradas_editadas.push(entradas_novas[i])
+  }
+
+
+  let obj_editado = Object.fromEntries(entradas_editadas);
+
+  // Validando objeto editado
   let validacao_opp = await controller.validate_opportunity(obj_editado);
 
   if(!validacao_opp.valid){

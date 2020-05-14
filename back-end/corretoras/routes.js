@@ -21,11 +21,13 @@ router.get ('/all', async (req,res) => {
 router.get('/:id', async(req,res) => {
   let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
-  let colab_info = await colaborador_controller.get_colaboradores_corretora(req.params.id, db_corretora.manager._id || db_corretora.manager);
+  if(db_corretora.manager){
+    let colab_info = await colaborador_controller.get_colaboradores_corretora(req.params.id, db_corretora.manager._id || db_corretora.manager);
 
-  db_corretora.colaboradores = colab_info.colaboradores;
+    db_corretora.colaboradores = colab_info.colaboradores;
 
-  db_corretora.manager = colab_info.manager;
+    db_corretora.manager = colab_info.manager;
+  }
 
   res.status(200).json(db_corretora);
 });
@@ -50,7 +52,7 @@ router.post('/new', async(req,res) => {
       return res.status(400).json({"message": validacao_colab.message});
     }
 
-    let db_corretora = controller.register_corretora(new_corretora)
+    let db_corretora = await controller.register_corretora(new_corretora)
 
     corretor_responsavel.corretora = db_corretora._id;
     corretor_responsavel.active = true;
@@ -72,10 +74,25 @@ router.post('/:id/edit', async(req,res) => {
 
   let db_corretora = await controller.get_corretora_by_id(req.params.id);
 
-  let obj_editado = Object.fromEntries(Object.entries(db_corretora).map(([key, value]) =>{
-    return [key, req_corretora[key] || value];
-  }));
+  // edição de objeto
+  let entradas_editadas = Object.entries(db_corretora)
+  .map(([key, value]) =>{ return [key, req_corretora[key] || value]; })
 
+  let entradas_novas = Object.entries(req_corretora).filter(([key,value]) => {
+    let existente = entradas_editadas.find(([key_e, value_e]) => {
+      return key_e === key;
+    })
+    return existente === undefined;
+  })
+
+  for (var i = 0; i < entradas_novas.length; i++) {
+    entradas_editadas.push(entradas_novas[i])
+  }
+
+
+  let obj_editado = Object.fromEntries(entradas_editadas);
+
+  // Validando objeto novo
   let validacao = await controller.validate_corretora(obj_editado);
 
   if(!validacao.valid){

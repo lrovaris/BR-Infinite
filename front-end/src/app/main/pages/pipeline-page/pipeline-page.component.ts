@@ -135,23 +135,28 @@ export class PipelinePageComponent implements OnInit {
 
     };
     console.log(newOportunidade);
-    if (this.isEdit) {
-      let oportunidade = this.pipelineService.getOportunidadeWIthOutForm();
-      this.pipelineService.editPostOportunidade(oportunidade._id, newOportunidade);
-    } else if (!this.isEdit){
       const files: Array<File> = this.filesToUpload;
-      for(let i =0; i < files.length; i++){
-        this.formData.append('docs', files[i]);
-      }
+    for(let i =0; i < files.length; i++) {
+      this.formData.append('docs', files[i]);
+    }
       this.pipelineService.postUpload(this.formData).subscribe((data: any) => {
         console.log(data);
-        newOportunidade['files'] = data.info_files;
-        this.pipelineService.postOportunidade(newOportunidade).subscribe((data:any) => {
-          alert(data.message)
-        })
+        for(let i = 0; i < data.info_files.length; i++) {
+          this.Files.push(data.info_files[i]);
+        }
+        newOportunidade['files'] = this.Files;
+        if (this.isEdit) {
+          let oportunidade = this.pipelineService.getOportunidadeWIthOutForm();
+          this.pipelineService.editPostOportunidade(oportunidade._id, newOportunidade)
+        } else if (!this.isEdit) {
+          this.pipelineService.postOportunidade(newOportunidade).subscribe((data:any) => {
+            alert(data.message);
+            this.router.navigate(['pipeline'])
+          })
+        }
       });
 
-    }
+
    // this.oportunidade.reset();
   };
 
@@ -176,8 +181,7 @@ export class PipelinePageComponent implements OnInit {
               if(this.pipelineService.getOportunidadeWIthOutForm()) {
                 this.isEdit = true;
                 let data = this.pipelineService.getOportunidadeWIthOutForm();
-                console.log(data);
-
+                this.Files = data.files;
                 this.selectColaborador(data.corretora._id || data.corretora)
 
                 this.CongenereList = data.congenereList;

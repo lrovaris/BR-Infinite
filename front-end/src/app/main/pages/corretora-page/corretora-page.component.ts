@@ -5792,6 +5792,9 @@ export class CorretoraPageComponent implements OnInit {
   id: any;
   colaboradores = [];
   checkColaborador = false;
+  Files = [];
+  filesToUpload: Array<File> = [];
+  formData: any = new FormData();
 
   SelectCidade(estado) {
     this.cidades = [];
@@ -5800,6 +5803,17 @@ export class CorretoraPageComponent implements OnInit {
         this.cidades = Estados[i].cidades;
       }
     }
+  }
+
+  removeFile(nome){
+    let index = this.filesToUpload.indexOf(nome);
+    if (index !== -1) this.filesToUpload.splice(index, 1);
+  }
+
+
+  upload(event: any) {
+    let newFile = event.target.files[0];
+    this.filesToUpload.push(newFile);
   }
 
   constructor(
@@ -5878,7 +5892,7 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   postColaborador() {
-    console.log('fui chamado')
+    console.log('fui chamado');
     this.submitted = true;
     if (this.colaborador.invalid) {
       return;
@@ -5919,6 +5933,7 @@ export class CorretoraPageComponent implements OnInit {
       alert('Formulário Inválido, por favor verifique ');
       return;
     }
+
     if(this.isEdit) {
       this.seguradoras = this.seguradoraService.getSeguradoras();
     }
@@ -5938,13 +5953,25 @@ export class CorretoraPageComponent implements OnInit {
       },
       seguradoras: this.seguradoras
     };
-    if (this.isEdit) {
-      let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-      this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel);
-    } else if (!this.isEdit){
-      this.responsavel = this.colaboradorService.getColaboradorResponsavel();
-      this.corretoraService.postCorretora(newCorretora, this.responsavel);
+    this.responsavel = this.colaboradorService.getColaboradorResponsavel();
+    const files: Array<File> = this.filesToUpload;
+    for(let i =0; i < files.length; i++) {
+      this.formData.append('docs', files[i]);
     }
+      this.corretoraService.postUpload(this.formData).subscribe((data: any) => {
+        console.log(data);
+        for(let i = 0; i < data.info_files.length; i++) {
+          this.Files.push(data.info_files[i]);
+        }
+        newCorretora['files'] = this.Files;
+        if (this.isEdit) {
+          let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+          this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel)
+        } else if (!this.isEdit) {
+          console.log(this.responsavel);
+          this.corretoraService.postCorretora(newCorretora, this.responsavel)
+        }
+      });
     this.corretora.reset();
   };
 

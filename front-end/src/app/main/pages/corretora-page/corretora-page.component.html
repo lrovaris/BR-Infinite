@@ -24,7 +24,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="userinput1">Nome da corretora</label>
+                        <label for="userinput1">Nome da corretora *</label>
                         <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
                       </div>
                     </div>
@@ -264,6 +264,91 @@
           </div>
         </div><!--CARD-->
         <app-colaborador-page></app-colaborador-page>
+
+        <div class="card">
+          <div class="card-header">
+
+          </div>
+          <div class="card-content">
+            <div class="col">
+              <div class="row">
+                <div class="col-md-6">
+                  <fieldset class="form-group">
+                    <label for="upload">Upload de Arquivos</label>
+                    <div class="custom-file  mx-auto d-block ">
+                      <input  (change)="upload($event)" type="file" class="custom-file-input" id="upload">
+                      <label class="custom-file-label" for="upload">Escolha um arquivo</label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <section id="simple">
+                    <div class="row text-left">
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4>Arquivos a serem carregados</h4>
+                          </div>
+                          <div class="card-content">
+                            <div class="card-body">
+                              <table class="table">
+                                <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Nome</th>
+                                  <th>Remover</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let file of filesToUpload; let i = index">
+                                  <th>{{i+1}}</th>
+                                  <td>{{file.name}}</td>
+                                  <td style="cursor: pointer" (click)="removeFile(file)"><i class="icon-trash text-danger text-bold-700"></i></td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6" *ngIf="Files.length > 0">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4>Arquivos no Servidor</h4>
+                          </div>
+                          <div class="card-content">
+                            <div class="card-body">
+                              <table class="table">
+                                <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>Nome</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let file of Files; let i = index">
+                                  <th>{{i+1}}</th>
+                                  <td>{{file.nome}}</td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div class="card">
           <div class="card-header">

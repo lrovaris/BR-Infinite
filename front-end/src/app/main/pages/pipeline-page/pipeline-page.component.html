@@ -16,14 +16,9 @@
                 <div class="form-body">
                   <h4 class="form-section"><i class="ft-info"></i>Informções da Oportunidade</h4>
                   <div class="row">
-                    <div class="col-sm-12 col-md-4 col-sm-12"></div>
-                    <div class="col-sm-12 col-md-4 col-sm-12"></div>
-                    <div class="col-sm-12 col-md-4 col-sm-12"></div>
-                  </div>
-                  <div class="row">
                     <div class="col-sm-12 col-md-4">
                       <fieldset class="form-group">
-                        <label for="corretora">Corretora</label>
+                        <label for="corretora">Corretora *</label>
                         <select (change)="selectColaborador(selectCorretora.value)" #selectCorretora class="form-control border-primary" id="corretora" formControlName="corretora">
                           <option  [value]="corretora._id" *ngFor="let corretora of Corretoras">{{corretora.name}}</option>
                         </select>
@@ -31,7 +26,7 @@
                     </div>
                     <div class="col-sm-12 col-md-5">
                       <fieldset class="form-group">
-                        <label for="solicitante">Solicitante</label>
+                        <label for="solicitante">Solicitante *</label>
                         <select class="form-control border-primary" id="solicitante" formControlName="solicitante">
                           <!-- <option [value]="oportunidade.value.solicitante._id" *ngIf="isEdit">{{oportunidade.value.solicitante.name}}</option> -->
                           <option [value]="colaborador._id" *ngFor="let colaborador of Colaboradores">{{colaborador.name}}</option>
@@ -40,7 +35,7 @@
                     </div>
                     <div class="col-sm-12 col-md-3">
                       <fieldset class="form-group">
-                        <label for="basicSelect">Detentor?</label>
+                        <label for="basicSelect">Detentor? *</label>
                         <select class="form-control border-primary" id="basicSelect" formControlName="detentor">
                           <option value="Sim">Sim</option>
                           <option value="Nao">Não</option>
@@ -65,7 +60,7 @@
                   <div class="row">
                     <div class="col-sm-12 col-md-3">
                       <fieldset class="form-group">
-                        <label for="produto">Produto</label>
+                        <label for="produto">Produto *</label>
                         <select class="form-control border-primary" id="produto" formControlName="produto">
                           <option [value]="produto._id" *ngFor="let produto of Produtos">{{produto.name}}</option>
                         </select>
@@ -79,7 +74,7 @@
                     </div>
                     <div class="col-sm-12 col-md-2">
                       <fieldset class="form-group">
-                        <label for="tipoNegocio">Tipo de Negócio</label>
+                        <label for="tipoNegocio">Tipo de Negócio *</label>
                         <select #selectElement class="form-control border-primary" id="tipoNegocio" formControlName="tipoNegocio">
                           <option value="Novo">Novo</option>
                           <option value="Renovação">Renovação</option>
@@ -170,7 +165,7 @@
                   <div class="row">
                     <div class="col-sm-12 col-md-5">
                       <fieldset class="form-group">
-                        <label for="seguradora">Seguradora / BrInfinite</label>
+                        <label for="seguradora">Seguradora / BrInfinite *</label>
                         <select formControlName="seguradora" class="form-control border-primary" id="seguradora">
                           <option [value]="seguradora._id" *ngFor="let seguradora of Seguradoras">{{seguradora.name}}</option>
                         </select>
@@ -199,7 +194,7 @@
                   <div class="row">
                     <div class="col-sm-12 col-md-3">
                       <fieldset class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status">Status *</label>
                         <select formControlName="status" class="form-control border-primary" id="status">
                           <option value="Em análise">Em análise</option>
                           <option value="Fechado">Fechado</option>
@@ -227,12 +222,15 @@
                     </div>
                   </div>
 
-                  <div class="row" *ngIf=" (filesToUpload.length > 0)">
+                  <div class="row">
                     <div class="col">
                       <section id="simple">
                         <div class="row text-left">
                           <div class="col-sm-6">
                             <div class="card">
+                              <div class="card-header">
+                                <h4>Arquivos a serem carregados</h4>
+                              </div>
                               <div class="card-content">
                                 <div class="card-body">
                                   <table class="table">
@@ -255,9 +253,38 @@
                               </div>
                             </div>
                           </div>
+
+                          <div class="col-sm-6" *ngIf="Files.length > 0">
+                            <div class="card">
+                              <div class="card-header">
+                                <h4>Arquivos no Servidor</h4>
+                              </div>
+                              <div class="card-content">
+                                <div class="card-body">
+                                  <table class="table">
+                                    <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Nome</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let file of Files; let i = index">
+                                      <th>{{i+1}}</th>
+                                      <td>{{file.nome}}</td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </section>
                     </div>
+
+
                   </div>
 
 

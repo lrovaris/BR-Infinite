@@ -77,6 +77,10 @@ export class ColaboradorService {
     this.ColaboradorResponsavel = null;
   }
 
+  getColaboradorBackEnd() {
+    return this.colaboradorBackEnd;
+  }
+
   setIsResponsibleFalse() {
     this.isResponsible = false;
   }
@@ -85,6 +89,12 @@ export class ColaboradorService {
   }
   getIsResponsible() {
     return this.isResponsible;
+  }
+
+  desactiveColaborador(id){
+    this.http.post(`${this.url}/colaboradores/${id}/delete`, {}).subscribe((data: any) => {
+      alert(data.message)
+    })
   }
 
   setColaboradorResponsavel(colaborador, newColaborador) {

@@ -5827,6 +5827,7 @@ export class SeguradoraPageComponent implements OnInit {
   ) {
     this.seguradora = this.formbuilder.group({
       name: [null, Validators.required],
+      InscricaoEstadual: [null],
       telephone: [null],
       cnpj: [null],
       estate: [null],
@@ -5866,6 +5867,7 @@ export class SeguradoraPageComponent implements OnInit {
       telephone: this.seguradora.value.telephone,
       cnpj: this.seguradora.value.cnpj,
       email: this.seguradora.value.email,
+      InscricaoEstadual: this.seguradora.value.InscricaoEstadual,
       address: {
         estate: this.seguradora.value.estate,
         city: this.seguradora.value.city,
@@ -5890,6 +5892,16 @@ export class SeguradoraPageComponent implements OnInit {
     }
     this.seguradora.reset();
   };
+
+ async desactiveColaborador(id) {
+  await this.colaboradorService.desactiveColaborador(id);
+  this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {
+    this.colaboradores = data.colaboradores;
+    this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {
+      this.colaboradores = data.colaboradores;
+    })
+  })
+  }
 
   postColaborador() {
     this.submitted = true;

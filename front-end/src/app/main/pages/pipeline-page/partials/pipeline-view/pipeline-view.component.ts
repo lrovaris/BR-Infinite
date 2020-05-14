@@ -71,7 +71,7 @@ export class PipelineViewComponent implements OnInit {
         };
       })
       .catch(function(error) {
-        // Error Handling
+
       });
   }
 

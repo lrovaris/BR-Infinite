@@ -55,7 +55,7 @@ export class SeguradoraService {
   }
 
   getSeguradora(id) {
-    return this.http.get(`${this.url}/seguradoras/${id}`)
+    return  this.http.get(`${this.url}/seguradoras/${id}`)
   }
 
   getAllSeguradoras() {
@@ -79,6 +79,8 @@ export class SeguradoraService {
   getSeguradoraInfo() {
     return this.seguradoraInfo;
   }
+
+
 
   postSeguradora(seguradora, responsavel){
     let manager = responsavel.value;

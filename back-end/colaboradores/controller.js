@@ -102,7 +102,7 @@ function validate_colaborador(colaborador){
 async function register_colaborador(new_colab){
   let db_colab = await db.register_colaborador(new_colab).catch(err => console.error(err));
 
-  return db_colab.ops[0];
+  return db_colab;
 }
 
 module.exports = {

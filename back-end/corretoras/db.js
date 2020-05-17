@@ -24,7 +24,7 @@ async function register_corretora(new_corretora) {
 
   logger.log("Corretora nova cadastrada");
 
-  return new_corr;
+  return new_corr.ops[0];
 }
 
 async function update_corretora(corretora) {
@@ -36,7 +36,7 @@ async function update_corretora(corretora) {
 
   await get_corretoras();
 
-  return updated_corr;
+  return updated_corr.ops[0];
 }
 
 module.exports = { get_corretoras, update_corretora, register_corretora };

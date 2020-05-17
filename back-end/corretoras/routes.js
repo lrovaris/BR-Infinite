@@ -38,7 +38,7 @@ router.post('/new', async(req,res) => {
 
     let new_corretora = req.body.corretora;
 
-    let validacao_corr = controller.validate_corretora(new_corretora);
+    let validacao_corr = await controller.validate_corretora(new_corretora);
 
     if(!validacao_corr.valid){
       return res.status(400).json({"message":validacao_corr.message});
@@ -61,9 +61,13 @@ router.post('/new', async(req,res) => {
 
     db_corretora["manager"] = new_colab.insertedId;
 
-    await db.update_corretora(db_corretora).catch(err => logger.error(err));
+    let db_corr_to_send = await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
-    res.status(200).json({"message":"Corretora e gerente cadastrados com sucesso!"});
+    res.status(200).json({
+      message:"Corretora e gerente cadastrados com sucesso!",
+      corretora: db_corr_to_send,
+      manager: new_colab
+    });
 });
 
 

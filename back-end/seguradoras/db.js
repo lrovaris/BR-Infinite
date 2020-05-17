@@ -24,7 +24,7 @@ async function register_seguradora(new_seguradora) {
 
   logger.log("Seguradora nova cadastrada");
 
-  return new_seg;
+  return new_seg.ops[0];
 }
 
 async function update_seguradora(seguradora) {
@@ -36,7 +36,7 @@ async function update_seguradora(seguradora) {
 
   await get_seguradoras();
 
-  return updated_seg;
+  return updated_seg.ops[0];
 }
 
 module.exports = { get_seguradoras, update_seguradora, register_seguradora };

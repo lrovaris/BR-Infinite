@@ -34,7 +34,7 @@ async function register_colaborador(new_colaborador) {
   logger.log("Colaborador novo cadastrado");
 
   // Retornando o novo colaborador
-  return new_colab;
+  return new_colab.ops[0];
 }
 
 async function update_colaborador(colaborador) {
@@ -46,7 +46,7 @@ async function update_colaborador(colaborador) {
 
    await get_colaboradores();
 
-   return edited_colab;
+   return edited_colab.ops[0];
 }
 
 module.exports = { get_colaboradores, update_colaborador, register_colaborador };

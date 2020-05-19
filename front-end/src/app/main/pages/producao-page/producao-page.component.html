@@ -1,1 +1,38 @@
-<p>producao-page works!</p>
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4>Produçao</h4>
+                </div>
+                <div class="col-sm-12 col-md-8">
+                  <button (click)="navigateEnviarAnexo()" style="margin-top: -1px" class="btn btn-header float-right">
+                    <a>Enviar Anexo</a>
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <fieldset class="form-group">
+                    <label for="seguradora">Seguradora</label>
+                    <select #seguradoraSelect class="form-control border-primary" id="seguradora">
+                      <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+
+    </div>
+  </div>
+</div>

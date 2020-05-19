@@ -98,7 +98,12 @@ export class PipelinePageComponent implements OnInit {
     let mes  = data.split("-")[1];
     let dia  = data.split("-")[2];
 
-    return dia + '/' + (mes) + '/' + (ano)
+    if ((mes) && (dia)) {
+      return dia + '/' + (mes) + '/' + (ano)
+    } else {
+      return ano;
+    }
+
     // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
   }
 

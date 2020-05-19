@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProducaoService {
+
+  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
+
+  constructor(private http: HttpClient) { }
+
+  enviarAnexo(file) {
+    return this.http.post(`${this.url}/production/upload`, file);
+  }
+
+  postProducao(producao) {
+    return this.http.post(`${this.url}/production/new`, producao);
+  }
+
+}

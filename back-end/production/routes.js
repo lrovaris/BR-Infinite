@@ -25,6 +25,10 @@ router.post('/new', async(req,res) => {
 
     let this_seguradora = req.body.seguradora;
 
+    if(new_entry_path === undefined){
+      return res.status(400).json({"message":"Caminho indefinido"})
+    }
+
     if(this_seguradora === undefined){
       return res.status(400).json({"message":"Seguradora inválida"});
     }
@@ -37,12 +41,16 @@ router.post('/new', async(req,res) => {
 
     let seg_id = seg_obj._id.toString();
 
+
     let current_date = new Date();
     let entries = [];
     let valid = true;
     let message;
 
-    fs.createReadStream("./uploads/production/"+new_entry_path)
+    let path_to_file = `./uploads/production/${new_entry_path}`;
+
+    if (fs.existsSync(path_to_file)){
+      fs.createReadStream(path_to_file)
       .pipe(csv())
       .on('data', async(row) => {
 
@@ -69,6 +77,10 @@ router.post('/new', async(req,res) => {
         }
 
       });
+
+    }else {
+      res.status(400).json({"message":"Caminho inválido"});
+    }
 });
 
 

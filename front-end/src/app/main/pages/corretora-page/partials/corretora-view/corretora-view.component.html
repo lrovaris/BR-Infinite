@@ -157,6 +157,52 @@
                 </div>
 
 
+
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="nickname">Apelidos</label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row" *ngIf="corretora.nicknames.length > 0">
+                  <div class="col">
+                    <section id="apelidos-table">
+                      <div class="row text-left">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="card-body">
+                                <table class="table">
+                                  <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Apelido</th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr *ngFor="let apelido of corretora.nicknames; let i = index">
+                                    <th>{{i+1}}</th>
+                                    <td>{{apelido}}</td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+
+
+
+
                 <h4 class="form-section"><i class="ft-cloud"></i> Arquivos na Nuvem </h4>
                 <div class="row">
                   <div class="col-md-12">

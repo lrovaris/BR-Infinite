@@ -159,25 +159,25 @@ export class ColaboradorPageComponent implements OnInit {
   ngOnInit() {
     let isCorretora = this.colaboradorService.getIsCorretora();
     let isSeguradora = this.colaboradorService.getIsSeguradora();
-    console.log(isSeguradora);
+
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.localDeTrabalho = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+
     } else if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
-       this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-       console.log(this.localDeTrabalho);
+      this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
     }
-      if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
-        console.log(this.localDeTrabalho);
-      this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
-        this.colaborador.controls['name'].setValue(data.name);
-        this.colaborador.controls['telephone'].setValue(data.telephone);
-        this.colaborador.controls['email'].setValue(data.email);
-        this.colaborador.controls['birthday'].setValue(data.birthday);
-        this.colaborador.controls['job'].setValue(data.job);
-        this.colaborador.controls['corretora'].setValue(data.corretora);
-        this.colaborador.controls['seguradora'].setValue(data.seguradora);
-      });
-    }
+
+    this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
+      this.colaborador.controls['name'].setValue(data.name);
+      this.colaborador.controls['telephone'].setValue(data.telephone);
+      this.colaborador.controls['email'].setValue(data.email);
+      this.colaborador.controls['birthday'].setValue(data.birthday);
+      this.colaborador.controls['job'].setValue(data.job);
+      this.colaborador.controls['corretora'].setValue(data.corretora);
+      this.colaborador.controls['seguradora'].setValue(data.seguradora);
+    });
+
+
     if (isCorretora.isCorretora) {
       this.selectIndex = 1;
       this.selectTriggered = true;

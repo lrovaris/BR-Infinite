@@ -38,11 +38,9 @@ export class ListCorretoraComponent implements OnInit {
       this.corretoras = prod_data;
       this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
         this.seguradoras = seg_data;
-        console.log(this.seguradoras);
         this.corretoras = this.corretoras.map(prod => {
 
           prod.seguradoras = prod.seguradoras.map(prod_seg => {
-            console.log(prod_seg);
             let seg = this.seguradoras.find(seg_data => prod_seg.toString() === seg_data._id.toString());
 
             return {
@@ -54,7 +52,6 @@ export class ListCorretoraComponent implements OnInit {
           });
           return prod;
         });
-        console.log(this.corretoras);
       });
     });
   }

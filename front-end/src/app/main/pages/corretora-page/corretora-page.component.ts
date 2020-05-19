@@ -5923,9 +5923,6 @@ export class CorretoraPageComponent implements OnInit {
       return;
     }
 
-    if(this.isEdit) {
-      this.seguradoras = this.seguradoraService.getSeguradoras();
-    }
     let newCorretora = {
       name: this.corretora.value.name,
       email: this.corretora.value.email,
@@ -5943,27 +5940,48 @@ export class CorretoraPageComponent implements OnInit {
       },
       seguradoras: this.seguradoras
     };
+
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
+
     const files: Array<File> = this.filesToUpload;
+
     for(let i =0; i < files.length; i++) {
       this.formData.append('docs', files[i]);
     }
-      this.corretoraService.postUpload(this.formData).subscribe((data: any) => {
-        console.log(data);
-        for(let i = 0; i < data.info_files.length; i++) {
-          this.Files.push(data.info_files[i]);
-        }
-        newCorretora['files'] = this.Files;
-        if (this.isEdit) {
-          let corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-          this.corretoraService.editPostCorretora(corretora._id, newCorretora, this.responsavel)
-        } else if (!this.isEdit) {
-          console.log(this.responsavel);
-          this.corretoraService.postCorretora(newCorretora, this.responsavel)
-        }
-      });
-    this.corretora.reset();
+
+    this.corretoraService.postUpload(this.formData).subscribe((data: any) => {
+
+      for(let i = 0; i < data.info_files.length; i++) {
+        this.Files.push(data.info_files[i]);
+      }
+
+      newCorretora['files'] = this.Files;
+
+      if (this.isEdit) {
+
+        console.log(this.corretoraService.getcorretoraInfoWithOutFormGroup());
+        console.log(this.responsavel);
+
+        let this_id = this.corretoraService.getCorretoraId();
+        this.corretoraService.editPostCorretora(this_id, newCorretora, this.responsavel)
+      }
+
+      else if (!this.isEdit) {
+
+        this.corretoraService.postCorretora(newCorretora, this.responsavel).subscribe((data:any) => {
+          console.log(data);
+
+          alert(data.message);
+          this.router.navigate(['corretora']);
+        })
+      }
+
+    });
+
+
   };
+
+
 
   adicionarApelido() {
     this.apelidos.push(this.corretora.value.nicknames);

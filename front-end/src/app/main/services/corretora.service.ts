@@ -29,6 +29,10 @@ export class CorretoraService {
     return this.corretoraInfoWithOutFormGroup;
   }
 
+  getCorretoraId(){
+    return this.corretoraInfoWithOutFormGroup._id;
+  }
+
   postUpload(file) {
     return this.http.post(`${this.url}/corretoras/upload`, file);
   }
@@ -47,16 +51,14 @@ export class CorretoraService {
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options).subscribe((data:any) => {
-      alert(data.message);
-      this.router.navigate(['corretora']);
-    })
+    return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options)
   }
 
   editPostCorretora(id, corretora, responsavel){
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
+    
     return this.http.post(`${this.url}/corretoras/${id}/edit`, corretora, options).subscribe((data:any) => {
       alert(data.message);
       this.isEdit = false;

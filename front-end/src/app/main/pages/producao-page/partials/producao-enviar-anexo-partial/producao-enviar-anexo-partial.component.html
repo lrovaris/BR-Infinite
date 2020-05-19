@@ -1,0 +1,91 @@
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="col-sm-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4>Produçao</h4>
+                </div>
+                <div class="col-sm-12 col-md-8">
+                  <button (click)="navigateBack()" style="margin-top: -1px" class="btn btn-header float-right">
+                    <a>Voltar</a>
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <fieldset class="form-group">
+                    <label for="seguradora">Seguradora</label>
+                    <select  #seguradoraSelect class="form-control border-primary" id="seguradora">
+                      <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <fieldset class="form-group">
+                    <label for="upload">Upload de Arquivos</label>
+                    <div class="custom-file  mx-auto d-block ">
+                      <input  (change)="upload($event)" type="file" class="custom-file-input" id="upload">
+                      <label class="custom-file-label" for="upload">Escolha um arquivo</label>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6" *ngIf="filesToUpload.length > 0">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4>Arquivo a ser carregado</h4>
+                    </div>
+                    <div class="card-content">
+                      <div class="card-body">
+                        <table class="table">
+                          <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Remover</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let file of filesToUpload; let i = index">
+                            <th>{{i+1}}</th>
+                            <td>{{file.name}}</td>
+                            <td style="cursor: pointer" (click)="removeFile(file)"><i class="icon-trash text-danger text-bold-700"></i></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <button (click)="enviarAnexo(seguradoraSelect.value)" style="margin-top: -1px" class="btn btn-header">
+                    <a>Enviar</a>
+                  </button>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-body">
+
+    </div>
+  </div>
+</div>

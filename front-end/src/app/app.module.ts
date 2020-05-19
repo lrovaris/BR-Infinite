@@ -25,6 +25,7 @@ import { CorretoraViewComponent } from './main/pages/corretora-page/partials/cor
 import { ProdutoViewComponent } from './main/pages/produtos-page/partials/produto-view/produto-view.component';
 import { PipelineViewComponent } from './main/pages/pipeline-page/partials/pipeline-view/pipeline-view.component';
 import { PipelineListComponent } from './main/pages/pipeline-page/partials/pipeline-list/pipeline-list.component';
+import { ProducaoEnviarAnexoPartialComponent } from './main/pages/producao-page/partials/producao-enviar-anexo-partial/producao-enviar-anexo-partial.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PipelineListComponent } from './main/pages/pipeline-page/partials/pipel
     CorretoraViewComponent,
     ProdutoViewComponent,
     PipelineViewComponent,
-    PipelineListComponent
+    PipelineListComponent,
+    ProducaoEnviarAnexoPartialComponent
   ],
   imports: [
     BrowserModule,

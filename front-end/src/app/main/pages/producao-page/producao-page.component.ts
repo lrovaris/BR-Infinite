@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SeguradoraService} from "../../services/seguradora.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-producao-page',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProducaoPageComponent implements OnInit {
 
-  constructor() { }
+  allSeguradoras = [];
+
+  constructor(private seguradoraService: SeguradoraService, private router: Router) { }
+
+  navigateEnviarAnexo() {
+    this.router.navigate(['producao/enviar']);
+  }
 
   ngOnInit() {
+    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
+      this.allSeguradoras = data;
+    });
   }
 
 }

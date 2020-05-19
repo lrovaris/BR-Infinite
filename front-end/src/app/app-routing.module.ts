@@ -40,7 +40,6 @@ const routes: Routes = [
   { path: 'colaborador', component: ColaboradorPageComponent },
   { path: 'producao', component: ProducaoPageComponent },
   { path: 'producao/enviar', component: ProducaoEnviarAnexoPartialComponent }
-
 ];
 
 @NgModule({

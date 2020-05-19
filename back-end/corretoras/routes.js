@@ -38,7 +38,7 @@ router.post('/new', async(req,res) => {
 
     let new_corretora = req.body.corretora;
 
-    let validacao_corr = controller.validate_corretora(new_corretora);
+    let validacao_corr = await controller.validate_corretora(new_corretora);
 
     if(!validacao_corr.valid){
       return res.status(400).json({"message":validacao_corr.message});
@@ -61,9 +61,13 @@ router.post('/new', async(req,res) => {
 
     db_corretora["manager"] = new_colab.insertedId;
 
-    await db.update_corretora(db_corretora).catch(err => logger.error(err));
+    let db_corr_to_send = await db.update_corretora(db_corretora).catch(err => logger.error(err));
 
-    res.status(200).json({"message":"Corretora e gerente cadastrados com sucesso!"});
+    res.status(200).json({
+      message:"Corretora e gerente cadastrados com sucesso!",
+      corretora: db_corr_to_send,
+      manager: new_colab
+    });
 });
 
 
@@ -149,6 +153,22 @@ router.post('/download', async(req,res)=>{
   }
 
   res.download(`./uploads/corretoras/${to_download.path}`)
+})
+
+router.post('/deleteFile', async(req,res)=>{
+  let to_delete = req.body;
+
+  if(!to_delete.path){
+    res.status(400).json({message: "Caminho para imagem inválido"})
+  }
+
+  try {
+    fs.unlinkSync(`./uploads/corretoras/${to_delete.path}`)
+    res.status(200).json({message:"Arquivo deletado com sucesso"})
+  } catch(err) {
+    logger.error(err)
+    res.status(500).json({message:"Ocorreu um erro", erro:err})
+  }
 })
 
 module.exports = router;

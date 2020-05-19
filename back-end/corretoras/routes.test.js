@@ -20,13 +20,13 @@ describe('Corretoras Routes', () => {
         telephone:"999219075",
         email:"colaborador@legal.com",
         birthday: "today",
-        job:"meter o loco"
+        job:"testar paradas"
       }
     })
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"message":"Corretora e gerente cadastrados com sucesso!"});
+    expect(res.body.message).toEqual("Corretora e gerente cadastrados com sucesso!");
   })
 
 
@@ -48,7 +48,48 @@ describe('Corretoras Routes', () => {
 
     corretinha2 = corretoras_req2.find(corr => corr._id.toString() === corr_id.toString());
 
-    expect(corretinha2.name = "corretona");
+    expect(corretinha2.name).toEqual("corretona");
+  })
+
+  it('deveria tentar registrar duas corretoras e falhar na segunda pelo apelido estar em uso', async () => {
+    await request(app).post('/corretoras/new').send({
+      corretora: { name:"Corretora para testar o apelido", nicknames:["apelidada", "testadora"] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    let res = await request(app).post('/corretoras/new').send({
+      corretora: { name:"Segunda corretora para testar o apelido", nicknames:["testadora"] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    expect(res.body.message).toEqual("Apelido em uso");
+    expect(res.status).toEqual(400);
+  })
+
+  it('deveria tentar registrar duas corretoras, conseguir, tentar editar a segunda e falhar pelo apelido estar em uso', async () => {
+    await request(app).post('/corretoras/new').send({
+      corretora: { name:"Corretora para testar o apelido", nicknames:["corretora_testadora"] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    let res = await request(app).post('/corretoras/new').send({
+      corretora: { name:"Segunda corretora para testar o apelido" },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    let corr_id = res.body.corretora._id;
+
+    expect(res.status).toEqual(200);
+
+    const edit = await request(app).post(`/corretoras/${corr_id}/edit`).send({
+      nicknames:[
+        "testante",
+        "corretora_testadora"
+      ]
+    })
+
+    expect(edit.body.message).toEqual("Apelido em uso");
+    expect(edit.status).toEqual(400);
   })
 
 })

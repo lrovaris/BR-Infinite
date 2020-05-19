@@ -5,6 +5,7 @@ const cache = require('../memoryCache');
 const logger = require('../logger');
 const controller = require('./controller')
 const multer  = require('multer')
+const fs = require('fs');
 
 const corretora_controller = require('../corretoras/controller')
 const colaborador_controller = require('../colaboradores/controller')
@@ -173,6 +174,22 @@ router.post('/download', async(req,res)=>{
   }
 
   res.download(`./uploads/oportunidades/${to_download.path}`)
+})
+
+router.post('/deleteFile', async(req,res)=>{
+  let to_delete = req.body;
+
+  if(!to_delete.path){
+    res.status(400).json({message: "Caminho para imagem inválido"})
+  }
+
+  try {
+    fs.unlinkSync(`./uploads/oportunidades/${to_delete.path}`)
+    res.status(200).json({message:"Arquivo deletado com sucesso"})
+  } catch(err) {
+    logger.error(err)
+    res.status(500).json({message:"Ocorreu um erro", erro:err})
+  }
 })
 
 module.exports = router;

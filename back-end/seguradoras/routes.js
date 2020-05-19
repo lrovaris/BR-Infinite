@@ -59,7 +59,7 @@ router.post('/new', async(req,res) => {
     let db_colab = await colaborador_db.register_colaborador(gerente).catch(err => {logger.log(err);});
 
     // Modificando o objeto da seguradora com as informações do gerente
-    db_seg["manager"] = db_colab.insertedId;
+    db_seg["manager"] = db_colab._id;
     await db.update_seguradora(db_seg).catch(err => logger.error(err));
 
     // Enviando resposta de operação bem-sucedida

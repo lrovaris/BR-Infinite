@@ -35,13 +35,6 @@ function validate_produto(new_produto) {
     };
   }
 
-  if (!new_produto.description){
-    return {
-      "valid": false,
-      "message": "Campo de descrição vazio"
-    };
-  }
-
   if (!new_produto.seguradoras){
     return {
       "valid": false,

@@ -19,7 +19,7 @@ async function get_seguradora_by_id(seg_id){
 async function register_seguradora(new_seg){
   let db_seg = await db.register_seguradora(new_seg).catch(err => logger.error(err));
 
-  return db_seg.ops[0];
+  return db_seg;
 }
 
 async function validate_seguradora(seguradora){

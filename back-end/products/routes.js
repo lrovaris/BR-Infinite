@@ -46,9 +46,7 @@ router.post('/:id/edit', async(req,res) => {
 
   req_produto['_id'] = req.params.id;
 
-  let db_produto = cache.get("produtos").filter((produto_obj) => {
-      return produto_obj._id == req_produto._id;
-  })[0];
+  let db_produto = await controller.get_produto_by_id(req.params.id)
 
   // Editando objeto
   let entradas_editadas = Object.entries(db_produto)
@@ -69,14 +67,12 @@ router.post('/:id/edit', async(req,res) => {
   let obj_editado = Object.fromEntries(entradas_editadas);
 
   // Salvando objeto editado
-  let edited_produto = await db.update_produto(db_produto).catch(err => logger.error(err));
+  let edited_produto = await db.update_produto(obj_editado).catch(err => logger.error(err));
 
-  to_send = {
+  res.status(200).json({
     message: "Produto editado com sucesso!",
     product: edited_produto.ops[0]
-  }
-
-  res.status(200).json(to_send);
+  });
 });
 
 module.exports = router;

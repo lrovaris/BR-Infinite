@@ -18,14 +18,40 @@ async function get_corretora_by_id(corr_id) {
 async function register_corretora(new_corr){
   let db_corr = await db.register_corretora(new_corr).catch(err => logger.error(err));
 
-  return db_corr.ops[0];
+  return db_corr;
 }
 
-function validate_corretora(corretora) {
+async function validate_corretora(corretora) {
   if (corretora === undefined){
     return{
       "valid": false,
       "message": "Corretora inválida"
+    }
+  }
+
+  if(corretora.nicknames){
+    for (var i = 0; i < corretora.nicknames.length; i++) {
+
+      let nic_corr = await get_corretora_by_nickname(corretora.nicknames[i])
+
+      if(nic_corr === undefined){
+        continue;
+      }
+
+      if(!corretora._id){
+        return{
+          "message":"Apelido em uso",
+          "valid":false
+        }
+      }
+
+      if(corretora._id.toString() !== nic_corr._id.toString()){
+        return{
+          "message":"Apelido em uso",
+          "valid":false
+        }
+      }
+
     }
   }
 

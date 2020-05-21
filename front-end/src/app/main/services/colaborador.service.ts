@@ -1,122 +1,59 @@
-import {Injectable} from '@angular/core';
-import {Colaborador} from "../pages/colaborador-page/Colaborador";
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Router } from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {UrlService} from "./utils/url.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColaboradorService {
 
-  workId: any;
-  isResponsible: boolean = false;
-  colaborador$ = new Observable<Colaborador>();
-  isSeguradora: boolean = false;
-  isCorretora: boolean = false;
-  localDeTrabalho: string = '';
-  colaboradorBackEnd: any;
-  name: string = '';
-  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
-
-  checkCameFromSeguradoraList = false;
-  checkCameFromCorretoraList = false;
+  hasColaboradorChanged = false;
 
   ColaboradorResponsavel: any;
 
+  constructor(private router: Router, private http: HttpClient, private urlService: UrlService) { }
 
-
- // TODO ------------------------------ GET SET
-
-  setCameFromCorretoraTrue() {
-    this.checkCameFromCorretoraList = true;
-  }
-  getCameFromCorretora() {
-   return this.checkCameFromCorretoraList;
-  }
-  setCameFromSeguradoraTrue() {
-    this.checkCameFromSeguradoraList = true;
-  }
-  getCameFromSeguradora() {
-    return this.checkCameFromSeguradoraList;
+  getHasColaboradorChanged() {
+    return this.hasColaboradorChanged;
   }
 
-  setWorkId(id) {
-    this.workId = id;
-  }
-  setIsSeguradoraTrue(name) {
-    this.name = name;
-    this.isSeguradora = true;
-  }
-  setIsCorretoraTrue(name) {
-    this.name = name;
-    this.isCorretora = true;
-  }
-  setIsSeguradoraFalse() {
-    this.isSeguradora = false;
-  }
-  setIsCorretoraFalse() {
-    this.isCorretora = false;
+  setHasColaboradorChanged(boolean: boolean) {
+    this.hasColaboradorChanged = boolean;
   }
 
-  getIsCorretora() {
-    return {
-      name: this.name,
-      isCorretora: this.isCorretora,
-    };
-  }
 
-  getIsSeguradora() {
-    return {
-      name: this.name,
-      isSeguradora: this.isSeguradora,
-    };
+  getColaboradorResponsavel() {
+    return this.ColaboradorResponsavel;
   }
 
   setColaboradorResponsavelNull() {
     this.ColaboradorResponsavel = null;
   }
 
-  getColaboradorBackEnd() {
-    return this.colaboradorBackEnd;
+  setColaboradorResponsavel(colaborador) {
+    this.ColaboradorResponsavel = colaborador;
   }
 
-  setIsResponsibleFalse() {
-    this.isResponsible = false;
-  }
-  setIsResponsibleTrue() {
-    this.isResponsible = true;
-  }
-  getIsResponsible() {
-    return this.isResponsible;
+    getColaborador(id) {
+    return this.http.get(`${this.urlService.getUrl()}/colaboradores/${id}`)
+    }
+
+  addNewColaborador(colaborador) {
+    return this.http.post(`${this.urlService.getUrl()}/colaboradores/new`, colaborador)
   }
 
   desactiveColaborador(id){
-    this.http.post(`${this.url}/colaboradores/${id}/delete`, {}).subscribe((data: any) => {
+    this.http.post(`${this.urlService.getUrl()}/colaboradores/${id}/delete`, {}).subscribe((data: any) => {
       alert(data.message)
     })
   }
 
-  setColaboradorResponsavel(colaborador, newColaborador) {
-    this.colaboradorBackEnd = newColaborador;
-    this.ColaboradorResponsavel = colaborador;
-  }
-
-  getColaboradorResponsavel() {
-    return this.ColaboradorResponsavel;
-  }
-
-  // TODO ------------------------------ END GET SET
-
-  // TODO METODOS DE BACK END ____________________________________________________________________
-    getColaborador(id) {
-    return this.http.get(`${this.url}/colaboradores/${id}`)
-    }
-  // TODO END METODOS DE BACK END ________________________________________________________________
-  constructor(private router: Router, private http: HttpClient) { }
-
-  postColaborador(colaborador) {
-    return this.http.post(`${this.url}/colaboradores/new`, colaborador)
+  editColaborador(id, changes){
+    const options = {
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    };
+   return this.http.post(`${this.urlService.getUrl()}/colaboradores/${id}/edit`, changes, options);
   }
 
 }

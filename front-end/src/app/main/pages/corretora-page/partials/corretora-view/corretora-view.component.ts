@@ -41,11 +41,7 @@ export class CorretoraViewComponent implements OnInit {
   navigateEdit() {
     this.router.navigate(['corretora/cadastro'])
   }
-  navigateColaborador() {
-    this.colaboradorService.setCameFromCorretoraTrue();
-    this.colaboradorService.setWorkId(this.corretora._id);
-    this.router.navigate(['colaborador'])
-  }
+
 
   download(file) {
 

@@ -5918,7 +5918,7 @@ export class SeguradoraPageComponent implements OnInit {
       seguradora: this.id,
       active: true
     };
-    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+    this.colaboradorService.addNewColaborador(newColaborador).subscribe((data: any) => {
       alert(data.message);
       this.colaborador.reset();
       this.seguradoraService.getSeguradora(this.id).subscribe((data: any) => {

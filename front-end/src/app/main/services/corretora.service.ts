@@ -10,19 +10,18 @@ export class CorretoraService {
   url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
 
   corretoraInfo: any;
-  responsavel: any;
-  isEdit = false;
   corretoraInfoWithOutFormGroup: any;
 
-  saveCorretoraInfo(corretora) {
-    this.corretoraInfo = corretora;
-  }
   getCorretoraInfo() {
     return this.corretoraInfo;
   }
 
   setCorretoraInfoWithOutFormGroupNull() {
     this.corretoraInfoWithOutFormGroup = null
+  }
+
+  setCorretoraInfoWithOutFormGroup(data) {
+    this.corretoraInfoWithOutFormGroup = data
   }
 
   getcorretoraInfoWithOutFormGroup() {
@@ -47,26 +46,19 @@ export class CorretoraService {
       alert('Você não pode cadastrar uma corretora sem um corretor Responsável');
       return
     }
-    let manager = responsavel.value;
+    let manager = responsavel;
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     return this.http.post(`${this.url}/corretoras/new`, {corretora, manager}, options)
   }
 
-  editPostCorretora(id, corretora, responsavel){
+  editPostCorretora(id, corretora){
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     
-    return this.http.post(`${this.url}/corretoras/${id}/edit`, corretora, options).subscribe((data:any) => {
-      alert(data.message);
-      this.isEdit = false;
-      this.getCorretora(id).subscribe((data: any) => {
-        this.corretoraInfoWithOutFormGroup = data;
-        this.router.navigate(['corretora/visualizacao'])
-      });
-    })
+    return this.http.post(`${this.url}/corretoras/${id}/edit`, corretora, options);
   }
 
   getAllCorretoras() {
@@ -77,11 +69,12 @@ export class CorretoraService {
     return this.http.get(`${this.url}/corretoras/${id}`)
   }
 
-  editCorretora(corretora) {
+  navigateToViewCorretora(corretora) {
     this.corretoraInfoWithOutFormGroup = corretora;
-    this.isEdit = true;
     this.router.navigate(['corretora/visualizacao'])
+
   }
+
 
 
 

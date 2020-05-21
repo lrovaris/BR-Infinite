@@ -5896,7 +5896,7 @@ export class CorretoraPageComponent implements OnInit {
       seguradora: '',
       active: true
     };
-    this.colaboradorService.postColaborador(newColaborador).subscribe((data: any) => {
+    this.colaboradorService.addNewColaborador(newColaborador).subscribe((data: any) => {
       alert(data.message);
       this.colaborador.reset();
       this.corretoraService.getCorretora(this.id).subscribe((data: any) => {
@@ -5916,7 +5916,7 @@ export class CorretoraPageComponent implements OnInit {
     this.submitted = true;
 
     if (this.corretora.invalid) {
-      alert('Formulário Inválido, por favor verifique ');
+      alert('Formulário Inválido, por favor verifique');
       return;
     }
 
@@ -5941,7 +5941,6 @@ export class CorretoraPageComponent implements OnInit {
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
 
     const files: Array<File> = this.filesToUpload;
-
     for(let i =0; i < files.length; i++) {
       this.formData.append('docs', files[i]);
     }
@@ -5956,18 +5955,30 @@ export class CorretoraPageComponent implements OnInit {
 
       if (this.isEdit) {
 
-        console.log(this.corretoraService.getcorretoraInfoWithOutFormGroup());
-        console.log(this.responsavel);
+        this.corretoraService.editPostCorretora(this.corretoraService.getCorretoraId(), newCorretora).subscribe((data: any) => {
+          console.log(data);
+          this.corretoraService.setCorretoraInfoWithOutFormGroup(data.corretora);
+          if (this.colaboradorService.getHasColaboradorChanged()) {
+            this.colaboradorService.editColaborador(data.corretora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((data: any) => {
+              alert(data.message);
+              this.isEdit = false;
+              this.router.navigate(['corretora/visualizacao'])
+            })
+          } else {
+            alert(data.message);
+            this.isEdit = false;
+            this.router.navigate(['corretora/visualizacao'])
+          }
 
-        let this_id = this.corretoraService.getCorretoraId();
-        this.corretoraService.editPostCorretora(this_id, newCorretora, this.responsavel)
+        })
       }
 
       else if (!this.isEdit) {
 
+        console.log(this.responsavel);
+
         this.corretoraService.postCorretora(newCorretora, this.responsavel).subscribe((data:any) => {
           console.log(data);
-
           alert(data.message);
           this.router.navigate(['corretora']);
         })
@@ -6011,6 +6022,8 @@ export class CorretoraPageComponent implements OnInit {
     if (index !== -1) this.seguradorasTable.splice(index, 1);
   }
 
+
+
   searchEstado = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
@@ -6026,5 +6039,10 @@ export class CorretoraPageComponent implements OnInit {
       map(term => term === '' ? []
         : this.cidades.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
+
+
+
+
+
 
 }

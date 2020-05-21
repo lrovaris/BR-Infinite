@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let corretora of corretoras; let i = index" style="cursor: pointer" (click)="editCorretora(corretora._id)">
+                    <tr *ngFor="let corretora of corretoras; let i = index" style="cursor: pointer" (click)="navigateToView(corretora._id)">
                       <td>{{i+1}}</td>
                       <td>{{corretora.name}}</td>
                       <td>{{corretora.telephone}}</td>

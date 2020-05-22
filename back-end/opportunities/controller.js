@@ -114,8 +114,6 @@ async function validate_opportunity(opportunity) {
     }
   }
 
-
-
   if (!opportunity.congenereList){
     return {
       "message":"Congêneres inválidos",

@@ -5955,17 +5955,23 @@ export class CorretoraPageComponent implements OnInit {
 
       if (this.isEdit) {
 
-        this.corretoraService.editPostCorretora(this.corretoraService.getCorretoraId(), newCorretora).subscribe((data: any) => {
-          console.log(data);
-          this.corretoraService.setCorretoraInfoWithOutFormGroup(data.corretora);
+        this.corretoraService.editPostCorretora(this.corretoraService.getCorretoraId(), newCorretora).subscribe((corr_data: any) => {
+          console.log(corr_data);
+          this.corretoraService.setCorretoraInfoWithOutFormGroup(corr_data.corretora);
           if (this.colaboradorService.getHasColaboradorChanged()) {
-            this.colaboradorService.editColaborador(data.corretora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((data: any) => {
-              alert(data.message);
+            this.colaboradorService.editColaborador(corr_data.corretora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((colab_data: any) => {
+              alert(colab_data.message);
+
+              let this_corr = corr_data.corretora
+
+              this_corr.manager = colab_data.colaborador;
+
+              this.corretoraService.navigateToViewCorretora(this_corr)
+
               this.isEdit = false;
-              this.router.navigate(['corretora/visualizacao'])
             })
           } else {
-            alert(data.message);
+            alert(corr_data.message);
             this.isEdit = false;
             this.router.navigate(['corretora/visualizacao'])
           }

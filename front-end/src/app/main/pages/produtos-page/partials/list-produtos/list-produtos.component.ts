@@ -35,7 +35,7 @@ export class ListProdutosComponent implements OnInit {
 
           prod.seguradoras = prod.seguradoras.map(prod_seg => {
 
-            let seg = this.seguradoras.find(seg_data => prod_seg.toString() === seg_data._id.toString());
+            let seg = this.seguradoras.find(seg_obj => prod_seg.toString() === seg_obj._id.toString());
 
             return {
               name: seg.name,
@@ -53,6 +53,7 @@ export class ListProdutosComponent implements OnInit {
 
       });
     });
+
   }
 
 }

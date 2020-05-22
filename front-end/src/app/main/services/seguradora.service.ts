@@ -80,31 +80,19 @@ export class SeguradoraService {
     return this.seguradoraInfo;
   }
 
-
-
   postSeguradora(seguradora, responsavel){
-    let manager = responsavel.value;
+    let manager = responsavel;
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options).subscribe((data:any) => {
-      alert(data.message);
-      this.router.navigate(['seguradora'])
-    })
+    return this.http.post(`${this.url}/seguradoras/new`, {seguradora, manager}, options)
   }
 
   editPostSeguradora(id, seguradora){
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options).subscribe((data:any) => {
-      alert(data.message);
-      this.isEdit = false;
-     this.getSeguradora(id).subscribe((data: any) => {
-       this.seguradoraInfoWithOutFormGroup = data;
-       this.router.navigate(['seguradora/visualizacao'])
-     });
-    })
+    return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options)
   }
 
 

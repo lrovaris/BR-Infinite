@@ -44,17 +44,20 @@ export class ColaboradorPageComponent implements OnInit {
       this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
     }
 
-    this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
-      this.colaboradorForm.controls['name'].setValue(data.name);
-      this.colaboradorForm.controls['telephone'].setValue(data.telephone);
-      this.colaboradorForm.controls['email'].setValue(data.email);
-      this.colaboradorForm.controls['birthday'].setValue(data.birthday);
-      this.colaboradorForm.controls['job'].setValue(data.job);
-      this.colaboradorForm.controls['corretora'].setValue(data.corretora);
-      this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
-      this.saveColaborador();
-      this.colaboradorService.setHasColaboradorChanged(false);
-    });
+    if(this.localDeTrabalho){
+      this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
+        this.colaboradorForm.controls['name'].setValue(data.name);
+        this.colaboradorForm.controls['telephone'].setValue(data.telephone);
+        this.colaboradorForm.controls['email'].setValue(data.email);
+        this.colaboradorForm.controls['birthday'].setValue(data.birthday);
+        this.colaboradorForm.controls['job'].setValue(data.job);
+        this.colaboradorForm.controls['corretora'].setValue(data.corretora);
+        this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
+        this.saveColaborador();
+        this.colaboradorService.setHasColaboradorChanged(false);
+      });
+    }
+
 
   }
 

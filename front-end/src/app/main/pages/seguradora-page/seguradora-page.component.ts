@@ -5882,15 +5882,54 @@ export class SeguradoraPageComponent implements OnInit {
     };
     this.responsavel = this.colaboradorService.getColaboradorResponsavel();
 
-    console.log(this.seguradoraService.isEdit);
+    console.log('this.responsavel', this.responsavel);
+
 
     if (this.seguradoraService.isEdit) {
+
       let seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-      this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora);
+
+      this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora).subscribe((seg_data:any) => {
+
+        console.log(seg_data);
+
+        this.seguradoraService.putSeguradora(seg_data.seguradora);
+
+        if(this.colaboradorService.getHasColaboradorChanged()){
+
+          this.colaboradorService.editColaborador(seg_data.seguradora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((colab_data: any) => {
+            alert(colab_data.message);
+
+            let this_seg = seg_data.seguradora
+
+            this_seg.manager = colab_data.colaborador;
+
+            this.seguradoraService.viewSeguradora(this_seg)
+
+            this.isEdit = false;
+          })
+
+          console.log('colab mudou');
+
+        }else{
+
+          alert(seg_data.message);
+
+          this.isEdit = false;
+
+          this.router.navigate(['seguradora/visualizacao'])
+
+        }
+
+      });
+
     } else {
-      this.seguradoraService.postSeguradora(newSeguradora, this.responsavel);
+
+      this.seguradoraService.postSeguradora(newSeguradora, this.responsavel).subscribe((data:any) => {
+        alert(data.message);
+        this.router.navigate(['seguradora'])
+      });
     }
-    this.seguradora.reset();
   };
 
  async desactiveColaborador(id) {

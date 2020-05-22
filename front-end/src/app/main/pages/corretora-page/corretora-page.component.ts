@@ -5956,9 +5956,11 @@ export class CorretoraPageComponent implements OnInit {
       if (this.isEdit) {
 
         this.corretoraService.editPostCorretora(this.corretoraService.getCorretoraId(), newCorretora).subscribe((corr_data: any) => {
-          console.log(corr_data);
+
           this.corretoraService.setCorretoraInfoWithOutFormGroup(corr_data.corretora);
+
           if (this.colaboradorService.getHasColaboradorChanged()) {
+
             this.colaboradorService.editColaborador(corr_data.corretora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((colab_data: any) => {
               alert(colab_data.message);
 
@@ -5970,10 +5972,13 @@ export class CorretoraPageComponent implements OnInit {
 
               this.isEdit = false;
             })
+
           } else {
+
             alert(corr_data.message);
             this.isEdit = false;
             this.router.navigate(['corretora/visualizacao'])
+
           }
 
         })

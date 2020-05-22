@@ -57,7 +57,7 @@ export class CorretoraService {
     const options = {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
-    
+
     return this.http.post(`${this.url}/corretoras/${id}/edit`, corretora, options);
   }
 
@@ -70,9 +70,10 @@ export class CorretoraService {
   }
 
   navigateToViewCorretora(corretora) {
+    console.log('chegou aqui!');
+
     this.corretoraInfoWithOutFormGroup = corretora;
     this.router.navigate(['corretora/visualizacao'])
-
   }
 
 

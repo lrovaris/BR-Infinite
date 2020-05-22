@@ -34,8 +34,6 @@ router.get('/:id', async(req,res) => {
 
 router.post('/new', async(req,res) => {
 
-    let corretora_valid = true;
-
     let new_corretora = req.body.corretora;
 
     let validacao_corr = await controller.validate_corretora(new_corretora);
@@ -57,9 +55,9 @@ router.post('/new', async(req,res) => {
     corretor_responsavel.corretora = db_corretora._id;
     corretor_responsavel.active = true;
 
-    let new_colab = await colaborador_db.register_colaborador(corretor_responsavel).catch(err => {logger.log(err);});
+    let new_colab = await colaborador_controller.register_colaborador(corretor_responsavel);
 
-    db_corretora["manager"] = new_colab.insertedId;
+    db_corretora["manager"] = new_colab._id;
 
     let db_corr_to_send = await db.update_corretora(db_corretora).catch(err => logger.error(err));
 

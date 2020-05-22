@@ -134,7 +134,6 @@ export class PipelinePageComponent implements OnInit {
     const inclusionDate = this.date.now;
 
     let newOportunidade = {
-      inclusionDate: this.date.now,
       corretora: this.oportunidade.value.corretora,
       colaborador: this.oportunidade.value.solicitante,
       proponente: this.oportunidade.value.proponente,
@@ -168,6 +167,7 @@ export class PipelinePageComponent implements OnInit {
           let oportunidade = this.pipelineService.getOportunidadeWIthOutForm();
           this.pipelineService.editPostOportunidade(oportunidade._id, newOportunidade)
         } else if (!this.isEdit) {
+          newOportunidade['inclusionDate'] = this.date.now;
           this.pipelineService.postOportunidade(newOportunidade).subscribe((data:any) => {
             alert(data.message);
             this.router.navigate(['pipeline'])

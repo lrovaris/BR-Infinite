@@ -1,7 +1,6 @@
 const request = require('supertest')
 const app = require('../server')
 const routes = require('./routes');
-const db = require('../db');
 const controller = require('./controller')
 
 describe('Seguradoras Routes', () => {
@@ -64,7 +63,7 @@ describe('Seguradoras Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
-    expect(res.body).toEqual({"message":"Seguradora e gerente cadastrados com sucesso!"});
+    expect(res.body.message).toEqual("Seguradora e gerente cadastrados com sucesso!");
   })
 
 

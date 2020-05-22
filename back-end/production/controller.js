@@ -54,13 +54,33 @@ async function validate_entry(entry) {
   };
 }
 
-async function register_entries(entries){
-  let db_entries = [];
+async function validate_entries(rows, seg_id){
 
-  Promise.all(
+  const validated_rows = await Promise.all(
+    rows.map(async row =>{
+      let validation = await validate_entry(row)
+
+      let to_db = validation.entry;
+      to_db.sentDate = new Date();
+      to_db.seguradora = seg_id;
+
+      return {
+        entry: to_db,
+        valid: validation.valid,
+        message: validation.message
+      };
+      }
+    )
+  )
+
+  return validated_rows;
+}
+
+async function register_entries(entries){
+  let db_entries = await Promise.all(
     entries.map(async entry =>{
       let new_entry = await db.register_entry(entry).catch(err => logger.error(err));
-      db_entries.push(new_entry)
+      return new_entry;
     })
   )
 
@@ -68,4 +88,4 @@ async function register_entries(entries){
 }
 
 
-module.exports = { get_entries, validate_entry, register_entries };
+module.exports = { get_entries, validate_entry, register_entries, validate_entries };

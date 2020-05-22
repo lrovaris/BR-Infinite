@@ -1,7 +1,6 @@
 const request = require('supertest')
 const app = require('../server')
 const routes = require('./routes');
-const db = require('../db')
 
 describe('User Routes', () => {
   it('deveria retornar vazio', async () => {

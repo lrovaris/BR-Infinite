@@ -115,7 +115,7 @@
                       <div class="form-group">
                         <label for="comissao">Comissão</label>
                         <div class="input-group">
-                          <input type="text" id="comissao" class="form-control border-primary" formControlName="comissao1"  aria-describedby="basic-addon2">
+                          <input type="number" id="comissao" class="form-control border-primary" formControlName="comissao1"  aria-describedby="basic-addon2">
                           <div class="input-group-append">
                             <span style="background-color: #27416F; color: white; font-weight: bolder;" class="input-group-text border-primary" id="basic-addon2">%</span>
                           </div>
@@ -156,7 +156,7 @@
                                       <th>{{i+1}}</th>
                                       <td>{{congenere.name}}</td>
                                       <td>{{congenere.price}}</td>
-                                      <td>{{congenere.comission}}</td>
+                                      <td>{{congenere.comission}}%</td>
                                       <td style="cursor: pointer" (click)="removeCongenere(congenere)"><i class="icon-trash text-danger text-bold-700"></i></td>
                                     </tr>
                                     </tbody>
@@ -194,7 +194,7 @@
                       <div class="form-group">
                         <label for="comissao2">Comissão *</label>
                         <div class="input-group">
-                          <input type="text" id="comissao2" class="form-control border-primary" formControlName="comissao2" aria-describedby="basic-addon3">
+                          <input type="number" id="comissao2" class="form-control border-primary" formControlName="comissao2" aria-describedby="basic-addon3">
                           <div class="input-group-append">
                             <span style="background-color: #27416F; color: white; font-weight: bolder;" class="input-group-text border-primary" id="basic-addon3">%</span>
                           </div>

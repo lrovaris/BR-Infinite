@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CorretoraService} from "../../../../services/corretora.service";
+import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
 import {ColaboradorService} from "../../../../services/colaborador.service";
 import domtoimage from 'dom-to-image';
@@ -18,6 +19,8 @@ export class CorretoraViewComponent implements OnInit {
   checkTelefones = false;
   checkColaboradores = false;
   corretora: any;
+  seguradorasTable = [];
+  seguradoras = [];
 
   setTelefonesTrue() {
     return this.checkTelefones = true;
@@ -36,7 +39,12 @@ export class CorretoraViewComponent implements OnInit {
     this.router.navigate(['corretora'])
   }
 
-  constructor(private corretoraService: CorretoraService, private router: Router, private colaboradorService: ColaboradorService) { }
+  constructor(
+    private corretoraService: CorretoraService,
+    private router: Router,
+    private colaboradorService: ColaboradorService,
+    private seguradoraService: SeguradoraService
+  ) { }
 
   navigateEdit() {
     this.router.navigate(['corretora/cadastro'])
@@ -54,6 +62,24 @@ export class CorretoraViewComponent implements OnInit {
   ngOnInit() {
     this.corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
     console.log(this.corretora);
+
+    this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
+      this.seguradoras = seg_data;
+
+        this.seguradorasTable = this.corretora.seguradoras.map(corr_seg => {
+
+          let seg = this.seguradoras.find(seg_data => corr_seg.toString() === seg_data._id.toString());
+
+          return {
+            name: seg.name,
+            _id: seg._id,
+            telephone: seg.telephone,
+            email: seg.email
+          }
+        });
+
+    });
+
   }
 
   async downloadPDFCompleto()

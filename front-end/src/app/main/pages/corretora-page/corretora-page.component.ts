@@ -5862,7 +5862,7 @@ export class CorretoraPageComponent implements OnInit {
 
 
   SelectCidade(estado) {
-    this.cidades = Estados.find(this_estado => this_estado.nome === estado);
+    this.cidades = Estados.find(this_estado => this_estado.nome === estado).cidades;
   }
 
 // UPLOAD DE ARQUIVO ---------------------------------------------------------------------------------------------------

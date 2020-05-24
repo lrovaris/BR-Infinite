@@ -19,7 +19,7 @@
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
                     <label for="seguradora">Seguradora</label>
-                    <select #seguradoraSelect class="form-control border-primary" id="seguradora">
+                    <select (change)="setActiveSeguradora(seguradoraSelect.value)" #seguradoraSelect class="form-control border-primary" id="seguradora">
                       <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
                     </select>
                   </fieldset>

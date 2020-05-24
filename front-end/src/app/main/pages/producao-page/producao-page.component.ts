@@ -15,6 +15,8 @@ export class ProducaoPageComponent implements OnInit {
   allProducoes = [];
   seguradora = [];
   corretora = [];
+  corretorasOfActiveSeguradora = [];
+  activeSeguradora: any;
 
   constructor(
               private seguradoraService: SeguradoraService,
@@ -28,6 +30,9 @@ export class ProducaoPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log(this.isTheNewDateBigger('11/02/2020', '11/02/2020'));
+
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
     });
@@ -67,11 +72,107 @@ export class ProducaoPageComponent implements OnInit {
 
     })
 
+  } // FIM DO NG ON INIT (bem grandinho ne rs :3)
 
 
 
+
+  setActiveSeguradora(id) {
+
+    this.corretorasOfActiveSeguradora = [];
+
+    this.activeSeguradora = id;
+
+    for (let i = 0; i < this.allProducoes.length; i++) {
+
+      if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
+
+        if (this.corretorasOfActiveSeguradora.length === 0) {
+
+          this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
+
+        } else {
+
+          let corretora = this.corretorasOfActiveSeguradora.find(cor => this.allProducoes[i].corretora._id === cor.corretora._id);
+          if (corretora === undefined) {
+            this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
+          } else {
+
+            if (this.isTheNewDateBigger(corretora.date, this.allProducoes[i].date)) {
+              
+              let index = this.corretorasOfActiveSeguradora.indexOf(corretora);
+              if (index !== -1) this.corretorasOfActiveSeguradora.splice(index, 1);
+
+              this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    console.log(this.corretorasOfActiveSeguradora);
+
+  }
+
+  isTheNewDateBigger(oldDate, NewDate) {
+
+    let dataNew = NewDate;
+
+    let dataOld = oldDate;
+
+    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
+
+    let anoNew  = dataNew.split("/")[0];
+    let mesNew  = dataNew.split("/")[1];
+    let diaNew  = dataNew.split("/")[2];
+
+    let anoOld  = dataOld.split("/")[0];
+    let mesOld  = dataOld.split("/")[1];
+    let diaOld  = dataOld.split("/")[2];
+
+    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
+
+
+    if (anoNew < anoOld) {
+
+      return false // ANO DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
+
+    } else if ( (anoNew >= anoOld) ) {
+
+      if (mesNew < mesOld) {
+
+        return false  // MES DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
+
+      } else if ( mesNew >= mesOld) {
+
+        if (diaNew < diaOld) {
+
+          return false   // DIA DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
+
+        } else if ( diaNew > diaOld ) {
+
+          return true
+
+        }
+
+        if (mesNew > mesOld) {
+          return true
+        }
+
+      }
+
+      return anoNew > anoOld;
+
+    }
 
 
   }
+
+
 
 }

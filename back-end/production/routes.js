@@ -42,10 +42,10 @@ router.post('/new', async(req,res) => {
     let seg_id = seg_obj._id.toString();
 
 
-    let current_date = new Date();
     let entries = [];
     let valid = true;
     let message;
+    let rows = [];
 
     let path_to_file = `./uploads/production/${new_entry_path}`;
 
@@ -53,29 +53,24 @@ router.post('/new', async(req,res) => {
       fs.createReadStream(path_to_file)
       .pipe(csv())
       .on('data', async(row) => {
-
-        let validation = await controller.validate_entry(row)
-
-        if(validation.valid){
-          let to_db = validation.entry;
-          to_db.sentDate = current_date;
-          to_db.seguradora = seg_id;
-          entries.push(to_db)
-        }else{
-          valid = false;
-          message = validation.message
-        }
+        rows.push(row);
       })
-      .on('end', async() => {
-        if(valid){
+      .on('finish', async() =>{
+        let validation = await controller.validate_entries(rows, seg_id);
+
+        not_valid_entry = validation.find(validation_obj => validation_obj.valid === false);
+
+        entries = validation.map(validation_obj => validation_obj.entry);
+
+
+        if(not_valid_entry === undefined){
           let db_entries = await controller.register_entries(entries);
 
           res.status(200).json({"message":"Entradas cadastradas com sucesso!"});
         }else {
 
-          res.status(400).json({"message":message});
+          res.status(400).json({"message":not_valid_entry.message});
         }
-
       });
 
     }else {

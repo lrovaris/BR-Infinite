@@ -63,7 +63,11 @@ router.post('/new', async(req,res) => {
     await db.update_seguradora(db_seg).catch(err => logger.error(err));
 
     // Enviando resposta de operação bem-sucedida
-    res.status(200).json({"message":"Seguradora e gerente cadastrados com sucesso!"});
+    res.status(200).json({
+      message:"Seguradora e gerente cadastrados com sucesso!",
+      seguradora: db_seg,
+      gerente: db_colab
+    });
 });
 
 

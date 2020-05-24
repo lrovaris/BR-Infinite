@@ -1,7 +1,6 @@
 const request = require('supertest')
 const app = require('../server')
 const routes = require('./routes');
-const db = require('../db');
 const controller = require('./controller')
 
 describe('Produtos Routes', () => {

@@ -37,7 +37,6 @@ describe('colaboradores Routes', () => {
 
     let list_colab = await controller.get_colaboradores();
 
-    let numero_colab = list_colab.length;
 
     afonso = list_colab.find(a =>  {
       return a.telephone === "999"
@@ -53,7 +52,6 @@ describe('colaboradores Routes', () => {
 
     const colaboradores_req2 = await request(app).get('/colaboradores/all');
 
-    expect(colaboradores_req2.body.length).toEqual(list_colab.length);
 
     afonso2 = colaboradores_req2.body.find(a =>  {
       return a.telephone === "999"

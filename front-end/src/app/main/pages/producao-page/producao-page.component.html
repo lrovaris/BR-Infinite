@@ -54,16 +54,18 @@
                       <th>Corretora</th>
                       <th>data</th>
                       <th>Acumulado</th>
+                      <th>Média de Emissão</th>
                       <th>Projeção</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let producao of corretorasOfActiveSeguradora; let i = index" style="cursor: pointer">
                       <td>{{i+1}}</td>
-                      <td>{{producao.corretora.name}}</td>
+                      <td>{{producao.name}}</td>
                       <td>{{producao.date}}</td>
-                      <td>{{producao.total}}</td>
-                      <td>{{producao.total}}</td>
+                      <td>R${{' '}}{{producao.total}}</td>
+                      <td>R${{' '}}{{producao.media}}</td>
+                      <td>R${{' '}}<a style="color: #3b9e48; font-weight: 400">{{producao.projection}}</a></td>
                     </tr>
                     </tbody>
                   </table>

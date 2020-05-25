@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="col-sm-12">
-        <div class="card">
+        <div class="card" style="padding-bottom: 1rem">
           <div class="card-header">
             <div class="col-sm-12">
               <div class="row">
@@ -32,7 +32,47 @@
       </div>
     </div>
     <div class="content-body">
-
+      <section id="simple-table">
+        <div class="row text-left">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <div style="padding: 1rem">
+                  <div *ngIf="corretorasOfActiveSeguradora.length > 0" class="row">
+                    <div class="col-sm-12">
+                     <h4 style="font-weight: 400"> {{seguradoraName}} Acumulado:  <a style="color: #27416F">R${{acumulado}}</a></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Corretora</th>
+                      <th>data</th>
+                      <th>Acumulado</th>
+                      <th>Projeção</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let producao of corretorasOfActiveSeguradora; let i = index" style="cursor: pointer">
+                      <td>{{i+1}}</td>
+                      <td>{{producao.corretora.name}}</td>
+                      <td>{{producao.date}}</td>
+                      <td>{{producao.total}}</td>
+                      <td>{{producao.total}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </div>

@@ -17,6 +17,9 @@ export class ProducaoPageComponent implements OnInit {
   corretora = [];
   corretorasOfActiveSeguradora = [];
   activeSeguradora: any;
+  acumulado = 1000;
+  seguradoraName: any;
+  arrayWithOldDatesProduction = [];
 
   constructor(
               private seguradoraService: SeguradoraService,
@@ -31,7 +34,7 @@ export class ProducaoPageComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.isTheNewDateBigger('11/02/2020', '11/02/2020'));
+
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
@@ -68,6 +71,7 @@ export class ProducaoPageComponent implements OnInit {
           return prod;
         });
         console.log(this.allProducoes);
+        this.calculateDatesCorretora(this.allProducoes);
       });
 
     })
@@ -79,6 +83,8 @@ export class ProducaoPageComponent implements OnInit {
 
   setActiveSeguradora(id) {
 
+    this.acumulado = 0;
+
     this.corretorasOfActiveSeguradora = [];
 
     this.activeSeguradora = id;
@@ -87,6 +93,8 @@ export class ProducaoPageComponent implements OnInit {
 
       if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
 
+        this.seguradoraName = this.allProducoes[i].seguradora.name;
+
         if (this.corretorasOfActiveSeguradora.length === 0) {
 
           this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
@@ -94,15 +102,17 @@ export class ProducaoPageComponent implements OnInit {
         } else {
 
           let corretora = this.corretorasOfActiveSeguradora.find(cor => this.allProducoes[i].corretora._id === cor.corretora._id);
+
           if (corretora === undefined) {
+
             this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
+
           } else {
 
             if (this.isTheNewDateBigger(corretora.date, this.allProducoes[i].date)) {
-              
+
               let index = this.corretorasOfActiveSeguradora.indexOf(corretora);
               if (index !== -1) this.corretorasOfActiveSeguradora.splice(index, 1);
-
               this.corretorasOfActiveSeguradora.push(this.allProducoes[i]);
 
             }
@@ -116,57 +126,96 @@ export class ProducaoPageComponent implements OnInit {
     }
 
     console.log(this.corretorasOfActiveSeguradora);
+    console.log(this.arrayWithOldDatesProduction);
 
+    for (let i = 0; i < this.corretorasOfActiveSeguradora.length; i++) {
+
+      this.acumulado = this.acumulado + this.corretorasOfActiveSeguradora[i].total;
+
+    }
+
+  }
+
+  /*
+  TODO corretora: {name: "Corretora corretora", _id: "5ec820471b5b4a1ff5feb995", telephone: "", email: ""}
+  TODO date: "14/05/2020"
+  TODO seguradora: {name: "teste abcd", _id: "5ec7dfcf1b5b4a1ff5feb991", telephone: null, email: null}
+  TODO sentDate: "2020-05-22T18:58:35.649Z"
+  TODO total: 1200
+  TODO _id: "5ec820db1b5b4a1ff5feb999"
+  */
+
+  calculateDatesCorretora(corretoraProduction) {
+
+    let yearsObject: Object = {};
+
+    for (let i = 0; i < corretoraProduction.length; i++) {
+
+      let currentDate = this.getDateInfo(corretoraProduction[i].date);
+
+      if (Object.entries(yearsObject).length === 0) {
+
+        let year = currentDate.anoInfo;
+
+        yearsObject[year] = {};
+
+      } else {
+        let allYears = Object.entries(yearsObject)
+      }
+
+    }
+    console.log(yearsObject)
+  }
+
+  getDateInfo(date) {
+    return {
+      diaInfo: date.split("/")[0],
+      mesInfo: date.split("/")[1],
+      anoInfo: date.split("/")[2]
+    }
   }
 
   isTheNewDateBigger(oldDate, NewDate) {
 
-    let dataNew = NewDate;
+    let dataNew = this.getDateInfo(NewDate);
 
-    let dataOld = oldDate;
-
-    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
-
-    let anoNew  = dataNew.split("/")[0];
-    let mesNew  = dataNew.split("/")[1];
-    let diaNew  = dataNew.split("/")[2];
-
-    let anoOld  = dataOld.split("/")[0];
-    let mesOld  = dataOld.split("/")[1];
-    let diaOld  = dataOld.split("/")[2];
+    let dataOld = this.getDateInfo(oldDate);
 
     // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
 
 
-    if (anoNew < anoOld) {
+
+    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
+
+    if (dataNew.anoInfo < dataOld.anoInfo) {
 
       return false // ANO DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
 
-    } else if ( (anoNew >= anoOld) ) {
+    } else if ( (dataNew.anoInfo >= dataOld.anoInfo) ) {
 
-      if (mesNew < mesOld) {
+      if (dataNew.mesInfo < dataOld.mesInfo) {
 
         return false  // MES DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
 
-      } else if ( mesNew >= mesOld) {
+      } else if ( dataNew.mesInfo >= dataOld.mesInfo) {
 
-        if (diaNew < diaOld) {
+        if (dataNew.diaInfo < dataOld.diaInfo) {
 
           return false   // DIA DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
 
-        } else if ( diaNew > diaOld ) {
+        } else if ( dataNew.diaInfo > dataOld.diaInfo ) {
 
           return true
 
         }
 
-        if (mesNew > mesOld) {
+        if (dataNew.mesInfo > dataOld.mesInfo) {
           return true
         }
 
       }
 
-      return anoNew > anoOld;
+      return dataNew.anoInfo > dataOld.anoInfo;
 
     }
 

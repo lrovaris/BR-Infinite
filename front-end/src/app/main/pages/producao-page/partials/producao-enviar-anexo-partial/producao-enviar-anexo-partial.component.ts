@@ -48,7 +48,7 @@ export class ProducaoEnviarAnexoPartialComponent implements OnInit {
         seguradora: seguradoraId
       };
       this.producaoService.postProducao(producao).subscribe((data: any) => {
-        console.log(data);
+       alert(data.message);
       })
     })
   }

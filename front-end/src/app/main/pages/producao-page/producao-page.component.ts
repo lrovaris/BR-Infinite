@@ -16,10 +16,12 @@ export class ProducaoPageComponent implements OnInit {
   seguradora = [];
   corretora = [];
   corretorasOfActiveSeguradora = [];
+  filteredCorretorasOfActiveSeguradora = [];
   activeSeguradora: any;
   acumulado = 1000;
   seguradoraName: any;
   arrayWithOldDatesProduction = [];
+  corretoraFilter = ""
 
   constructor(
               private seguradoraService: SeguradoraService,
@@ -34,7 +36,7 @@ export class ProducaoPageComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.corretoraFilter = "";
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
@@ -75,6 +77,19 @@ export class ProducaoPageComponent implements OnInit {
     })
 
   } // FIM DO NG ON INIT (bem grandinho ne rs :3)
+
+
+  filterCorretoras(event){
+    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora.filter(prod => prod.name.includes(event.target.value));
+
+    this.acumulado = 0;
+
+    for (let i = 0; i < this.filteredCorretorasOfActiveSeguradora.length; i++) {
+
+      this.acumulado = this.acumulado + this.filteredCorretorasOfActiveSeguradora[i].total;
+
+    }
+  }
 
 
   getCorretoraLineInfo(id, seguradoraProductionArray) {
@@ -167,6 +182,10 @@ export class ProducaoPageComponent implements OnInit {
       }
     }
 
+    if(this.corretoraFilter !== ''){
+      activeSeguradoraProductionsArray = activeSeguradoraProductionsArray.filter(prod => prod.corretora.name.includes(this.corretoraFilter));
+    }
+
     this.seguradoraName = activeSeguradoraProductionsArray[0].seguradora.name;
 
     let allCorretoras = [];
@@ -193,6 +212,8 @@ export class ProducaoPageComponent implements OnInit {
       this.acumulado = this.acumulado + this.corretorasOfActiveSeguradora[i].total;
 
     }
+
+    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;
 
   }
 

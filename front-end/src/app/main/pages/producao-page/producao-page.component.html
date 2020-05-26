@@ -47,7 +47,12 @@
                     <div class="col-4">
                       <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar corretoras" />
                     </div>
-                  </div>
+                    <div class="col-4">
+                      <button (click)="compararComDiaAnterior()" style="margin-top: -1px" class="btn btn-header float-right">
+                        <a>Comparar com dia anterior</a>
+                      </button>
+                    </div>
+                    </div>
                 </div>
               </div>
               <div class="card-content">

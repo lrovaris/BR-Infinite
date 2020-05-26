@@ -3,6 +3,7 @@ import { SeguradoraService} from "../../services/seguradora.service";
 import { Router} from "@angular/router";
 import { ProducaoService} from "../../services/producao.service";
 import { CorretoraService} from "../../services/corretora.service";
+import { DateService} from "../../services/utils/date.service";
 
 @Component({
   selector: 'app-producao-page',
@@ -27,7 +28,8 @@ export class ProducaoPageComponent implements OnInit {
               private seguradoraService: SeguradoraService,
               private router: Router,
               private producaoService: ProducaoService,
-              private corretoraService: CorretoraService
+              private corretoraService: CorretoraService,
+              private dateService: DateService
   ) { }
 
   navigateEnviarAnexo() {
@@ -71,7 +73,7 @@ export class ProducaoPageComponent implements OnInit {
           prod.corretora = corretora;
           return prod;
         });
-        // this.calculateDatesCorretora(this.allProducoes);
+        // this.createYearsObjectFromProduction(this.allProducoes);
       });
 
     })
@@ -94,6 +96,7 @@ export class ProducaoPageComponent implements OnInit {
 
   getCorretoraLineInfo(id, seguradoraProductionArray) {
    let corretoraProductionArray = [];
+
     for (let i = 0; i < seguradoraProductionArray.length; i++) {
       if (seguradoraProductionArray[i].corretora._id === id) {
         corretoraProductionArray.push(seguradoraProductionArray[i]);
@@ -105,36 +108,24 @@ export class ProducaoPageComponent implements OnInit {
     let totalToReturn = corretoraProductionArray[0].total;
     let projectionToReturn = 0;
 
-   let corretoraDates = this.calculateDatesCorretora(corretoraProductionArray);
-
-   console.log(corretoraDates);
-
    let montanteAdicional = 0;
 
    let timesCounted = 0;
 
    let media: number;
 
-   let minorDate = corretoraProductionArray[0].date;
-
     for (let i = 0; i < corretoraProductionArray.length; i++) {
 
-      if (this.isTheNewDateBigger(dateToReturn, corretoraProductionArray[i].date)) {
+      if (this.dateService.isTheNewDateBigger(dateToReturn, corretoraProductionArray[i].date)) {
         dateToReturn = corretoraProductionArray[i].date;
 
         montanteAdicional = montanteAdicional + (corretoraProductionArray[i].total - totalToReturn);
 
         totalToReturn = corretoraProductionArray[i].total;
 
-        console.log(montanteAdicional);
         timesCounted++
 
       }
-
-      /*if (!this.isTheNewDateBigger(minorDate, corretoraProductionArray[i].date)) {
-        minorDate = corretoraProductionArray[i].date
-      }*/
-
     }
 
     // numeros dia dias uteis no mes é 20
@@ -143,17 +134,9 @@ export class ProducaoPageComponent implements OnInit {
     // o numero de dias uteis faltando deve ser 30 - dataAtual - valor de dias inuteis restantes
     // e o valor de dias inuteis restantes é igual a (30 - dataAtual) / 3
 
-
-
-    console.log('-------');
     media = montanteAdicional / timesCounted;
-    console.log(media);
-    console.log('-------');
 
-
-
-    let diasFaltando = ((30 - this.getDateInfo(dateToReturn).day) * 2) / 3;
-    console.log(diasFaltando.toFixed());
+    let diasFaltando = ((30 - this.dateService.getDateInfoFromString(dateToReturn).day) * 2) / 3;
 
     projectionToReturn = (diasFaltando * media) + totalToReturn;
 
@@ -162,7 +145,8 @@ export class ProducaoPageComponent implements OnInit {
       name: nameToReturn,
       date: dateToReturn,
       total: totalToReturn,
-      projection: projectionToReturn.toFixed()
+      projection: projectionToReturn.toFixed(),
+      production: corretoraProductionArray
     }
   }
 
@@ -214,7 +198,6 @@ export class ProducaoPageComponent implements OnInit {
     }
 
     this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;
-
   }
 
   /*
@@ -227,128 +210,39 @@ export class ProducaoPageComponent implements OnInit {
   */
 
 
+  compararComDiaAnterior(){
+    let biggerDate = this.filteredCorretorasOfActiveSeguradora[0].date
 
-
-
-  calculateDatesCorretora(corretoraProduction) {
-
-    let yearsObject: Object = {};
-
-    for (let i = 0; i < corretoraProduction.length; i++) {
-
-      let currentDate = this.getDateInfo(corretoraProduction[i].date);
-
-      yearsObject = this.makedataobj(currentDate, yearsObject);
-
-    }
-   return yearsObject;
-  }
-
-  getDateInfo(date) {
-    return {
-      day: date.split("/")[0],
-      month: date.split("/")[1],
-      year: date.split("/")[2]
-    }
-  }
-
-  isTheNewDateBigger(oldDate, NewDate) {
-
-    let dataNew = this.getDateInfo(NewDate);
-
-    let dataOld = this.getDateInfo(oldDate);
-
-    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
-
-
-
-    // SEPARACAO DAS DATAS EM DIA MES E ANO PARA AS COMPARACOES
-
-    if (dataNew.year < dataOld.year) {
-
-      return false // ANO DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
-
-    } else if ( (dataNew.year >= dataOld.year) ) {
-
-      if (dataNew.month < dataOld.month) {
-
-        return false  // MES DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
-
-      } else if ( dataNew.month >= dataOld.month) {
-
-        if (dataNew.day < dataOld.day) {
-
-          return false   // DIA DO NOVO DOCUMENTO É MENOR QUE O DOCUMENTO NO ARRAY LOGO NAO É A ULTIMA DATA
-
-        } else if ( dataNew.day > dataOld.day ) {
-
-          return true
-
-        }
-
-        if (dataNew.month > dataOld.month) {
-          return true
-        }
-
-      }
-
-      return dataNew.year > dataOld.year;
-
-    }
-
-
-  }
-
-
-
-  makedataobj(new_data, yearsObj) {
-
-    let yearsArray = Object.entries(yearsObj);
-
-    if(yearsArray.length === 0){
-
-      yearsObj[new_data.year] = {}
-
-    }else {
-
-      let currentYearObj = yearsArray.find(year_obj => year_obj[0] === new_data.year)
-
-      if(currentYearObj !== undefined){
-        let monthsArray = Object.entries(currentYearObj[1]);
-
-        if(monthsArray.length === 0){
-
-          yearsObj[new_data.year][new_data.month] = [new_data.day]
-
-        }else {
-
-          let currentMonthObj = monthsArray.find(month_obj => month_obj[0] ===new_data.month)
-
-          if(currentMonthObj !== undefined){
-
-            let daysArray = currentMonthObj[1];
-
-            if (daysArray.length === 0) {
-              yearsObj[new_data.year][new_data.month].push(new_data.day);
-            }
-
-            else if(!daysArray.includes(new_data.day)){
-
-              yearsObj[new_data.year][new_data.month].push(new_data.day);
-
-            }
-          }else {
-            yearsObj[new_data.year][new_data.month] = [new_data.day]
-          }
-        }
-      }
-      else{
-        yearsObj[new_data.year] = {}
-        yearsObj[new_data.year][new_data.month] = [new_data.day]
+    for (let index = 0; index < this.filteredCorretorasOfActiveSeguradora.length; index++) {
+      if(this.dateService.isTheNewDateBigger(biggerDate, this.filteredCorretorasOfActiveSeguradora[index].date)){
+        biggerDate = this.filteredCorretorasOfActiveSeguradora[index].date
       }
     }
-    return yearsObj;
-  }
 
+    let dateInfo = this.dateService.getDateInfoFromString(biggerDate)
+
+    dateInfo.day -= 1;
+
+    let biggerDateMinusOne = this.dateService.getDateStringFromInfo(dateInfo);
+
+    let compareInfo = this.filteredCorretorasOfActiveSeguradora.map( corrInfo =>{
+      console.log(corrInfo);
+
+      let thisYearsObj = this.dateService.createYearsObjectFromProduction(corrInfo.production)
+
+      console.log(this.dateService.doesDateExist(biggerDateMinusOne, thisYearsObj));
+
+      return corrInfo;
+    });
+
+    // criar  os dados que a gente vai precisar na comparação para o componente
+    // trocar o componente
+
+    // no componente
+    // caso exista, mostrar a comparação
+    // se não existir, dar feedback visual
+
+
+  }
 
 }

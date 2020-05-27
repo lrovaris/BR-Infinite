@@ -132,7 +132,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let producao of filteredComparingCorretoras; let i = index" style="cursor: pointer">
+                    <tr *ngFor="let producao of filteredComparingCorretoras; let i = index" style="cursor: pointer" (click)="dailyProductionData(producao.lastDay.production)">
                       <td>{{i+1}}</td>
                       <td>{{producao.today.name}}</td>
                       <td>{{producao.lastDay.date}} - {{producao.today.date}}</td>
@@ -151,7 +151,39 @@
     </div>
 
 
-    <div class="content-body">
+    <div class="content-body" *ngIf="(isComparing)">
+
+      <div class="row" *ngIf="checkedCorretora" >
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+             <div class="row">
+             <div class="col-sm-12">
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h4 class="card-title">Produçao dos dias anteriores</h4>
+                 </div>
+                 <div class="col-sm-8">
+                   <i (click)="switchCheckedCorretora()" class="ft-x float-right" style="font-size: 1.3rem; font-weight: 600; color: #9e1e25; cursor: pointer"></i>
+                 </div>
+               </div>
+             </div>
+             </div>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <div id="vartical-bar-chart" class="height-400">
+                  <ngx-charts-bar-vertical-2d [scheme]="barChartColorScheme" [results]="chartData3" [gradient]="barChartGradient" [xAxis]="barChartShowXAxis"
+                                              [yAxis]="barChartShowYAxis" [legend]="barChartShowLegend" [showXAxisLabel]="barChartShowXAxisLabel"
+                                              [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel" [yAxisLabel]="barChartYAxisLabel"
+                                              (select)="onSelect($event)">
+                  </ngx-charts-bar-vertical-2d>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-sm-12">
@@ -174,26 +206,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Vertical Bar Chart</h4>
-            </div>
-            <div class="card-content">
-              <div class="card-body">
-                <div id="vartical-bar-chart" class="height-400">
-                  <ngx-charts-bar-vertical-2d [scheme]="barChartColorScheme" [results]="barChartmulti" [gradient]="barChartGradient" [xAxis]="barChartShowXAxis"
-                                              [yAxis]="barChartShowYAxis" [legend]="barChartShowLegend" [showXAxisLabel]="barChartShowXAxisLabel"
-                                              [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel" [yAxisLabel]="barChartYAxisLabel"
-                                              (select)="onSelect($event)">
-                  </ngx-charts-bar-vertical-2d>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
     </div>
 

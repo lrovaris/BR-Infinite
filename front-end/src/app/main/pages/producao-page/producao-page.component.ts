@@ -61,10 +61,16 @@ let barChartmulti2 = [
 })
 export class ProducaoPageComponent implements OnInit {
 
+  chartData = [];
+  chartData2 = {};
+  chartData3 = [];
+
   allSeguradoras = [];
   allProducoes = [];
   seguradora = [];
   corretora = [];
+
+  checkedCorretora = false;
 
   corretorasOfActiveSeguradora = [];
   filteredCorretorasOfActiveSeguradora = [];
@@ -307,12 +313,89 @@ export class ProducaoPageComponent implements OnInit {
 
     // se não existir, dar feedback visual
 
+    this.formatToChart(this.filteredComparingCorretoras);
+
   }
 
 
   // CHART START ---------------------------------------------------------------------------------------------
   // CHART START ---------------------------------------------------------------------------------------------
   // CHART START ---------------------------------------------------------------------------------------------
+
+  formatToChart(filteredComparingCorretoras) {
+
+    this.chartData = filteredComparingCorretoras.map(chartData => {
+
+     let oldChartData = chartData;
+
+      chartData = {};
+
+      chartData.name = oldChartData.today.name;
+      chartData.series = [
+
+        {
+          name: oldChartData.lastDay.date,
+          value: Number(oldChartData.lastDay.total)
+        },
+        {
+          name: oldChartData.today.date,
+          value: Number(oldChartData.today.total)
+        }
+      ];
+
+      chartData.production = oldChartData.lastDay.production;
+
+      console.log(chartData);
+
+      return chartData;
+
+    });
+
+    this.barChartmulti =  this.chartData;
+
+  }
+
+  dailyProductionData(production) {
+
+    this.checkedCorretora = false;
+
+    console.log(production);
+
+    this.chartData2['name'] = production[0].corretora.name;
+    this.chartData2['series'] = production.map(chartData => {
+
+      let oldChartData = chartData;
+
+      chartData = {};
+
+      chartData.name = oldChartData.name;
+      chartData =
+        {
+          name: oldChartData.date,
+          value: Number(oldChartData.total)
+        };
+
+      console.log(chartData);
+
+      return chartData;
+
+    });
+
+    console.log(this.chartData2);
+
+    this.chartData3.push(this.chartData2);
+
+    console.log(this.chartData3);
+
+    setTimeout(() => {
+      this.checkedCorretora = true;
+    }, 250)
+
+  }
+
+  switchCheckedCorretora() {
+    this.checkedCorretora = false;
+  }
 
   //Chart Data
 

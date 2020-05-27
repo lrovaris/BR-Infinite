@@ -30,6 +30,7 @@ import { ProducaoEnviarAnexoPartialComponent } from './main/pages/producao-page/
 // GRAFICOS -----------
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 // END GRAFICOS -----------
 
@@ -64,7 +65,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

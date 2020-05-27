@@ -5815,6 +5815,8 @@ export class CorretoraPageComponent implements OnInit {
       number: [''],
       complement: [''],
       neighborhood: [''],
+      InscricaoEstadual: [''],
+      cep: [''],
     });
 
     this.colaborador = this.formbuilder.group({
@@ -5847,11 +5849,13 @@ export class CorretoraPageComponent implements OnInit {
       this.corretora.controls['name'].setValue(data.name);
       this.corretora.controls['telephone'].setValue(data.telephone);
       this.corretora.controls['cnpj'].setValue(data.cnpj);
+      this.corretora.controls['InscricaoEstadual'].setValue(data.InscricaoEstadual);
       this.corretora.controls['email'].setValue(data.email);
       this.corretora.controls['estate'].setValue(data.address.estate);
       this.corretora.controls['number'].setValue(data.address.number);
       this.corretora.controls['city'].setValue(data.address.city);
       this.corretora.controls['street'].setValue(data.address.street);
+      this.corretora.controls['cep'].setValue(data.address.cep);
       this.corretora.controls['complement'].setValue(data.address.complement);
       this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
     }
@@ -5926,6 +5930,7 @@ export class CorretoraPageComponent implements OnInit {
       telephone: this.corretora.value.telephone,
       cnpj: this.corretora.value.cnpj,
       nicknames: this.apelidos,
+      InscricaoEstadual: this.corretora.value.InscricaoEstadual,
       address: {
         estate: this.corretora.value.estate,
         city: this.corretora.value.city,
@@ -5934,6 +5939,7 @@ export class CorretoraPageComponent implements OnInit {
         complement: this.corretora.value.complement,
         uf: this.corretora.value.uf,
         neighborhood: this.corretora.value.neighborhood,
+        cep: this.corretora.value.cep
       },
       seguradoras: this.seguradoras
     };

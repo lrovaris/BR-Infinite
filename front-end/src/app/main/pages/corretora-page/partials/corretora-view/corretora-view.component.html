@@ -23,19 +23,27 @@
                   <h4 class="form-section"></h4>
 
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-6">
+                    <div style="margin-left: 1rem" class="col-md-4">
                       <label for="userinput1">Nome da Corretora</label>
                       <p type="text" id="userinput1" class=" " >
                         {{corretora.name}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-5">
+                    <div style="margin-left: 1rem" class="col-md-4">
                       <label for="userinput2">CNPJ</label>
                       <p type="text" id="userinput2" class=" " >
                         {{corretora.cnpj}}
                       </p>
                     </div>
+                    <div style="margin-left: 1rem" class="col-md-3">
+                      <label for="insEstadual">Inscrição Estadual</label>
+                      <p type="text" id="insEstadual" class=" " >
+                        {{corretora.InscricaoEstadual}}
+                      </p>
+                    </div>
                   </div>
+
+
                   <div class="row">
                     <div style="margin-left: 1rem" class="col-md-6">
                       <label for="userinput1">Email</label>
@@ -54,22 +62,31 @@
                   <h4 class="form-section"><i class="ft-home"></i> Endereço </h4>
 
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-3">
+                    <div style="margin-left: 1rem" class="col-md-6">
                       <label for="userinput9">UF</label>
                       <p type="text" id="userinput9">
                         {{corretora.address.estate}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
+                    <div style="margin-left: 1rem" class="col-md-5">
                       <label for="userinput10">Cidade</label>
                       <p type="text" id="userinput10" class=" ">
                         {{corretora.address.city}}
                       </p>
                     </div>
+                  </div>
+
+                  <div class="row">
                     <div style="margin-left: 1rem" class="col-md-4">
                       <label for="userinput5">Rua</label>
                       <p class=" " type="text" id="userinput5">
                         {{corretora.address.street}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-4">
+                      <label for="userinput5">Cep</label>
+                      <p class=" " type="text" id="userinput5">
+                        {{corretora.address.cep}}
                       </p>
                     </div>
                   </div>

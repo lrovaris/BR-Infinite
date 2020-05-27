@@ -22,16 +22,22 @@
                     <div class="col-md-4 col-sm-12"></div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <div class="form-group">
-                        <label for="userinput1">Nome da corretora *</label>
+                        <label for="userinput1">Nome da Corretora *</label>
                         <input type="text" id="userinput1" class="form-control border-primary" formControlName="name">
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                         <label for="userinput2">CNPJ</label>
                         <input type="text" id="userinput2" class="form-control border-primary" formControlName="cnpj">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                      <div class="form-group">
+                        <label for="InscricaoEstadual">Inscrição Estadual</label>
+                        <input type="text" id="InscricaoEstadual" class="form-control border-primary" formControlName="InscricaoEstadual">
                       </div>
                     </div>
                   </div>
@@ -68,9 +74,19 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="userinput5">Rua</label>
-                    <input class="form-control border-primary" type="text" id="userinput5" formControlName="street">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label for="userinput5">Rua</label>
+                        <input class="form-control border-primary" type="text" id="userinput5" formControlName="street">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input class="form-control border-primary" type="text" id="cep" formControlName="cep">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row">

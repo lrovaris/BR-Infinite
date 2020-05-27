@@ -7,26 +7,15 @@ export class DateService {
 
   constructor() { }
 
-  createYearsObjectFromProduction(thisProduction) {
-    let yearsObject = {};
-
-    for (let i = 0; i < thisProduction.length; i++) {
-
-      let currentDate = this.getDateInfoFromString(thisProduction[i].date);
-      let prod_id = thisProduction[i]._id
-
-      yearsObject = this.makeDateObject(currentDate, prod_id, yearsObject);
-
-    }
-
-   return yearsObject;
-  }
-
   getDateInfoFromString(date) {
+    let day = date.split("/")[0];
+    let month = date.split("/")[1];
+    let year = date.split("/")[2];
+
     return {
-      day: date.split("/")[0],
-      month: date.split("/")[1],
-      year: date.split("/")[2]
+      day: day,
+      month: month,
+      year: year
     }
   }
 
@@ -71,6 +60,21 @@ export class DateService {
       return dataNew.year > dataOld.year;
     }
 
+  }
+
+  createYearsObjectFromProduction(thisProduction) {
+    let yearsObject = {};
+
+    for (let i = 0; i < thisProduction.length; i++) {
+
+      let currentDate = this.getDateInfoFromString(thisProduction[i].date);
+      let prod_id = thisProduction[i]._id
+
+      yearsObject = this.makeDateObject(currentDate, prod_id, yearsObject);
+
+    }
+
+   return yearsObject;
   }
 
   makeDateObject(new_data, productionId, yearsObj) {
@@ -155,4 +159,56 @@ export class DateService {
       prod_id: yearsObj[data_obj.year][data_obj.month][data_obj.day]
     }
   }
+
+  getProductionArrayFromDateInfoInterval(begin, end, yearsObj){
+
+    while (yearsObj[begin.year] === undefined && begin.year < end.year) {
+      begin.year++
+    }
+
+    begin.year = begin.year.toString();
+
+    while (yearsObj[begin.year][begin.month] === undefined && begin.month < end.month) {
+      begin.month++
+    }
+
+    if(Number(begin.month) < 10){
+      begin.month = "0" + Number(begin.month).toString();
+    }else{
+      begin.month = begin.month.toString()
+    }
+
+    // console.log(begin);
+
+    // console.log(yearsObj);
+
+
+    while (yearsObj[begin.year][begin.month][begin.day] === undefined && begin.day < end.day) {
+      begin.day++
+    }
+
+    if(begin.day < 10){
+      begin.day = "0" + begin.day.toString();
+    }else{
+      begin.day = begin.day.toString()
+    }
+
+    // console.log(begin);
+    // console.log(end);
+
+    if(begin.year === end.year && begin.month === end.month){
+      let month_day_prods = Object.entries(yearsObj[begin.year][begin.month]);
+
+      month_day_prods = month_day_prods.filter(([day, prod]) =>{
+        return (day >= begin.day && day <= end.day)
+      })
+
+      return month_day_prods.map(([day, prod]) => {
+        return prod;
+      })
+    }
+
+    // console.log(yearsObj[begin.year][begin.month]);
+  }
+
 }

@@ -16,13 +16,19 @@ export class ProducaoPageComponent implements OnInit {
   allProducoes = [];
   seguradora = [];
   corretora = [];
+
   corretorasOfActiveSeguradora = [];
   filteredCorretorasOfActiveSeguradora = [];
+
+  comparingCorretoras = []
+  filteredComparingCorretoras = []
+
   activeSeguradora: any;
   acumulado = 1000;
   seguradoraName: any;
   arrayWithOldDatesProduction = [];
   corretoraFilter = ""
+  isComparing = false;
 
   constructor(
               private seguradoraService: SeguradoraService,
@@ -93,16 +99,59 @@ export class ProducaoPageComponent implements OnInit {
     }
   }
 
+  setActiveSeguradora(id) {
 
-  getCorretoraLineInfo(id, seguradoraProductionArray) {
-   let corretoraProductionArray = [];
+    this.isComparing = false;
 
-    for (let i = 0; i < seguradoraProductionArray.length; i++) {
-      if (seguradoraProductionArray[i].corretora._id === id) {
-        corretoraProductionArray.push(seguradoraProductionArray[i]);
+    this.acumulado = 0;
+
+    this.corretorasOfActiveSeguradora = [];
+
+    this.activeSeguradora = id;
+
+    let activeSeguradoraProductionsArray = [];
+
+    for (let i = 0; i < this.allProducoes.length; i++) {
+      if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
+        activeSeguradoraProductionsArray.push(this.allProducoes[i]);
       }
     }
 
+
+
+    this.seguradoraName = activeSeguradoraProductionsArray[0].seguradora.name;
+
+    let allCorretoras = [];
+
+    for (let i = 0; i < activeSeguradoraProductionsArray.length; i++) {
+      let corretora = allCorretoras.find(cor => activeSeguradoraProductionsArray[i].corretora._id === cor);
+
+      if (corretora === undefined) {
+
+        allCorretoras.push(activeSeguradoraProductionsArray[i].corretora._id);
+
+      }
+    }
+
+    this.corretorasOfActiveSeguradora = [];
+
+    for (let i = 0; i < allCorretoras.length; i++) {
+      let corretoraProductionArray = activeSeguradoraProductionsArray.filter(prod => prod.corretora._id === allCorretoras[i]);
+
+      this.corretorasOfActiveSeguradora.push(this.getCorretoraLineInfo(allCorretoras[i], corretoraProductionArray))
+    }
+
+    for (let i = 0; i < this.corretorasOfActiveSeguradora.length; i++) {
+
+      this.acumulado = this.acumulado + this.corretorasOfActiveSeguradora[i].total;
+
+    }
+
+    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;
+  }
+
+
+  getCorretoraLineInfo(id, corretoraProductionArray) {
     let dateToReturn = corretoraProductionArray[0].date;
     let nameToReturn = corretoraProductionArray[0].corretora.name;
     let totalToReturn = corretoraProductionArray[0].total;
@@ -146,59 +195,12 @@ export class ProducaoPageComponent implements OnInit {
       date: dateToReturn,
       total: totalToReturn,
       projection: projectionToReturn.toFixed(),
-      production: corretoraProductionArray
+      production: corretoraProductionArray,
+      _id: id
     }
   }
 
-  setActiveSeguradora(id) {
 
-    this.acumulado = 0;
-
-    this.corretorasOfActiveSeguradora = [];
-
-    this.activeSeguradora = id;
-
-    let activeSeguradoraProductionsArray = [];
-
-    for (let i = 0; i < this.allProducoes.length; i++) {
-      if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
-        activeSeguradoraProductionsArray.push(this.allProducoes[i]);
-      }
-    }
-
-    if(this.corretoraFilter !== ''){
-      activeSeguradoraProductionsArray = activeSeguradoraProductionsArray.filter(prod => prod.corretora.name.includes(this.corretoraFilter));
-    }
-
-    this.seguradoraName = activeSeguradoraProductionsArray[0].seguradora.name;
-
-    let allCorretoras = [];
-
-    for (let i = 0; i < activeSeguradoraProductionsArray.length; i++) {
-      let corretora = allCorretoras.find(cor => activeSeguradoraProductionsArray[i].corretora._id === cor);
-
-      if (corretora === undefined) {
-
-        allCorretoras.push(activeSeguradoraProductionsArray[i].corretora._id);
-
-      }
-    }
-
-    this.corretorasOfActiveSeguradora = [];
-
-
-    for (let i = 0; i < allCorretoras.length; i++) {
-      this.corretorasOfActiveSeguradora.push(this.getCorretoraLineInfo(allCorretoras[i], activeSeguradoraProductionsArray))
-    }
-
-    for (let i = 0; i < this.corretorasOfActiveSeguradora.length; i++) {
-
-      this.acumulado = this.acumulado + this.corretorasOfActiveSeguradora[i].total;
-
-    }
-
-    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;
-  }
 
   /*
   TODO corretora: {name: "Corretora corretora", _id: "5ec820471b5b4a1ff5feb995", telephone: "", email: ""}
@@ -222,25 +224,41 @@ export class ProducaoPageComponent implements OnInit {
     let dateInfo = this.dateService.getDateInfoFromString(biggerDate)
 
     dateInfo.day -= 1;
-
     let biggerDateMinusOne = this.dateService.getDateStringFromInfo(dateInfo);
 
-    let compareInfo = this.filteredCorretorasOfActiveSeguradora.map( corrInfo =>{
-      console.log(corrInfo);
+    dateInfo.day = 1;
+    let monthStart = this.dateService.getDateStringFromInfo(dateInfo)
+
+    let compareInfo = this.filteredCorretorasOfActiveSeguradora.map( corrInfo => {
 
       let thisYearsObj = this.dateService.createYearsObjectFromProduction(corrInfo.production)
 
-      console.log(this.dateService.doesDateExist(biggerDateMinusOne, thisYearsObj));
+      let prod_ids = this.dateService.getProductionArrayFromDateInfoInterval(this.dateService.getDateInfoFromString(monthStart), this.dateService.getDateInfoFromString(biggerDateMinusOne), thisYearsObj);
 
-      return corrInfo;
+      let prods = prod_ids.map(prod_id => {
+        return this.allProducoes.find(prod_obj => prod_obj._id.toString() === prod_id);
+      })
+
+      let lastDayInfo = this.getCorretoraLineInfo(corrInfo._id, prods);
+
+      return {
+        today: corrInfo,
+        lastDay: lastDayInfo
+      };
     });
 
-    // criar  os dados que a gente vai precisar na comparação para o componente
-    // trocar o componente
+
+    this.isComparing = true;
 
     // no componente
     // caso exista, mostrar a comparação
+
+    this.comparingCorretoras = compareInfo
+    this.filteredComparingCorretoras = this.comparingCorretoras
+
     // se não existir, dar feedback visual
+
+
 
 
   }

@@ -31,7 +31,8 @@
         </div>
       </div>
     </div>
-    <div class="content-body" *ngIf="filteredCorretorasOfActiveSeguradora.length > 0">
+
+    <div class="content-body" *ngIf="filteredCorretorasOfActiveSeguradora.length > 0 && !isComparing">
       <section id="simple-table">
         <div class="row text-left">
           <div class="col-sm-12">
@@ -87,5 +88,74 @@
         </div>
       </section>
     </div>
+
+
+
+
+
+    <div class="content-body" *ngIf="isComparing">
+      <section id="simple-table">
+        <div class="row text-left">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <div style="padding: 1rem">
+                  <div class="row">
+                    <div class="col-sm-12">
+                     <h4 style="font-weight: 400"> {{seguradoraName}} Acumulado:  <a style="color: #27416F">R${{acumulado}}</a></h4>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 1rem">
+                    <div class="col-4">
+                      <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar corretoras" />
+                    </div>
+                    <div class="col-4">
+                      <button (click)="isComparing = false" style="margin-top: -1px" class="btn btn-header float-right">
+                        <a>Voltar para visualização</a>
+                      </button>
+                    </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="card-body">
+
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Corretora</th>
+                      <th>datas</th>
+                      <th>Acumulado</th>
+                      <th>Média de Emissão</th>
+                      <th>Projeção</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let producao of filteredComparingCorretoras; let i = index" style="cursor: pointer">
+                      <td>{{i+1}}</td>
+                      <td>{{producao.today.name}}</td>
+                      <td>{{producao.lastDay.date}} - {{producao.today.date}}</td>
+                      <td>R${{' '}}{{producao.today.total}}({{producao.today.total > producao.lastDay.total ? "+" : "-" }}{{producao.today.total - producao.lastDay.total}}) </td>
+                      <td>R${{' '}}{{producao.today.media}}</td>
+                      <td>R${{' '}}<a style="color: #3b9e48; font-weight: 400">{{producao.today.projection}}</a></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+
+
+
+
+
+
   </div>
 </div>

@@ -5,6 +5,55 @@ import { ProducaoService} from "../../services/producao.service";
 import { CorretoraService} from "../../services/corretora.service";
 import { DateService} from "../../services/utils/date.service";
 
+import { barChartSingle, barChartmulti, pieChartSingle, pieChartmulti, lineChartSingle, lineChartMulti, areaChartSingle, areaChartMulti } from '../../../shared/data/ngxChart';
+import * as chartsData from '../../../shared/configs/ngx-charts.config';
+
+
+let barChartmulti2 = [
+  {
+    "name": "correta",
+    "series": [
+      {
+        "name": "11/02/2020",
+        "value": 730
+      },
+      {
+        "name": "11/03/2020",
+        "value": 894
+      },
+    ]
+  },
+
+  {
+    "name": "corretora",
+    "series": [
+      {
+        "name": "11/02/2020",
+        "value": 787
+      },
+      {
+        "name": "11/03/2020",
+        "value": 827
+      }
+    ]
+  },
+
+  {
+    "name": "nova",
+    "series": [
+      {
+        "name": "11/02/2020",
+        "value": 500
+      },
+      {
+        "name": "11/03/2020",
+        "value": 580
+      }
+    ]
+  }
+];
+
+
 @Component({
   selector: 'app-producao-page',
   templateUrl: './producao-page.component.html',
@@ -258,9 +307,32 @@ export class ProducaoPageComponent implements OnInit {
 
     // se não existir, dar feedback visual
 
-
-
-
   }
+
+
+  // CHART START ---------------------------------------------------------------------------------------------
+  // CHART START ---------------------------------------------------------------------------------------------
+  // CHART START ---------------------------------------------------------------------------------------------
+
+  //Chart Data
+
+  barChartmulti = barChartmulti2;
+
+
+  // options
+  barChartShowYAxis = chartsData.barChartShowYAxis;
+  barChartShowXAxis = chartsData.barChartShowXAxis;
+  barChartGradient = chartsData.barChartGradient;
+  barChartShowLegend = chartsData.barChartShowLegend;
+  barChartShowXAxisLabel = chartsData.barChartShowXAxisLabel;
+  barChartXAxisLabel = chartsData.barChartXAxisLabel;
+  barChartShowYAxisLabel = chartsData.barChartShowYAxisLabel;
+  barChartYAxisLabel = chartsData.barChartYAxisLabel;
+  barChartColorScheme = chartsData.barChartColorScheme;
+
+
+  // CHART END ---------------------------------------------------------------------------------------------
+  // CHART END ---------------------------------------------------------------------------------------------
+  // CHART END ---------------------------------------------------------------------------------------------
 
 }

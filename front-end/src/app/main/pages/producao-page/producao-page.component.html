@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="col-sm-12">
-        <div class="card" style="padding-bottom: 1rem">
+        <div class="card" style="padding-bottom: 1rem; border-radius: 0 0 10px 10px">
           <div class="card-header">
             <div class="col-sm-12">
               <div class="row">
@@ -18,7 +18,7 @@
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="seguradora">Seguradora</label>
+                    <label for="seguradora">Selecione a Seguradora</label>
                     <select (change)="setActiveSeguradora(seguradoraSelect.value)" #seguradoraSelect class="form-control border-primary" id="seguradora">
                       <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
                     </select>
@@ -36,7 +36,7 @@
       <section id="simple-table">
         <div class="row text-left">
           <div class="col-sm-12">
-            <div class="card">
+            <div style="border-radius: 10px" class="card">
               <div class="card-header">
                 <div style="padding: 1rem">
                   <div class="row">
@@ -97,7 +97,7 @@
       <section id="simple-table2">
         <div class="row text-left">
           <div class="col-sm-12">
-            <div class="card">
+            <div style="border-radius: 10px" class="card">
               <div class="card-header">
                 <div style="padding: 1rem">
                   <div class="row">
@@ -152,15 +152,26 @@
 
 
     <div class="content-body">
-        <div class="row text-left">
-          <div class="col-sm-12">
-            <div class="card">
-              <div class="card-content">
-
+      <div class="row">
+        <div class="col-sm-12">
+          <div style="border-radius: 10px" class="card">
+            <div class="card-header">
+              <h4 class="card-title">Horizontal Bar Chart</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <div id="horizontal-bar-chart" class="height-400">
+                  <ngx-charts-bar-horizontal-2d [scheme]="barChartColorScheme" [results]="barChartmulti" [gradient]="barChartGradient" [xAxis]="barChartShowXAxis"
+                                                [yAxis]="barChartShowYAxis" [legend]="barChartShowLegend" [showXAxisLabel]="barChartShowXAxisLabel"
+                                                [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel" [yAxisLabel]="barChartYAxisLabel"
+                  >
+                  </ngx-charts-bar-horizontal-2d>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
 
 

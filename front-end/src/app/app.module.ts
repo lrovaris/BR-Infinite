@@ -27,6 +27,12 @@ import { PipelineViewComponent } from './main/pages/pipeline-page/partials/pipel
 import { PipelineListComponent } from './main/pages/pipeline-page/partials/pipeline-list/pipeline-list.component';
 import { ProducaoEnviarAnexoPartialComponent } from './main/pages/producao-page/partials/producao-enviar-anexo-partial/producao-enviar-anexo-partial.component';
 
+// GRAFICOS -----------
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+// END GRAFICOS -----------
+
 
 @NgModule({
   declarations: [
@@ -57,7 +63,8 @@ import { ProducaoEnviarAnexoPartialComponent } from './main/pages/producao-page/
     AppRoutingModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

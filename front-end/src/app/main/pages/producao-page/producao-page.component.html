@@ -2,7 +2,7 @@
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="col-sm-12">
-        <div class="card" style="padding-bottom: 1rem; border-radius: 0 0 10px 10px">
+        <div class="card" style="padding-bottom: 1rem; border-radius: 10px">
           <div class="card-header">
             <div class="col-sm-12">
               <div class="row">
@@ -152,6 +152,7 @@
 
 
     <div class="content-body">
+
       <div class="row">
         <div class="col-sm-12">
           <div style="border-radius: 10px" class="card">
@@ -172,6 +173,28 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Vertical Bar Chart</h4>
+            </div>
+            <div class="card-content">
+              <div class="card-body">
+                <div id="vartical-bar-chart" class="height-400">
+                  <ngx-charts-bar-vertical-2d [scheme]="barChartColorScheme" [results]="barChartmulti" [gradient]="barChartGradient" [xAxis]="barChartShowXAxis"
+                                              [yAxis]="barChartShowYAxis" [legend]="barChartShowLegend" [showXAxisLabel]="barChartShowXAxisLabel"
+                                              [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel" [yAxisLabel]="barChartYAxisLabel"
+                                              (select)="onSelect($event)">
+                  </ngx-charts-bar-vertical-2d>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 

@@ -14,7 +14,7 @@ export var barChartShowYAxisLabel = true;
 export var barChartYAxisLabel = 'Corretoras';
 
 export var barChartColorScheme = {
-  domain: ['#27416F','#A0814B', '#162135', '#424B5B',]
+  domain: ['#27416F','#B29F7E', '#D8AC5F', '#001335',]
 };
 
 //Pie CHart

@@ -15,11 +15,11 @@ let barChartmulti2 = [
     "series": [
       {
         "name": "11/02/2020",
-        "value": 730
+        "value": 620
       },
       {
         "name": "11/03/2020",
-        "value": 894
+        "value": 920
       },
     ]
   },
@@ -33,7 +33,7 @@ let barChartmulti2 = [
       },
       {
         "name": "11/03/2020",
-        "value": 827
+        "value": 787
       }
     ]
   },
@@ -47,7 +47,7 @@ let barChartmulti2 = [
       },
       {
         "name": "11/03/2020",
-        "value": 580
+        "value": 420
       }
     ]
   }

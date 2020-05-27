@@ -9,6 +9,10 @@
   border-color:  #27416F!important;
 }
 
+.border-secondary {
+  border-color: #D8AC5F !important;
+}
+
 .btn:focus {
   box-shadow: none !important;
 }
@@ -18,5 +22,11 @@
 }
 
 body {
-  background-color: #424b5b;
+  background-color: #d6e5ef;
+}
+
+.card {
+  border-radius: 10px;
+  border: 1px solid #27416F;
+  padding: 8px 1rem 8px;
 }

@@ -14,6 +14,22 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
+router.post('/seguradoras/:id', async (req,res) => {
+  let seg_report = await controller.get_seguradora_report(req.params.id);
+
+  res.status(200).json({
+    report: seg_report
+  });
+});
+
+router.get ('/seguradoras/:id', async (req,res) => {
+  let seg_report = await controller.get_seguradora_report(req.params.id);
+
+  res.status(200).json({
+    report: seg_report
+  });
+});
+
 router.get ('/all', async (req,res) => {
   let all_entries = await controller.get_entries();
 

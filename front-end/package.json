@@ -75,8 +75,8 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.24",
-    "@angular/cli": "~8.3.25",
+    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular/cli": "~8.3.22",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
@@ -93,6 +93,10 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "@babel/compat-data": "~7.8.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
   }
 }

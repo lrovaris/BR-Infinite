@@ -38,7 +38,7 @@ describe('colaboradores Routes', () => {
     let list_colab = await controller.get_colaboradores();
 
 
-    afonso = list_colab.find(a =>  {
+    let afonso = list_colab.find(a =>  {
       return a.telephone === "999"
     });
 

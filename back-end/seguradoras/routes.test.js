@@ -71,8 +71,6 @@ describe('Seguradoras Routes', () => {
 
     const seguradoras_req = await controller.get_seguradoras();
 
-    let seguradoras_num = seguradoras_req.length;
-
     let segurinha = seguradoras_req.find(seg => seg.name === "segurinha");
 
     let seg_id = segurinha._id
@@ -84,8 +82,6 @@ describe('Seguradoras Routes', () => {
     expect(res.statusCode).toEqual(200);
 
     const seguradoras_req2 = await controller.get_seguradoras();
-
-    expect(seguradoras_req2.length).toEqual(seguradoras_num);
 
     let segurinha2 = seguradoras_req2.find(seg => seg._id.toString() === seg_id.toString());
 

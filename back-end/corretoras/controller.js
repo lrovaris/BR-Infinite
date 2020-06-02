@@ -87,7 +87,23 @@ async function get_corretora_by_nickname(nickname){
   }
 }
 
+async function get_corretoras_by_seguradora(seg_id) {
+  let corrs = await get_corretoras();
+
+  corrs = corrs.filter(corr =>{
+    if(corr.seguradoras === undefined){
+      return false
+    }else {
+      if(!corr.seguradoras.includes(seg_id)){
+        return false
+      }else {
+        return true
+      }
+    }
+  });
+
+  return corrs;
+}
 
 
-
-module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora, get_corretora_by_nickname};
+module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora, get_corretora_by_nickname, get_corretoras_by_seguradora};

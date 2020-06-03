@@ -27,9 +27,9 @@ export class ProducaoService {
     return this.http.get(`${this.urlService.getUrl()}/production/seguradoras/${id}`)
   }
 
-  postRelatorio(year, month, id) {
+  postRelatorioDiario(year, month, id) {
     console.log(year,month,id);
-    return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/monthly`, {year,month})
+    return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/daily`, {year,month})
   }
 
 }

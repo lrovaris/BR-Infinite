@@ -70,11 +70,17 @@ export class ProducaoPageComponent implements OnInit {
   seguradora = [];
   corretora = [];
 
+  media = '';
+  acumulado = '';
+  projecao = '';
+
   tipoRelatorio = 'padrão';
 
   reportsArray = [];
 
   seguradoraDates = [];
+
+  saveOldReport = [];
 
   monthsArray = [];
 
@@ -90,10 +96,9 @@ export class ProducaoPageComponent implements OnInit {
   filteredComparingCorretoras = [];
 
   activeSeguradora: any;
-  acumulado = 1000;
   seguradoraName: any;
   arrayWithOldDatesProduction = [];
-  corretoraFilter = ""
+  corretoraFilter = "";
   isComparing = false;
 
   constructor(
@@ -114,7 +119,7 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
-      this.setActiveSeguradora(this.allSeguradoras[0]);
+      this.setActiveSeguradora(this.allSeguradoras[0]._id);
     });
 
     this.producaoService.getAllProducao().subscribe((data: any) => {
@@ -156,16 +161,24 @@ export class ProducaoPageComponent implements OnInit {
 
   filterCorretoras(event){
 
-    this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+    console.log(event.target.value.toLowerCase());
 
-    
+    if(event.target.value.toLowerCase() !== '') {
+      this.saveOldReport = this.reportsArray;
+      this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+    } else {
+      this.reportsArray = this.saveOldReport;
+    }
 
   }
 
   gerarRelatorio() {
-    this.producaoService.postRelatorio(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
+    this.producaoService.postRelatorioDiario(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
       console.log(data);
       this.reportsArray = data.report.report;
+      this.media = data.report.media;
+      this.acumulado = data.report.total;
+      this.projecao = data.report.projection;
       console.log(this.reportsArray);
     })
   }
@@ -189,7 +202,7 @@ export class ProducaoPageComponent implements OnInit {
 
   setActiveSeguradora(seguradora) {
 
-    console.log(seguradora);
+  this.reportsArray = [];
 
     this.seguradoraName = '';
 
@@ -197,17 +210,21 @@ export class ProducaoPageComponent implements OnInit {
 
     this.isComparing = false;
 
-    this.acumulado = 0;
-
     this.corretorasOfActiveSeguradora = [];
 
-    this.activeSeguradora = seguradora._id;
+    this.activeSeguradora = seguradora;
+
+    let findSeguradora = this.allSeguradoras.find( findSeguradora => findSeguradora._id === seguradora);
+
+    this.seguradoraName = findSeguradora.name;
 
     console.log(this.activeSeguradora);
 
     this.producaoService.getSeguradoraReports(this.activeSeguradora).subscribe((data: any) => {
 
       this.seguradoraName = seguradora.name;
+
+      console.log(data);
 
       if (Object.entries(data.dates).length > 0) {
         this.seguradoraDates = Object.entries(data.dates);

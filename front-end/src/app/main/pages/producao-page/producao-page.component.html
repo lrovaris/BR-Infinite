@@ -7,7 +7,7 @@
             <div class="col-sm-12">
               <div class="row">
                 <div class="col-md-4">
-                  <h4>Produçao</h4>
+                  <h4>Relatório por Seguradora - Diário</h4>
                 </div>
                 <div class="col-sm-12 col-md-8">
                   <button (click)="navigateEnviarAnexo()" style="margin-top: -1px" class="btn btn-header float-right">
@@ -19,8 +19,8 @@
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
                     <label for="seguradora">Selecione o tipo de relatório</label>
-                    <select  class="form-control border-primary" id="relatorio">
-                      <option>padrao</option>
+                    <select (change)="selectRelatorio(selectRelatorio.value)" #selectRelatorio class="form-control border-primary" id="relatorio">
+                      <option value="padrao" >padrao</option>
                     </select>
                   </fieldset>
                 </div>
@@ -30,7 +30,7 @@
                   <fieldset class="form-group">
                     <label for="seguradora">Selecione a Seguradora</label>
                     <select (change)="setActiveSeguradora(seguradoraSelect.value)" #seguradoraSelect class="form-control border-primary" id="seguradora">
-                      <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                      <option [value]="seguradora" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
                     </select>
                   </fieldset>
                 </div>
@@ -77,18 +77,13 @@
               <div class="card-header">
                 <div style="padding: 1rem">
                   <div class="row">
-                    <div class="col-sm-12">
-                     <h4 style="font-weight: 400"> {{seguradoraName}} Acumulado:  <a style="color: #27416F">R${{acumulado}}</a></h4>
-                    </div>
+                   <div class="col">
+                     <h4 style="font-weight: 300"> Relatório Diário - {{tipoRelatorio}} {{seguradoraName}} {{selectedMonth}}/{{selectedYear}} </h4>
+                   </div>
                   </div>
                   <div class="row" style="margin-top: 1rem">
                     <div class="col-4">
                       <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar corretoras" />
-                    </div>
-                    <div class="col-4">
-                      <button (click)="compararComDiaAnterior()" style="margin-top: -1px" class="btn btn-header float-right">
-                        <a>Comparar com dia anterior</a>
-                      </button>
                     </div>
                     </div>
                 </div>
@@ -101,7 +96,7 @@
                     <tr>
                       <th>#</th>
                       <th>Corretora</th>
-                      <th *ngFor="let dates of reportsArray[0].report">{{dates.date}}</th>
+                      <th *ngFor="let dates of reportsArray[0].corr_report">{{dates.date}}</th>
                     </tr>
                     </thead>
                     <tbody>

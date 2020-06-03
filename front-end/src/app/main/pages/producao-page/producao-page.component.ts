@@ -70,7 +70,7 @@ export class ProducaoPageComponent implements OnInit {
   seguradora = [];
   corretora = [];
 
-  seguradoraData: any;
+  tipoRelatorio = 'padrão';
 
   reportsArray = [];
 
@@ -86,8 +86,8 @@ export class ProducaoPageComponent implements OnInit {
   corretorasOfActiveSeguradora = [];
   filteredCorretorasOfActiveSeguradora = [];
 
-  comparingCorretoras = []
-  filteredComparingCorretoras = []
+  comparingCorretoras = [];
+  filteredComparingCorretoras = [];
 
   activeSeguradora: any;
   acumulado = 1000;
@@ -114,8 +114,7 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
-      this.activeSeguradora = this.allSeguradoras[0]._id;
-      this.setActiveSeguradora(this.activeSeguradora);
+      this.setActiveSeguradora(this.allSeguradoras[0]);
     });
 
     this.producaoService.getAllProducao().subscribe((data: any) => {
@@ -156,20 +155,18 @@ export class ProducaoPageComponent implements OnInit {
 
 
   filterCorretoras(event){
-    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora.filter(prod => prod.name.includes(event.target.value));
 
-    this.acumulado = 0;
+    this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
 
-    for (let i = 0; i < this.filteredCorretorasOfActiveSeguradora.length; i++) {
+    
 
-      this.acumulado = this.acumulado + this.filteredCorretorasOfActiveSeguradora[i].total;
-
-    }
   }
 
   gerarRelatorio() {
     this.producaoService.postRelatorio(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
       console.log(data);
+      this.reportsArray = data.report.report;
+      console.log(this.reportsArray);
     })
   }
 
@@ -185,7 +182,16 @@ export class ProducaoPageComponent implements OnInit {
 
   }
 
-  setActiveSeguradora(id) {
+  selectRelatorio(value) {
+    this.tipoRelatorio = value;
+  }
+
+
+  setActiveSeguradora(seguradora) {
+
+    console.log(seguradora);
+
+    this.seguradoraName = '';
 
     this.seguradoraDates = [];
 
@@ -195,9 +201,13 @@ export class ProducaoPageComponent implements OnInit {
 
     this.corretorasOfActiveSeguradora = [];
 
-    this.activeSeguradora = id;
+    this.activeSeguradora = seguradora._id;
 
-    this.producaoService.getSeguradoraReports(id).subscribe((data: any) => {
+    console.log(this.activeSeguradora);
+
+    this.producaoService.getSeguradoraReports(this.activeSeguradora).subscribe((data: any) => {
+
+      this.seguradoraName = seguradora.name;
 
       if (Object.entries(data.dates).length > 0) {
         this.seguradoraDates = Object.entries(data.dates);

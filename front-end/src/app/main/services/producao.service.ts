@@ -28,8 +28,11 @@ export class ProducaoService {
   }
 
   postRelatorioDiario(year, month, id) {
-    console.log(year,month,id);
     return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/daily`, {year,month})
+  }
+
+  postRelatorioMensal(beginYear, beginMonth,endYear,endMonth, id) {
+    return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/monthly`, {beginYear, beginMonth, endYear, endMonth})
   }
 
 }

@@ -31,6 +31,10 @@ import { ProducaoEnviarAnexoPartialComponent } from './main/pages/producao-page/
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-browser/animations";
+import { ProducaoMensalPartialComponent } from './main/pages/producao-page/partials/producao-mensal-partial/producao-mensal-partial.component';
+import { ProducaoSelectPartialComponent } from './main/pages/producao-page/partials/producao-select-partial/producao-select-partial.component';
+import { ProducaoSelectCorretoraSeguradoraPartialComponent } from './main/pages/producao-page/partials/producao-select-corretora-seguradora-partial/producao-select-corretora-seguradora-partial.component';
+import { ProducaoSelect2PartialComponent } from './main/pages/producao-page/partials/producao-select2-partial/producao-select2-partial.component';
 
 // END GRAFICOS -----------
 
@@ -57,7 +61,11 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from "@angular/platform-b
     ProdutoViewComponent,
     PipelineViewComponent,
     PipelineListComponent,
-    ProducaoEnviarAnexoPartialComponent
+    ProducaoEnviarAnexoPartialComponent,
+    ProducaoMensalPartialComponent,
+    ProducaoSelectPartialComponent,
+    ProducaoSelectCorretoraSeguradoraPartialComponent,
+    ProducaoSelect2PartialComponent
   ],
   imports: [
     BrowserModule,

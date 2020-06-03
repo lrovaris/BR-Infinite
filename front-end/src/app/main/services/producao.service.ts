@@ -23,5 +23,13 @@ export class ProducaoService {
     return this.http.get(`${this.urlService.getUrl()}/production/all`);
   }
 
+  getSeguradoraReports(id) {
+    return this.http.get(`${this.urlService.getUrl()}/production/seguradoras/${id}`)
+  }
+
+  postRelatorio(year, month, id) {
+    console.log(year,month,id);
+    return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/monthly`, {year,month})
+  }
 
 }

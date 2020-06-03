@@ -70,6 +70,17 @@ export class ProducaoPageComponent implements OnInit {
   seguradora = [];
   corretora = [];
 
+  seguradoraData: any;
+
+  reportsArray = [];
+
+  seguradoraDates = [];
+
+  monthsArray = [];
+
+  selectedYear: any;
+  selectedMonth: any;
+
   checkedCorretora = false;
 
   corretorasOfActiveSeguradora = [];
@@ -103,6 +114,8 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
+      this.activeSeguradora = this.allSeguradoras[0]._id;
+      this.setActiveSeguradora(this.activeSeguradora);
     });
 
     this.producaoService.getAllProducao().subscribe((data: any) => {
@@ -154,7 +167,27 @@ export class ProducaoPageComponent implements OnInit {
     }
   }
 
+  gerarRelatorio() {
+    this.producaoService.postRelatorio(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
+      console.log(data);
+    })
+  }
+
+  selectMonth(mes) {
+    this.selectedMonth = mes;
+  }
+
+  selectYear(yearObj) {
+
+    this.selectedYear = yearObj[0];
+    this.monthsArray = yearObj[1];
+    this.monthsArray = Object.entries(this.monthsArray);
+
+  }
+
   setActiveSeguradora(id) {
+
+    this.seguradoraDates = [];
 
     this.isComparing = false;
 
@@ -164,7 +197,19 @@ export class ProducaoPageComponent implements OnInit {
 
     this.activeSeguradora = id;
 
-    let activeSeguradoraProductionsArray = [];
+    this.producaoService.getSeguradoraReports(id).subscribe((data: any) => {
+
+      if (Object.entries(data.dates).length > 0) {
+        this.seguradoraDates = Object.entries(data.dates);
+        this.selectYear(this.seguradoraDates[0]);
+        setTimeout(() => {
+          this.selectMonth(this.monthsArray[0][0]);
+        }, 1)
+      }
+
+    })
+
+/*    let activeSeguradoraProductionsArray = [];
 
     for (let i = 0; i < this.allProducoes.length; i++) {
       if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
@@ -202,7 +247,10 @@ export class ProducaoPageComponent implements OnInit {
 
     }
 
-    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;
+    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;*/
+
+
+
   }
 
 

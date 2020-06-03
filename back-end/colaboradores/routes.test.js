@@ -38,8 +38,8 @@ describe('colaboradores Routes', () => {
     let list_colab = await controller.get_colaboradores();
 
 
-    let afonso = list_colab.find(a =>  {
-      return a.telephone === "999"
+    let afonso = list_colab.find(colab =>  {
+      return colab.telephone === "999"
     });
 
     expect(afonso.name).toEqual("afonso tavarex");

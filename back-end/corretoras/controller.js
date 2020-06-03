@@ -66,25 +66,17 @@ async function validate_corretora(corretora) {
 }
 
 async function get_corretora_by_nickname(nickname){
-  let cache_corr = cache.get(`nickname:${nickname}`);
+  let all_corr = await get_corretoras();
 
-  if (cache_corr){
-    return cache_corr;
-  }else {
-    let all_corr = await get_corretoras();
+  let corretora = all_corr.find(corr_obj =>{
+    if(!corr_obj.nicknames){
+      return false;
+    }
 
-    let corretora = all_corr.find(corr_obj =>{
-      if(!corr_obj.nicknames){
-        return false;
-      }
-
-      return (corr_obj.nicknames.includes(nickname));
-    });
-
-    cache.set(`nickname:${nickname}`, corretora)
-
-    return corretora;
-  }
+    return (corr_obj.nicknames.includes(nickname));
+  });
+    
+  return corretora;
 }
 
 async function get_corretoras_by_seguradora(seg_id) {

@@ -5834,12 +5834,17 @@ export class CorretoraPageComponent implements OnInit {
     if (this.corretoraService.getCorretoraInfo()) {
       this.corretora =  this.corretoraService.getCorretoraInfo();
     }
+
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
+      console.log(data);
+
       this.allSeguradoras = data;
     });
+
     if (this.corretoraService.getCorretoraInfo()) {
       this.corretora = this.corretoraService.getCorretoraInfo();
     }
+
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
@@ -5859,6 +5864,7 @@ export class CorretoraPageComponent implements OnInit {
       this.corretora.controls['complement'].setValue(data.address.complement);
       this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
     }
+
   }
 
 

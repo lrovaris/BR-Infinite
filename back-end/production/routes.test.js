@@ -72,7 +72,9 @@ describe('Production Routes', () => {
     // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.statusCode).toEqual(200)
-    expect(new_request.body.report.length).toEqual(4)
+    expect(new_request.body.dates['2020'] !== undefined).toEqual(true)
+    expect(new_request.body.dates['2020']['5'].length).toEqual(3)
+
   })
 
 
@@ -102,17 +104,23 @@ describe('Production Routes', () => {
 
     let new_request = await request(app).get(`/production/seguradoras/${new_seguradora_id}`)
 
-    // console.log(JSON.stringify(new_request.body, null, 1));
+    expect(new_request.statusCode).toEqual(200)
+    expect(new_request.body.dates['2020'] !== undefined).toEqual(true)
+    expect(new_request.body.dates['2021'] !== undefined).toEqual(true)
+    expect(new_request.body.dates['2020']['5'].length).toEqual(8)
   })
 
 
   it('deveria retornar um array para cada corretora de uma seguradora com todas produções de um intervalo de tempo', async () => {
-    let new_request = await request(app).get(`/production/seguradoras/${seguradora_id}`)
+    let new_request = await request(app).post(`/production/seguradoras/${seguradora_id}/report/monthly`).send({
+      month: 5,
+      year: 2020
+    })
 
-    // console.log(JSON.stringify(new_request.body, null, 1));
+    console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.statusCode).toEqual(200)
-    expect(new_request.body.report.length).toEqual(4)
+    // expect(new_request.body.report.length).toEqual(4)
   })
 
 })

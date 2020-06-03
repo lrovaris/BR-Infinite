@@ -14,22 +14,6 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
-router.post('/seguradoras/:id', async (req,res) => {
-  let seg_report = await controller.get_seguradora_report(req.params.id);
-
-  res.status(200).json({
-    report: seg_report
-  });
-});
-
-router.get ('/seguradoras/:id', async (req,res) => {
-  let seg_report = await controller.get_seguradora_report(req.params.id);
-
-  res.status(200).json({
-    report: seg_report
-  });
-});
-
 router.get ('/all', async (req,res) => {
   let all_entries = await controller.get_entries();
 
@@ -94,7 +78,6 @@ router.post('/new', async(req,res) => {
     }
 });
 
-
 //  Upload / Download
 
 const storage = multer.diskStorage({
@@ -127,6 +110,54 @@ router.post('/upload', upload.array('docs'), async(req,res) =>{
     info_files: this_files
   })
 })
+
+
+// Relatórios e comparações
+
+router.get ('/seguradoras/:id', async (req,res) => {
+  let seg_dates = await controller.get_seguradora_dates(req.params.id);
+
+  res.status(200).json({
+    dates: seg_dates
+  });
+});
+
+router.post ('/seguradoras/:id/report/monthly', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let year = req.body.year;
+
+  if(year === undefined){
+    return res.status(400).json({
+      message: "Ano inválido"
+    })
+  }
+
+  year = Number(year.toString());
+
+  let month = req.body.month;
+
+  if(month === undefined){
+    return res.status(400).json({
+      message: "Mês inválido"
+    })
+  }
+
+  month = Number(month.toString())
+
+  let report = await controller.get_seguradora_month_report(req.params.id, year, month);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
 
 
 module.exports = router;

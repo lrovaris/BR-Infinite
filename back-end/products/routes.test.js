@@ -30,8 +30,6 @@ describe('Produtos Routes', () => {
 
     const produtos_req = await controller.get_produtos();
 
-    let produtos_num = produtos_req.length;
-
     produto_novo = produtos_req.find(prod => prod.name === "produto legal");
 
     expect(produto_novo.name).toEqual("produto legal");
@@ -43,8 +41,6 @@ describe('Produtos Routes', () => {
     expect(res.statusCode).toEqual(200);
 
     const produtos_req2 = await controller.get_produtos();
-
-    expect(produtos_req2.length).toEqual(produtos_num);
 
     produto_novo2 = produtos_req2[0];
 

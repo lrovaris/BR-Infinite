@@ -1,8 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./db');
-const cache = require('../memoryCache');
-const logger = require('../logger');
 const controller = require('./controller')
 const multer  = require('multer')
 const fs = require('fs');
@@ -122,7 +119,7 @@ router.get ('/seguradoras/:id', async (req,res) => {
   });
 });
 
-router.post ('/seguradoras/:id/report/monthly', async (req,res) => {
+router.post ('/seguradoras/:id/report/daily', async (req,res) => {
   let seg_id = req.params.id;
 
   if(seg_id === undefined){
@@ -151,13 +148,106 @@ router.post ('/seguradoras/:id/report/monthly', async (req,res) => {
 
   month = Number(month.toString())
 
-  let report = await controller.get_seguradora_month_report(req.params.id, year, month);
+  let report = await controller.get_seguradora_daily_report(req.params.id, year, month);
 
   res.status(200).json({
     report: report
   });
 });
 
+router.post ('/seguradoras/:id/report/monthly', async (req,res) => {
+  let seg_id = req.params.id;
 
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let begin_year = Number(req.body.beginYear);
+  let begin_month = Number(req.body.beginMonth);
+  let end_year = Number(req.body.endYear);
+  let end_month = Number(req.body.endMonth);
+
+  if(begin_year === undefined || typeof begin_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano de início inválido"
+    })
+  }
+
+  if(begin_month === undefined || typeof begin_month !== 'number'){
+    return res.status(400).json({
+      message: "Mês de início inválido"
+    })
+  }
+
+  if(end_year === undefined || typeof end_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano final inválido"
+    })
+  }
+
+  if(end_month === undefined || typeof end_month !== 'number'){
+    return res.status(400).json({
+      message: "Mês final inválido"
+    })
+  }
+
+  if(end_year < begin_year){
+    return res.status(400).json({
+      message: "O ano final deve ser posterior ao ano de início"
+    })
+  }
+
+  if(end_month < begin_month && end_year === begin_year){
+    return res.status(400).json({
+      message: "O mês final deve ser posterior ao mês de início"
+    })
+  }
+
+
+  let report = await controller.get_seguradora_monthly_report(seg_id, begin_year, begin_month, end_year, end_month);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.post ('/seguradoras/:id/report/yearly', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let begin_year = Number(req.body.beginYear);
+  let end_year = Number(req.body.endYear);
+
+  if(begin_year === undefined || typeof begin_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano de início inválido"
+    })
+  }
+
+  if(end_year === undefined || typeof end_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano final inválido"
+    })
+  }
+
+  if(end_year < begin_year){
+    return res.status(400).json({
+      message: "O ano final deve ser posterior ao ano de início"
+    })
+  }
+
+  let report = await controller.get_seguradora_yearly_report(seg_id, begin_year, end_year);
+
+  res.status(200).json({
+    report: report
+  });
+});
 
 module.exports = router;

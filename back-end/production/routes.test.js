@@ -6,6 +6,7 @@ const controller = require('./controller')
 
 const my_csv_path = "1589898272624-48409787testecsv.csv";
 const other_csv_path = "csv-exemplo.csv";
+const monthly_test_csv = "testerelatoriomensal.csv"
 
 
 let seguradora_id = '';
@@ -13,6 +14,8 @@ let seg;
 let corr_1;
 let corr_2;
 let corr_3;
+
+let month_year_seg_id = "";
 
 describe('Production Routes', () => {
 
@@ -77,7 +80,6 @@ describe('Production Routes', () => {
 
   })
 
-
   it('deveria criar uma seguradora, uma corretora e cadastrar uma nova produção, com mais de um ano e vários meses', async () => {
     let new_seg = await request(app).post('/seguradoras/new').send({
       seguradora: { name:"segura_teste" },
@@ -110,17 +112,65 @@ describe('Production Routes', () => {
     expect(new_request.body.dates['2020']['5'].length).toEqual(8)
   })
 
-
-  it('deveria retornar um array para cada corretora de uma seguradora com todas produções de um intervalo de tempo', async () => {
-    let new_request = await request(app).post(`/production/seguradoras/${seguradora_id}/report/monthly`).send({
+  it('deveria retornar um relatório com array para cada corretora de uma seguradora com todas produções de um mês quebrado por cada dia', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${seguradora_id}/report/daily`).send({
       month: 5,
       year: 2020
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+    expect(new_request.body.report.total).toEqual(20470)
+    expect(new_request.body.report.report.length).toEqual(4)
+  })
+
+  it('deveria criar uma seguradora, adicionar um relatório com dois meses, e fazer uma requisição que retorna um relatório com array para cada corretora de uma seguradora com a última produção de cada mês de um intervalo de meses', async () => {
+    let new_seg = await request(app).post('/seguradoras/new').send({
+      seguradora: { name:"segura_teste" },
+      manager: { name:"Luis do QA", telephone:"999219075", email:"luis@segurateste.com", birthday: "01 - 05", job:"quebrar apps" }
+    })
+
+    month_year_seg_id = new_seg.body.seguradora._id;
+
+    expect(new_seg.statusCode).toEqual(200)
+
+    let new_corr = await request(app).post('/corretoras/new').send({
+      corretora: { name:"corretinha",  nicknames:["novo teste"], seguradoras:[ month_year_seg_id ] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    expect(new_corr.statusCode).toEqual(200)
+
+    const entry_request = await request(app).post('/production/new').send({
+      seguradora: month_year_seg_id,
+      path: monthly_test_csv
+    })
+
+    expect(entry_request.statusCode).toEqual(200)
+
+    let new_request = await request(app).post(`/production/seguradoras/${month_year_seg_id}/report/monthly`).send({
+      beginYear: 2020,
+      beginMonth: 5,
+      endYear: 2021,
+      endMonth: 6
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+    expect(new_request.body.report.total).toEqual(3983)
+    expect(new_request.body.report.report.length).toEqual(1)
+    expect(new_request.body.report.report[0].corr_report.length).toEqual(4)
+  })
+
+  it('deveria fazer uma requisição que retorna um relatório com array para cada corretora de uma seguradora com a produção anual de um intervalo', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${month_year_seg_id}/report/yearly`).send({
+      beginYear: 2020,
+      endYear: 2021,
     })
 
     console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.statusCode).toEqual(200)
-    // expect(new_request.body.report.length).toEqual(4)
   })
+
+
 
 })

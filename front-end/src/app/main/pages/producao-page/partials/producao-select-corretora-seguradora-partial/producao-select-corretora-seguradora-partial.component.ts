@@ -11,11 +11,11 @@ export class ProducaoSelectCorretoraSeguradoraPartialComponent implements OnInit
   constructor(private router: Router) { }
 
   navigateCorretoraSelect() {
-    this.router.navigate([''])
+    this.router.navigate(['producao/selecione/corretora'])
   }
 
   navigateSeguradoraSelect() {
-    this.router.navigate(['producao/selecione'])
+    this.router.navigate(['producao/selecione/seguradora'])
   }
 
   navigateEnviarAnexo() {

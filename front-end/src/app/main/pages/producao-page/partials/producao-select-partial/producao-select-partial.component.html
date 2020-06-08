@@ -3,18 +3,46 @@
     <div class="content-header row">
       <div class="col-sm-12">
         <div class="card" style="padding-bottom: 1rem; border-radius: 10px">
-          <div class="card-content" style="display: flex; justify-content: center; align-items: center">
+          <div class="card-content">
             <div class="row">
-              <div class="col-sm-4">
-                <button class="btn-header btn" (click)="navigateDiario()"><a>diario</a></button>
+              <div class="col-sm-8"  style="display: flex; justify-content: center; align-items: center">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <button class="btn-header btn" (click)="changeDiario()"><a>diario</a></button>
+                  </div>
+                  <div class="col-sm-4">
+                    <button class="btn-header btn" (click)="changeMensal()"><a>mensal</a></button>
+                  </div>
+                  <div class="col-sm-4">
+                    <button class="btn-header btn"  (click)="changeAnual()"><a>anual</a></button>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <button class="btn-header btn" (click)="navigateMensal()"><a>mensal</a></button>
-              </div>
-              <div class="col-sm-4">
-                <button class="btn-header btn"><a>anual</a></button>
+              <div class="col-sm-4" >
+                <div class="row">
+                  <div class="col-sm-6">
+                    <button class="btn-header btn float-right" (click)="navigateCorretora()"><a>Corretora</a></button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button class="btn-header btn" (click)="navigateEnviarAnexo()"><a>Enviar Anexo</a></button>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card" *ngIf="diario">
+          <div class="card-content">
+            <app-producao-page></app-producao-page>
+          </div>
+        </div>
+        <div class="card" *ngIf="mensal">
+          <div class="card-content">
+            <app-producao-mensal-partial></app-producao-mensal-partial>
           </div>
         </div>
       </div>

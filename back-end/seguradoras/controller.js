@@ -16,6 +16,16 @@ async function get_seguradora_by_id(seg_id){
   return seguradora;
 }
 
+async function get_seguradoras_by_id_array(seg_ids){
+  let all_seg = await get_seguradoras();
+
+  let resp = all_seg.filter(seg_obj =>{
+    return (seg_ids.includes(seg_obj._id.toString()))
+  });
+
+  return resp;
+}
+
 async function register_seguradora(new_seg){
   let db_seg = await db.register_seguradora(new_seg).catch(err => logger.error(err));
 
@@ -40,4 +50,4 @@ async function validate_seguradora(seguradora){
   return{ valid: true }
 }
 
-module.exports = { get_seguradoras, get_seguradora_by_id, validate_seguradora, register_seguradora };
+module.exports = { get_seguradoras, get_seguradora_by_id, validate_seguradora, register_seguradora, get_seguradoras_by_id_array };

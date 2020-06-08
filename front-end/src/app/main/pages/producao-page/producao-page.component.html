@@ -15,9 +15,10 @@
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="seguradora">Selecione o tipo de relatório</label>
-                    <select (change)="selectRelatorio(selectRelatorio.value)" #selectRelatorio class="form-control border-primary" id="relatorio">
+                    <label for="relatorio">Selecione o tipo de relatório</label>
+                    <select (change)="selectRelatorio(selectRelatorioAtribute.value)" #selectRelatorioAtribute class="form-control border-primary" id="relatorio">
                       <option value="padrao" >padrao</option>
+                      <option value="comparativo">comparativo</option>
                     </select>
                   </fieldset>
                 </div>
@@ -32,15 +33,15 @@
                   </fieldset>
                 </div>
 
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
                   <fieldset class="form-group">
                     <label for="ano">Selecione o Ano</label>
                     <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano">
-                      <option [value]="ano" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
                   <fieldset class="form-group">
                     <label for="mes">Selecione o Mes</label>
                     <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes">
@@ -53,13 +54,65 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <button (click)="gerarRelatorio()" style="margin-top: 1.6rem" class="btn btn-header float-right" id="asd">
+                    <button (click)="gerarRelatorio()" style="margin-top: 1.8rem" class="btn btn-header float-right" id="asd">
                       <a>Gerar relatorio</a>
                     </button>
                   </div>
                 </div>
 
               </div>
+
+              <div *ngIf="tipoRelatorio === 'comparativo'" class="row">
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                  <fieldset class="form-group">
+                    <label for="ano2">Selecione o Ano</label>
+                    <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano3">
+                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                  <fieldset class="form-group">
+                    <label for="mes2">Selecione o Mes</label>
+                    <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes3">
+                      <option [value]="mes[0]" *ngFor="let mes of monthsArray">{{mes[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                <fieldset class="form-group">
+                  <label for="mes2">Selecione o Dia</label>
+                  <select (change)="selectDay(daySelect.value)" #daySelect class="form-control border-primary" id="day">
+                    <option [value]="day" *ngFor="let day of daysArray">{{day}}</option>
+                  </select>
+                </fieldset>
+              </div>
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                  <fieldset class="form-group">
+                    <label for="ano2">Selecione o Ano</label>
+                    <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano4">
+                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                  <fieldset class="form-group">
+                    <label for="mes2">Selecione o Mes</label>
+                    <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes4">
+                      <option [value]="mes[0]" *ngFor="let mes of monthsArray">{{mes[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                  <fieldset class="form-group">
+                    <label for="mes2">Selecione o Dia</label>
+                    <select (change)="selectDay(daySelect.value)" #daySelect class="form-control border-primary" id="day2">
+                      <option [value]="day" *ngFor="let day of daysArray">{{day}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

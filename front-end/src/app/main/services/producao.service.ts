@@ -35,4 +35,8 @@ export class ProducaoService {
     return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/monthly`, {beginYear, beginMonth, endYear, endMonth})
   }
 
+  postRelatorioAnual(beginYear,endYear, id) {
+    return this.http.post(`${this.urlService.getUrl()}/production/seguradoras/${id}/report/yearly`, {beginYear, endYear})
+  }
+
 }

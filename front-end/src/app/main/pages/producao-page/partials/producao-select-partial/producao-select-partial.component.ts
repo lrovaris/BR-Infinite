@@ -10,15 +10,38 @@ export class ProducaoSelectPartialComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  navigateDiario() {
-    this.router.navigate(['producao/diario'])
-  }
-
-  navigateMensal() {
-    this.router.navigate(['producao/mensal'])
-  }
+  diario = false;
+  mensal = false;
+  anual = false;
 
   ngOnInit() {
+    this.diario = true;
+  }
+
+  changeDiario() {
+    this.diario = true;
+    this.mensal = false;
+    this.anual = false;
+  }
+
+  changeMensal() {
+    this.diario = false;
+    this.mensal = true;
+    this.anual = false;
+  }
+
+  changeAnual() {
+    this.diario = false;
+    this.mensal = false;
+    this.anual = true;
+  }
+
+  navigateCorretora() {
+    this.router.navigate(['producao/selecione/corretora'])
+  }
+
+  navigateEnviarAnexo() {
+    this.router.navigate(['producao/enviar'])
   }
 
 }

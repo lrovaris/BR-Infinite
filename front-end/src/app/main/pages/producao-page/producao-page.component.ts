@@ -74,7 +74,7 @@ export class ProducaoPageComponent implements OnInit {
   acumulado = '';
   projecao = '';
 
-  tipoRelatorio = 'padrão';
+  tipoRelatorio = '';
 
   reportsArray = [];
 
@@ -83,9 +83,14 @@ export class ProducaoPageComponent implements OnInit {
   saveOldReport = [];
 
   monthsArray = [];
+  daysArray = [];
 
   selectedYear: any;
   selectedMonth: any;
+  selectedDay: any;
+  selectedYearEnd: any;
+  selectedMonthEnd: any;
+  selectedDayEnd: any;
 
   checkedCorretora = false;
 
@@ -109,17 +114,18 @@ export class ProducaoPageComponent implements OnInit {
               private dateService: DateService
   ) { }
 
-  navigateEnviarAnexo() {
-    this.router.navigate(['producao/enviar']);
-  }
 
   ngOnInit() {
+
+    this.tipoRelatorio = 'padrao';
 
     this.corretoraFilter = "";
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
+      this.tipoRelatorio = 'comparativo';
       this.setActiveSeguradora(this.allSeguradoras[0]._id);
+      this.tipoRelatorio = 'padrao';
     });
 
     this.producaoService.getAllProducao().subscribe((data: any) => {
@@ -161,7 +167,6 @@ export class ProducaoPageComponent implements OnInit {
 
   filterCorretoras(event){
 
-    console.log(event.target.value.toLowerCase());
 
     if(event.target.value.toLowerCase() !== '') {
       this.saveOldReport = this.reportsArray;
@@ -174,26 +179,58 @@ export class ProducaoPageComponent implements OnInit {
 
   gerarRelatorio() {
     this.producaoService.postRelatorioDiario(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
-      console.log(data);
+
       this.reportsArray = data.report.report;
       this.media = data.report.media;
       this.acumulado = data.report.total;
       this.projecao = data.report.projection;
-      console.log(this.reportsArray);
     })
   }
 
-  selectMonth(mes) {
-    this.selectedMonth = mes;
+  selectDay(day) {
+    this.selectedDay = day;
   }
+
+  selectMonth(mes) {
+    console.log(mes);
+    this.selectedMonth = mes;
+
+    if (this.tipoRelatorio === 'comparativo') {
+
+      let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYear
+      });
+
+      monthObj = Object.entries(monthObj[1]);
+
+
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonth === mes_;
+      });
+
+      this.daysArray = dayArray[1];
+
+    }
+
+  }
+
+
+
 
   selectYear(yearObj) {
 
-    this.selectedYear = yearObj[0];
-    this.monthsArray = yearObj[1];
-    this.monthsArray = Object.entries(this.monthsArray);
+
+    let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+      return year === yearObj
+    });
+
+
+    this.monthsArray = Object.entries(monthObj[1]);
+
+    this.selectedYear = yearObj;
 
   }
+
 
   selectRelatorio(value) {
     this.tipoRelatorio = value;
@@ -218,17 +255,15 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraName = findSeguradora.name;
 
-    console.log(this.activeSeguradora);
 
     this.producaoService.getSeguradoraReports(this.activeSeguradora).subscribe((data: any) => {
 
       this.seguradoraName = seguradora.name;
 
-      console.log(data);
 
       if (Object.entries(data.dates).length > 0) {
         this.seguradoraDates = Object.entries(data.dates);
-        this.selectYear(this.seguradoraDates[0]);
+        this.selectYear(this.seguradoraDates[0][0]);
         setTimeout(() => {
           this.selectMonth(this.monthsArray[0][0]);
         }, 1)
@@ -420,8 +455,6 @@ export class ProducaoPageComponent implements OnInit {
 
       chartData.production = oldChartData.lastDay.production;
 
-      console.log(chartData);
-
       return chartData;
 
     });
@@ -433,8 +466,6 @@ export class ProducaoPageComponent implements OnInit {
   dailyProductionData(production) {
 
     this.checkedCorretora = false;
-
-    console.log(production);
 
     this.chartData2['name'] = production[0].corretora.name;
     this.chartData2['series'] = production.map(chartData => {
@@ -450,17 +481,12 @@ export class ProducaoPageComponent implements OnInit {
           value: Number(oldChartData.total)
         };
 
-      console.log(chartData);
 
       return chartData;
 
     });
 
-    console.log(this.chartData2);
-
     this.chartData3.push(this.chartData2);
-
-    console.log(this.chartData3);
 
     setTimeout(() => {
       this.checkedCorretora = true;

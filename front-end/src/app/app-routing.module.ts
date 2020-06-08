@@ -20,6 +20,7 @@ import {ProducaoEnviarAnexoPartialComponent} from "./main/pages/producao-page/pa
 import {ProducaoSelectPartialComponent} from "./main/pages/producao-page/partials/producao-select-partial/producao-select-partial.component";
 import {ProducaoMensalPartialComponent} from "./main/pages/producao-page/partials/producao-mensal-partial/producao-mensal-partial.component";
 import {ProducaoSelectCorretoraSeguradoraPartialComponent} from "./main/pages/producao-page/partials/producao-select-corretora-seguradora-partial/producao-select-corretora-seguradora-partial.component";
+import {ProducaoSelect2PartialComponent} from "./main/pages/producao-page/partials/producao-select2-partial/producao-select2-partial.component";
 
 
 // TODO O Projeto está estruturado em divisão por páginas
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'produtos/visualizacao', component: ProdutoViewComponent },
   { path: 'colaborador', component: ColaboradorPageComponent },
   { path: 'producao', component: ProducaoSelectCorretoraSeguradoraPartialComponent },
-  { path: 'producao/selecione', component: ProducaoSelectPartialComponent },
+  { path: 'producao/selecione/seguradora', component: ProducaoSelectPartialComponent },
+  { path: 'producao/selecione/corretora', component: ProducaoSelect2PartialComponent },
   { path: 'producao/diario', component: ProducaoPageComponent },
   { path: 'producao/mensal', component: ProducaoMensalPartialComponent },
   { path: 'producao/anual', component: ProducaoSelectPartialComponent },

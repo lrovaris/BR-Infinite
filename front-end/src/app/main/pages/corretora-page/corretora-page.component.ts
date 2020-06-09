@@ -5836,39 +5836,62 @@ export class CorretoraPageComponent implements OnInit {
     }
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-      console.log(data);
+
 
       this.allSeguradoras = data;
+
+      if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
+        this.isEdit = true;
+        let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+
+        this.seguradoras = data.seguradoras;
+        this.apelidos = data.nicknames;
+        this.id = data._id;
+        this.colaboradores = data.colaboradores;
+        this.corretora.controls['name'].setValue(data.name);
+        this.corretora.controls['telephone'].setValue(data.telephone);
+        this.corretora.controls['cnpj'].setValue(data.cnpj);
+        this.corretora.controls['InscricaoEstadual'].setValue(data.InscricaoEstadual);
+        this.corretora.controls['email'].setValue(data.email);
+        this.corretora.controls['estate'].setValue(data.address.estate);
+        this.corretora.controls['number'].setValue(data.address.number);
+        this.corretora.controls['city'].setValue(data.address.city);
+        this.corretora.controls['street'].setValue(data.address.street);
+        this.corretora.controls['cep'].setValue(data.address.cep);
+        this.corretora.controls['complement'].setValue(data.address.complement);
+        this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
+
+        this.seguradorasTable = this.mapSeguradoras(this.seguradoras);
+
+        console.log(this.seguradorasTable);
+
+      }
     });
 
-    if (this.corretoraService.getCorretoraInfo()) {
-      this.corretora = this.corretoraService.getCorretoraInfo();
-    }
 
-    if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
-      this.isEdit = true;
-      let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-      this.apelidos = data.nicknames;
-      this.id = data._id;
-      this.colaboradores = data.colaboradores;
-      this.corretora.controls['name'].setValue(data.name);
-      this.corretora.controls['telephone'].setValue(data.telephone);
-      this.corretora.controls['cnpj'].setValue(data.cnpj);
-      this.corretora.controls['InscricaoEstadual'].setValue(data.InscricaoEstadual);
-      this.corretora.controls['email'].setValue(data.email);
-      this.corretora.controls['estate'].setValue(data.address.estate);
-      this.corretora.controls['number'].setValue(data.address.number);
-      this.corretora.controls['city'].setValue(data.address.city);
-      this.corretora.controls['street'].setValue(data.address.street);
-      this.corretora.controls['cep'].setValue(data.address.cep);
-      this.corretora.controls['complement'].setValue(data.address.complement);
-      this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
-    }
+
+
+
 
   }
 
 
+  mapSeguradoras(seguradorasArray) {
 
+      seguradorasArray = seguradorasArray.map(prod_seg => {
+
+        let seg = this.allSeguradoras.find(seg_obj => prod_seg.toString() === seg_obj._id.toString());
+
+        return {
+          name: seg.name,
+          _id: seg._id,
+          telephone: seg.telephone,
+          email: seg.email
+        }
+      });
+
+    return seguradorasArray;
+  }
 
 
   SelectCidade(estado) {
@@ -5998,10 +6021,10 @@ export class CorretoraPageComponent implements OnInit {
 
       else if (!this.isEdit) {
 
-        console.log(this.responsavel);
+
 
         this.corretoraService.postCorretora(newCorretora, this.responsavel).subscribe((data:any) => {
-          console.log(data);
+
           alert(data.message);
           this.router.navigate(['corretora']);
         })
@@ -6025,7 +6048,7 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   log() {
-    console.log('');
+
   }
 
 

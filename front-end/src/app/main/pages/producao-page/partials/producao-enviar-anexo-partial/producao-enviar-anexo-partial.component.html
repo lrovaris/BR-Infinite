@@ -37,6 +37,14 @@
                     </div>
                   </fieldset>
                 </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="date">Data</label>
+                    <div class="position-relative has-icon-left">
+                      <input  #dateAtribute type="date" id="date" class="form-control border-primary" (change)="saveDate(dateAtribute.value)">
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="row">

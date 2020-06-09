@@ -16,6 +16,23 @@ export class ProducaoEnviarAnexoPartialComponent implements OnInit {
   formData: any = new FormData();
   seguradora: any;
 
+  data;
+
+
+  FormataStringData(data) {
+    let ano  = data.split("-")[0];
+    let mes  = data.split("-")[1];
+    let dia  = data.split("-")[2];
+
+    if ((mes) && (dia)) {
+      return dia + '/' + (mes) + '/' + (ano)
+    } else {
+      return ano;
+    }
+
+    // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
+  }
+
   upload(event: any) {
     let newFile = event.target.files[0];
     this.filesToUpload.push(newFile);
@@ -45,7 +62,8 @@ export class ProducaoEnviarAnexoPartialComponent implements OnInit {
       console.log(data);
       let producao = {
         path: data.info_files[0].path,
-        seguradora: seguradoraId
+        seguradora: seguradoraId,
+        date: this.data
       };
       this.producaoService.postProducao(producao).subscribe((data: any) => {
        alert(data.message);
@@ -57,6 +75,12 @@ export class ProducaoEnviarAnexoPartialComponent implements OnInit {
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
     });
+  }
+
+  saveDate(data) {
+  this.data =  this.FormataStringData(data);
+
+    console.log(this.data);
   }
 
 }

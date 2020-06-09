@@ -75,7 +75,7 @@ async function get_corretora_by_nickname(nickname){
 
     return (corr_obj.nicknames.includes(nickname));
   });
-    
+
   return corretora;
 }
 
@@ -96,6 +96,5 @@ async function get_corretoras_by_seguradora(seg_id) {
 
   return corrs;
 }
-
 
 module.exports = { get_corretoras, get_corretora_by_id, validate_corretora, register_corretora, get_corretora_by_nickname, get_corretoras_by_seguradora};

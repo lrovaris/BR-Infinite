@@ -108,7 +108,6 @@ router.post('/upload', upload.array('docs'), async(req,res) =>{
   })
 })
 
-
 // Relatórios e comparações
 
 router.get ('/seguradoras/:id', async (req,res) => {
@@ -249,5 +248,350 @@ router.post ('/seguradoras/:id/report/yearly', async (req,res) => {
     report: report
   });
 });
+
+router.post ('/seguradoras/:id/compare/daily', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let first_year = req.body.firstYear;
+
+  if(first_year === undefined){
+    return res.status(400).json({
+      message: "Primeiro ano inválido"
+    })
+  }
+
+  first_year = Number(first_year.toString());
+
+  let second_year = req.body.secondYear;
+
+  if(second_year === undefined){
+    return res.status(400).json({
+      message: "Segundo ano inválido"
+    })
+  }
+
+  second_year = Number(second_year.toString());
+
+  if(first_year > second_year){
+    return res.status(400).json({
+      message: "O segundo ano deve ser posterior ou igual ao primeiro ano"
+    })
+  }
+
+  let first_month = req.body.firstMonth;
+
+  if(first_month === undefined){
+    return res.status(400).json({
+      message: "Primeiro mês inválido"
+    })
+  }
+
+  first_month = Number(first_month.toString());
+
+  let second_month = req.body.secondMonth;
+
+  if(second_month === undefined){
+    return res.status(400).json({
+      message: "Segundo mês inválido"
+    })
+  }
+
+  second_month = Number(second_month.toString());
+
+  if(first_month > second_month && first_year === second_year){
+    return res.status(400).json({
+      message: "O segundo mês deve ser posterior ou igual ao primeiro mês"
+    })
+  }
+
+  let first_day = req.body.firstDay;
+
+  if(first_day === undefined){
+    return res.status(400).json({
+      message: "Primeiro dia inválido"
+    })
+  }
+
+  first_day = Number(first_day.toString());
+
+  let second_day = req.body.secondDay;
+
+  if(second_day === undefined){
+    return res.status(400).json({
+      message: "Segundo dia inválido"
+    })
+  }
+
+  second_day = Number(second_day.toString());
+
+  if(first_day > second_day && first_year === second_year && first_month === second_month){
+    return res.status(400).json({
+      message: "O segundo dia deve ser posterior ou igual ao primeiro dia"
+    })
+  }
+
+  let report = await controller.get_seguradora_daily_compare(seg_id, first_year, first_month, first_day, second_year, second_month, second_day);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.post ('/seguradoras/:id/compare/monthly', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let first_year = req.body.firstYear;
+
+  if(first_year === undefined){
+    return res.status(400).json({
+      message: "Primeiro ano inválido"
+    })
+  }
+
+  first_year = Number(first_year.toString());
+
+  let second_year = req.body.secondYear;
+
+  if(second_year === undefined){
+    return res.status(400).json({
+      message: "Segundo ano inválido"
+    })
+  }
+
+  second_year = Number(second_year.toString());
+
+  if(first_year > second_year){
+    return res.status(400).json({
+      message: "O segundo ano deve ser posterior ou igual ao primeiro ano"
+    })
+  }
+
+  let first_month = req.body.firstMonth;
+
+  if(first_month === undefined){
+    return res.status(400).json({
+      message: "Primeiro mês inválido"
+    })
+  }
+
+  first_month = Number(first_month.toString());
+
+  let second_month = req.body.secondMonth;
+
+  if(second_month === undefined){
+    return res.status(400).json({
+      message: "Segundo mês inválido"
+    })
+  }
+
+  second_month = Number(second_month.toString());
+
+  if(first_month > second_month && first_year === second_year){
+    return res.status(400).json({
+      message: "O segundo mês deve ser posterior ou igual ao primeiro mês"
+    })
+  }
+
+  let report = await controller.get_seguradora_monthly_compare(seg_id, first_year, first_month, second_year, second_month);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.post ('/seguradoras/:id/compare/yearly', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let first_year = req.body.firstYear;
+
+  if(first_year === undefined){
+    return res.status(400).json({
+      message: "Primeiro ano inválido"
+    })
+  }
+
+  first_year = Number(first_year.toString());
+
+  let second_year = req.body.secondYear;
+
+  if(second_year === undefined){
+    return res.status(400).json({
+      message: "Segundo ano inválido"
+    })
+  }
+
+  second_year = Number(second_year.toString());
+
+  if(first_year > second_year){
+    return res.status(400).json({
+      message: "O segundo ano deve ser posterior ou igual ao primeiro ano"
+    })
+  }
+
+  let report = await controller.get_seguradora_yearly_compare(seg_id, first_year, second_year);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.get ('/corretoras/:id', async (req,res) => {
+  let corr_dates = await controller.get_corretora_dates(req.params.id);
+
+  res.status(200).json({
+    dates: corr_dates
+  });
+});
+
+router.post ('/corretoras/:id/report/daily', async (req,res) => {
+  let corr_id = req.params.id;
+
+  if(corr_id === undefined){
+    return res.status(400).json({
+      message: "Corretora inválida"
+    })
+  }
+
+  let year = req.body.year;
+
+  if(year === undefined){
+    return res.status(400).json({
+      message: "Ano inválido"
+    })
+  }
+
+  year = Number(year.toString());
+
+  let month = req.body.month;
+
+  if(month === undefined){
+    return res.status(400).json({
+      message: "Mês inválido"
+    })
+  }
+
+  month = Number(month.toString())
+
+  let report = await controller.get_corretora_daily_report(corr_id, year, month);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.post ('/corretoras/:id/report/monthly', async (req,res) => {
+  let corr_id = req.params.id;
+
+  if(corr_id === undefined){
+    return res.status(400).json({
+      message: "Corretora inválida"
+    })
+  }
+
+  let begin_year = Number(req.body.beginYear);
+  let begin_month = Number(req.body.beginMonth);
+  let end_year = Number(req.body.endYear);
+  let end_month = Number(req.body.endMonth);
+
+  if(begin_year === undefined || typeof begin_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano de início inválido"
+    })
+  }
+
+  if(begin_month === undefined || typeof begin_month !== 'number'){
+    return res.status(400).json({
+      message: "Mês de início inválido"
+    })
+  }
+
+  if(end_year === undefined || typeof end_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano final inválido"
+    })
+  }
+
+  if(end_month === undefined || typeof end_month !== 'number'){
+    return res.status(400).json({
+      message: "Mês final inválido"
+    })
+  }
+
+  if(end_year < begin_year){
+    return res.status(400).json({
+      message: "O ano final deve ser posterior ao ano de início"
+    })
+  }
+
+  if(end_month < begin_month && end_year === begin_year){
+    return res.status(400).json({
+      message: "O mês final deve ser posterior ao mês de início"
+    })
+  }
+
+
+  let report = await controller.get_corretora_monthly_report(corr_id, begin_year, begin_month, end_year, end_month);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+router.post ('/corretoras/:id/report/yearly', async (req,res) => {
+  let corr_id = req.params.id;
+
+  if(corr_id === undefined){
+    return res.status(400).json({
+      message: "Corretora inválida"
+    })
+  }
+
+  let begin_year = Number(req.body.beginYear);
+  let end_year = Number(req.body.endYear);
+
+  if(begin_year === undefined || typeof begin_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano de início inválido"
+    })
+  }
+
+  if(end_year === undefined || typeof end_year !== 'number'){
+    return res.status(400).json({
+      message: "Ano final inválido"
+    })
+  }
+
+  if(end_year < begin_year){
+    return res.status(400).json({
+      message: "O ano final deve ser posterior ao ano de início"
+    })
+  }
+
+  let report = await controller.get_corretora_yearly_report(corr_id, begin_year, end_year);
+
+  res.status(200).json({
+    report: report
+  });
+});
+
+
 
 module.exports = router;

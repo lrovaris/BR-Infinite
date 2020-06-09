@@ -1,13 +1,12 @@
 
 const request = require('supertest')
 const app = require('../server')
-const routes = require('./routes');
 const controller = require('./controller')
 
 const my_csv_path = "1589898272624-48409787testecsv.csv";
 const other_csv_path = "csv-exemplo.csv";
 const monthly_test_csv = "testerelatoriomensal.csv"
-
+const corr_test_csv = "corretora_ex.csv"
 
 let seguradora_id = '';
 let seg;
@@ -16,6 +15,8 @@ let corr_2;
 let corr_3;
 
 let month_year_seg_id = "";
+
+let corretora_id = "";
 
 describe('Production Routes', () => {
 
@@ -166,7 +167,101 @@ describe('Production Routes', () => {
       endYear: 2021,
     })
 
-    console.log(JSON.stringify(new_request.body, null, 1));
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria fazer uma requisição que retorna um array para cada corretora de uma seguradora com uma comparação entre dois dias escolhidos', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${month_year_seg_id}/compare/daily`).send({
+      firstYear: 2020,
+      firstMonth: 5,
+      firstDay: 19,
+      secondYear: 2021,
+      secondMonth: 5,
+      secondDay: 19
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria fazer uma requisição que retorna um array para cada corretora de uma seguradora com uma comparação entre dois meses escolhidos', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${month_year_seg_id}/compare/monthly`).send({
+      firstYear: 2020,
+      firstMonth: 5,
+      secondYear: 2021,
+      secondMonth: 5,
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria fazer uma requisição que retorna um array para cada corretora de uma seguradora com uma comparação entre dois anos escolhidos', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${month_year_seg_id}/compare/yearly`).send({
+      firstYear: 2020,
+      secondYear: 2021
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria criar uma corretora, uma seguradora, e cadastrar entradas de produção', async () => {
+
+    let new_seg = await request(app).post('/seguradoras/new').send({
+      seguradora: { name:"segura_teste" },
+      manager: { name:"Luis do QA", telephone:"999219075", email:"luis@segurateste.com", birthday: "01 - 05", job:"quebrar apps" }
+    })
+
+    expect(new_seg.statusCode).toEqual(200)
+
+    let new_corr = await request(app).post('/corretoras/new').send({
+      corretora: { name:"corretinha",  nicknames:["LaCorreta"], seguradoras:[ new_seg.body.seguradora._id ] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+    })
+
+    corretora_id = new_corr.body.corretora._id;
+
+    expect(new_corr.statusCode).toEqual(200)
+
+    const entry_request = await request(app).post('/production/new').send({
+      seguradora: new_seg.body.seguradora._id,
+      path: corr_test_csv
+    })
+
+    expect(entry_request.statusCode).toEqual(200)
+  })
+
+  it('deveria retornar um objeto com as datas disponíveis para uma corretora', async () => {
+    const dates_request = await request(app).get(`/production/corretoras/${corretora_id}`)
+
+    // console.log(JSON.stringify(dates_request.body, null, 1));
+
+    expect(dates_request.statusCode).toEqual(200)
+  })
+
+  it('deveria retornar um relatório com array para cada seguradora de uma corretora com todas produções de um mês quebrado por cada dia', async () => {
+    let new_request = await request(app).post(`/production/corretoras/${corretora_id}/report/daily`).send({
+      month: 5,
+      year: 2020
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria retornar um relatório com array para cada seguradora de uma corretora com todas produções de um intervalo de tempo quebrado por cada mês', async () => {
+    let new_request = await request(app).post(`/production/corretoras/${corretora_id}/report/monthly`).send({
+      beginYear: 2020,
+      beginMonth: 5,
+      endYear: 2021,
+      endMonth: 6
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
+  it('deveria fazer uma requisição que retorna um relatório com array para cada corretora de uma seguradora com a produção anual de um intervalo', async () => {
+    let new_request = await request(app).post(`/production/corretoras/${corretora_id}/report/yearly`).send({
+      beginYear: 2020,
+      endYear: 2021,
+    })
 
     expect(new_request.statusCode).toEqual(200)
   })

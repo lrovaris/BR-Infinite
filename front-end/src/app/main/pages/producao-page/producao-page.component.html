@@ -180,7 +180,7 @@
                       <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
                         {{reports.total}}
                       </td>
-                      <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao.var.toFixed(2) * 100)}}%</td>
+                      <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao?.var * 100)?.toFixed(2)}}%</td>
                     </tr>
                     </tbody>
                   </table>

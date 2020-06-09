@@ -17,8 +17,10 @@ import * as chartsData from '../../../shared/configs/ngx-charts.config';
 export class ProducaoPageComponent implements OnInit {
 
 
+  firstTime: boolean;
+  firstTimeEnd: boolean;
+
   allSeguradoras = [];
-  allProducoes = [];
   seguradora = [];
   corretora = [];
 
@@ -55,12 +57,13 @@ export class ProducaoPageComponent implements OnInit {
               private seguradoraService: SeguradoraService,
               private router: Router,
               private producaoService: ProducaoService,
-              private corretoraService: CorretoraService,
-              private dateService: DateService
   ) { }
 
 
   ngOnInit() {
+
+    this.firstTime = true;
+    this.firstTimeEnd = true;
 
     this.tipoRelatorio = 'padrao';
 
@@ -68,44 +71,9 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
-      this.tipoRelatorio = 'comparativo';
       this.setActiveSeguradora(this.allSeguradoras[0]._id);
       this.tipoRelatorio = 'padrao';
     });
-
-    this.producaoService.getAllProducao().subscribe((data: any) => {
-      this.allProducoes = data;
-      this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
-        this.seguradora = seg_data;
-        this.allProducoes = this.allProducoes.map(prod => {
-            let seg = this.seguradora.find(seg_obj => prod.seguradora.toString() === seg_obj._id.toString());
-           let seguradora = {
-              name: seg.name,
-              _id: seg._id,
-              telephone: seg.telephone,
-              email: seg.email
-            };
-          prod.seguradora = seguradora;
-          return prod;
-        });
-      });
-      this.corretoraService.getAllCorretoras().subscribe((cor_data:any) => {
-        this.corretora = cor_data;
-        this.allProducoes = this.allProducoes.map(prod => {
-          let cor = this.corretora.find(cor_obj => prod.corretora.toString() === cor_obj._id.toString());
-          let corretora = {
-            name: cor.name,
-            _id: cor._id,
-            telephone: cor.telephone,
-            email: cor.email
-          };
-          prod.corretora = corretora;
-          return prod;
-        });
-        // this.createYearsObjectFromProduction(this.allProducoes);
-      });
-
-    })
 
   } // FIM DO NG ON INIT (bem grandinho ne rs :3)
 
@@ -163,6 +131,16 @@ export class ProducaoPageComponent implements OnInit {
         return this.selectedMonth === mes_;
       });
       this.daysArray = dayArray[1];
+    } else if ( this.firstTime) {
+      let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYear
+      });
+      monthObj = Object.entries(monthObj[1]);
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonth === mes_;
+      });
+      this.daysArray = dayArray[1];
+      this.firstTime = false;
     }
   }
 
@@ -180,6 +158,9 @@ export class ProducaoPageComponent implements OnInit {
   }
 
   selectMonthEnd(mes) {
+
+    console.log(this.firstTimeEnd);
+
     this.selectedMonthEnd = mes;
 
     if (this.tipoRelatorio === 'comparativo') {
@@ -191,6 +172,19 @@ export class ProducaoPageComponent implements OnInit {
         return this.selectedMonthEnd === mes_;
       });
       this.daysArrayEnd = dayArray[1];
+    } else if ( this.firstTimeEnd ) {
+
+      let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYearEnd
+      });
+      monthObj = Object.entries(monthObj[1]);
+      console.log(monthObj);
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonthEnd === mes_;
+      });
+      this.daysArrayEnd = dayArray[1];
+
+      this.firstTime = false;
     }
   }
 
@@ -232,9 +226,16 @@ export class ProducaoPageComponent implements OnInit {
       if (Object.entries(data.dates).length > 0) {
         this.seguradoraDates = Object.entries(data.dates);
         this.selectYear(this.seguradoraDates[0][0]);
+        this.selectYearEnd(this.seguradoraDates[0][0]);
         console.log(this.monthsArray);
         setTimeout(() => {
           this.selectMonth(this.monthsArray[0][0]);
+          this.selectMonthEnd(this.monthsArray[0][0]);
+          setTimeout(() => {
+            console.log(this.daysArrayEnd);
+            this.selectDay(this.daysArray[0]);
+            this.selectDayEnd(this.daysArrayEnd[0]);
+          }, 1)
         }, 1)
       }
 

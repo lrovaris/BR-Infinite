@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'produtos/cadastro', component: ProdutosPageComponent },
   { path: 'produtos/visualizacao', component: ProdutoViewComponent },
   { path: 'colaborador', component: ColaboradorPageComponent },
-  { path: 'producao', component: ProducaoSelectCorretoraSeguradoraPartialComponent },
+  { path: 'producao', component: ProducaoSelectPartialComponent },
   { path: 'producao/selecione/seguradora', component: ProducaoSelectPartialComponent },
   { path: 'producao/selecione/corretora', component: ProducaoSelect2PartialComponent },
   { path: 'producao/diario', component: ProducaoPageComponent },

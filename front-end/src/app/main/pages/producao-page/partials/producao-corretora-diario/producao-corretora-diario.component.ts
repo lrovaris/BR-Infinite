@@ -26,6 +26,9 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
   selectedDay: any;
   selectedDayEnd: any;
 
+  firstTime: boolean;
+  firstTimeEnd: boolean;
+
   daysArray = [];
   daysArrayEnd = [];
 
@@ -41,6 +44,9 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
   constructor(private producaoService: ProducaoService, private corretoraService: CorretoraService) { }
 
   ngOnInit() {
+
+    this.firstTime = true;
+    this.firstTimeEnd = true;
 
     this.tipoRelatorio = 'padrao';
 
@@ -76,7 +82,7 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
 
     this.producaoService.getCorretoraReports(this.activeCorretora).subscribe((data: any) => {
 
-      console.log(data);
+
 
       this.corretoraName = corretora.name;
 
@@ -84,9 +90,15 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
       if (Object.entries(data.dates).length > 0) {
         this.corretoraDates = Object.entries(data.dates);
         this.selectYear(this.corretoraDates[0][0]);
-        console.log(this.monthsArray);
+        this.selectYearEnd(this.corretoraDates[0][0]);
+
         setTimeout(() => {
           this.selectMonth(this.monthsArray[0][0]);
+          this.selectMonthEnd(this.monthsArray[0][0]);
+          setTimeout(() => {
+            this.selectDay(this.daysArray[0]);
+            this.selectDayEnd(this.daysArrayEnd[0]);
+          }, 1)
         }, 1)
       }
 
@@ -111,6 +123,9 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
   }
 
   selectMonthEnd(mes) {
+
+    console.log(this.firstTimeEnd);
+
     this.selectedMonthEnd = mes;
 
     if (this.tipoRelatorio === 'comparativo') {
@@ -122,11 +137,24 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
         return this.selectedMonthEnd === mes_;
       });
       this.daysArrayEnd = dayArray[1];
+    } else if ( this.firstTimeEnd ) {
+
+      let monthObj = this.corretoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYearEnd
+      });
+      monthObj = Object.entries(monthObj[1]);
+      console.log(monthObj);
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonthEnd === mes_;
+      });
+      this.daysArrayEnd = dayArray[1];
+
+      this.firstTime = false;
     }
   }
 
   selectMonth(mes) {
-
+    console.log(mes);
     this.selectedMonth = mes;
 
     if (this.tipoRelatorio === 'comparativo') {
@@ -138,12 +166,22 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
         return this.selectedMonth === mes_;
       });
       this.daysArray = dayArray[1];
+    } else if ( this.firstTime) {
+      let monthObj = this.corretoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYear
+      });
+      monthObj = Object.entries(monthObj[1]);
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonth === mes_;
+      });
+      this.daysArray = dayArray[1];
+      this.firstTime = false;
     }
   }
 
   gerarRelatorio() {
     this.producaoService.postRelatorioCorretoraDiario(this.selectedYear, this.selectedMonth, this.activeCorretora).subscribe((data: any) => {
-      console.log(data);
+
       this.reportsArray = data.report.report;
       this.media = data.report.media;
       this.acumulado = data.report.total;
@@ -154,9 +192,8 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
   }
 
   gerarRelatorioComparativo() {
-    console.log(this.selectedMonthEnd);
+
     this.producaoService.postComparacaoCorretoraDiaria(this.selectedYear, this.selectedMonth, this.selectedDay,this.selectedYearEnd, this.selectedMonthEnd, this.selectedDayEnd, this.activeCorretora).subscribe((data: any) => {
-      console.log(data);
 
       this.variacao = data.report.var_media
 

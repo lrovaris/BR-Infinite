@@ -157,8 +157,10 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
     this.producaoService.postComparacaoCorretorasAnual(this.selectedYearStart, this.selectedYearEnd, this.activeCorretora).subscribe((data: any) => {
       this.reportsArray = data.report.report;
       this.variacao = data.report.var_media;
-
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
+
+      console.log(data);
+
     })
   }
 

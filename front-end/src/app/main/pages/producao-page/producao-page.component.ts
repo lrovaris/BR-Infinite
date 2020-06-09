@@ -9,51 +9,6 @@ import { barChartSingle, barChartmulti, pieChartSingle, pieChartmulti, lineChart
 import * as chartsData from '../../../shared/configs/ngx-charts.config';
 
 
-let barChartmulti2 = [
-  {
-    "name": "correta",
-    "series": [
-      {
-        "name": "11/02/2020",
-        "value": 620
-      },
-      {
-        "name": "11/03/2020",
-        "value": 920
-      },
-    ]
-  },
-
-  {
-    "name": "corretora",
-    "series": [
-      {
-        "name": "11/02/2020",
-        "value": 787
-      },
-      {
-        "name": "11/03/2020",
-        "value": 787
-      }
-    ]
-  },
-
-  {
-    "name": "nova",
-    "series": [
-      {
-        "name": "11/02/2020",
-        "value": 500
-      },
-      {
-        "name": "11/03/2020",
-        "value": 420
-      }
-    ]
-  }
-];
-
-
 @Component({
   selector: 'app-producao-page',
   templateUrl: './producao-page.component.html',
@@ -61,9 +16,6 @@ let barChartmulti2 = [
 })
 export class ProducaoPageComponent implements OnInit {
 
-  chartData = [];
-  chartData2 = {};
-  chartData3 = [];
 
   allSeguradoras = [];
   allProducoes = [];
@@ -73,17 +25,19 @@ export class ProducaoPageComponent implements OnInit {
   media = '';
   acumulado = '';
   projecao = '';
+  variacao = '';
 
   tipoRelatorio = '';
 
   reportsArray = [];
-
   seguradoraDates = [];
-
   saveOldReport = [];
 
   monthsArray = [];
   daysArray = [];
+
+  monthsArrayEnd = [];
+  daysArrayEnd = [];
 
   selectedYear: any;
   selectedMonth: any;
@@ -92,19 +46,10 @@ export class ProducaoPageComponent implements OnInit {
   selectedMonthEnd: any;
   selectedDayEnd: any;
 
-  checkedCorretora = false;
-
-  corretorasOfActiveSeguradora = [];
-  filteredCorretorasOfActiveSeguradora = [];
-
-  comparingCorretoras = [];
-  filteredComparingCorretoras = [];
-
   activeSeguradora: any;
   seguradoraName: any;
-  arrayWithOldDatesProduction = [];
+
   corretoraFilter = "";
-  isComparing = false;
 
   constructor(
               private seguradoraService: SeguradoraService,
@@ -187,6 +132,20 @@ export class ProducaoPageComponent implements OnInit {
     })
   }
 
+  gerarRelatorioComparativo() {
+    console.log(this.selectedMonthEnd);
+    this.producaoService.postComparacaoDiaria(this.selectedYear, this.selectedMonth, this.selectedDay,this.selectedYearEnd, this.selectedMonthEnd, this.selectedDayEnd, this.activeSeguradora).subscribe((data: any) => {
+      console.log(data);
+
+      this.variacao = data.report.var_media
+
+      this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
+
+      this.reportsArray = data.report.report;
+
+    })
+  }
+
   selectDay(day) {
     this.selectedDay = day;
   }
@@ -196,39 +155,51 @@ export class ProducaoPageComponent implements OnInit {
     this.selectedMonth = mes;
 
     if (this.tipoRelatorio === 'comparativo') {
-
       let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
         return year === this.selectedYear
       });
-
       monthObj = Object.entries(monthObj[1]);
-
-
       let dayArray = monthObj.find(([mes_, dayArrays]) => {
         return this.selectedMonth === mes_;
       });
-
       this.daysArray = dayArray[1];
-
     }
-
   }
 
-
-
-
   selectYear(yearObj) {
-
-
     let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
       return year === yearObj
     });
-
-
     this.monthsArray = Object.entries(monthObj[1]);
-
     this.selectedYear = yearObj;
+  }
 
+
+  selectDayEnd(day) {
+    this.selectedDayEnd = day;
+  }
+
+  selectMonthEnd(mes) {
+    this.selectedMonthEnd = mes;
+
+    if (this.tipoRelatorio === 'comparativo') {
+      let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+        return year === this.selectedYearEnd
+      });
+      monthObj = Object.entries(monthObj[1]);
+      let dayArray = monthObj.find(([mes_, dayArrays]) => {
+        return this.selectedMonthEnd === mes_;
+      });
+      this.daysArrayEnd = dayArray[1];
+    }
+  }
+
+  selectYearEnd(yearObj) {
+    let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+      return year === yearObj
+    });
+    this.monthsArrayEnd = Object.entries(monthObj[1]);
+    this.selectedYearEnd = yearObj;
   }
 
 
@@ -245,9 +216,6 @@ export class ProducaoPageComponent implements OnInit {
 
     this.seguradoraDates = [];
 
-    this.isComparing = false;
-
-    this.corretorasOfActiveSeguradora = [];
 
     this.activeSeguradora = seguradora;
 
@@ -264,6 +232,7 @@ export class ProducaoPageComponent implements OnInit {
       if (Object.entries(data.dates).length > 0) {
         this.seguradoraDates = Object.entries(data.dates);
         this.selectYear(this.seguradoraDates[0][0]);
+        console.log(this.monthsArray);
         setTimeout(() => {
           this.selectMonth(this.monthsArray[0][0]);
         }, 1)
@@ -271,100 +240,7 @@ export class ProducaoPageComponent implements OnInit {
 
     })
 
-/*    let activeSeguradoraProductionsArray = [];
-
-    for (let i = 0; i < this.allProducoes.length; i++) {
-      if (this.allProducoes[i].seguradora._id === this.activeSeguradora) {
-        activeSeguradoraProductionsArray.push(this.allProducoes[i]);
-      }
-    }
-
-
-
-    this.seguradoraName = activeSeguradoraProductionsArray[0].seguradora.name;
-
-    let allCorretoras = [];
-
-    for (let i = 0; i < activeSeguradoraProductionsArray.length; i++) {
-      let corretora = allCorretoras.find(cor => activeSeguradoraProductionsArray[i].corretora._id === cor);
-
-      if (corretora === undefined) {
-
-        allCorretoras.push(activeSeguradoraProductionsArray[i].corretora._id);
-
-      }
-    }
-
-    this.corretorasOfActiveSeguradora = [];
-
-    for (let i = 0; i < allCorretoras.length; i++) {
-      let corretoraProductionArray = activeSeguradoraProductionsArray.filter(prod => prod.corretora._id === allCorretoras[i]);
-
-      this.corretorasOfActiveSeguradora.push(this.getCorretoraLineInfo(allCorretoras[i], corretoraProductionArray))
-    }
-
-    for (let i = 0; i < this.corretorasOfActiveSeguradora.length; i++) {
-
-      this.acumulado = this.acumulado + this.corretorasOfActiveSeguradora[i].total;
-
-    }
-
-    this.filteredCorretorasOfActiveSeguradora = this.corretorasOfActiveSeguradora;*/
-
-
-
   }
-
-
-  getCorretoraLineInfo(id, corretoraProductionArray) {
-    let dateToReturn = corretoraProductionArray[0].date;
-    let nameToReturn = corretoraProductionArray[0].corretora.name;
-    let totalToReturn = corretoraProductionArray[0].total;
-    let projectionToReturn = 0;
-
-   let montanteAdicional = 0;
-
-   let timesCounted = 0;
-
-   let media: number;
-
-    for (let i = 0; i < corretoraProductionArray.length; i++) {
-
-      if (this.dateService.isTheNewDateBigger(dateToReturn, corretoraProductionArray[i].date)) {
-        dateToReturn = corretoraProductionArray[i].date;
-
-        montanteAdicional = montanteAdicional + (corretoraProductionArray[i].total - totalToReturn);
-
-        totalToReturn = corretoraProductionArray[i].total;
-
-        timesCounted++
-
-      }
-    }
-
-    // numeros dia dias uteis no mes é 20
-    // numero total de dias aproximado é 30
-    // portanto o numero de dias inuteis deve ser 10
-    // o numero de dias uteis faltando deve ser 30 - dataAtual - valor de dias inuteis restantes
-    // e o valor de dias inuteis restantes é igual a (30 - dataAtual) / 3
-
-    media = montanteAdicional / timesCounted;
-
-    let diasFaltando = ((30 - this.dateService.getDateInfoFromString(dateToReturn).day) * 2) / 3;
-
-    projectionToReturn = (diasFaltando * media) + totalToReturn;
-
-    return {
-      media: media.toFixed(),
-      name: nameToReturn,
-      date: dateToReturn,
-      total: totalToReturn,
-      projection: projectionToReturn.toFixed(),
-      production: corretoraProductionArray,
-      _id: id
-    }
-  }
-
 
 
   /*
@@ -377,146 +253,5 @@ export class ProducaoPageComponent implements OnInit {
   */
 
 
-  compararComDiaAnterior(){
-    let biggerDate = this.filteredCorretorasOfActiveSeguradora[0].date
-
-    for (let index = 0; index < this.filteredCorretorasOfActiveSeguradora.length; index++) {
-      if(this.dateService.isTheNewDateBigger(biggerDate, this.filteredCorretorasOfActiveSeguradora[index].date)){
-        biggerDate = this.filteredCorretorasOfActiveSeguradora[index].date
-      }
-    }
-
-    let dateInfo = this.dateService.getDateInfoFromString(biggerDate)
-
-    dateInfo.day -= 1;
-    let biggerDateMinusOne = this.dateService.getDateStringFromInfo(dateInfo);
-
-    dateInfo.day = 1;
-    let monthStart = this.dateService.getDateStringFromInfo(dateInfo)
-
-    let compareInfo = this.filteredCorretorasOfActiveSeguradora.map( corrInfo => {
-
-      let thisYearsObj = this.dateService.createYearsObjectFromProduction(corrInfo.production)
-
-      let prod_ids = this.dateService.getProductionArrayFromDateInfoInterval(this.dateService.getDateInfoFromString(monthStart), this.dateService.getDateInfoFromString(biggerDateMinusOne), thisYearsObj);
-
-      let prods = prod_ids.map(prod_id => {
-        return this.allProducoes.find(prod_obj => prod_obj._id.toString() === prod_id);
-      })
-
-      let lastDayInfo = this.getCorretoraLineInfo(corrInfo._id, prods);
-
-      return {
-        today: corrInfo,
-        lastDay: lastDayInfo
-      };
-    });
-
-
-    this.isComparing = true;
-
-    // no componente
-    // caso exista, mostrar a comparação
-
-    this.comparingCorretoras = compareInfo
-    this.filteredComparingCorretoras = this.comparingCorretoras
-
-    // se não existir, dar feedback visual
-
-    this.formatToChart(this.filteredComparingCorretoras);
-
-  }
-
-
-  // CHART START ---------------------------------------------------------------------------------------------
-  // CHART START ---------------------------------------------------------------------------------------------
-  // CHART START ---------------------------------------------------------------------------------------------
-
-  formatToChart(filteredComparingCorretoras) {
-
-    this.chartData = filteredComparingCorretoras.map(chartData => {
-
-     let oldChartData = chartData;
-
-      chartData = {};
-
-      chartData.name = oldChartData.today.name;
-      chartData.series = [
-
-        {
-          name: oldChartData.lastDay.date,
-          value: Number(oldChartData.lastDay.total)
-        },
-        {
-          name: oldChartData.today.date,
-          value: Number(oldChartData.today.total)
-        }
-      ];
-
-      chartData.production = oldChartData.lastDay.production;
-
-      return chartData;
-
-    });
-
-    this.barChartmulti =  this.chartData;
-
-  }
-
-  dailyProductionData(production) {
-
-    this.checkedCorretora = false;
-
-    this.chartData2['name'] = production[0].corretora.name;
-    this.chartData2['series'] = production.map(chartData => {
-
-      let oldChartData = chartData;
-
-      chartData = {};
-
-      chartData.name = oldChartData.name;
-      chartData =
-        {
-          name: oldChartData.date,
-          value: Number(oldChartData.total)
-        };
-
-
-      return chartData;
-
-    });
-
-    this.chartData3.push(this.chartData2);
-
-    setTimeout(() => {
-      this.checkedCorretora = true;
-    }, 250)
-
-  }
-
-  switchCheckedCorretora() {
-    this.checkedCorretora = false;
-  }
-
-  //Chart Data
-
-  barChartmulti = barChartmulti2;
-
-
-  // options
-  barChartShowYAxis = chartsData.barChartShowYAxis;
-  barChartShowXAxis = chartsData.barChartShowXAxis;
-  barChartGradient = chartsData.barChartGradient;
-  barChartShowLegend = chartsData.barChartShowLegend;
-  barChartShowXAxisLabel = chartsData.barChartShowXAxisLabel;
-  barChartXAxisLabel = chartsData.barChartXAxisLabel;
-  barChartShowYAxisLabel = chartsData.barChartShowYAxisLabel;
-  barChartYAxisLabel = chartsData.barChartYAxisLabel;
-  barChartColorScheme = chartsData.barChartColorScheme;
-
-
-  // CHART END ---------------------------------------------------------------------------------------------
-  // CHART END ---------------------------------------------------------------------------------------------
-  // CHART END ---------------------------------------------------------------------------------------------
 
 }

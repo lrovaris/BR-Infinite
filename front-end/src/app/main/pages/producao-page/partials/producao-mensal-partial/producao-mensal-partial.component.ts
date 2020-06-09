@@ -22,6 +22,8 @@ export class ProducaoMensalPartialComponent implements OnInit {
   selectedMonthEnd = '';
   selectedYearEnd = '';
 
+  variacao: any;
+
   corretoraFilter = '';
   allSeguradoras = [];
 
@@ -159,6 +161,16 @@ export class ProducaoMensalPartialComponent implements OnInit {
       console.log(data);
       this.reportsArray = data.report.report;
       console.log(this.reportsArray);
+    })
+  }
+
+  gerarRelatorioComparativo() {
+    this.producaoService.postComparacaoMensal(this.selectedYearStart, this.selectedMonthStart, this.selectedYearEnd, this.selectedMonthEnd, this.activeSeguradora).subscribe((data: any) => {
+      console.log(data);
+      this.reportsArray = data.report.report;
+      this.variacao = data.report.var_media;
+
+      this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
     })
   }
 

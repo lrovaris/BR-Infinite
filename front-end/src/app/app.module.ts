@@ -36,6 +36,9 @@ import { ProducaoSelectPartialComponent } from './main/pages/producao-page/parti
 import { ProducaoSelectCorretoraSeguradoraPartialComponent } from './main/pages/producao-page/partials/producao-select-corretora-seguradora-partial/producao-select-corretora-seguradora-partial.component';
 import { ProducaoSelect2PartialComponent } from './main/pages/producao-page/partials/producao-select2-partial/producao-select2-partial.component';
 import { ProducaoAnualPartialComponent } from './main/pages/producao-page/partials/producao-anual-partial/producao-anual-partial.component';
+import { ProducaoCorretoraDiarioComponent } from './main/pages/producao-page/partials/producao-corretora-diario/producao-corretora-diario.component';
+import { ProducaoCorretoraMensalComponent } from './main/pages/producao-page/partials/producao-corretora-mensal/producao-corretora-mensal.component';
+import { ProducaoCorretoraAnualComponent } from './main/pages/producao-page/partials/producao-corretora-anual/producao-corretora-anual.component';
 
 // END GRAFICOS -----------
 
@@ -67,7 +70,10 @@ import { ProducaoAnualPartialComponent } from './main/pages/producao-page/partia
     ProducaoSelectPartialComponent,
     ProducaoSelectCorretoraSeguradoraPartialComponent,
     ProducaoSelect2PartialComponent,
-    ProducaoAnualPartialComponent
+    ProducaoAnualPartialComponent,
+    ProducaoCorretoraDiarioComponent,
+    ProducaoCorretoraMensalComponent,
+    ProducaoCorretoraAnualComponent
   ],
   imports: [
     BrowserModule,

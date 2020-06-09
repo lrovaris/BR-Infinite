@@ -37,12 +37,17 @@
       <div class="col-sm-12">
         <div class="card" *ngIf="diario">
           <div class="card-content">
-            <app-producao-page></app-producao-page>
+            <app-producao-corretora-diario></app-producao-corretora-diario>
           </div>
         </div>
         <div class="card" *ngIf="mensal">
           <div class="card-content">
-            <app-producao-mensal-partial></app-producao-mensal-partial>
+            <app-producao-corretora-mensal></app-producao-corretora-mensal>
+          </div>
+        </div>
+        <div class="card" *ngIf="anual">
+          <div class="card-content">
+            <app-producao-corretora-anual></app-producao-corretora-anual>
           </div>
         </div>
       </div>

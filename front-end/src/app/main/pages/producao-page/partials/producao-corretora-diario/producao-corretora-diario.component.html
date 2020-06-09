@@ -6,8 +6,8 @@
           <div class="card-header">
             <div class="col-sm-12">
               <div class="row">
-                <div class="col-md-4">
-                  <h4>Relatório por Seguradora - Diário</h4>
+                <div class="col-md-12">
+                  <h4>Relatório por corretora - Diário</h4>
                 </div>
                 <div class="col-sm-12 col-md-8">
                 </div>
@@ -26,22 +26,22 @@
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="seguradorass">Selecione a Seguradora</label>
-                    <select (change)="setActiveSeguradora(seguradoraSelect.value)" #seguradoraSelect class="form-control border-primary" id="seguradorass">
-                      <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                    <label for="corretorass">Selecione a Corretora</label>
+                    <select (change)="setActiveCorretora(corretoraSelect.value)" #corretoraSelect class="form-control border-primary" id="corretorass">
+                      <option [value]="corretora._id" *ngFor="let corretora of allCorretoras">{{corretora.name}}</option>
                     </select>
                   </fieldset>
                 </div>
 
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 && tipoRelatorio === 'padrao'">
                   <fieldset class="form-group">
                     <label for="ano">Selecione o Ano</label>
                     <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano">
-                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                      <option [value]="ano[0]" *ngFor="let ano of corretoraDates">{{ano[0]}}</option>
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 && tipoRelatorio === 'padrao'">
                   <fieldset class="form-group">
                     <label for="mes">Selecione o Mes</label>
                     <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes">
@@ -63,15 +63,15 @@
               </div>
 
               <div *ngIf="tipoRelatorio === 'comparativo'" class="row">
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
                   <fieldset class="form-group">
                     <label for="ano3">Selecione o Ano</label>
                     <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano3">
-                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                      <option [value]="ano[0]" *ngFor="let ano of corretoraDates">{{ano[0]}}</option>
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 ">
                   <fieldset class="form-group">
                     <label for="mes3">Selecione o Mês</label>
                     <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes3">
@@ -79,23 +79,23 @@
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
-                <fieldset class="form-group">
-                  <label for="day">Selecione o Dia</label>
-                  <select (change)="selectDay(daySelect.value)" #daySelect class="form-control border-primary" id="day">
-                    <option [value]="day" *ngFor="let day of daysArray">{{day}}</option>
-                  </select>
-                </fieldset>
-              </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 ">
                   <fieldset class="form-group">
-                    <label for="ano4">Selecione o Ano</label>
-                    <select (change)="selectYearEnd(anoSelectEnd.value)" #anoSelectEnd class="form-control border-primary" id="ano4">
-                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                    <label for="day">Selecione o Dia</label>
+                    <select (change)="selectDay(daySelect.value)" #daySelect class="form-control border-primary" id="day">
+                      <option [value]="day" *ngFor="let day of daysArray">{{day}}</option>
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
+                  <fieldset class="form-group">
+                    <label for="ano4">Selecione o Ano</label>
+                    <select (change)="selectYearEnd(anoSelectEnd.value)" #anoSelectEnd class="form-control border-primary" id="ano4">
+                      <option [value]="ano[0]" *ngFor="let ano of corretoraDates">{{ano[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 ">
                   <fieldset class="form-group">
                     <label for="mes4">Selecione o Mês</label>
                     <select (change)="selectMonthEnd(mesSelectEnd.value)" #mesSelectEnd class="form-control border-primary" id="mes4">
@@ -103,7 +103,7 @@
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 ">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0 ">
                   <fieldset class="form-group">
                     <label for="day2">Selecione o Dia</label>
                     <select (change)="selectDayEnd(daySelectEnd.value)" #daySelectEnd class="form-control border-primary" id="day2">
@@ -136,9 +136,9 @@
               <div class="card-header">
                 <div style="padding: 1rem">
                   <div class="row">
-                   <div class="col">
-                     <h4 style="font-weight: 300"> Relatório Diário - {{tipoRelatorio}} {{seguradoraName}} {{selectedMonth}}/{{selectedYear}} </h4>
-                   </div>
+                    <div class="col">
+                      <h4 style="font-weight: 300"> Relatório Diário - {{tipoRelatorio}} {{corretoraName}} {{selectedMonth}}/{{selectedYear}} </h4>
+                    </div>
                   </div>
                   <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'padrao'">
                     <div class="col-sm-4">
@@ -156,11 +156,6 @@
                       <h4 style="font-weight: 400">Variação: {{variacao}}%  </h4>
                     </div>
                   </div>
-                  <div class="row" style="margin-top: 2rem">
-                    <div class="col-4">
-                      <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar corretoras" />
-                    </div>
-                    </div>
                 </div>
               </div>
               <div class="card-content" style="margin: 0 2.2rem">
@@ -169,15 +164,15 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th style="min-width: 300px !important;">Corretora</th>
-                      <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].corr_report">{{dates.date}}</th>
+                      <th style="min-width: 300px !important;">Seguradora</th>
+                      <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].seg_report">{{dates.date}}</th>
                       <th *ngIf="tipoRelatorio === 'comparativo'">Variação</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let producao of reportsArray; let i = index" style="cursor: pointer">
-                      <th style="min-width: 300px !important;">{{producao.corretora}}</th>
-                      <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
+                      <th style="min-width: 300px !important;">{{producao.seguradora}}</th>
+                      <td style="min-width: 120px !important;" *ngFor="let reports of producao.seg_report">
                         {{reports.total}}
                       </td>
                       <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao.var.toFixed(2) * 100)}}%</td>

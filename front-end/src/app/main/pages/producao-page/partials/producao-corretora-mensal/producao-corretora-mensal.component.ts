@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
 import {ProducaoService} from "../../../../services/producao.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 import {DateService} from "../../../../services/utils/date.service";
 
 @Component({
-  selector: 'app-producao-anual-partial',
-  templateUrl: './producao-anual-partial.component.html',
-  styleUrls: ['./producao-anual-partial.component.scss']
+  selector: 'app-producao-corretora-mensal',
+  templateUrl: './producao-corretora-mensal.component.html',
+  styleUrls: ['./producao-corretora-mensal.component.scss']
 })
-export class ProducaoAnualPartialComponent implements OnInit {
+export class ProducaoCorretoraMensalComponent implements OnInit {
+
 
   reportsArray = [];
   saveOldReport = [];
 
   tipoRelatorio = 'padrao';
-  seguradoraName = 'Seguradora';
+  corretoraName = 'Corretora';
   selectedMonthStart = '';
   selectedYearStart = '';
   selectedMonthEnd = '';
@@ -25,56 +25,57 @@ export class ProducaoAnualPartialComponent implements OnInit {
   variacao: any;
 
   corretoraFilter = '';
-  allSeguradoras = [];
+  allCorretoras = [];
 
-  seguradoraDates = [];
-
-  seguradora = [];
+  corretoraDates = [];
 
   corretora = [];
 
-  activeSeguradora = '';
+  activeCorretora = '';
 
   allProducoes = [];
 
   monthsArrayStart = [];
   monthsArrayEnd = [];
 
+  selectedMonth: any;
   selectedYear: any;
 
   monthsArray = [];
 
   constructor(
-    private seguradoraService: SeguradoraService,
+    private corretoraService: CorretoraService,
     private router: Router,
     private producaoService: ProducaoService,
-    private corretoraService: CorretoraService,
     private dateService: DateService
   ) { }
 
+  navigateEnviarAnexo() {
+    this.router.navigate(['producao/enviar']);
+  }
 
   ngOnInit() {
 
     this.corretoraFilter = "";
 
-    this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
-      this.allSeguradoras = data;
-      this.setActiveSeguradora(this.allSeguradoras[0]._id);
+    this.corretoraService.getAllCorretoras().subscribe((data:any) => {
+      this.allCorretoras = data;
+      this.setActiveCorretora(this.allCorretoras[0]._id);
     });
 
     this.producaoService.getAllProducao().subscribe((data: any) => {
       this.allProducoes = data;
-      this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
-        this.seguradora = seg_data;
+      this.corretoraService.getAllCorretoras().subscribe((seg_data:any) => {
+        this.corretora = seg_data;
         this.allProducoes = this.allProducoes.map(prod => {
-          let seg = this.seguradora.find(seg_obj => prod.seguradora.toString() === seg_obj._id.toString());
-          let seguradora = {
+          let seg = this.corretora.find(seg_obj => prod.corretora.toString() === seg_obj._id.toString());
+          let corretora = {
             name: seg.name,
             _id: seg._id,
             telephone: seg.telephone,
             email: seg.email
           };
-          prod.seguradora = seguradora;
+          prod.corretora = corretora;
           return prod;
         });
       });
@@ -111,10 +112,13 @@ export class ProducaoAnualPartialComponent implements OnInit {
 
   }
 
+  selectMonthStart(mes) {
+    this.selectedMonthStart = mes;
+  }
 
   selectYearStart(yearObj) {
 
-    let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+    let monthObj = this.corretoraDates.find(([year, monthObj]) => {
       return year === yearObj
     });
 
@@ -124,14 +128,17 @@ export class ProducaoAnualPartialComponent implements OnInit {
 
   }
 
+  selectMonthEnd(mes) {
+    this.selectedMonthEnd = mes;
+  }
 
   selectYearEnd(yearObj) {
 
-    console.log(this.seguradoraDates);
+    console.log(this.corretoraDates);
 
     console.log(yearObj);
 
-    let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
+    let monthObj = this.corretoraDates.find(([year, monthObj]) => {
       return year === yearObj
     });
 
@@ -147,17 +154,16 @@ export class ProducaoAnualPartialComponent implements OnInit {
   }
 
   gerarRelatorio() {
-    this.producaoService.postRelatorioAnual(this.selectedYearStart, this.selectedYearEnd, this.activeSeguradora).subscribe((data: any) => {
-
+    this.producaoService.postRelatorioCorretoraMensal(this.selectedYearStart, this.selectedMonthStart, this.selectedYearEnd, this.selectedMonthEnd, this.activeCorretora).subscribe((data: any) => {
+      console.log(data);
       this.reportsArray = data.report.report;
-
-      console.log(data)
-
+      console.log(this.reportsArray);
     })
   }
 
   gerarRelatorioComparativo() {
-    this.producaoService.postComparacaoAnual(this.selectedYearStart, this.selectedYearEnd, this.activeSeguradora).subscribe((data: any) => {
+    this.producaoService.postComparacaoCorretoraMensal(this.selectedYearStart, this.selectedMonthStart, this.selectedYearEnd, this.selectedMonthEnd, this.activeCorretora).subscribe((data: any) => {
+      console.log(data);
       this.reportsArray = data.report.report;
       this.variacao = data.report.var_media;
 
@@ -165,37 +171,42 @@ export class ProducaoAnualPartialComponent implements OnInit {
     })
   }
 
-  setActiveSeguradora(seguradora) {
+  setActiveCorretora(corretora) {
 
     this.reportsArray = [];
 
-    this.seguradoraName = '';
+    this.corretoraName = '';
 
-    this.seguradoraDates = [];
+    this.corretoraDates = [];
 
-    this.activeSeguradora = seguradora;
+    this.activeCorretora = corretora;
 
-    let findSeguradora = this.allSeguradoras.find( findSeguradora => findSeguradora._id === seguradora);
+    let findCorretora = this.allCorretoras.find( findCorretora => findCorretora._id === corretora);
 
-    this.seguradoraName = findSeguradora.name;
+    this.corretoraName = findCorretora.name;
 
-    console.log(this.activeSeguradora);
+    console.log(this.activeCorretora);
 
-    this.producaoService.getSeguradoraReports(this.activeSeguradora).subscribe((data: any) => {
+    this.producaoService.getCorretoraReports(this.activeCorretora).subscribe((data: any) => {
 
-      this.seguradoraName = seguradora.name;
+      this.corretoraName = corretora.name;
 
       console.log(data);
 
       if (Object.entries(data.dates).length > 0) {
-        this.seguradoraDates = Object.entries(data.dates);
-        this.selectYearStart(this.seguradoraDates[0][0]);
+        this.corretoraDates = Object.entries(data.dates);
+        this.selectYearStart(this.corretoraDates[0][0]);
+        setTimeout(() => {
+          this.selectMonthStart(this.monthsArrayStart[0][0]);
+        }, 1)
       }
 
       if (Object.entries(data.dates).length > 0) {
-        this.seguradoraDates = Object.entries(data.dates);
-        this.selectYearEnd(this.seguradoraDates[0][0]);
-
+        this.corretoraDates = Object.entries(data.dates);
+        this.selectYearEnd(this.corretoraDates[0][0]);
+        setTimeout(() => {
+          this.selectMonthEnd(this.monthsArrayEnd[0][0]);
+        }, 1)
       }
 
     })

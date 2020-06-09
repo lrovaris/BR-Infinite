@@ -7,7 +7,7 @@
             <div class="col-sm-12">
               <div class="row">
                 <div class="col-md-4">
-                  <h4>Relatório por Seguradora - Anual</h4>
+                  <h4>Relatório por Corretora - Mensal</h4>
                 </div>
               </div>
               <div class="row">
@@ -16,7 +16,7 @@
                     <label for="relatorio"> tipo de relatório</label>
                     <select (change)="selectRelatorio(selectRelatorioInput.value)" #selectRelatorioInput class="form-control border-primary" id="relatorio">
                       <option value="padrao" >padrao</option>
-                      <option value="comparativo" >comparativo</option>
+                      <option value="comparativo">comparativo</option>
                     </select>
                   </fieldset>
                 </div>
@@ -24,49 +24,63 @@
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="seguradorass"> Seguradora</label>
-                    <select (change)="setActiveSeguradora(seguradoraSelect.value)" #seguradoraSelect class="form-control border-primary" id="seguradorass">
-                      <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                    <label for="corretorass"> Corretora</label>
+                    <select (change)="setActiveCorretora(corretoraSelect.value)" #corretoraSelect class="form-control border-primary" id="corretorass">
+                      <option [value]="corretora._id" *ngFor="let corretora of allCorretoras">{{corretora.name}}</option>
                     </select>
                   </fieldset>
                 </div>
 
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
                   <fieldset class="form-group">
                     <label for="ano1"> Ano Inicial</label>
                     <select (change)="selectYearStart(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano1">
-                      <option [value]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                      <option [value]="ano[0]" *ngFor="let ano of corretoraDates">{{ano[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
+                  <fieldset class="form-group">
+                    <label for="mes1"> Mes Inicial</label>
+                    <select (change)="selectMonthStart(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes1">
+                      <option [value]="mes[0]" *ngFor="let mes of monthsArrayStart">{{mes[0]}}</option>
                     </select>
                   </fieldset>
                 </div>
 
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
                   <fieldset class="form-group">
                     <label for="ano2"> Ano Final</label>
                     <select (change)="selectYearEnd(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano2">
-                      <option [ngValue]="ano[0]" *ngFor="let ano of seguradoraDates">{{ano[0]}}</option>
+                      <option [ngValue]="ano[0]" *ngFor="let ano of corretoraDates">{{ano[0]}}</option>
                     </select>
                   </fieldset>
                 </div>
-
-                <div class="col-md-4" *ngIf="tipoRelatorio === 'padrao'">
+                <div class="col-md-2 col-sm-6" *ngIf="corretoraDates.length > 0">
+                  <fieldset class="form-group">
+                    <label for="mes2"> Mes Final</label>
+                    <select (change)="selectMonthEnd(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes2">
+                      <option [value]="mes[0]" *ngFor="let mes of monthsArrayEnd">{{mes[0]}}</option>
+                    </select>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3" *ngIf="tipoRelatorio === 'padrao'">
                   <div class="form-group">
-                    <button (click)="gerarRelatorio()" style="margin-top: 1.6rem" class="btn btn-header float-right" id="asd">
+                    <button (click)="gerarRelatorio()" style="margin-top: 1.6rem" class="btn btn-header float-left" id="asd">
                       <a>Gerar relatorio</a>
                     </button>
                   </div>
                 </div>
-
-                <div class="col-md-4" *ngIf="tipoRelatorio === 'comparativo'">
+                <div class="col-md-3" *ngIf="tipoRelatorio === 'comparativo'">
                   <div class="form-group">
-                    <button (click)="gerarRelatorioComparativo()" style="margin-top: 1.6rem" class="btn btn-header float-right" id="asd">
+                    <button (click)="gerarRelatorioComparativo()" style="margin-top: 1.6rem" class="btn btn-header float-left" id="asd">
                       <a>Gerar relatorio Comparativo</a>
                     </button>
                   </div>
                 </div>
-
               </div>
-
             </div>
           </div>
         </div>
@@ -82,17 +96,12 @@
                 <div style="padding: 1rem">
                   <div class="row">
                     <div class="col">
-                      <h4 style="font-weight: 300"> Relatório Anual - {{tipoRelatorio}} {{seguradoraName}} {{selectedYearStart}} até {{selectedYearEnd}} </h4>
+                      <h4 style="font-weight: 300"> Relatório Mensal - {{tipoRelatorio}} {{corretoraName}} {{selectedMonthStart}}/{{selectedYearStart}} até {{selectedMonthEnd}}/{{selectedYearEnd}} </h4>
                     </div>
                   </div>
                   <div class="row" *ngIf="tipoRelatorio === 'comparativo'">
                     <div class="col-sm-12">
-                      <h4> Variação: {{variacao}}%</h4>
-                    </div>
-                  </div>
-                  <div class="row" style="margin-top: 2rem">
-                    <div class="col-4">
-                      <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar corretoras" />
+                      <h4> Variação: {{variacao}}% </h4>
                     </div>
                   </div>
                 </div>
@@ -103,15 +112,15 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th style="min-width: 300px !important;">Corretora</th>
-                      <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].corr_report">{{dates.date}}</th>
-                      <th *ngIf="tipoRelatorio === 'comparativo'"> Variação </th>
+                      <th style="min-width: 300px !important;">Seguradora</th>
+                      <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].seg_report">{{dates.date}}</th>
+                      <th *ngIf="tipoRelatorio === 'comparativo'">Variação</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let producao of reportsArray; let i = index" style="cursor: pointer">
-                      <th style="min-width: 300px !important;">{{producao.corretora}}</th>
-                      <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
+                      <th style="min-width: 300px !important;">{{producao.seguradora}}</th>
+                      <td style="min-width: 120px !important;" *ngFor="let reports of producao.seg_report">
                         {{reports.total}}
                       </td>
                       <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao.var * 100).toFixed(2)}}%</td>

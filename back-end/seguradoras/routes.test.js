@@ -33,8 +33,8 @@ describe('Seguradoras Routes', () => {
       manager: {
         name:"afonso colaborante",
         telephone:"999219075",
-        birthday: "today",
-        job:"meter o loco"
+        birthday: "2020-05-01",
+        job:"QA"
       }
     })
 
@@ -56,8 +56,8 @@ describe('Seguradoras Routes', () => {
         name:"afonso colaborante",
         telephone:"999219075",
         email:"colaborador@legal.com",
-        birthday: "today",
-        job:"meter o loco"
+        birthday: "2020-05-01",
+        job:"QA"
       }
     })
 

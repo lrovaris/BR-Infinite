@@ -6,11 +6,11 @@ const cache = require('../../memoryCache');
 const seguradora_controller = require("../../seguradoras/controller")
 const corretora_controller = require('../../corretoras/controller')
 
-async function validate_entries(rows, seg_id){
+async function validate_entries(rows, seg_id, this_date){
 
   const validated_rows = await Promise.all(
     rows.map(async row =>{
-      let validation = await validate_entry(row, seg_id)
+      let validation = await validate_entry(row, seg_id, this_date)
 
       let to_db = validation.entry;
 
@@ -31,7 +31,7 @@ async function validate_entries(rows, seg_id){
   return validated_rows;
 }
 
-async function validate_entry(entry, seg_id) {
+async function validate_entry(entry, seg_id, this_date) {
   if (entry === undefined){
     return{
       "valid": false,
@@ -88,7 +88,7 @@ async function validate_entry(entry, seg_id) {
     "entry":{
       "corretora": corr._id.toString(),
       "total": thisTotal,
-      "date": entry.Data
+      "date": this_date
     }
   };
 }

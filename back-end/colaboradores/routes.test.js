@@ -10,7 +10,7 @@ describe('colaboradores Routes', () => {
       name:"afonso tavarex",
       telephone:"999",
       email:"email@legal.com",
-      birthday: "today"
+      birthday: "1521-12-12"
     })
 
     expect(res.statusCode).toEqual(400)
@@ -23,8 +23,8 @@ describe('colaboradores Routes', () => {
       name:"afonso tavarex",
       telephone:"999",
       email:"email@legal.com",
-      birthday: "today",
-      job:"meter o loco"
+      birthday: "1521-12-12",
+      job:"QA"
     })
 
     expect(res.statusCode).toEqual(200)
@@ -58,6 +58,20 @@ describe('colaboradores Routes', () => {
     });
 
     expect(afonso2.name).toEqual("afonso tavares");
+  })
+
+  it('deveria retornar uma lista com os aniversariantes do mês', async () => {
+    let new_colab = await request(app).post('/colaboradores/new').send({
+      name:"rapazin",
+      telephone:"999999999",
+      email:"email@legal.com",
+      birthday: `1521-${(new Date().getMonth() + 1)}-12`,
+      job:"QA"
+    })
+
+    const res = await request(app).get(`/colaboradores/birthday`)
+
+    expect(res.statusCode).toEqual(200);
   })
 
 })

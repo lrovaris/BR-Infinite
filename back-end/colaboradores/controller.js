@@ -15,6 +15,75 @@ async function get_colaboradores_by_id(colab_id) {
   return colaborador;
 }
 
+async function get_colaboradores_by_birthday(){
+  let all_colab = await get_colaboradores();
+
+  let current_month = (new Date().getMonth() + 1);
+
+  let this_month_birthday_colabs = all_colab.filter(this_colab => {
+    return getDateInfoFromString(this_colab.birthday).month === current_month
+  })
+
+  this_month_birthday_colabs = this_month_birthday_colabs.map(colab => {
+    return{
+      name: colab.name,
+      birthday: colab.birthday,
+      seguradora: colab.seguradora,
+      corretora: colab.corretora
+    }
+  })
+
+
+  return this_month_birthday_colabs
+}
+
+function getDateInfoFromString(date) {
+  if(date === undefined){
+    return {
+      valid: false
+    }
+  }
+  let isValidDate = true;
+
+  let this_year
+
+  if(date.split("-")[0]){
+      this_year = Number(date.split("-")[0].toString())
+  }
+
+
+  if(this_year === null  || isNaN(this_year)){
+    isValidDate = false
+  }
+
+  let this_month
+  if(date.split("-")[1]){
+      this_month = Number(date.split("-")[1].toString())
+  }
+
+  if(this_month === null  || isNaN(this_month)){
+    isValidDate = false
+  }
+
+  let this_day
+  if(date.split("-")[2]){
+      this_day = Number(date.split("-")[2].toString())
+  }
+
+  if(this_day === null || isNaN(this_day)){
+    isValidDate = false
+  }
+
+  let this_response = {
+    year: this_year,
+    month: this_month,
+    day: this_day,
+    valid: isValidDate
+  }
+
+  return this_response;
+}
+
 async function get_colaboradores_corretora(id_corretora, id_manager){
   let all_colab = await get_colaboradores();
 
@@ -87,6 +156,13 @@ function validate_colaborador(colaborador){
       "valid": false,
       "message":"Campo de aniversário vazio"
     };
+  }else {
+    if(!getDateInfoFromString(colaborador.birthday).valid){
+      return {
+        "valid": false,
+        "message":"Campo de aniversário inválido (o formato deve ser aaaa-mm-dd)"
+      }
+    }
   }
 
   if (!colaborador.job){
@@ -111,5 +187,6 @@ module.exports = {
   get_colaboradores_corretora,
   get_colaboradores_seguradora,
   validate_colaborador,
-  register_colaborador
+  register_colaborador,
+  get_colaboradores_by_birthday
 };

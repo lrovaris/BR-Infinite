@@ -14,6 +14,14 @@ router.get ('/', (req,res) => {
 
 router.post('/login', async(req,res) => {
 
+  if(!req.body.login){
+    return res.status(400).json({"message": "Campo de login em branco"})
+  }
+
+  if(!req.body.password){
+    return res.status(400).json({"message": "Campo de login em branco"})
+  }
+
   let this_user = await controller.get_user_by_login(req.body.login)
 
   if(!this_user.login){

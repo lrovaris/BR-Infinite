@@ -19,7 +19,7 @@ describe('Corretoras Routes', () => {
         name:"afonso colaborante",
         telephone:"999219075",
         email:"colaborador@legal.com",
-        birthday: "today",
+        birthday: "2020-05-01",
         job:"testar paradas"
       }
     })
@@ -54,12 +54,12 @@ describe('Corretoras Routes', () => {
   it('deveria tentar registrar duas corretoras e falhar na segunda pelo apelido estar em uso', async () => {
     await request(app).post('/corretoras/new').send({
       corretora: { name:"Corretora para testar o apelido", nicknames:["apelidada", "testadora"] },
-      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" }
     })
 
     let res = await request(app).post('/corretoras/new').send({
       corretora: { name:"Segunda corretora para testar o apelido", nicknames:["testadora"] },
-      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" }
     })
 
     expect(res.body.message).toEqual("Apelido em uso");
@@ -69,12 +69,12 @@ describe('Corretoras Routes', () => {
   it('deveria tentar registrar duas corretoras, conseguir, tentar editar a segunda e falhar pelo apelido estar em uso', async () => {
     await request(app).post('/corretoras/new').send({
       corretora: { name:"Corretora para testar o apelido", nicknames:["corretora_testadora"] },
-      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" }
     })
 
     let res = await request(app).post('/corretoras/new').send({
       corretora: { name:"Segunda corretora para testar o apelido" },
-      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "today", job:"testar paradas" }
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" }
     })
 
     let corr_id = res.body.corretora._id;

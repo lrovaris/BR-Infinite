@@ -16,6 +16,12 @@ router.get ('/all', async (req,res) => {
   res.status(200).json(all_colaboradores);
 });
 
+router.get ('/birthday', async (req,res) => {
+  let colab_list = await controller.get_colaboradores_by_birthday();
+
+  res.status(200).json(colab_list);
+});
+
 router.get ('/:id', async (req,res) => {
   to_send = await controller.get_colaboradores_by_id(req.params.id);
 
@@ -33,7 +39,7 @@ router.post('/new', async(req,res) => {
 
     new_colaborador['active'] = true;
 
-    let db_colab = controller.register_colaborador(new_colaborador);
+    let db_colab = await controller.register_colaborador(new_colaborador);
 
     res.status(200).json({
       message: "Colaborador cadastrado com sucesso!",

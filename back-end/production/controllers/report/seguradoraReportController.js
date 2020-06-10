@@ -1,6 +1,7 @@
 const default_controller = require('../defaultController')
 const date_utils = require('../../utils/dateUtils')
 const corretora_controller = require('../../../corretoras/controller')
+const seguradora_controller = require('../../../seguradoras/controller')
 
 async function get_seguradora_daily_report(seg_id, report_year, report_month) {
   let all_prods = await default_controller.get_entries();
@@ -286,8 +287,64 @@ async function get_seguradora_yearly_report(seg_id, begin_year, end_year){
   }
 }
 
+async function get_seguradora_home_reports(){
+  let all_prods = await default_controller.get_entries();
+
+  let all_segs = await seguradora_controller.get_seguradoras();
+
+  let this_report =  await Promise.all(
+    all_segs.map(async this_seguradora =>{
+
+     let seg_prods = all_prods.filter(prod => prod.seguradora === this_seguradora._id.toString())
+
+     let this_corrs = await corretora_controller.get_corretoras_by_seguradora(this_seguradora._id.toString());
+
+     let this_name = this_seguradora.name;
+
+     let this_total = 0;
+
+     for (var i = 0; i < this_corrs.length; i++) {
+       let this_corretora = this_corrs[i];
+
+       let this_corr_prod = seg_prods.filter(prod => prod.corretora.toString() === this_corretora._id.toString())
+
+       let this_month_corr_prod = this_corr_prod.filter(prod => {
+
+         let prod_date = date_utils.getDateInfoFromString(prod.date)
+
+         if(prod_date.year !== new Date().getFullYear()){
+           return false
+         }
+
+         if(prod_date.month !== (new Date().getMonth() + 1)){
+           return false
+         }
+
+         return true
+       }).sort((prod_a, prod_b) =>{
+         return date_utils.getDateInfoFromString(prod_b.date).day - date_utils.getDateInfoFromString(prod_a.date).day
+       })[0]
+
+       if(this_month_corr_prod !== undefined){
+         this_total += this_month_corr_prod.total
+       }
+     }
+
+     return{
+       total: this_total,
+       name: this_name
+     }
+   })
+  )
+
+  return {
+    report: this_report
+  }
+}
+
 module.exports = {
   get_seguradora_daily_report,
   get_seguradora_monthly_report,
-  get_seguradora_yearly_report
+  get_seguradora_yearly_report,
+  get_seguradora_home_reports
 };

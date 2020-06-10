@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {LoginService} from "../main/services/login.service";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,9 @@ export class HeaderComponent implements OnInit {
 
   check = false;
 
-  constructor(private router: Router) { }
+  isLoggedIn = false;
+
+  constructor(private router: Router, public loginService: LoginService) { }
 
   navigateCadastro() {
     this.check = !this.check;
@@ -23,6 +26,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if (this.loginService.getIsAuth()) {
+      this.isLoggedIn = true;
+    }
+
   }
 
 }

@@ -15,30 +15,7 @@ export class LoginService {
   private token: string;
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
-  private user = {
-    id: '',
-    nome: '',
-    email: '',
-    informacaoProfissional :{
-      sobre: '',
-      infoAdicional: '',
-      registro: {sigla: '', numeroRegistro: ''},
-      ocupacao: '',
-      dataEntrada: '',
-      experiencia: [],
-      tratarCondicoes: [],
-      experienciaProfissional: [],
-      formacao: [],
-      linkedin: '',
-      facebook: '',
-      instagram: ''
-    },
-    isProfessional: false,
-    mensagens: [],
-    avaliacoes: [],
-    tags: [],
-    localidade: {estado:'', cidade:''}
-  };
+  private user: any;
   id = '';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -50,8 +27,8 @@ export class LoginService {
     return this.http.post(`${this.url}users/new`, newUser, options).pipe(
       retry(2),
       catchError( (err: any) => {
-        console.log(err.error.Message);
-        alert(err.error.Message);
+        console.log(err.error.message);
+        alert(err.error.message);
         return throwError(err);
       })
     ).subscribe(log => {
@@ -65,16 +42,16 @@ export class LoginService {
 
   handleError(error: HttpErrorResponse) {
     console.log('pegou o erro');
-    let errorMessage = '';
+    let errormessage = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
-      errorMessage = error.error.message;
+      errormessage = error.error.message;
     } else {
       // Erro ocorreu no lado do servidor
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      errormessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+    console.log(errormessage);
+    return throwError(errormessage);
   }
 
   updateCadastro(updatedUser) {
@@ -97,17 +74,18 @@ export class LoginService {
       password: password
     };
     const options = {
-      headers: new HttpHeaders().append('Content-Type', 'application/application/json'),
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     this.http
-      .post<{Token: string, Message: string}>(this.url+"users/login",
+      .post<{token: string, message: string}>(this.url+"users/login",
         authData, options
       )
       .subscribe(response => {
         console.log(response);
-        this.token = response.Token;
+        this.token = response.token;
         const helper = new JwtHelperService();
         this.user = helper.decodeToken(this.token);
+        console.log(this.user);
         this.id = this.user.id;
         console.log(this.user.id);
 
@@ -131,8 +109,8 @@ export class LoginService {
     return this.http.get(`${this.url}users/all`).pipe(
       retry(2),
       catchError( (err: any) => {
-        console.log(err.error.Message);
-        alert(err.error.Message);
+        console.log(err.error.message);
+        alert(err.error.message);
         return throwError(err);
       })
     )

@@ -56,4 +56,8 @@ export class ColaboradorService {
    return this.http.post(`${this.urlService.getUrl()}/colaboradores/${id}/edit`, changes, options);
   }
 
+  getBirthDays() {
+    return this.http.get(`${this.urlService.getUrl()}/colaboradores/birthday`);
+  }
+
 }

@@ -1,1 +1,73 @@
-<p>home-page works!</p>
+<div class="apex-content content container-fluid">
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <div class="row" style="margin-top: 1rem">
+        <div class="col-sm-3" style="margin: auto">
+          <img src="../../../../assets/logo.png" style="width: 100%; height: auto">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div  class="card" style="padding: 1rem; max-height: 500px; overflow: scroll">
+            <div class="row">
+              <div class="col-sm-12">
+                <h4>Aniversariantes do mês</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Aniversário</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let aniversariante of aniversariantesDoMes">
+
+                    <td>{{aniversariante.name}}</td>
+                    <td>{{aniversariante.birthday}}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div  class="card" style="padding: 1rem; max-height: 500px; overflow: scroll">
+            <div class="row">
+              <div class="col-sm-12">
+                <h4>Produção Seguradoras</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Produção Acumulada</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let seguradora of producaoSeguradoras">
+
+                    <td>{{seguradora.name}}</td>
+                    <td>R${{seguradora.total}}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

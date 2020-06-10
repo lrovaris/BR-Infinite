@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {UrlService} from "./utils/url.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class SeguradoraService {
 
   isEdit = false;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private urlService: UrlService) { }
 
   getIsEdit() {
     return this.isEdit;
@@ -95,5 +96,8 @@ export class SeguradoraService {
     return this.http.post(`${this.url}/seguradoras/${id}/edit`, seguradora, options)
   }
 
+  getProducaoHomePage() {
+    return this.http.get(`${this.urlService.getUrl()}/production/seguradoras/home_report`)
+  }
 
 }

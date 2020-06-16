@@ -3,6 +3,8 @@ const date_utils = require('../../utils/dateUtils')
 const corretora_controller = require('../../../corretoras/controller')
 const seguradora_controller = require('../../../seguradoras/controller')
 
+const date_prod_controller = require("../dateController")
+
 async function get_seguradora_daily_report(seg_id, report_year, report_month) {
   let all_prods = await default_controller.get_entries();
 
@@ -67,7 +69,9 @@ async function get_seguradora_daily_report(seg_id, report_year, report_month) {
     return day_a - day_b
   })
 
-  let this_projection =  (this_total + (((( 30 - ordered_month_days[day_num - 1]) * 2) / 3) * this_media)).toFixed()
+  let util_days = await date_prod_controller.get_day_number_by_date(report_year, report_month)
+
+  let this_projection =  ( this_total + ( ( util_days - day_num) * this_media ) ).toFixed()
 
   return {
     total: this_total,
@@ -297,6 +301,15 @@ async function get_seguradora_home_reports(){
 
      let seg_prods = all_prods.filter(prod => prod.seguradora === this_seguradora._id.toString())
 
+     let date_obj = await date_utils.createYearsObjectFromProduction(seg_prods)
+
+     let year_obj = date_obj[(new Date().getFullYear()).toString()]
+
+     let this_month_days = [ "" ]
+     if(year_obj !== undefined){
+       this_month_days = [(new Date().getMonth() + 1).toString()];
+     }
+
      let this_corrs = await corretora_controller.get_corretoras_by_seguradora(this_seguradora._id.toString());
 
      let this_name = this_seguradora.name;
@@ -330,9 +343,21 @@ async function get_seguradora_home_reports(){
        }
      }
 
+     let this_media = (this_total / this_month_days.length).toFixed()
+
+     let ordered_month_days = this_month_days.sort((day_a, day_b) =>{
+       return day_a - day_b
+     })
+
+     let util_days = await date_prod_controller.get_day_number_by_date(new Date().getFullYear(), (new Date().getMonth() + 1))
+
+     let this_projection =  ( this_total + ( ( util_days - this_month_days.length) * this_media ) ).toFixed()
+
      return{
        total: this_total,
-       name: this_name
+       name: this_name,
+       media: this_media,
+       projection: this_projection
      }
    })
   )

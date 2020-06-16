@@ -114,8 +114,40 @@ router.post('/upload', upload.array('docs'), async(req,res) =>{
   })
 })
 
-// Relatórios e comparações
+// Dias úteis
 
+router.get ('/dates/all', async (req,res) => {
+  let all_prod_dates = await controller.get_production_dates();
+
+  return res.status(200).json(all_prod_dates);
+});
+
+router.post('/dates/new', async(req,res) => {
+
+  let year = req.body.year;
+
+  if(year === undefined){
+    return res.status(400).json({ message: "Ano inválido" })
+  }
+
+  let month = req.body.month;
+
+  if(month === undefined){
+    return res.status(400).json({ message: "Mês inválido" })
+  }
+
+  let dayNumber = req.body.dayNumber;
+
+  if(dayNumber === undefined){
+    return res.status(400).json({ message: "Número de dias inválido" })
+  }
+
+  let db_date = await controller.register_production_date({ year, month, dayNumber })
+
+  return res.status(200).json({ message: "Data de produção cadastrada com sucesso!", date: db_date })
+})
+
+// Relatórios e comparações
 
 router.get ('/seguradoras/home_report', async (req,res) => {
   let report = await controller.get_seguradora_home_reports();
@@ -124,8 +156,6 @@ router.get ('/seguradoras/home_report', async (req,res) => {
     report: report
   });
 });
-
-
 
 router.get ('/seguradoras/:id', async (req,res) => {
   let seg_dates = await controller.get_seguradora_dates(req.params.id);
@@ -812,7 +842,5 @@ router.post ('/corretoras/:id/compare/yearly', async (req,res) => {
     report: report
   });
 });
-
-
 
 module.exports = router;

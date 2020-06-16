@@ -24,6 +24,9 @@ export class HeaderComponent implements OnInit {
     this.check = !this.check;
     this.router.navigate(['lista'])
   }
+  navigateConfiguracao() {
+    this.router.navigate(['configuracao'])
+  }
 
   ngOnInit() {
 

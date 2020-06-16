@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ColaboradorService} from "../../services/colaborador.service";
 import { Router} from "@angular/router";
 import {SeguradoraService} from "../../services/seguradora.service";
-import {Colaborador} from "../colaborador-page/Colaborador";
 
 const Estados = [
   {
@@ -5783,7 +5782,6 @@ export class SeguradoraPageComponent implements OnInit {
 
   cidades = [];
   seguradora: FormGroup;
-  condition = false;
   submitted = false;
   responsavel: any;
   telefones = [];

@@ -6,6 +6,7 @@
 <div>
   <button *ngIf="check && loginService.getIsAuth()" (click)="navigateLista()" class="btn btn-primary" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Lista</a></button>
   <button *ngIf="!check && loginService.getIsAuth()" (click)="navigateCadastro()" class="btn btn-primary" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Cadastrar</a></button>
+  <button *ngIf="loginService.getIsAuth()" (click)="navigateConfiguracao()" class="btn btn-primary"  style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Configurações</a></button>
   <button *ngIf="loginService.getIsAuth()" class="btn btn-primary" (click)="loginService.logout();" style="margin-right: 2rem; margin-top: 1rem; background-color: #27416F; border: none"><a style="color: white">Sair</a></button>
 </div>
 </nav>

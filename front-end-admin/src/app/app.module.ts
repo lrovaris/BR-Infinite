@@ -11,6 +11,7 @@ import { Ng2SmartTableModule }  from "ng2-smart-table";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { ConfiguracaoPageComponent } from './main/pages/configuracao-page/configuracao-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
     HeaderComponent,
     LoginPageComponent,
     CadastroPageComponent,
-    UserListPageComponent
+    UserListPageComponent,
+    ConfiguracaoPageComponent
   ],
   imports: [
     BrowserModule,

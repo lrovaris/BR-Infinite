@@ -5,7 +5,7 @@
   </a>
   <div>
 
-    <button *ngIf="!service.getIsAuth()"  (click)="navigateLogin()" class="btn btn-primary btn-header"><a>login</a></button>
+    <button *ngIf="!service.getIsAuth()"  (click)="navigateLogin()" class="btn btn-primary btn-header"><a>Login</a></button>
     <button *ngIf="service.getIsAuth()"  (click)="navigateHome()" class="btn btn-primary btn-header"><a>Home</a></button>
     <button *ngIf="service.getIsAuth()"  (click)="navigateCorretora()" class="btn btn-primary btn-header"><a>Corretoras</a></button>
     <button *ngIf="service.getIsAuth()"  (click)="navigateSeguradora()" class="btn btn-primary btn-header"><a>Seguradoras</a></button>

@@ -15,10 +15,10 @@
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="relatorio">Selecione o tipo de relatório</label>
+                    <label for="relatorio">Selecione o tipo de Relatório</label>
                     <select (change)="selectRelatorio(selectRelatorioAtribute.value)" #selectRelatorioAtribute class="form-control border-primary" id="relatorio">
-                      <option value="padrao" >padrao</option>
-                      <option value="comparativo">comparativo</option>
+                      <option value="Padrão" >Padrão</option>
+                      <option value="Comparativo">Comparativo</option>
                     </select>
                   </fieldset>
                 </div>
@@ -33,7 +33,7 @@
                   </fieldset>
                 </div>
 
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'Padrão'">
                   <fieldset class="form-group">
                     <label for="ano">Selecione o Ano</label>
                     <select (change)="selectYear(anoSelect.value)" #anoSelect class="form-control border-primary" id="ano">
@@ -41,8 +41,8 @@
                     </select>
                   </fieldset>
                 </div>
-                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'padrao'">
-                  <fieldset class="form-group">
+                <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0 && tipoRelatorio === 'Padrão'">
+                  <fieldset class="form-group">this.spriteSheet.style.backgroundPosition
                     <label for="mes">Selecione o Mes</label>
                     <select (change)="selectMonth(mesSelect.value)" #mesSelect class="form-control border-primary" id="mes">
                       <option [value]="mes[0]" *ngFor="let mes of monthsArray">{{mes[0]}}</option>
@@ -52,17 +52,17 @@
                 <div class="col-md-1">
 
                 </div>
-                <div class="col-md-3" *ngIf="tipoRelatorio === 'padrao'">
+                <div class="col-md-3" *ngIf="tipoRelatorio === 'Padrão'">
                   <div class="form-group">
                     <button (click)="gerarRelatorio()" style="margin-top: 1.8rem" class="btn btn-header float-right" id="asd">
-                      <a>Gerar relatorio</a>
+                      <a>Gerar Relatório</a>
                     </button>
                   </div>
                 </div>
 
               </div>
 
-              <div *ngIf="tipoRelatorio === 'comparativo'" class="row">
+              <div *ngIf="tipoRelatorio === 'Comparativo'" class="row">
                 <div class="col-md-2 col-sm-6" *ngIf="seguradoraDates.length > 0">
                   <fieldset class="form-group">
                     <label for="ano3">Selecione o Ano</label>
@@ -114,9 +114,9 @@
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  <div class="form-group" *ngIf="tipoRelatorio === 'comparativo'">
+                  <div class="form-group" *ngIf="tipoRelatorio === 'Comparativo'">
                     <button (click)="gerarRelatorioComparativo()" style="margin-top: 1.8rem" class="btn btn-header" id="asd2">
-                      <a>Gerar relatorio de Comparação</a>
+                      <a>Gerar Relatório de Comparação</a>
                     </button>
                   </div>
                 </div>
@@ -140,7 +140,7 @@
                      <h4 style="font-weight: 300"> Relatório Diário - {{tipoRelatorio}} {{seguradoraName}} {{selectedMonth}}/{{selectedYear}} </h4>
                    </div>
                   </div>
-                  <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'padrao'">
+                  <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'Padrão'">
                     <div class="col-sm-4">
                       <h4 style="font-weight: 400">Acumulado: {{acumulado}}  </h4>
                     </div>
@@ -151,7 +151,7 @@
                       <h4 style="font-weight: 400">Projeção:  {{projecao}}</h4>
                     </div>
                   </div>
-                  <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'comparativo'">
+                  <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'Comparativo'">
                     <div class="col-sm-4">
                       <h4 style="font-weight: 400">Variação: {{variacao}}%  </h4>
                     </div>
@@ -171,7 +171,7 @@
                     <tr>
                       <th style="min-width: 300px !important;">Corretora</th>
                       <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].corr_report">{{dates.date}}</th>
-                      <th *ngIf="tipoRelatorio === 'comparativo'">Variação</th>
+                      <th *ngIf="tipoRelatorio === 'Comparativo'">Variação</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -180,7 +180,7 @@
                       <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
                         {{reports.total}}
                       </td>
-                      <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao?.var * 100)?.toFixed(2)}}%</td>
+                      <td *ngIf="tipoRelatorio === 'Comparativo'">{{(producao?.var * 100)?.toFixed(2)}}%</td>
                     </tr>
                     </tbody>
                   </table>

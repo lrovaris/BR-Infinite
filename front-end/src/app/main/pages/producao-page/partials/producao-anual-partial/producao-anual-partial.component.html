@@ -13,10 +13,10 @@
               <div class="row">
                 <div class="col-md-2 col-sm-12">
                   <fieldset class="form-group">
-                    <label for="relatorio"> tipo de relatório</label>
+                    <label for="relatorio"> Tipo de Relatório</label>
                     <select (change)="selectRelatorio(selectRelatorioInput.value)" #selectRelatorioInput class="form-control border-primary" id="relatorio">
-                      <option value="padrao" >padrao</option>
-                      <option value="comparativo" >comparativo</option>
+                      <option value="Padrão" >Padrão</option>
+                      <option value="Comparativo" >Comparativo</option>
                     </select>
                   </fieldset>
                 </div>
@@ -49,7 +49,7 @@
                   </fieldset>
                 </div>
 
-                <div class="col-md-4" *ngIf="tipoRelatorio === 'padrao'">
+                <div class="col-md-4" *ngIf="tipoRelatorio === 'Padrão'">
                   <div class="form-group">
                     <button (click)="gerarRelatorio()" style="margin-top: 1.6rem" class="btn btn-header float-right" id="asd">
                       <a>Gerar relatorio</a>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4" *ngIf="tipoRelatorio === 'comparativo'">
+                <div class="col-md-4" *ngIf="tipoRelatorio === 'Comparativo'">
                   <div class="form-group">
                     <button (click)="gerarRelatorioComparativo()" style="margin-top: 1.6rem" class="btn btn-header float-right" id="asd">
                       <a>Gerar relatorio Comparativo</a>
@@ -85,7 +85,7 @@
                       <h4 style="font-weight: 300"> Relatório Anual - {{tipoRelatorio}} {{seguradoraName}} {{selectedYearStart}} até {{selectedYearEnd}} </h4>
                     </div>
                   </div>
-                  <div class="row" *ngIf="tipoRelatorio === 'comparativo'">
+                  <div class="row" *ngIf="tipoRelatorio === 'Comparativo'">
                     <div class="col-sm-12">
                       <h4> Variação: {{variacao}}%</h4>
                     </div>
@@ -105,7 +105,7 @@
                     <tr>
                       <th style="min-width: 300px !important;">Corretora</th>
                       <th style="min-width: 120px !important;" *ngFor="let dates of reportsArray[0].corr_report">{{dates.date}}</th>
-                      <th *ngIf="tipoRelatorio === 'comparativo'"> Variação </th>
+                      <th *ngIf="tipoRelatorio === 'Comparativo'"> Variação </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -114,7 +114,7 @@
                       <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
                         {{reports.total}}
                       </td>
-                      <td *ngIf="tipoRelatorio === 'comparativo'">{{(producao.var * 100).toFixed(2)}}%</td>
+                      <td *ngIf="tipoRelatorio === 'Comparativo'">{{(producao.var * 100).toFixed(2)}}%</td>
                     </tr>
                     </tbody>
                   </table>

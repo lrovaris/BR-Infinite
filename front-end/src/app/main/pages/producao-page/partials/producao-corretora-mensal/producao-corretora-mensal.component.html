@@ -15,7 +15,7 @@
                   <fieldset class="form-group">
                     <label for="relatorio"> tipo de relatório</label>
                     <select (change)="selectRelatorio(selectRelatorioInput.value)" #selectRelatorioInput class="form-control border-primary" id="relatorio">
-                      <option value="padrao" >padrao</option>
+                      <option value="Padrão" >Padrão</option>
                       <option value="comparativo">comparativo</option>
                     </select>
                   </fieldset>
@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-3" *ngIf="tipoRelatorio === 'padrao'">
+                <div class="col-md-3" *ngIf="tipoRelatorio === 'Padrão'">
                   <div class="form-group">
                     <button (click)="gerarRelatorio()" style="margin-top: 1.6rem" class="btn btn-header float-left" id="asd">
                       <a>Gerar relatorio</a>

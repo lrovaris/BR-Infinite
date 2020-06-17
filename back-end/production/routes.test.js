@@ -300,4 +300,57 @@ describe('Production Routes', () => {
     expect(new_request.statusCode).toEqual(200)
   })
 
+  it('cadastrar novas entradas e sobrescrever essas entradas', async() =>{
+
+    let new_seg = await request(app).post('/seguradoras/new').send({
+      seguradora: { name:"segura_teste" },
+      manager: { name:"Luis do QA", telephone:"999219075", email:"luis@segurateste.com", birthday: "2020-05-01", job:"quebrar apps" }
+    })
+
+    expect(new_seg.statusCode).toEqual(200)
+
+    let new_corr = await request(app).post('/corretoras/new').send({
+      corretora: { name:"corretinha",  nicknames:["Sobrescrevente"], seguradoras:[ new_seg.body.seguradora._id ] },
+      manager: { name:"afonso colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" }
+    })
+
+
+    expect(new_corr.statusCode).toEqual(200)
+
+    let new_path = "ex_sobrescrever.csv"
+
+    let new_request = await request(app).post('/production/new').send({
+      seguradora: new_seg.body.seguradora._id,
+      path: new_path,
+      date: "15/05/2020"
+    })
+
+    expect(new_request.statusCode).toEqual(200)
+
+    let overwritten_path = "ex_sobrescrever_2.csv"
+
+    let overwrite_request = await request(app).post('/production/new').send({
+      seguradora: new_seg.body.seguradora._id,
+      path: overwritten_path,
+      date: "15/05/2020"
+    })
+
+    // console.log(JSON.stringify(overwrite_request.body, null, 1));
+
+    expect(overwrite_request.statusCode).toEqual(200)
+
+  })
+
+  it('cadastrar nova data de produção', async () => {
+    let new_request = await request(app).post(`/production/dates/new`).send({
+      year: 2020,
+      month: 6,
+      dayNumber: 21
+    })
+
+    console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
 })

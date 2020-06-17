@@ -2,6 +2,7 @@ const default_controller = require('../defaultController')
 const date_utils = require('../../utils/dateUtils')
 const corretora_controller = require('../../../corretoras/controller')
 const seguradora_controller = require('../../../seguradoras/controller')
+const date_prod_controller = require("../dateController")
 
 async function get_corretora_daily_report(corr_id, report_year, report_month) {
   let all_prods = await default_controller.get_entries();
@@ -70,7 +71,9 @@ async function get_corretora_daily_report(corr_id, report_year, report_month) {
     return day_a - day_b
   })
 
-  let this_projection =  (this_total + (((( 30 - ordered_month_days[day_num - 1]) * 2) / 3) * this_media)).toFixed()
+  let util_days = await date_prod_controller.get_day_number_by_date(report_year, report_month)
+
+  let this_projection =  ( this_total + ( ( util_days - day_num) * this_media ) ).toFixed()
 
 
 

@@ -1,6 +1,6 @@
 // Imports padrão
 const db = require('../db');
-const cache = require('../../memoryCache');
+const default_controller = require('./defaultController')
 
 // Controladores externos
 const seguradora_controller = require("../../seguradoras/controller")
@@ -94,10 +94,59 @@ async function validate_entry(entry, seg_id, this_date) {
 }
 
 async function register_entries(entries){
+
+  let current_entries = await default_controller.get_entries();
+
+
   let db_entries = await Promise.all(
     entries.map(async entry =>{
-      let new_entry = await db.register_entry(entry).catch(err => logger.error(err));
-      return new_entry;
+
+      let old_entry = current_entries.find(entry_obj =>{
+        if (entry_obj.corretora.toString() !== entry.corretora.toString()){
+          return false
+        }
+
+        if (entry_obj.seguradora.toString() !== entry.seguradora.toString()){
+          return false
+        }
+
+        if (entry_obj.date.toString() !== entry.date.toString()){
+          return false
+        }
+
+        return true
+
+      })
+
+      if(old_entry !== undefined){
+
+        let entradas_editadas = Object.entries(old_entry)
+        .map(([key, value]) =>{ return [key, entry[key] || value]; })
+
+        let entradas_novas = Object.entries(entry).filter(([key,value]) => {
+          let existente = entradas_editadas.find(([key_e, value_e]) => {
+            return key_e === key;
+          })
+          return existente === undefined;
+        })
+
+        for (var i = 0; i < entradas_novas.length; i++) {
+          entradas_editadas.push(entradas_novas[i])
+        }
+
+        let obj_editado = Object.fromEntries(entradas_editadas);
+
+        let edited_entry = await db.update_entry(obj_editado).catch(err => console.error(err));
+
+        return edited_entry
+
+      }else {
+        let new_entry = await db.register_entry(entry).catch(err => logger.error(err));
+        return new_entry;
+      }
+
+
+
     })
   )
 

@@ -1,4 +1,3 @@
-const default_controller = require('./defaultController')
 const date_utils = require('../utils/dateUtils')
 const corretora_controller = require('../../corretoras/controller')
 

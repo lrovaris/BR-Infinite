@@ -23,7 +23,14 @@ const {
   get_corretora_yearly_compare
 } = require("./controllers/reportController")
 
-const { get_entries } = require ("./controllers/defaultController")
+const {
+  get_production_dates,
+  register_production_date
+} = require("./controllers/dateController")
+
+const {
+  get_entries
+} = require ("./controllers/defaultController")
 
 module.exports = {
   get_entries,
@@ -44,5 +51,7 @@ module.exports = {
   get_corretora_yearly_report,
   get_corretora_daily_compare,
   get_corretora_monthly_compare,
-  get_corretora_yearly_compare
+  get_corretora_yearly_compare,
+  get_production_dates,
+  register_production_date
 };

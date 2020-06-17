@@ -22,6 +22,14 @@ router.get ('/birthday', async (req,res) => {
   res.status(200).json(colab_list);
 });
 
+router.post ('/birthday', async (req,res) => {
+  let req_month = req.body.month
+
+  let colab_list = await controller.get_colaboradores_by_birthday(req_month);
+
+  res.status(200).json(colab_list);
+});
+
 router.get ('/:id', async (req,res) => {
   to_send = await controller.get_colaboradores_by_id(req.params.id);
 

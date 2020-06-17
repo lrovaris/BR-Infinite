@@ -147,6 +147,8 @@ router.post('/dates/new', async(req,res) => {
   return res.status(200).json({ message: "Data de produção cadastrada com sucesso!", date: db_date })
 })
 
+router.post('/dates/:id/edit')
+
 // Relatórios e comparações
 
 router.get ('/seguradoras/home_report', async (req,res) => {

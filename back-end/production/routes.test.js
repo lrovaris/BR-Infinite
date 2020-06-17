@@ -348,7 +348,7 @@ describe('Production Routes', () => {
       dayNumber: 21
     })
 
-    console.log(JSON.stringify(new_request.body, null, 1));
+    // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.statusCode).toEqual(200)
   })

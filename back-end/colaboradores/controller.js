@@ -15,10 +15,17 @@ async function get_colaboradores_by_id(colab_id) {
   return colaborador;
 }
 
-async function get_colaboradores_by_birthday(){
+async function get_colaboradores_by_birthday(req_month){
   let all_colab = await get_colaboradores();
 
-  let current_month = (new Date().getMonth() + 1);
+  let current_month;
+
+  if(req_month === undefined){
+    current_month = (new Date().getMonth() + 1);
+  }
+  else {
+    current_month = req_month
+  }
 
   let this_month_birthday_colabs = all_colab.filter(this_colab => {
     return getDateInfoFromString(this_colab.birthday).month === current_month

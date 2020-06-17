@@ -74,4 +74,22 @@ describe('colaboradores Routes', () => {
     expect(res.statusCode).toEqual(200);
   })
 
+  it('deveria retornar uma lista com os aniversariantes do mês de novembro', async () => {
+    let new_colab = await request(app).post('/colaboradores/new').send({
+      name:"rapazin",
+      telephone:"999999999",
+      email:"email@legal.com",
+      birthday: `1521-11-12`,
+      job:"QA"
+    })
+
+    const res = await request(app).post(`/colaboradores/birthday`).send({
+      month: 11
+    })
+
+    // console.log(JSON.stringify(res.body));
+
+    expect(res.statusCode).toEqual(200);
+  })
+
 })

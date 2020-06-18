@@ -9,12 +9,34 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-4">
-          <div  class="card" style="padding: 1rem; max-height: 500px; overflow: scroll">
+        <div class="col-sm-5">
+          <div  class="card" style="padding: 1rem; max-height: 500px; overflow: hidden">
             <div class="row">
               <div class="col-sm-12">
                 <h4>Aniversariantes do mês</h4>
               </div>
+            </div>
+            <div class="row">
+             <div class="col-sm-12">
+               <div class="form-group">
+                 <label for="issueinput7">Selecione o Mês</label>
+                 <select  id="issueinput7"  class="form-control border-primary" data-toggle="tooltip" data-trigger="hover"
+                          data-placement="top" data-title="Priority" (change)="selectNewMonth()" [(ngModel)]="mesSelected" [ngModelOptions]="{standAlone: true}">
+                   <option value="1" >Janeiro</option>
+                   <option value="2" >Fevereiro</option>
+                   <option value="3" >Março</option>
+                   <option value="4" >Abril</option>
+                   <option value="5" >Maio</option>
+                   <option value="6" >Junho</option>
+                   <option value="7" >Julho</option>
+                   <option value="8" >Agosto</option>
+                   <option value="9" >Setembro</option>
+                   <option value="10" >Outubro</option>
+                   <option value="11" >Novembro</option>
+                   <option value="12" >Dezembro</option>
+                 </select>
+               </div>
+             </div>
             </div>
             <div class="row">
               <div class="col-sm-12">
@@ -23,6 +45,7 @@
                   <tr>
                     <th>Nome</th>
                     <th>Aniversário</th>
+                    <th>Local de Trabalho</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -30,6 +53,8 @@
 
                     <td>{{aniversariante.name}}</td>
                     <td>{{aniversariante.birthday}}</td>
+                    <td *ngIf="aniversariante.seguradora != ''">{{aniversariante.seguradora}}</td>
+                    <td *ngIf="aniversariante.corretora != ''">{{aniversariante.corretora}}</td>
 
                   </tr>
                   </tbody>
@@ -38,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-7">
           <div  class="card" style="padding: 1rem; max-height: 500px; overflow: scroll">
             <div class="row">
               <div class="col-sm-12">

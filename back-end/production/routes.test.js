@@ -57,11 +57,17 @@ describe('Production Routes', () => {
       date: "15/05/2020"
     })
 
+    await request(app).post('/production/new').send({
+      seguradora: seguradora_id,
+      path: my_csv_path,
+      date: "16/05/2020"
+    })
+
     expect(entry_request.statusCode).toEqual(200)
 
     let all_entries = await controller.get_entries();
 
-    expect(all_entries.length).toEqual(9)
+    expect(all_entries.length).toEqual(18)
   })
 
   it('deveria retornar um array com a produção de todas as corretoras de uma seguradora', async () => {
@@ -119,6 +125,18 @@ describe('Production Routes', () => {
 
     expect(new_request.statusCode).toEqual(200)
   })
+
+  it('(CSV) relatório diário da seguradora', async () => {
+    let new_request = await request(app).post(`/production/seguradoras/${seguradora_id}/report/daily/csv`).send({
+      month: 5,
+      year: 2020
+    })
+
+    // console.log(JSON.stringify(new_request.body));
+
+    expect(new_request.statusCode).toEqual(200)
+  })
+
 
   it('relatório mensal da seguradora', async () => {
     let new_seg = await request(app).post('/seguradoras/new').send({

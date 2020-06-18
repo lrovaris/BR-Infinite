@@ -4,8 +4,26 @@ const routes = require('./routes');
 const db = require('../db');
 const controller = require('./controller')
 
+let corr_id;
+
 describe('Corretoras Routes', () => {
+
   it('deveria criar uma corretora nova com um gerente', async () => {
+    const seg_request = await request(app).post('/seguradoras/new').send({
+      seguradora: {
+        name:"segurateste"
+      },
+      manager: {
+        name:"afonso colaborante",
+        telephone:"999219075",
+        email:"colaborador@legal.com",
+        birthday: "2020-05-01",
+        job:"testar paradas"
+      }
+    })
+
+    expect(seg_request.status).toEqual(200)
+
     const res = await request(app).post('/corretoras/new').send({
       corretora: {
         name:"corretinha",
@@ -13,7 +31,7 @@ describe('Corretoras Routes', () => {
         telephone:"5",
         email:"contato@corretinha.com.br",
         address:"lugar desconhecido",
-        seguradoras:[1,2,3]
+        seguradoras:[ seg_request.body.seguradora._id ]
       },
       manager: {
         name:"afonso colaborante",
@@ -26,9 +44,10 @@ describe('Corretoras Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
+    corr_id = res.body.corretora._id;
+
     expect(res.body.message).toEqual("Corretora e gerente cadastrados com sucesso!");
   })
-
 
   it('deveria pegar o nome da corretora do banco de dados e modificar', async () => {
 
@@ -90,6 +109,14 @@ describe('Corretoras Routes', () => {
 
     expect(edit.body.message).toEqual("Apelido em uso");
     expect(edit.status).toEqual(400);
+  })
+
+  it('deveria gerar o csv de uma corretora individual', async() => {
+    const new_request = await request(app).get(`/corretoras/${corr_id}/csv`)
+
+    console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
   })
 
 })

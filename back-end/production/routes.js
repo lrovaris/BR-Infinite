@@ -167,6 +167,45 @@ router.get ('/seguradoras/:id', async (req,res) => {
   });
 });
 
+router.post ('/seguradoras/:id/report/daily/csv', async (req,res) => {
+  let seg_id = req.params.id;
+
+  if(seg_id === undefined){
+    return res.status(400).json({
+      message: "Seguradora inválida"
+    })
+  }
+
+  let year = req.body.year;
+
+  if(year === undefined){
+    return res.status(400).json({
+      message: "Ano inválido"
+    })
+  }
+
+  year = Number(year.toString());
+
+  let month = req.body.month;
+
+  if(month === undefined){
+    return res.status(400).json({
+      message: "Mês inválido"
+    })
+  }
+
+  month = Number(month.toString())
+
+  controller.get_seguradora_daily_report_csv(req.params.id, year, month, (response) =>{
+    if(response.valid){
+      res.download(`./relatorios/${response.path}`);
+    }else {
+      res.status(500).json({message: "Ocorreu um erro interno do servidor"})
+    }
+  });
+});
+
+
 router.post ('/seguradoras/:id/report/daily', async (req,res) => {
   let seg_id = req.params.id;
 

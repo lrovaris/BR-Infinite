@@ -4,7 +4,7 @@ const corretora_controller = require('../../../corretoras/controller')
 const seguradora_controller = require('../../../seguradoras/controller')
 const date_prod_controller = require('../dateController')
 
-const { get_seguradora_daily_report } = require('./seguradoraReport/seguradoraDailyReport');
+const { get_seguradora_daily_report, get_seguradora_daily_report_csv } = require('./seguradoraReport/seguradoraDailyReport');
 const { get_seguradora_monthly_report } = require('./seguradoraReport/seguradoraMonthlyReport');
 const { get_seguradora_yearly_report } = require('./seguradoraReport/seguradoraYearlyReport');
 
@@ -86,6 +86,7 @@ async function get_seguradora_home_reports(){
 
 module.exports = {
   get_seguradora_daily_report,
+  get_seguradora_daily_report_csv,
   get_seguradora_monthly_report,
   get_seguradora_yearly_report,
   get_seguradora_home_reports

@@ -12,11 +12,25 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
+router.get('/all/csv', async(req,res) => {
+  controller.get_all_corretoras_csv((response) => {
+
+    res.download(`relatorios/${response.path}`)
+  })
+})
+
 router.get ('/all', async (req,res) => {
   let all_corretoras = await controller.get_corretoras();
 
   res.status(200).json(all_corretoras);
 });
+
+router.get('/:id/csv', async(req,res) => {
+  controller.get_corretora_csv(req.params.id, (response) => {
+
+    res.download(`relatorios/${response.path}`)
+  })
+})
 
 router.get('/:id', async(req,res) => {
   let db_corretora = await controller.get_corretora_by_id(req.params.id);

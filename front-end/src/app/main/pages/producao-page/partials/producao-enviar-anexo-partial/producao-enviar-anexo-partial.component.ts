@@ -59,14 +59,17 @@ export class ProducaoEnviarAnexoPartialComponent implements OnInit {
       this.formData.append('docs', files[i]);
     }
     this.producaoService.enviarAnexo(this.formData).subscribe((data: any) => {
-      console.log(data);
+      alert(data.message);
       let producao = {
         path: data.info_files[0].path,
         seguradora: seguradoraId,
         date: this.data
       };
       this.producaoService.postProducao(producao).subscribe((data: any) => {
-       alert(data.message);
+
+        alert(data.message);
+      }, error1 => {
+        alert(error1.error.message)
       })
     })
   }

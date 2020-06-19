@@ -6,6 +6,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ColaboradorService} from "../../../../services/colaborador.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-list-seguradora',
   templateUrl: './list-seguradora.component.html',
@@ -51,4 +53,11 @@ export class ListSeguradoraComponent implements OnInit {
       this.seguradoras = data;
     });
   }
+
+  downloadCsv() {
+    this.seguradoraService.downloadAllCsv().subscribe((data: any) => {
+      saveAs(data, 'seguradoras-report.csv');
+    })
+  }
+
 }

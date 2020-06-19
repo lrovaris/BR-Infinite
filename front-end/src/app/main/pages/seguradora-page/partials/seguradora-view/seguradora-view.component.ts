@@ -3,8 +3,7 @@ import domtoimage from 'dom-to-image';
 import * as jsPDF from 'jspdf';
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {Router} from "@angular/router";
-import {delay} from "rxjs/operators";
-import {ColaboradorService} from "../../../../services/colaborador.service";
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-seguradora-view',
@@ -63,6 +62,12 @@ export class SeguradoraViewComponent implements OnInit {
       .catch(function(error) {
         // Error Handling
       });
+  }
+
+  downloadCSV() {
+    this.seguradoraService.downloadCsv(this.seguradora._id).subscribe((data: any) => {
+      saveAs(data, `${this.seguradora.name}-report.csv`);
+    })
   }
 
 }

@@ -135,7 +135,6 @@ export class CorretoraViewComponent implements OnInit {
   }
 
   downloadCSV() {
-    console.log('aaaaaaa');
     this.corretoraService.downloadCsv(this.corretora._id).subscribe((data: any) => {
     saveAs(data, `${this.corretora.name}-report.csv`);
       console.log(data);

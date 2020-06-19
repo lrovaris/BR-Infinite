@@ -100,4 +100,13 @@ export class SeguradoraService {
     return this.http.get(`${this.urlService.getUrl()}/production/seguradoras/home_report`)
   }
 
+  downloadCsv(id){
+    return this.http.get(`${this.url}/seguradoras/${id}/csv`, {responseType: 'blob'})
+  }
+
+  downloadAllCsv() {
+    return this.http.get(`${this.url}/seguradoras/all/csv`, {responseType: 'blob'})
+  }
+
+
 }

@@ -5798,6 +5798,10 @@ export class CorretoraPageComponent implements OnInit {
   formData: any = new FormData();
   apelidos = [];
 
+  thinking: any = false;
+
+  selectableSeguradoras = [];
+
   constructor(
     private formbuilder: FormBuilder,
     public colaboradorService: ColaboradorService,
@@ -5841,6 +5845,7 @@ export class CorretoraPageComponent implements OnInit {
 
 
       this.allSeguradoras = data;
+      this.selectableSeguradoras = data;
 
       if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
         this.isEdit = true;
@@ -5867,14 +5872,10 @@ export class CorretoraPageComponent implements OnInit {
 
         console.log(this.seguradorasTable);
 
+        this.filterSelectableSeguradoras();
+
       }
     });
-
-
-
-
-
-
   }
 
 
@@ -6058,16 +6059,39 @@ export class CorretoraPageComponent implements OnInit {
     this.router.navigate(['corretora'])
   }
 
+
+  filterSelectableSeguradoras(){
+    let seg_id_list = this.seguradorasTable.map(seg => seg._id.toString());
+
+    this.selectableSeguradoras = this.allSeguradoras.filter(seg => {
+      return !seg_id_list.includes(seg._id.toString());
+    });
+
+    this.thinking = false;
+  }
+
   addSeguradora(seguradora) {
+    if(this.thinking === true){
+      return
+    }
+
+    if(seguradora === '' || seguradora === undefined){
+      return
+    }
+
+    this.thinking = true;
+
     this.seguradoraService.getSeguradora(seguradora).subscribe((data: any) => {
       this.seguradorasTable.push(data);
+      this.seguradoras.push(seguradora)
+      this.filterSelectableSeguradoras();
     });
-    this.seguradoras.push(seguradora)
   }
 
   removeSeguradora(seguradora) {
     let index = this.seguradorasTable.indexOf(seguradora);
     if (index !== -1) this.seguradorasTable.splice(index, 1);
+    this.filterSelectableSeguradoras();
   }
 
 

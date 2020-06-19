@@ -114,7 +114,15 @@ describe('Corretoras Routes', () => {
   it('deveria gerar o csv de uma corretora individual', async() => {
     const new_request = await request(app).get(`/corretoras/${corr_id}/csv`)
 
-    console.log(JSON.stringify(new_request.body, null, 1));
+    // console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
+  })
+
+  it('deveria gerar o csv de todas as corretoras', async() => {
+    const new_request = await request(app).get(`/corretoras/all/csv`)
+
+    // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.status).toEqual(200);
   })

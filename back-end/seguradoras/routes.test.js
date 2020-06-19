@@ -3,6 +3,8 @@ const app = require('../server')
 const routes = require('./routes');
 const controller = require('./controller')
 
+let seg_test_id;
+
 describe('Seguradoras Routes', () => {
 
   it('deveria falhar em criar uma seguradora nova', async () => {
@@ -14,6 +16,8 @@ describe('Seguradoras Routes', () => {
         address:"lugar desconhecido"
       }
     })
+
+
 
     expect(res.statusCode).toEqual(400)
 
@@ -63,6 +67,8 @@ describe('Seguradoras Routes', () => {
 
     expect(res.statusCode).toEqual(200)
 
+    seg_test_id = res.body.seguradora._id
+
     expect(res.body.message).toEqual("Seguradora e gerente cadastrados com sucesso!");
   })
 
@@ -104,6 +110,20 @@ describe('Seguradoras Routes', () => {
 
     expect(res.body.manager.name).toEqual("afonso colaborante");
 
+  })
+
+  it('deveria gerar o csv de uma seguradora individual', async() => {
+    const new_request = await request(app).get(`/seguradoras/${seg_test_id}/csv`)
+
+    console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
+  })
+
+  it('deveria gerar o csv de todas as seguradoras', async() => {
+    const new_request = await request(app).get(`/seguradoras/all/csv`)
+
+    expect(new_request.status).toEqual(200);
   })
 
 })

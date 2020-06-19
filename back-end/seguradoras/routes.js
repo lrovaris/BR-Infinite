@@ -11,11 +11,25 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
+router.get ('/all/csv', async (req,res) => {
+  controller.get_all_seguradoras_csv((response) => {
+
+    res.download(`relatorios/${response.path}`)
+  })
+});
+
 router.get ('/all', async (req,res) => {
   let all_seguradoras = await controller.get_seguradoras();
 
   res.status(200).json(all_seguradoras);
 });
+
+router.get('/:id/csv', async(req,res) => {
+  controller.get_seguradora_csv(req.params.id, (response) => {
+
+    res.download(`relatorios/${response.path}`)
+  })
+})
 
 router.get ('/:id', async (req,res) => {
   let this_seg = await controller.get_seguradora_by_id(req.params.id);

@@ -76,7 +76,13 @@ export class CorretoraService {
     this.router.navigate(['corretora/visualizacao'])
   }
 
+  downloadCsv(id){
+    return this.http.get(`${this.url}/corretoras/${id}/csv`, {responseType: 'blob'})
+  }
 
+  downloadAllCsv() {
+    return this.http.get(`${this.url}/corretoras/all/csv`, {responseType: 'blob'})
+  }
 
 
   constructor(private http: HttpClient, private router: Router) { }

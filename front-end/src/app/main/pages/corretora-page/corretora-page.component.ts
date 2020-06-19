@@ -7,6 +7,8 @@ import {Router} from "@angular/router";
 import {CorretoraService} from "../../services/corretora.service";
 import {SeguradoraService} from "../../services/seguradora.service";
 
+
+
 const estados = [];
 const Estados = [
   {
@@ -6085,6 +6087,7 @@ export class CorretoraPageComponent implements OnInit {
       map(term => term === '' ? []
         : this.cidades.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     );
+
 
 
 

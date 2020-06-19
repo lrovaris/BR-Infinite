@@ -54,6 +54,34 @@
       <div class="col-sm-2" style="padding: 2rem">
         <button class="btn btn-header" type="submit" (click)="logForm()"><a>Salvar</a></button>
       </div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>ano</th>
+                      <th>mes</th>
+                      <th>Dias Uteis</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let data of allDiasUteis">
+                      <th>{{data.year}}</th>
+                      <td>{{data.month}}</td>
+                      <td>{{data.dayNumber}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

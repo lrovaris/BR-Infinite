@@ -90,9 +90,9 @@ export class ProdutosPageComponent implements OnInit {
   }
 
   addSeguradora(seg){
-    let seguradora = this.allSeguradoras.find(seg_obj => seg_obj._id.toString() === seg.toString())
+    let seguradora = this.allSeguradoras.find(seg_obj => seg_obj._id.toString() === seg.toString());
 
-    this.seguradorasTable.push(seguradora)
+    this.seguradorasTable.push(seguradora);
 
     this.filterSelectableSeguradoras();
   }

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { CorretoraService } from "../../../../services/corretora.service";
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {ColaboradorService} from "../../../../services/colaborador.service";
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-list-corretora',
@@ -55,6 +56,10 @@ export class ListCorretoraComponent implements OnInit {
     });
   }
 
-
+  downloadCsv() {
+    this.corretoraService.downloadAllCsv().subscribe((data: any) => {
+      saveAs(data, 'corretoras-report.csv');
+    })
+  }
 
 }

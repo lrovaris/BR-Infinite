@@ -11,6 +11,8 @@ export class ConfiguracaoPageComponent implements OnInit {
 
   diasUteis: FormGroup;
 
+  allDiasUteis = [];
+
   constructor( private formbuilder: FormBuilder, private diasUteisService: DiasUteisService) {
     this.diasUteis = this.formbuilder.group({
       year: [null],
@@ -30,6 +32,12 @@ export class ConfiguracaoPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.diasUteisService.getDiasUteisMes().subscribe((data: any) => {
+      this.allDiasUteis = data;
+      console.log(data);
+    })
+
   }
 
 }

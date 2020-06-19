@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ColaboradorService} from "../../services/colaborador.service";
-import {SeguradoraService} from "../../services/seguradora.service";
-import {date} from "ng2-validation/dist/date";
+import { ColaboradorService} from "../../services/colaborador.service";
+import { SeguradoraService} from "../../services/seguradora.service";
+import { CorretoraService} from "../../services/corretora.service";
 
 @Component({
   selector: 'app-home-page',
@@ -16,24 +16,62 @@ export class HomePageComponent implements OnInit {
 
   producaoSeguradoras = [];
 
-  constructor(private colaboradorService: ColaboradorService, private seguradoraService: SeguradoraService) { }
+  seguradoras = [];
+  corretoras = [];
+
+  constructor(private colaboradorService: ColaboradorService, private seguradoraService: SeguradoraService, private corretoraService: CorretoraService) { }
 
   ngOnInit() {
 
+
+    this.seguradoraService.getAllSeguradoras().subscribe((data: any) => {
+      this.seguradoras = data;
+    });
+    this.corretoraService.getAllCorretoras().subscribe((data: any) => {
+      this.corretoras = data;
+    });
+
+
+
     this.mesSelected = new Date().getMonth() + 1;
 
-   this.colaboradorService.getBirthDays().subscribe((data: any) => {
+    this.colaboradorService.getBirthDays().subscribe((data: any) => {
 
       this.aniversariantesDoMes = data;
       this.aniversariantesDoMes = this.aniversariantesDoMes.map(aniversariante => {
       aniversariante.birthday =  this.FormataStringData(aniversariante.birthday);
         return aniversariante;
       })
+
+
+      this.aniversariantesDoMes = this.aniversariantesDoMes.map(aniversariante => {
+
+        let seg = this.seguradoras.find(seg_obj => aniversariante.seguradora.toString() === seg_obj._id.toString());
+        let cor = this.corretoras.find(cor_obj => aniversariante.seguradora.toString() === cor_obj._id.toString());
+
+        if (seg != undefined) {
+          return {
+            name: aniversariante.name,
+            birthday: aniversariante.birthday,
+            seguradora: seg.name
+          }
+        } else if (cor != undefined) {
+          return {
+            name: aniversariante.name,
+            birthday: aniversariante.birthday,
+            corretora: cor.name
+          }
+        } else {
+          return
+        }
+
+      });
+
+
     });
 
     this.seguradoraService.getProducaoHomePage().subscribe((data: any) => {
       this.producaoSeguradoras = data.report.report;
-      console.log(this.producaoSeguradoras);
     })
 
   }
@@ -54,7 +92,6 @@ export class HomePageComponent implements OnInit {
   selectNewMonth() {
      setTimeout(()=> {
        this.colaboradorService.getBirthDaysMonth(this.mesSelected).subscribe((data: any) => {
-         console.log(data);
          this.aniversariantesDoMes = data;
          this.aniversariantesDoMes = this.aniversariantesDoMes.map(aniversariante => {
            aniversariante.birthday =  this.FormataStringData(aniversariante.birthday);

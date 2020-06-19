@@ -263,7 +263,7 @@
                     </div>
                   </div>
                   <!--<div class="row">
-                    <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of allSeguradoras">
+                    <div class="col-xl-3 col-lg-3 col-6" *ngFor="let seguradora of selectableSeguradoras">
                     &lt;!&ndash; TODO:CHANGE&ndash;&gt;  <app-seguradora-card-partial [seguradora]="seguradora" [nome]="seguradora.name"></app-seguradora-card-partial>
                     </div>
                   </div>-->
@@ -274,7 +274,7 @@
                     <fieldset class="form-group">
                       <label for="seguradora">Seguradora</label>
                       <select #seguradoraSelect class="form-control border-primary" id="seguradora">
-                        <option [value]="seguradora._id" *ngFor="let seguradora of allSeguradoras">{{seguradora.name}}</option>
+                        <option [value]="seguradora._id" *ngFor="let seguradora of selectableSeguradoras">{{seguradora.name}}</option>
                       </select>
                     </fieldset>
                   </div>

@@ -23,7 +23,10 @@ export class ConfiguracaoPageComponent implements OnInit {
 
   onSubmit() {
     this.diasUteisService.postDiasUteisMes(this.diasUteis.value).subscribe((data: any) => {
-      console.log(data);
+      this.allDiasUteis.push(data.date);
+      alert(data.message);
+    }, error1 => {
+      alert(error1.error.message)
     })
   }
 

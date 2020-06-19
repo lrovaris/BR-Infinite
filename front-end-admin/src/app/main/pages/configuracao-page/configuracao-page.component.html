@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="ano">ano</label>
-                        <input formControlName="year" type="text" id="ano" class="form-control" name="year">
+                        <input #yearInput formControlName="year" type="text" id="ano" class="form-control" name="year">
                       </div>
                     </div>
                   </div>
@@ -41,7 +41,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label for="ano">Dias Úteis no Mês</label>
-                        <input formControlName="dayNumber" type="text" id="dias" class="form-control" name="dayNumber">
+                        <input #dayNumberInput formControlName="dayNumber" type="text" id="dias" class="form-control" name="dayNumber">
                       </div>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="col-sm-2" style="padding: 2rem">
-        <button class="btn btn-header" type="submit" (click)="logForm()"><a>Salvar</a></button>
+        <button class="btn btn-header" type="submit" (click)="logForm(); dayNumberInput.value = ''; yearInput.value = ''"><a>Salvar</a></button>
       </div>
       <div class="col-sm-4">
         <div class="row">

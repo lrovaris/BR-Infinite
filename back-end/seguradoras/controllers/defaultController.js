@@ -20,6 +20,22 @@ async function get_seguradoras_by_id_array(seg_ids){
   let all_seg = await get_seguradoras();
 
   let resp = all_seg.filter(seg_obj =>{
+    if(seg_obj === undefined){
+      return false
+    }
+
+    if(!seg_obj._id){
+      return false
+    }
+
+    if(seg_obj._id === undefined){
+      return false
+    }
+
+    if(seg_ids === undefined){
+      return false
+    }
+
     return (seg_ids.includes(seg_obj._id.toString()))
   });
 

@@ -5798,7 +5798,7 @@ export class CorretoraPageComponent implements OnInit {
   formData: any = new FormData();
   apelidos = [];
 
-  thinking:bool = false;
+  thinking: any = false;
 
   selectableSeguradoras = [];
 

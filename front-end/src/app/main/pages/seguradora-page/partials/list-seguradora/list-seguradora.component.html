@@ -17,7 +17,24 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="filterInput">Fltro</label>
+                    <input #filterInput id="filterInput" type="text" class="form-control border-primary">
+                  </div>
+                  <div class="col-sm-3">
+                    <fieldset class="form-group">
+                      <label for="filterSelect">Selecione o campo de filtro</label>
+                      <select  #filterSelect class="form-control border-primary" id="filterSelect">
+                        <option value="name" >Nome</option>
+                        <option value="address">Endereço</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-sm-2">
+                    <button (click)="filter(filterInput.value, filterSelect.value)" style="margin-top: 1.8rem;" type="button" class="btn btn-header float-left border-primary">Filtrar</button>
+                  </div>
+                </div>
               </div>
               <div class="card-content">
                 <div class="card-body">

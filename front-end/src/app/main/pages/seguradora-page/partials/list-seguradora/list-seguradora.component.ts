@@ -60,4 +60,8 @@ export class ListSeguradoraComponent implements OnInit {
     })
   }
 
+  filter(name,filter) {
+    console.log(name,filter)
+  }
+
 }

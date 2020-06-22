@@ -108,5 +108,6 @@ export class SeguradoraService {
     return this.http.get(`${this.url}/seguradoras/all/csv`, {responseType: 'blob'})
   }
 
+  
 
 }

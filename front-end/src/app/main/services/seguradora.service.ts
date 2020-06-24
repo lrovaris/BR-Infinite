@@ -104,14 +104,13 @@ export class SeguradoraService {
     return this.http.get(`${this.url}/seguradoras/${id}/csv`, {responseType: 'blob'})
   }
 
-  downloadAllCsv() {
-    return this.http.get(`${this.url}/seguradoras/all/csv`, {responseType: 'blob'})
+  downloadAllCsv(filters) {
+    return this.http.post(`${this.url}/seguradoras/all/csv`, filters,{responseType: 'blob'})
   }
 
   filterSeguradoraList(filters) {
 
       return this.http.post(`${this.url}/seguradoras/filter`, {filters})
-
   }
 
 }

@@ -80,8 +80,8 @@ export class CorretoraService {
     return this.http.get(`${this.url}/corretoras/${id}/csv`, {responseType: 'blob'})
   }
 
-  downloadAllCsv() {
-    return this.http.get(`${this.url}/corretoras/all/csv`, {responseType: 'blob'})
+  downloadAllCsv(filters) {
+    return this.http.post(`${this.url}/corretoras/all/csv`,filters, {responseType: 'blob'})
   }
 
   filterCorretoraList(filters) {

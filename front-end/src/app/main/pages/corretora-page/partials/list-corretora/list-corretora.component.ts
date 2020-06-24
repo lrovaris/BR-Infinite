@@ -58,7 +58,7 @@ export class ListCorretoraComponent implements OnInit {
   }
 
   downloadCsv() {
-    this.corretoraService.downloadAllCsv().subscribe((data: any) => {
+    this.corretoraService.downloadAllCsv(this.filterArray).subscribe((data: any) => {
       saveAs(data, 'corretoras-report.csv');
     })
   }

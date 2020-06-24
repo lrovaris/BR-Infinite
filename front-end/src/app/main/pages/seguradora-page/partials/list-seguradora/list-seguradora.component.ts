@@ -57,7 +57,7 @@ export class ListSeguradoraComponent implements OnInit {
   }
 
   downloadCsv() {
-    this.seguradoraService.downloadAllCsv().subscribe((data: any) => {
+    this.seguradoraService.downloadAllCsv(this.filterArray).subscribe((data: any) => {
       saveAs(data, 'seguradoras-report.csv');
     })
   }

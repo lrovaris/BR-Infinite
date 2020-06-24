@@ -15,6 +15,22 @@ router.get ('/all', async (req,res) => {
   res.status(200).json(all_produtos);
 });
 
+router.post('/filter', async (req,res) => {
+  const filter_params = req.body.filters;
+
+  if(filter_params === undefined){
+    return res.status(400).json({ message: "Filtros inválidos" })
+  }
+
+  let filter_produtos = await controller.get_filtered_produtos(filter_params)
+
+  if(filter_produtos.valid){
+    return res.status(200).json(filter_produtos.data)
+  } else {
+    return res.status(400).json({ message: filter_produtos.message })
+  }
+})
+
 router.get('/:id', async(req,res)=>{
   to_send = await controller.get_produto_by_id(req.params.id);
 

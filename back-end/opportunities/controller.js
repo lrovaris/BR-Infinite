@@ -5,20 +5,13 @@ const product_controller = require('../products/controller')
 const seguradora_controller = require('../seguradoras/controller')
 let cache = require('../memoryCache');
 
+const { formatToResponse } = require('./controllers/responseController');
+const { get_filtered_opportunities } = require('./controllers/filterController')
+const {
+  get_opportunities,
+  get_opportunity_by_id
+} = require ('./controllers/defaultController')
 
-async function get_opportunities() {
-  return cache.get('opportunities') || await db.get_opportunities();
-}
-
-async function get_opportunity_by_id(opp_id) {
-  let all_opp = await get_opportunities();
-
-  let opportunity = all_opp.find(opp_obj =>{
-    return (opp_obj._id.toString() == opp_id.toString());
-  });
-
-  return opportunity;
-}
 
 async function validate_opportunity(opportunity) {
   if (opportunity === undefined){
@@ -190,4 +183,11 @@ async function validate_opportunity(opportunity) {
   return {"valid":true};
 }
 
-module.exports = { get_opportunities, get_opportunity_by_id, validate_opportunity };
+
+module.exports = {
+  get_opportunities,
+  get_opportunity_by_id,
+  validate_opportunity,
+  get_filtered_opportunities,
+  formatToResponse
+};

@@ -4,7 +4,8 @@ const {
   register_corretora,
   validate_corretora,
   get_corretora_by_nickname,
-  get_corretoras_by_seguradora
+  get_corretoras_by_seguradora,
+  get_filtered_corretoras
 } = require("./controllers/defaultController")
 
 const {
@@ -20,5 +21,6 @@ module.exports = {
   get_corretora_by_nickname,
   get_corretoras_by_seguradora,
   get_corretora_csv,
-  get_all_corretoras_csv
+  get_all_corretoras_csv,
+  get_filtered_corretoras
 };

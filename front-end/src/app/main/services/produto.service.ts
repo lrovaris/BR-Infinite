@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { UrlService  } from "./utils/url.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
 
-  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000
+  constructor(private http: HttpClient, private router: Router, private urlService: UrlService) {}
+
+  url = this.urlService.getUrl();
+
   produto: any;
   isEdit = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
 
   saveProductInfo(produto) {
     this.produto = produto;

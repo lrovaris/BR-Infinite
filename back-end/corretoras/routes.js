@@ -12,8 +12,14 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
-router.get('/all/csv', async(req,res) => {
-  controller.get_all_corretoras_csv((response) => {
+router.post('/all/csv', async(req,res) => {
+  let filters = req.body.filters
+
+  if(filters === undefined){
+    filters = [];
+  }
+
+  controller.get_all_corretoras_csv(filters, (response) => {
 
     res.download(`relatorios/${response.path}`)
   })
@@ -24,6 +30,22 @@ router.get ('/all', async (req,res) => {
 
   res.status(200).json(all_corretoras);
 });
+
+router.post('/filter', async (req,res) => {
+  const filter_params = req.body.filters;
+
+  if(filter_params === undefined){
+    return res.status(400).json({ message: "Filtros inválidos" })
+  }
+
+  let filter_corretoras = await controller.get_filtered_corretoras(filter_params)
+
+  if(filter_corretoras.valid){
+    return res.status(200).json(filter_corretoras.data)
+  } else {
+    return res.status(400).json({ message: filter_corretoras.message })
+  }
+})
 
 router.get('/:id/csv', async(req,res) => {
   controller.get_corretora_csv(req.params.id, (response) => {

@@ -4,13 +4,17 @@ import { Subject, throwError} from "rxjs";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router} from "@angular/router";
 import { catchError, retry} from "rxjs/operators";
+import { UrlService  } from "./utils/url.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  url = 'http://162.214.89.17:3000/'; // 162.214.89.17:3000/
+  constructor(private http: HttpClient, private router: Router, private urlService: UrlService) { }
+
+  url = this.urlService.getUrl();
+
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;
@@ -41,7 +45,7 @@ export class LoginService {
   };
   id = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+
 
   cadastro(newUser) {
     const options = {
@@ -98,7 +102,7 @@ export class LoginService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     };
     this.http
-      .post<{token: string, message: string}>(this.url+"users/login",
+      .post<{token: string, message: string}>(this.url+"/users/login",
         authData, options
       )
       .subscribe(response => {
@@ -123,7 +127,7 @@ export class LoginService {
   }
 
   getUsers() {
-    return this.http.get(`${this.url}users/all`).pipe(
+    return this.http.get(`${this.url}/users/all`).pipe(
       retry(2),
       catchError( (err: any) => {
         console.log(err.error.message);

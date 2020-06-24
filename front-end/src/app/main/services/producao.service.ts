@@ -7,9 +7,9 @@ import {UrlService} from "./utils/url.service";
 })
 export class ProducaoService {
 
-  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
-
   constructor(private http: HttpClient, private urlService: UrlService) { }
+
+  url = this.urlService.getUrl();
 
   enviarAnexo(file) {
     return this.http.post(`${this.url}/production/upload`, file);

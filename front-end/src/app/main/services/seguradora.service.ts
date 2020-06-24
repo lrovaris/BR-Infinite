@@ -9,7 +9,7 @@ import {UrlService} from "./utils/url.service";
 export class SeguradoraService {
 
   seguradoraInfo: any;
-  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000
+  url = this.urlService.getUrl();
   telefones = [];
   seguradoras = [];
   seguradoraInfoWithOutFormGroup: any;

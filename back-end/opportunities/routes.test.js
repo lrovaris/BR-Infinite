@@ -75,7 +75,7 @@ describe('Rotas das oportunidades', () => {
       colaborador: dummy_colab._id,
       proponente: "true",
       product: dummy_prod._id,
-      description: "descricao do negocio",
+      description: "sem desc",
       dealType: "renovacao",
       congenereRenewal: "concorrente safado",
       vigencia: "06-06-06",
@@ -140,6 +140,21 @@ describe('Rotas das oportunidades', () => {
     });
 
       expect(oportunidade2.dealType).toEqual("nova opp");
+  })
+
+  it('filtros pipeline', async() => {
+    const new_request = await request(app).post(`/opportunities/filter`).send({
+      filters:[
+        {
+          type:"vigenciaAfter",
+          value:"05-04-2020"
+        }
+      ]
+    })
+
+    // console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
   })
 
 })

@@ -1,12 +1,12 @@
 const fs = require('fs');
 const csv = require('fast-csv');
 
-const seguradora_controller = require("../../seguradoras/controller")
 const colaborador_controller = require('../../colaboradores/controller');
 
-const { get_seguradora_by_id, get_seguradoras } = require("./defaultController")
+const { get_seguradora_by_id, get_filtered_seguradoras } = require("./defaultController")
 
-async function get_all_seguradoras_csv(callback) {
+async function get_all_seguradoras_csv(filters, callback) {
+
 
   let my_csv = [];
 
@@ -19,7 +19,15 @@ async function get_all_seguradoras_csv(callback) {
 
   my_csv.push(csv_header);
 
-  let this_segs = await get_seguradoras();
+  let this_segs = await get_filtered_seguradoras(filters);
+
+  if(!this_segs.valid){
+    this_segs.status = 400
+
+    return callback(this_segs)
+  }else {
+    this_segs = this_segs.data
+  }
 
   for (var i = 0; i < this_segs.length; i++) {
     let this_seg = this_segs[i];
@@ -57,14 +65,16 @@ async function get_all_seguradoras_csv(callback) {
   .write(my_csv, {headers: false})
   .pipe(ws)
   .on('close', () => {
-    callback({
+    return callback({
       valid: true,
       path: `seguradoras.csv`
     })
   })
   .on('error', () => {
-    callback({
-      valid: false
+    return callback({
+      valid: false,
+      status: 500,
+      message: "Erro interno do servidor"
     })
   })
 

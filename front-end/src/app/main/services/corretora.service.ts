@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import { UrlService  } from "./utils/url.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CorretoraService {
 
-  url = 'http://162.214.89.17:3000'; // 162.214.89.17:3000/
+  url =  this.urlService.getUrl()
 
   corretoraInfo: any;
   corretoraInfoWithOutFormGroup: any;
@@ -90,7 +91,7 @@ export class CorretoraService {
 
   }
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private urlService: UrlService) { }
 
 
 }

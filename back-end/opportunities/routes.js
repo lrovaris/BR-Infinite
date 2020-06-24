@@ -7,10 +7,7 @@ const controller = require('./controller')
 const multer  = require('multer')
 const fs = require('fs');
 
-const corretora_controller = require('../corretoras/controller')
-const colaborador_controller = require('../colaboradores/controller')
-const product_controller = require('../products/controller')
-const seguradora_controller = require('../seguradoras/controller')
+
 
 router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
@@ -19,56 +16,9 @@ router.get ('/', (req,res) => {
 router.get ('/all', async (req,res) => {
   let all_opportunities = await controller.get_opportunities();
 
+  let formatted_response = await controller.formatToResponse(all_opportunities)
 
-  let norm_opp = await all_opportunities.flatMap(async(obj) =>{
-    let this_corr = await corretora_controller.get_corretora_by_id(obj.corretora._id || obj.corretora);
-
-    if(this_corr !== undefined){
-      obj.corretora = {
-        name: this_corr.name,
-        _id: this_corr._id
-      }
-    }
-
-
-    let this_seg = await seguradora_controller.get_seguradora_by_id(obj.seguradora._id || obj.seguradora);
-
-    if (this_seg !== undefined){
-      obj.seguradora = {
-        name: this_seg.name,
-        _id: this_seg._id
-      }
-    }
-
-
-    let this_colab = await colaborador_controller.get_colaboradores_by_id(obj.colaborador._id || obj.colaborador);
-
-    if(this_colab !== undefined){
-      obj.colaborador = {
-        name: this_colab.name,
-        _id: this_colab._id
-      }
-    }
-
-
-    let this_prod = await product_controller.get_produto_by_id(obj.product._id || obj.product);
-
-    if(this_prod !== undefined){
-      obj.product = {
-        name: this_prod.name,
-        _id: this_prod._id
-      }
-    }
-
-
-    return obj;
-  })
-
-  // norm_opp = await norm_opp.flatMap(obj => norm_seg(obj))
-
-  const results = await Promise.all(norm_opp);
-
-  res.status(200).json(all_opportunities);
+  res.status(200).json(formatted_response);
 });
 
 router.post('/filter', async (req,res) => {
@@ -81,7 +31,9 @@ router.post('/filter', async (req,res) => {
   let filter_opportunities = await controller.get_filtered_opportunities(filter_params)
 
   if(filter_opportunities.valid){
-    return res.status(200).json(filter_opportunities.data)
+    let formatted_response = await controller.formatToResponse(filter_opportunities.data)
+
+    return res.status(200).json(formatted_response)
   } else {
     return res.status(400).json({ message: filter_opportunities.message })
   }

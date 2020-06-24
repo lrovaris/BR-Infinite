@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class UrlService {
 
-   // url = 'http://162.214.89.17:3000';
-   url = 'http://localhost:3000';
+   url = 'http://162.214.89.17:3000';
+   // url = 'http://localhost:3000';
 
   public getUrl() {
      return this.url;

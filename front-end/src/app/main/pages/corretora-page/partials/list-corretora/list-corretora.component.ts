@@ -14,6 +14,7 @@ export class ListCorretoraComponent implements OnInit {
 
   corretoras = [];
   seguradoras = [];
+  filterArray = [];
 
   constructor(private corretoraService: CorretoraService,
               private router: Router,
@@ -60,6 +61,34 @@ export class ListCorretoraComponent implements OnInit {
     this.corretoraService.downloadAllCsv().subscribe((data: any) => {
       saveAs(data, 'corretoras-report.csv');
     })
+  }
+
+  filter() {
+    this.corretoraService.filterCorretoraList(this.filterArray).subscribe((data: any) => {
+      setTimeout(()=> {
+        console.log(data);
+        this.corretoras = data;
+      })
+    }, error1 => {
+      alert(error1.error.message)
+    });
+
+  }
+
+  pushFilterCard(value, type) {
+    if (value === '') {
+      return;
+    }
+    let filterObj = {
+      value,
+      type
+    };
+    this.filterArray.push(filterObj)
+  }
+
+  removeFilterCard(filterObj) {
+    this.filterArray.splice(this.filterArray.indexOf(filterObj), 1 );
+    this.filter();
   }
 
 }

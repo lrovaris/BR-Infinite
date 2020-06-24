@@ -9,8 +9,10 @@ import {SeguradoraService} from "../../../../services/seguradora.service";
   styleUrls: ['./list-produtos.component.scss']
 })
 export class ListProdutosComponent implements OnInit {
+
   produtos = [];
   seguradoras = [];
+  filterArray = [];
 
   constructor(private produtoService: ProdutoService, private router: Router, private seguradoraService: SeguradoraService) { }
 
@@ -54,6 +56,59 @@ export class ListProdutosComponent implements OnInit {
       });
     });
 
+  }
+
+
+  filter() {
+    this.seguradoraService.filterSeguradoraList(this.filterArray).subscribe((data: any) => {
+      setTimeout(()=> {
+        console.log(data);
+        this.produtos = data;
+        this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
+          this.seguradoras = seg_data;
+
+          this.produtos = this.produtos.map(prod => {
+
+            prod.seguradoras = prod.seguradoras.map(prod_seg => {
+
+              let seg = this.seguradoras.find(seg_obj => prod_seg.toString() === seg_obj._id.toString());
+
+              return {
+                name: seg.name,
+                _id: seg._id,
+                telephone: seg.telephone,
+                email: seg.email
+              }
+            });
+
+            return prod;
+          });
+
+          console.log(this.produtos);
+
+
+        });
+      })
+    }, error1 => {
+      alert(error1.error.message)
+    });
+
+  }
+
+  pushFilterCard(value, type) {
+    if (value === '') {
+      return;
+    }
+    let filterObj = {
+      value,
+      type
+    };
+    this.filterArray.push(filterObj)
+  }
+
+  removeFilterCard(filterObj) {
+    this.filterArray.splice(this.filterArray.indexOf(filterObj), 1 );
+    this.filter();
   }
 
 }

@@ -13,7 +13,15 @@
   border: solid 1px #27416F
 }
 .btn-header:hover a {
-  color: white;
+  color: white !important;
+}
+
+.btn-header:focus  {
+  background-color: #27416F !important;
+}
+
+.btn-header:focus a {
+  color: white !important;
 }
 
 .btn-header-cancel {

@@ -15,6 +15,39 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="filterInput">Fltro</label>
+                    <input #filterInput id="filterInput" type="text" class="form-control border-primary">
+                  </div>
+                  <div class="col-sm-3">
+                    <fieldset class="form-group">
+                      <label for="filterSelect">Selecione o campo de filtro</label>
+                      <select  #filterSelect class="form-control border-primary" id="filterSelect">
+                        <option value="name" >Nome</option>
+                        <option value="address">Endereço</option>
+                        <option value="seguradoras">Seguradora</option>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <div class="col-sm-2">
+                    <button (click)="pushFilterCard(filterInput.value, filterSelect.value); filter(); filterInput.value = ''" style="margin-top: 1.8rem;" class="btn btn-header float-left border-primary"><a>Filtrar</a></button>
+                  </div>
+                </div>
+                <div class="row flex-nowrap" style="max-width: 100%; overflow-x: scroll; overflow-y: hidden">
+                  <div class="col-sm-2" style="max-width: 170px" *ngFor="let filter of filterArray">
+                    <div class="card justify-content-center flex-column" style="height: 40%; background-color: #27416F; color: white" >
+                      <div class="row flex-nowrap" style="padding: 0;">
+                        <div class="col-sm-10">
+                          <a style="margin: 8px">{{filter.value}}</a>
+                        </div>
+                        <div class="col-sm-2">
+                          <i style="margin-top: 4px; font-weight: 600" class="ft-x float-right" (click)="removeFilterCard(filter)"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="card-content">
                 <div class="card-body">

@@ -108,6 +108,10 @@ export class SeguradoraService {
     return this.http.get(`${this.url}/seguradoras/all/csv`, {responseType: 'blob'})
   }
 
-  
+  filterSeguradoraList(filters) {
+
+      return this.http.post(`${this.url}/seguradoras/filter`, {filters})
+
+  }
 
 }

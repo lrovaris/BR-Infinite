@@ -65,5 +65,14 @@ export class PipelineService {
   }
 
 
+  filterPipelineList(filters) {
+
+    console.log(filters);
+
+    return this.http.post(`${this.url}/opportunities/filter`, {filters})
+
+  }
+
+
   constructor(private http: HttpClient, private router: Router) { }
 }

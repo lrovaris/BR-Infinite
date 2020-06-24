@@ -32,7 +32,21 @@
                     </fieldset>
                   </div>
                   <div class="col-sm-2">
-                    <button (click)="filter(filterInput.value, filterSelect.value)" style="margin-top: 1.8rem;" type="button" class="btn btn-header float-left border-primary">Filtrar</button>
+                    <button (click)="pushFilterCard(filterInput.value, filterSelect.value); filter(); filterInput.value = ''" style="margin-top: 1.8rem;" class="btn btn-header float-left border-primary"><a>Filtrar</a></button>
+                  </div>
+                </div>
+                <div class="row flex-nowrap" style="max-width: 100%; overflow-x: scroll; overflow-y: hidden">
+                  <div class="col-sm-2" style="max-width: 170px" *ngFor="let filter of filterArray">
+                    <div class="card justify-content-center flex-column" style="height: 40%; background-color: #27416F; color: white" >
+                      <div class="row flex-nowrap" style="padding: 0;">
+                        <div class="col-sm-10">
+                          <a style="margin: 8px">{{filter.value}}</a>
+                        </div>
+                        <div class="col-sm-2">
+                          <i style="margin-top: 4px; font-weight: 600" class="ft-x float-right" (click)="removeFilterCard(filter)"></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

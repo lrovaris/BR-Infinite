@@ -19,6 +19,8 @@ export class ListSeguradoraComponent implements OnInit {
   seguradorasObject: any;
   seguradorasFormatada: any;
 
+  filterArray = [];
+
   constructor(private seguradoraService: SeguradoraService,
               private router: Router,
               private colaboradorService: ColaboradorService,
@@ -60,8 +62,32 @@ export class ListSeguradoraComponent implements OnInit {
     })
   }
 
-  filter(name,filter) {
-    console.log(name,filter)
+  filter() {
+    this.seguradoraService.filterSeguradoraList(this.filterArray).subscribe((data: any) => {
+      setTimeout(()=> {
+        console.log(data);
+        this.seguradoras = data;
+      })
+    }, error1 => {
+      alert(error1.error.message)
+    });
+
+  }
+
+  pushFilterCard(value, type) {
+    if (value === '') {
+      return;
+    }
+    let filterObj = {
+      value,
+      type
+    };
+    this.filterArray.push(filterObj)
+  }
+
+  removeFilterCard(filterObj) {
+    this.filterArray.splice(this.filterArray.indexOf(filterObj), 1 );
+    this.filter();
   }
 
 }

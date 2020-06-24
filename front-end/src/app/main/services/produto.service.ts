@@ -60,4 +60,10 @@ export class ProdutoService {
     return this.http.get(`${this.url}/products/all`);
   }
 
+  filterProductsList(filters) {
+
+    return this.http.post(`${this.url}/products/filter`, {filters})
+
+  }
+
 }

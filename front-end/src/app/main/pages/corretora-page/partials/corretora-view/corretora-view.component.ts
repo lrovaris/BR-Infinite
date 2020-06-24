@@ -128,11 +128,6 @@ export class CorretoraViewComponent implements OnInit {
       });
   }
 
-  downloadFile(data: any) {
-    const blob = new Blob([data], { type: 'text/csv' });
-    const url= window.URL.createObjectURL(blob);
-    window.open(url);
-  }
 
   downloadCSV() {
     this.corretoraService.downloadCsv(this.corretora._id).subscribe((data: any) => {

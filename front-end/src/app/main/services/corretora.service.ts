@@ -84,6 +84,11 @@ export class CorretoraService {
     return this.http.get(`${this.url}/corretoras/all/csv`, {responseType: 'blob'})
   }
 
+  filterCorretoraList(filters) {
+
+    return this.http.post(`${this.url}/corretoras/filter`, {filters})
+
+  }
 
   constructor(private http: HttpClient, private router: Router) { }
 

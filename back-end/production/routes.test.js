@@ -64,10 +64,6 @@ describe('Production Routes', () => {
     })
 
     expect(entry_request.statusCode).toEqual(200)
-
-    let all_entries = await controller.get_entries();
-
-    expect(all_entries.length).toEqual(18)
   })
 
   it('deveria retornar um array com a produção de todas as corretoras de uma seguradora', async () => {
@@ -369,6 +365,33 @@ describe('Production Routes', () => {
     // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.statusCode).toEqual(200)
+  })
+
+
+  it('deveria registrar um caso real de uso da BR infinite nas produções', async () => {
+
+    let new_seg = await request(app).post('/seguradoras/new').send({
+      seguradora: { name:"real" },
+      manager: { name:"mlk testante", telephone:"999219075", email:"luis@segurateste.com", birthday: "2020-05-01", job:"quebrar apps" }
+    })
+
+    let this_seg_id = seg.body.seguradora._id;
+
+    expect(new_seg.statusCode).toEqual(200)
+
+    let new_corr = await request(app).post('/corretoras/new').send({ corretora: { name:"Corretora real",  nicknames:["ABREPE ADMR E CORR DE SEGS LTDA"], seguradoras:[ this_seg_id ] }, manager: { name:"luis colaborante", telephone:"999219075", email:"colaborador@legal.com", birthday: "2020-05-01", job:"testar paradas" } })
+
+    expect(new_corr.statusCode).toEqual(200)
+
+    const entry_request = await request(app).post('/production/new').send({
+      seguradora: this_seg_id,
+      path: "usoreal.csv",
+      date: "15/05/2020"
+    })
+
+    console.log(JSON.stringify(entry_request.body, null, 1));
+
+    expect(entry_request.statusCode).toEqual(200)
   })
 
 })

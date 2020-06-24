@@ -115,15 +115,39 @@ describe('Seguradoras Routes', () => {
   it('deveria gerar o csv de uma seguradora individual', async() => {
     const new_request = await request(app).get(`/seguradoras/${seg_test_id}/csv`)
 
-    console.log(JSON.stringify(new_request.body, null, 1));
-
     expect(new_request.status).toEqual(200);
   })
 
   it('deveria gerar o csv de todas as seguradoras', async() => {
-    const new_request = await request(app).get(`/seguradoras/all/csv`)
+    const new_request = await request(app).post(`/seguradoras/all/csv`).send({
+      filters:[
+        {
+          type: "name",
+          value: "seg"
+        }
+      ]
+    })
+
+    // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.status).toEqual(200);
   })
+
+  it('filtros de seguradoras', async() => {
+    const new_request = await request(app).post(`/seguradoras/filter`).send({
+      filters:[
+        {
+          type: "name",
+          value: "seg"
+        }
+      ]
+    })
+
+    // console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
+  })
+
+
 
 })

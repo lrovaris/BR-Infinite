@@ -71,6 +71,22 @@ router.get ('/all', async (req,res) => {
   res.status(200).json(all_opportunities);
 });
 
+router.post('/filter', async (req,res) => {
+  const filter_params = req.body.filters;
+
+  if(filter_params === undefined){
+    return res.status(400).json({ message: "Filtros inválidos" })
+  }
+
+  let filter_opportunities = await controller.get_filtered_opportunities(filter_params)
+
+  if(filter_opportunities.valid){
+    return res.status(200).json(filter_opportunities.data)
+  } else {
+    return res.status(400).json({ message: filter_opportunities.message })
+  }
+})
+
 router.get('/:id', async(req,res)=>{
   to_send = await controller.get_opportunity_by_id(req.params.id);
 

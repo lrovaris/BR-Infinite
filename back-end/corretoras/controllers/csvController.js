@@ -4,9 +4,9 @@ const csv = require('fast-csv');
 const seguradora_controller = require("../../seguradoras/controller")
 const colaborador_controller = require('../../colaboradores/controller');
 
-const { get_corretora_by_id, get_corretoras } = require("./defaultController")
+const { get_corretora_by_id, get_filtered_corretoras } = require("./defaultController")
 
-async function get_all_corretoras_csv(callback) {
+async function get_all_corretoras_csv(filters, callback) {
 
   let my_csv = [];
 
@@ -19,7 +19,17 @@ async function get_all_corretoras_csv(callback) {
 
   my_csv.push(csv_header);
 
-  let this_corrs = await get_corretoras();
+  let this_corrs = await get_filtered_corretoras(filters);
+
+  if(!this_corrs.valid){
+    this_corrs.status = 400
+
+    return callback(this_corrs)
+  }else {
+    this_corrs = this_corrs.data
+  }
+
+
 
   for (var i = 0; i < this_corrs.length; i++) {
     let this_corr = this_corrs[i];

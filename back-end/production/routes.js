@@ -54,7 +54,7 @@ router.post('/new', async(req,res) => {
 
     if (fs.existsSync(path_to_file)){
       fs.createReadStream(path_to_file)
-      .pipe(csv())
+      .pipe(csv({ separator: ';' }))
       .on('data', async(row) => {
         rows.push(row);
       })

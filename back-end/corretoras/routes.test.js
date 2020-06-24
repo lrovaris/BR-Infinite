@@ -120,11 +120,36 @@ describe('Corretoras Routes', () => {
   })
 
   it('deveria gerar o csv de todas as corretoras', async() => {
-    const new_request = await request(app).get(`/corretoras/all/csv`)
+    const new_request = await request(app).post(`/corretoras/all/csv`).send({
+      filters:[
+        {
+          type: "name",
+          value: "apeli"
+        }
+      ]
+    })
 
     // console.log(JSON.stringify(new_request.body, null, 1));
 
     expect(new_request.status).toEqual(200);
   })
+
+
+  it('filtros de corretoras', async() => {
+    const new_request = await request(app).post(`/corretoras/filter`).send({
+      filters:[
+        {
+          type: "seguradoras",
+          value: "s"
+        }
+      ]
+    })
+
+    // console.log(JSON.stringify(new_request.body, null, 1));
+
+    expect(new_request.status).toEqual(200);
+  })
+
+
 
 })

@@ -11,10 +11,21 @@ router.get ('/', (req,res) => {
   res.status(200).json({"message":"Funcionando"});
 });
 
-router.get ('/all/csv', async (req,res) => {
-  controller.get_all_seguradoras_csv((response) => {
+router.post ('/all/csv', async (req,res) => {
+  let filters = req.body.filters
 
-    res.download(`relatorios/${response.path}`)
+  if(filters === undefined){
+    filters = [];
+  }
+
+  controller.get_all_seguradoras_csv(filters, (response) => {
+
+    if(response.valid){
+      res.download(`relatorios/${response.path}`)
+    }else {
+      res.status(response.status).json({ message: response.message })
+    }
+
   })
 });
 
@@ -22,7 +33,23 @@ router.get ('/all', async (req,res) => {
   let all_seguradoras = await controller.get_seguradoras();
 
   res.status(200).json(all_seguradoras);
-});
+})
+
+router.post('/filter', async (req,res) => {
+  const filter_params = req.body.filters;
+
+  if(filter_params === undefined){
+    return res.status(400).json({ message: "Filtros inválidos" })
+  }
+
+  let filter_seguradoras = await controller.get_filtered_seguradoras(filter_params)
+
+  if(filter_seguradoras.valid){
+    return res.status(200).json(filter_seguradoras.data)
+  } else {
+    return res.status(400).json({ message: filter_seguradoras.message })
+  }
+})
 
 router.get('/:id/csv', async(req,res) => {
   controller.get_seguradora_csv(req.params.id, (response) => {

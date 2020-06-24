@@ -1,6 +1,8 @@
 const db = require('../db');
 const cache = require('../../memoryCache');
 
+const seguradora_controller = require('../../seguradoras/controller')
+
 async function get_corretoras() {
   return cache.get('corretoras') || await db.get_corretoras();
 }
@@ -100,6 +102,102 @@ async function get_corretoras_by_seguradora(seg_id) {
 
 
 
+async function get_filtered_corretoras(filter_params) {
+
+  for (var i = 0; i < filter_params.length; i++) {
+    if(filter_params[i].type !== "name" && filter_params[i].type !== "address" && filter_params[i].type !== "seguradoras"){
+      return{
+        valid: false,
+        message: `Tipo ${filter_params[i].type} não identificado`
+      }
+    }
+  }
+
+  const all_corretoras = await get_corretoras()
+  const all_seguradoras = await seguradora_controller.get_seguradoras();
+
+  let filtered_corretoras = all_corretoras.filter(corr_obj => {
+
+    for (var i = 0; i < filter_params.length; i++) {
+      if (filter_params[i].value === "" || filter_params[i].value === " "){
+        continue;
+      }
+
+      if (filter_params[i].type === "name"){
+
+        if(!corr_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())){
+          return false
+        }
+      }
+
+      if(filter_params[i].type === "address"){
+
+        if(corr_obj.address === undefined){
+          return false
+        }
+
+        if(corr_obj.address.estate === undefined || corr_obj.address.city === undefined){
+          return false
+        }
+
+        if(!corr_obj.address.estate.toLowerCase().includes(filter_params[i].value.toLowerCase()) && !corr_obj.address.city.toLowerCase().includes(filter_params[i].value.toLowerCase())){
+          return false
+        }
+
+      }
+
+      if(filter_params[i].type === "seguradoras"){
+
+        if (corr_obj.seguradoras === undefined){
+          return false;
+        }
+
+        let this_segs = corr_obj.seguradoras.map(seg_id => {
+
+
+          let seguradora = all_seguradoras.find(seg_obj =>{
+            return (seg_obj._id.toString() == seg_id.toString())
+          })
+
+          if(seguradora === undefined){
+            return undefined
+          }
+
+          return seguradora.name
+
+        })
+
+        let includes = false;
+
+        for (var i = 0; i < this_segs.length; i++) {
+
+          if(this_segs[i] === undefined){
+            continue;
+          }
+
+          if(this_segs[i].toLowerCase().includes(filter_params[i].value.toLowerCase())){
+            includes = true
+          }
+        }
+
+        if(!includes){
+          return false;
+        }
+
+      }
+    }
+
+    return true
+  })
+
+  return{
+    valid: true,
+    data: filtered_corretoras
+  }
+}
+
+
+
 
 module.exports = {
   get_corretoras,
@@ -107,5 +205,6 @@ module.exports = {
   register_corretora,
   validate_corretora,
   get_corretora_by_nickname,
-  get_corretoras_by_seguradora 
+  get_corretoras_by_seguradora,
+  get_filtered_corretoras
  };

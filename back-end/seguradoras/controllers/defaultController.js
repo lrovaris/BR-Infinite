@@ -66,4 +66,56 @@ async function validate_seguradora(seguradora){
   return{ valid: true }
 }
 
-module.exports = { get_seguradoras, get_seguradora_by_id, validate_seguradora, register_seguradora, get_seguradoras_by_id_array };
+async function get_filtered_seguradoras(filter_params) {
+
+  for (var i = 0; i < filter_params.length; i++) {
+    if(filter_params[i].type !== "name" && filter_params[i].type !== "address"){
+      return{
+        valid: false,
+        message: `Tipo ${filter_params[i].type} não identificado`
+      }
+    }
+  }
+
+  const all_seguradoras = await get_seguradoras()
+
+  let filtered_seguradoras = all_seguradoras.filter(seg_obj => {
+
+    for (var i = 0; i < filter_params.length; i++) {
+      if (filter_params[i].value === "" || filter_params[i].value === " "){
+        continue;
+      }
+
+      if (filter_params[i].type === "name"){
+
+        if(!seg_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())){
+          return false
+        }
+      }
+
+      if(filter_params[i].type === "address"){
+
+        if(!seg_obj.address.estate.toLowerCase().includes(filter_params[i].value.toLowerCase()) && !seg_obj.address.city.toLowerCase().includes(filter_params[i].value.toLowerCase())){
+          return false
+        }
+
+      }
+    }
+
+    return true
+  })
+
+  return{
+    valid: true,
+    data: filtered_seguradoras
+  }
+}
+
+module.exports = {
+  get_seguradoras,
+  get_seguradora_by_id,
+  validate_seguradora,
+  register_seguradora,
+  get_seguradoras_by_id_array,
+  get_filtered_seguradoras
+};

@@ -70,16 +70,18 @@ async function validate_entry(entry, seg_id, this_date) {
     }
   }
 
-  let thisTotal = entry.Total;
-  thisTotal = thisTotal.replace("R$ ","")
+  let thisTotal = "" + entry.Total;
+  thisTotal = thisTotal.replace("R$","")
   thisTotal = thisTotal.replace(",","")
   thisTotal = thisTotal.replace(".","")
-  thisTotal = Number(thisTotal)/100
+  thisTotal = thisTotal.replace(" ","")
 
-  if(isNaN(thisTotal)){
+  let thisTotalNun = Number(thisTotal)/100
+
+  if(isNaN(thisTotalNun)){
     return{
       "valid": false,
-      "message": `Valor monetário inválido`
+      "message": `Erro de digitação do valor ${entry.Total}`
     }
   }
 
@@ -87,7 +89,7 @@ async function validate_entry(entry, seg_id, this_date) {
     "valid":true,
     "entry":{
       "corretora": corr._id.toString(),
-      "total": thisTotal,
+      "total": thisTotalNun,
       "date": this_date
     }
   };

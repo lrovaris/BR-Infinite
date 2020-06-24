@@ -46,7 +46,7 @@ async function get_filtered_opportunities(filter_params) {
       if(filter_params[i].type === "seguradora"){
 
         const possible_seguradoras = all_seguradoras.filter(seg_obj => {
-          return seg_obj.name.includes(filter_params[i].value)
+          return seg_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())
         })
 
         const is_this_included = possible_seguradoras.find(seg_obj => {
@@ -66,7 +66,7 @@ async function get_filtered_opportunities(filter_params) {
       if(filter_params[i].type === "corretora"){
 
         const possible_corretoras = all_corretoras.filter(corr_obj => {
-          return corr_obj.name.includes(filter_params[i].value)
+          return corr_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())
         })
 
         const is_this_included = possible_corretoras.find(corr_obj => {
@@ -86,7 +86,7 @@ async function get_filtered_opportunities(filter_params) {
       if(filter_params[i].type === "colaborador"){
 
         const possible_colaboradores = all_colaboradores.filter(col_obj => {
-          return col_obj.name.includes(filter_params[i].value)
+          return col_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())
         })
 
         const is_this_included = possible_colaboradores.find(col_obj => {
@@ -106,7 +106,7 @@ async function get_filtered_opportunities(filter_params) {
       if(filter_params[i].type === "product"){
 
         const possible_products = all_products.filter(prod_obj => {
-          return prod_obj.name.includes(filter_params[i].value)
+          return prod_obj.name.toLowerCase().includes(filter_params[i].value.toLowerCase())
         })
 
         const is_this_included = possible_products.find(prod_obj => {

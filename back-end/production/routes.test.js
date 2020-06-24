@@ -389,7 +389,7 @@ describe('Production Routes', () => {
       date: "15/05/2020"
     })
 
-    console.log(JSON.stringify(entry_request.body, null, 1));
+    // console.log(JSON.stringify(entry_request.body, null, 1));
 
     expect(entry_request.statusCode).toEqual(200)
   })

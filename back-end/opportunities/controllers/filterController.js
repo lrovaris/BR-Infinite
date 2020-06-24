@@ -164,6 +164,10 @@ async function get_filtered_opportunities(filter_params) {
 
       if (filter_params[i].type === "vigenciaBefore"){
 
+        if(opp_obj.vigencia === undefined || opp_obj.vigencia === ""){
+          return false
+        }
+
         if(isTheNewDateBigger(filter_params[i].value, opp_obj.vigencia)){
           return false
         }
@@ -171,6 +175,10 @@ async function get_filtered_opportunities(filter_params) {
       }
 
       if (filter_params[i].type === "vigenciaAfter"){
+
+        if(opp_obj.vigencia === undefined || opp_obj.vigencia === ""){
+          return false
+        }
 
         if(isTheNewDateBigger(opp_obj.vigencia, filter_params[i].value)){
           return false

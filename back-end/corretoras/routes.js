@@ -19,6 +19,8 @@ router.post('/all/csv', async(req,res) => {
     filters = [];
   }
 
+  console.log('chegou request para todas');
+
   controller.get_all_corretoras_csv(filters, (response) => {
 
     res.download(`relatorios/${response.path}`)
@@ -48,6 +50,7 @@ router.post('/filter', async (req,res) => {
 })
 
 router.get('/:id/csv', async(req,res) => {
+  console.log('chegou request individual');
   controller.get_corretora_csv(req.params.id, (response) => {
 
     res.download(`relatorios/${response.path}`)

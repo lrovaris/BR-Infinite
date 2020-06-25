@@ -12,7 +12,29 @@ import { CorretoraService} from "../../services/corretora.service";
 })
 export class ColaboradorPageComponent implements OnInit {
 
-  @Input() inputLocalTrab
+  @Input()
+  set manager(manager){
+
+    if(manager === undefined){
+      return;
+    }
+
+    if (manager._id === undefined) {
+      return;
+    }
+
+    this.colaboradorService.getColaborador(manager._id).subscribe((data: any) => {
+      this.colaboradorForm.controls['name'].setValue(data.name);
+      this.colaboradorForm.controls['telephone'].setValue(data.telephone);
+      this.colaboradorForm.controls['email'].setValue(data.email);
+      this.colaboradorForm.controls['birthday'].setValue(data.birthday);
+      this.colaboradorForm.controls['job'].setValue(data.job);
+      this.colaboradorForm.controls['corretora'].setValue(data.corretora);
+      this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
+      this.saveColaborador();
+      this.colaboradorService.setHasColaboradorChanged(false);
+    });
+  }
 
   localDeTrabalho: any;
   colaboradorForm: FormGroup;
@@ -37,32 +59,6 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log(this.inputLocalTrab);
-
-    if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
-      this.localDeTrabalho = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-    }
-
-    if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
-      this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-    }
-
-    if(this.localDeTrabalho){
-      this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
-        this.colaboradorForm.controls['name'].setValue(data.name);
-        this.colaboradorForm.controls['telephone'].setValue(data.telephone);
-        this.colaboradorForm.controls['email'].setValue(data.email);
-        this.colaboradorForm.controls['birthday'].setValue(data.birthday);
-        this.colaboradorForm.controls['job'].setValue(data.job);
-        this.colaboradorForm.controls['corretora'].setValue(data.corretora);
-        this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
-        this.saveColaborador();
-        this.colaboradorService.setHasColaboradorChanged(false);
-      });
-    }
-
-
   }
 
   get f() { return this.colaboradorForm.controls; }
@@ -85,11 +81,5 @@ export class ColaboradorPageComponent implements OnInit {
       seguradora: this.colaboradorForm.controls['seguradora'].value,
     };
   }
-
-
-
-
-
-
 
 }

@@ -5851,6 +5851,11 @@ export class CorretoraPageComponent implements OnInit {
         this.isEdit = true;
         let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
 
+        // console.log(data.manager);
+
+        this.responsavel = data.manager
+
+
         this.seguradoras = data.seguradoras;
         this.apelidos = data.nicknames;
         this.id = data._id;

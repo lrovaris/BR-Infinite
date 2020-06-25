@@ -5985,6 +5985,9 @@ export class SeguradoraPageComponent implements OnInit {
     if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
       this.isEdit = true;
       let data = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
+
+      this.responsavel = data.manager
+
       this.seguradora.controls['name'].setValue(data.name);
       this.seguradora.controls['telephone'].setValue(data.telephone);
       this.seguradora.controls['cnpj'].setValue(data.cnpj);

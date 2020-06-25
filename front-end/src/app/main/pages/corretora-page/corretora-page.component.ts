@@ -5870,8 +5870,6 @@ export class CorretoraPageComponent implements OnInit {
 
         this.seguradorasTable = this.mapSeguradoras(this.seguradoras);
 
-        console.log(this.seguradorasTable);
-
         this.filterSelectableSeguradoras();
 
       }

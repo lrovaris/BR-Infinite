@@ -71,8 +71,6 @@ export class CorretoraService {
   }
 
   navigateToViewCorretora(corretora) {
-    console.log('chegou aqui!');
-
     this.corretoraInfoWithOutFormGroup = corretora;
     this.router.navigate(['corretora/visualizacao'])
   }

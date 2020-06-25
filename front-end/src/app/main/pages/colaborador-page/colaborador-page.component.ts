@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Router} from "@angular/router";
 import { ColaboradorService} from "../../services/colaborador.service";
@@ -11,6 +11,8 @@ import { CorretoraService} from "../../services/corretora.service";
   styleUrls: ['./colaborador-page.component.scss']
 })
 export class ColaboradorPageComponent implements OnInit {
+
+  @Input() inputLocalTrab
 
   localDeTrabalho: any;
   colaboradorForm: FormGroup;
@@ -36,11 +38,13 @@ export class ColaboradorPageComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.inputLocalTrab);
 
     if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
       this.localDeTrabalho = this.corretoraService.getcorretoraInfoWithOutFormGroup();
+    }
 
-    } else if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
+    if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
       this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
     }
 

@@ -61,7 +61,6 @@ export class CorretoraViewComponent implements OnInit {
 
   ngOnInit() {
     this.corretora = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-    console.log(this.corretora);
 
     this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
       this.seguradoras = seg_data;

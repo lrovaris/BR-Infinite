@@ -144,41 +144,6 @@ function validate_colaborador(colaborador){
     };
   }
 
-  if (!colaborador.telephone){
-    return {
-      "valid": false,
-      "message":"Campo de telefone do colaborador vazio"
-    };
-  }
-
-  if (!colaborador.email){
-    return {
-      "valid": false,
-      "message":"Campo de email do colaborador vazio"
-    };
-  }
-
-  if (!colaborador.birthday){
-    return {
-      "valid": false,
-      "message":"Campo de aniversário vazio"
-    };
-  }else {
-    if(!getDateInfoFromString(colaborador.birthday).valid){
-      return {
-        "valid": false,
-        "message":"Campo de aniversário inválido (o formato deve ser aaaa-mm-dd)"
-      }
-    }
-  }
-
-  if (!colaborador.job){
-    return {
-      "valid": false,
-      "message":"Campo de cargo vazio"
-    };
-  }
-
   return{ valid: true }
 }
 

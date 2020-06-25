@@ -3,7 +3,6 @@ const csv = require('fast-csv');
 
 const iconv = require('iconv-lite');
 
-
 function writeCsv(csv_name, csv_data, callback) {
 
   let ws = fs.createWriteStream(`./relatorios/${csv_name}.csv`, {encoding: 'utf8'})
@@ -26,6 +25,5 @@ function writeCsv(csv_name, csv_data, callback) {
   })
 
 }
-
 
 module.exports = { writeCsv };

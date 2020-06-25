@@ -1,5 +1,4 @@
-const fs = require('fs');
-const csv = require('fast-csv');
+const csv_utils = require('../../csv/utils')
 
 const colaborador_controller = require('../../colaboradores/controller');
 
@@ -59,26 +58,7 @@ async function get_all_seguradoras_csv(filters, callback) {
 
   }
 
-  let ws = fs.createWriteStream(`./relatorios/seguradoras.csv`)
-
-  csv
-  .write(my_csv, {headers: false})
-  .pipe(ws)
-  .on('close', () => {
-    return callback({
-      valid: true,
-      path: `seguradoras.csv`
-    })
-  })
-  .on('error', () => {
-    return callback({
-      valid: false,
-      status: 500,
-      message: "Erro interno do servidor"
-    })
-  })
-
-
+  csv_utils.writeCsv('seguradoras', my_csv, callback)
 }
 
 async function get_seguradora_csv(seg_id, callback) {
@@ -168,22 +148,7 @@ async function get_seguradora_csv(seg_id, callback) {
     my_csv.push(csv_colab_line);
   }
 
-  let ws = fs.createWriteStream(`./relatorios/${this_seg.name}.csv`)
-
-  csv
-  .write(my_csv, {headers: false})
-  .pipe(ws)
-  .on('close', () => {
-    callback({
-      valid: true,
-      path: `${this_seg.name}.csv`
-    })
-  })
-  .on('error', () => {
-    callback({
-      valid: false
-    })
-  })
+  csv_utils.writeCsv(this_seg.name, my_csv, callback)
 }
 
 module.exports = { get_seguradora_csv, get_all_seguradoras_csv };

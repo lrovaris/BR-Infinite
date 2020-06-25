@@ -1,5 +1,4 @@
-const fs = require('fs');
-const csv = require('fast-csv');
+const csv_utils = require('../../csv/utils')
 
 const seguradora_controller = require("../../seguradoras/controller")
 const colaborador_controller = require('../../colaboradores/controller');
@@ -61,24 +60,7 @@ async function get_all_corretoras_csv(filters, callback) {
 
   }
 
-  let ws = fs.createWriteStream(`./relatorios/corretoras.csv`)
-
-  csv
-  .write(my_csv, {headers: false})
-  .pipe(ws)
-  .on('close', () => {
-    callback({
-      valid: true,
-      path: `corretoras.csv`
-    })
-  })
-  .on('error', () => {
-    callback({
-      valid: false
-    })
-  })
-
-
+  csv_utils.writeCsv('corretoras', my_csv, callback)
 }
 
 async function get_corretora_csv(corr_id, callback) {
@@ -179,22 +161,8 @@ async function get_corretora_csv(corr_id, callback) {
     my_csv.push(csv_colab_line);
   }
 
-  let ws = fs.createWriteStream(`./relatorios/${this_corr.name}.csv`)
+  csv_utils.writeCsv(this_corr.name, my_csv, callback)
 
-  csv
-  .write(my_csv, {headers: false})
-  .pipe(ws)
-  .on('close', () => {
-    callback({
-      valid: true,
-      path: `${this_corr.name}.csv`
-    })
-  })
-  .on('error', () => {
-    callback({
-      valid: false
-    })
-  })
 }
 
 module.exports = { get_corretora_csv, get_all_corretoras_csv };

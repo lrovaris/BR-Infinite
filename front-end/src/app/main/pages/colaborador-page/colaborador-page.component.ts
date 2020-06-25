@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Router} from "@angular/router";
 import { ColaboradorService} from "../../services/colaborador.service";
@@ -11,6 +11,30 @@ import { CorretoraService} from "../../services/corretora.service";
   styleUrls: ['./colaborador-page.component.scss']
 })
 export class ColaboradorPageComponent implements OnInit {
+
+  @Input()
+  set manager(manager){
+
+    if(manager === undefined){
+      return;
+    }
+
+    if (manager._id === undefined) {
+      return;
+    }
+
+    this.colaboradorService.getColaborador(manager._id).subscribe((data: any) => {
+      this.colaboradorForm.controls['name'].setValue(data.name);
+      this.colaboradorForm.controls['telephone'].setValue(data.telephone);
+      this.colaboradorForm.controls['email'].setValue(data.email);
+      this.colaboradorForm.controls['birthday'].setValue(data.birthday);
+      this.colaboradorForm.controls['job'].setValue(data.job);
+      this.colaboradorForm.controls['corretora'].setValue(data.corretora);
+      this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
+      this.saveColaborador();
+      this.colaboradorService.setHasColaboradorChanged(false);
+    });
+  }
 
   localDeTrabalho: any;
   colaboradorForm: FormGroup;
@@ -35,30 +59,6 @@ export class ColaboradorPageComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
-    if (this.corretoraService.getcorretoraInfoWithOutFormGroup()) {
-      this.localDeTrabalho = this.corretoraService.getcorretoraInfoWithOutFormGroup();
-
-    } else if (this.seguradoraService.getseguradoraInfoWithOutFormGroup()) {
-      this.localDeTrabalho = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
-    }
-
-    if(this.localDeTrabalho){
-      this.colaboradorService.getColaborador(this.localDeTrabalho.manager._id).subscribe((data: any) => {
-        this.colaboradorForm.controls['name'].setValue(data.name);
-        this.colaboradorForm.controls['telephone'].setValue(data.telephone);
-        this.colaboradorForm.controls['email'].setValue(data.email);
-        this.colaboradorForm.controls['birthday'].setValue(data.birthday);
-        this.colaboradorForm.controls['job'].setValue(data.job);
-        this.colaboradorForm.controls['corretora'].setValue(data.corretora);
-        this.colaboradorForm.controls['seguradora'].setValue(data.seguradora);
-        this.saveColaborador();
-        this.colaboradorService.setHasColaboradorChanged(false);
-      });
-    }
-
-
   }
 
   get f() { return this.colaboradorForm.controls; }
@@ -81,11 +81,5 @@ export class ColaboradorPageComponent implements OnInit {
       seguradora: this.colaboradorForm.controls['seguradora'].value,
     };
   }
-
-
-
-
-
-
 
 }

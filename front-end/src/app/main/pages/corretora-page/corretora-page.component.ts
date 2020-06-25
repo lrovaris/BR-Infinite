@@ -5851,6 +5851,11 @@ export class CorretoraPageComponent implements OnInit {
         this.isEdit = true;
         let data = this.corretoraService.getcorretoraInfoWithOutFormGroup();
 
+        // console.log(data.manager);
+
+        this.responsavel = data.manager
+
+
         this.seguradoras = data.seguradoras;
         this.apelidos = data.nicknames;
         this.id = data._id;
@@ -5869,8 +5874,6 @@ export class CorretoraPageComponent implements OnInit {
         this.corretora.controls['neighborhood'].setValue(data.address.neighborhood);
 
         this.seguradorasTable = this.mapSeguradoras(this.seguradoras);
-
-        console.log(this.seguradorasTable);
 
         this.filterSelectableSeguradoras();
 

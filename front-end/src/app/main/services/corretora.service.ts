@@ -8,7 +8,7 @@ import { UrlService  } from "./utils/url.service";
 })
 export class CorretoraService {
 
-  url =  this.urlService.getUrl()
+  url =  this.urlService.getUrl();
 
   corretoraInfo: any;
   corretoraInfoWithOutFormGroup: any;

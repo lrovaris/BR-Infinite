@@ -5993,6 +5993,9 @@ export class CorretoraPageComponent implements OnInit {
 
       if (this.isEdit) {
 
+        console.log(newCorretora);
+        console.log(this.seguradoras);
+
         this.corretoraService.editPostCorretora(this.corretoraService.getCorretoraId(), newCorretora).subscribe((corr_data: any) => {
 
           this.corretoraService.setCorretoraInfoWithOutFormGroup(corr_data.corretora);
@@ -6089,9 +6092,13 @@ export class CorretoraPageComponent implements OnInit {
   }
 
   removeSeguradora(seguradora) {
+    console.log(seguradora)
     let index = this.seguradorasTable.indexOf(seguradora);
     if (index !== -1) this.seguradorasTable.splice(index, 1);
-    this.filterSelectableSeguradoras();
+
+    let index2 = this.seguradoras.indexOf(seguradora._id);
+    if (index2 !== -1) this.seguradoras.splice(index2, 1);
+    console.log(this.seguradoras);
   }
 
 

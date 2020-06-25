@@ -16,6 +16,8 @@ export class ListCorretoraComponent implements OnInit {
   seguradoras = [];
   filterArray = [];
 
+  filtered: boolean;
+
   constructor(private corretoraService: CorretoraService,
               private router: Router,
               private seguradoraService: SeguradoraService,
@@ -35,6 +37,7 @@ export class ListCorretoraComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filtered = false;
     this.corretoraService.getAllCorretoras().subscribe((prod_data:any) => {
       this.corretoras = prod_data;
       this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
@@ -72,6 +75,8 @@ export class ListCorretoraComponent implements OnInit {
     }, error1 => {
       alert(error1.error.message)
     });
+
+    this.filtered = this.filterArray.length > 0;
 
   }
 

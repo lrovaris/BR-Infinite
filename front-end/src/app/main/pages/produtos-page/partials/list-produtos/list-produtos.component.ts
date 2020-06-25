@@ -14,6 +14,8 @@ export class ListProdutosComponent implements OnInit {
   seguradoras = [];
   filterArray = [];
 
+  filtered: boolean;
+
   constructor(private produtoService: ProdutoService, private router: Router, private seguradoraService: SeguradoraService) { }
 
   navigateCadastroProduto() {
@@ -28,6 +30,9 @@ export class ListProdutosComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.filtered = false;
+
     this.produtoService.getAllProducts().subscribe((prod_data:any) => {
       this.produtos = prod_data;
       this.seguradoraService.getAllSeguradoras().subscribe((seg_data:any) => {
@@ -60,7 +65,7 @@ export class ListProdutosComponent implements OnInit {
 
 
   filter() {
-    this.seguradoraService.filterSeguradoraList(this.filterArray).subscribe((data: any) => {
+    this.produtoService.filterProductsList(this.filterArray).subscribe((data: any) => {
       setTimeout(()=> {
         console.log(data);
         this.produtos = data;
@@ -92,6 +97,8 @@ export class ListProdutosComponent implements OnInit {
     }, error1 => {
       alert(error1.error.message)
     });
+
+    this.filtered = this.filterArray.length > 0;
 
   }
 

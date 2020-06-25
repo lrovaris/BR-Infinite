@@ -19,6 +19,8 @@ export class ListSeguradoraComponent implements OnInit {
   seguradorasObject: any;
   seguradorasFormatada: any;
 
+  filtered: boolean;
+
   filterArray = [];
 
   constructor(private seguradoraService: SeguradoraService,
@@ -51,6 +53,7 @@ export class ListSeguradoraComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.filtered = false;
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.seguradoras = data;
     });
@@ -71,6 +74,8 @@ export class ListSeguradoraComponent implements OnInit {
     }, error1 => {
       alert(error1.error.message)
     });
+
+    this.filtered = this.filterArray.length > 0;
 
   }
 

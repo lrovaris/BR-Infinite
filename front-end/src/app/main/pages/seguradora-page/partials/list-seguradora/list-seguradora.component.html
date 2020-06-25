@@ -18,6 +18,10 @@
             <div class="card">
               <div class="card-header">
                 <div class="row">
+                  <div *ngIf="filtered" class="col-sm-1">
+                    <label for="filterInput">{{seguradoras.length > 1 ?  'Resultados' : 'Resultado'}}</label>
+                    <h5 style="color: #27416F; font-weight: 500; margin-top: 1rem">{{seguradoras.length}}</h5>
+                  </div>
                   <div class="col-sm-3">
                     <label for="filterInput">Fltro</label>
                     <input #filterInput id="filterInput" type="text" class="form-control border-primary">
@@ -37,6 +41,7 @@
                 </div>
                 <div class="row flex-nowrap" style="max-width: 100%; overflow-x: scroll; overflow-y: hidden">
                   <div class="col-sm-2" style="max-width: 170px" *ngFor="let filter of filterArray">
+                    <label for="filterSelect">{{filter.type}}</label>
                     <div class="card justify-content-center flex-column" style="height: 40%; background-color: #27416F; color: white" >
                       <div class="row flex-nowrap" style="padding: 0;">
                         <div class="col-sm-10">

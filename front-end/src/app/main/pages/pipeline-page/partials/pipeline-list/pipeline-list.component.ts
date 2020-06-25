@@ -18,8 +18,18 @@ export class PipelineListComponent implements OnInit {
   filterObj: any;
   filterObj2: any;
   isVigencia = false;
+  filtered: boolean;
 
   constructor(private pipelineService: PipelineService, private router: Router) { }
+
+
+
+  ngOnInit() {
+    this.filtered = false;
+    this.pipelineService.getAllOportunidades().subscribe((data: any) => {
+      this.oportunidade = data;
+    })
+  }
 
   saveOportunidade(oportundiade) {
     this.pipelineService.setOportunidade(oportundiade);
@@ -31,16 +41,12 @@ export class PipelineListComponent implements OnInit {
     this.router.navigate(['pipeline/cadastro'])
   }
 
-  ngOnInit() {
-    this.pipelineService.getAllOportunidades().subscribe((data: any) => {
-      this.oportunidade = data;
-    })
-  }
-
   selectChange(value) {
     this.isInclusionDate = value === 'inclusionDate';
     this.isVigencia = value === 'vigencia';
   }
+
+
 
   filter() {
     this.pipelineService.filterPipelineList(this.filterArray).subscribe((data: any) => {
@@ -51,6 +57,8 @@ export class PipelineListComponent implements OnInit {
     }, error1 => {
       alert(error1.error.message)
     });
+
+    this.filtered = this.filterArray.length > 0;
 
   }
 

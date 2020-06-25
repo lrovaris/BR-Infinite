@@ -5887,6 +5887,8 @@ export class SeguradoraPageComponent implements OnInit {
 
       let seguradora = this.seguradoraService.getseguradoraInfoWithOutFormGroup();
 
+      console.log(newSeguradora);
+
       this.seguradoraService.editPostSeguradora(seguradora._id, newSeguradora).subscribe((seg_data:any) => {
 
         console.log(seg_data);
@@ -5894,6 +5896,7 @@ export class SeguradoraPageComponent implements OnInit {
         this.seguradoraService.putSeguradora(seg_data.seguradora);
 
         if(this.colaboradorService.getHasColaboradorChanged()){
+
 
           this.colaboradorService.editColaborador(seg_data.seguradora.manager._id, this.colaboradorService.getColaboradorResponsavel()).subscribe((colab_data: any) => {
             alert(colab_data.message);

@@ -60,9 +60,8 @@ export class ColaboradorService {
     return this.http.get(`${this.urlService.getUrl()}/colaboradores/birthday`);
   }
 
-  getBirthDaysMonth(montha) {
-    let x = Number(montha);
-    console.log(x);
+  getBirthDaysMonth(months) {
+    let x = Number(months);
     return this.http.post(`${this.urlService.getUrl()}/colaboradores/birthday`, {month: x});
   }
 

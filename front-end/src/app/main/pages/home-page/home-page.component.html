@@ -51,10 +51,10 @@
                   <tbody>
                   <tr *ngFor="let aniversariante of aniversariantesDoMes">
 
-                    <td>{{aniversariante.name}}</td>
-                    <td>{{aniversariante.birthday}}</td>
-                    <td *ngIf="aniversariante.seguradora != ''">{{aniversariante.seguradora}}</td>
-                    <td *ngIf="aniversariante.corretora != ''">{{aniversariante.corretora}}</td>
+                    <td>{{aniversariante?.name}}</td>
+                    <td>{{aniversariante?.birthday}}</td>
+                    <td *ngIf="(aniversariante?.seguradora != '') && (aniversariante.seguradora)">{{aniversariante?.seguradora}}</td>
+                    <td *ngIf="(aniversariante?.corretora != '') && (aniversariante.corretora)">{{aniversariante?.corretora}}</td>
 
                   </tr>
                   </tbody>

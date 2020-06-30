@@ -135,4 +135,18 @@ export class CorretoraViewComponent implements OnInit {
     })
   }
 
+  FormataStringData(data) {
+    let ano  = data.split("-")[0];
+    let mes  = data.split("-")[1];
+    let dia  = data.split("-")[2];
+
+    if ((mes) && (dia)) {
+      return dia + '/' + (mes) + '/' + (ano)
+    } else {
+      return ano;
+    }
+
+    // Utilizo o .slice(-2) para garantir o formato com 2 digitos.
+  }
+
 }

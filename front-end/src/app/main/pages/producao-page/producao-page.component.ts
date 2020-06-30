@@ -65,14 +65,14 @@ export class ProducaoPageComponent implements OnInit {
     this.firstTime = true;
     this.firstTimeEnd = true;
 
-    this.tipoRelatorio = 'padrao';
+    this.tipoRelatorio = 'Padrão';
 
     this.corretoraFilter = "";
 
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.allSeguradoras = data;
       this.setActiveSeguradora(this.allSeguradoras[0]._id);
-      this.tipoRelatorio = 'padrao';
+      this.tipoRelatorio = 'Padrão';
     });
 
   } // FIM DO NG ON INIT (bem grandinho ne rs :3)
@@ -122,7 +122,7 @@ export class ProducaoPageComponent implements OnInit {
     console.log(mes);
     this.selectedMonth = mes;
 
-    if (this.tipoRelatorio === 'comparativo') {
+    if (this.tipoRelatorio === 'Comparativo') {
       let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
         return year === this.selectedYear
       });
@@ -163,7 +163,7 @@ export class ProducaoPageComponent implements OnInit {
 
     this.selectedMonthEnd = mes;
 
-    if (this.tipoRelatorio === 'comparativo') {
+    if (this.tipoRelatorio === 'Comparativo') {
       let monthObj = this.seguradoraDates.find(([year, monthObj]) => {
         return year === this.selectedYearEnd
       });
@@ -242,6 +242,23 @@ export class ProducaoPageComponent implements OnInit {
     })
 
   }
+
+   formatMoney(amount, decimalCount = 2, decimal = ",", thousands = ".") {
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+      const negativeSign = amount < 0 ? "-" : "";
+
+      let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+      let j = (i.length > 3) ? i.length % 3 : 0;
+
+      // @ts-ignore
+      return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+    } catch (e) {
+      console.log(e)
+    }
+  };
 
 
   /*

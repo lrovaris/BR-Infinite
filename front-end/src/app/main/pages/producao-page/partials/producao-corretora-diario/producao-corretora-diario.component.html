@@ -142,18 +142,18 @@
                   </div>
                   <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'Padrão'">
                     <div class="col-sm-4">
-                      <h4 style="font-weight: 400">Acumulado: {{acumulado}}  </h4>
+                      <h4 style="font-weight: 400">Acumulado: R${{formatMoney(acumulado)}}  </h4>
                     </div>
                     <div class="col-sm-4">
-                      <h4 style="font-weight: 400">Média emissão dia: {{media}} </h4>
+                      <h4 style="font-weight: 400">Média emissão dia: R${{formatMoney(media)}} </h4>
                     </div>
                     <div class="col-sm-4">
-                      <h4 style="font-weight: 400">Projeção:  {{projecao}}</h4>
+                      <h4 style="font-weight: 400">Projeção:  R${{formatMoney(projecao)}}</h4>
                     </div>
                   </div>
                   <div class="row" style="margin-top: 1.5rem" *ngIf="tipoRelatorio === 'Comparativo'">
                     <div class="col-sm-4">
-                      <h4 style="font-weight: 400">Variação: {{variacao}}%  </h4>
+                      <h4 style="font-weight: 400">Variação: R${{formatMoney(variacao)}}%  </h4>
                     </div>
                   </div>
                 </div>
@@ -173,7 +173,7 @@
                     <tr *ngFor="let producao of reportsArray; let i = index" style="cursor: pointer">
                       <th style="min-width: 300px !important;">{{producao.seguradora}}</th>
                       <td style="min-width: 120px !important;" *ngFor="let reports of producao.seg_report">
-                        {{reports.total}}
+                        R${{formatMoney(reports.total)}}
                       </td>
                       <td *ngIf="tipoRelatorio === 'Comparativo'">{{(producao.var.toFixed(2) * 100)}}%</td>
                     </tr>

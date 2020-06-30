@@ -117,13 +117,13 @@
 
                   <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-4">
+                    <div style="margin-left: 1rem" class="col-md-3">
                       <label for="gerenteNome">Nome do Responsável</label>
                       <p type="text" id="gerenteNome" class=" " >
                         {{corretora.manager.name}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-4">
+                    <div style="margin-left: 1rem" class="col-md-3">
                       <label for="gerenteTelefone">Telefone do Responsável</label>
                       <p type="text" id="gerenteTelefone" class=" " >
                         {{corretora.manager.telephone}}
@@ -133,6 +133,12 @@
                       <label for="gerenteEmail">Email do Responsável</label>
                       <p type="text" id="gerenteEmail" class=" " >
                         {{corretora.manager.email}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-2">
+                      <label for="gerenteEmail">Data de Nascimento</label>
+                      <p type="text" id="gertenteBirthDay" class=" " >
+                        {{FormataStringData(corretora.manager.birthday)}}
                       </p>
                     </div>
                   </div>

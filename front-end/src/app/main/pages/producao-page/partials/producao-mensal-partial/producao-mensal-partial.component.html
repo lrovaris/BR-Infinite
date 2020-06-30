@@ -101,7 +101,7 @@
                   </div>
                   <div class="row" *ngIf="tipoRelatorio === 'Comparativo'">
                     <div class="col-sm-12">
-                      <h4> Variação: {{variacao}}% </h4>
+                      <h4> Variação: R${{formatMoney(variacao)}}% </h4>
                     </div>
                   </div>
                   <div class="row" style="margin-top: 2rem">
@@ -126,7 +126,7 @@
                     <tr *ngFor="let producao of reportsArray; let i = index" style="cursor: pointer">
                       <th style="min-width: 300px !important;">{{producao.corretora}}</th>
                       <td style="min-width: 120px !important;" *ngFor="let reports of producao.corr_report">
-                        {{reports.total}}
+                        R${{formatMoney(reports.total)}}
                       </td>
                       <td *ngIf="tipoRelatorio === 'Comparativo'">{{(producao.var * 100).toFixed(2)}}%</td>
                     </tr>

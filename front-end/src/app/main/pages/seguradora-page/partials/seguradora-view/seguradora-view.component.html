@@ -118,22 +118,28 @@
                   <h4 class="form-section"><i class="ft-users"></i> Colaboradores </h4>
 
                   <div class="row">
-                    <div style="margin-left: 1rem" class="col-md-3">
+                    <div style="margin-left: 1rem" class="col-md-2">
                       <label for="gerenteNome">Nome do Responsável</label>
                       <p type="text" id="gerenteNome" class=" " >
                         {{seguradora.manager.name}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-3">
+                    <div style="margin-left: 1rem" class="col-md-2">
                       <label for="gerenteTelefone">Telefone do Responsável</label>
                       <p type="text" id="gerenteTelefone" class=" " >
                         {{seguradora.manager.telephone}}
                       </p>
                     </div>
-                    <div style="margin-left: 1rem" class="col-md-3">
+                    <div style="margin-left: 1rem" class="col-md-2">
                       <label for="gerenteEmail">Email do Responsável</label>
                       <p type="text" id="gerenteEmail" class=" " >
                         {{seguradora.manager.email}}
+                      </p>
+                    </div>
+                    <div style="margin-left: 1rem" class="col-md-2">
+                      <label for="gerenteEmail">Cargo</label>
+                      <p type="text" id="gerenteJob" class=" " >
+                        {{seguradora.manager.job}}
                       </p>
                     </div>
                     <div style="margin-left: 1rem" class="col-md-2">
@@ -159,6 +165,7 @@
                                    <th>Nome</th>
                                    <th>Email</th>
                                    <th>Telefone</th>
+                                   <th>Cargo</th>
                                    <th>Aniversario</th>
                                  </tr>
                                  </thead>
@@ -168,6 +175,7 @@
                                    <td>{{colaboradores.name}}</td>
                                    <td>{{colaboradores.email}}</td>
                                    <td>{{colaboradores.telephone}}</td>
+                                   <td>{{colaboradores.job}}</td>
                                    <td>{{colaboradores.birthday}}</td>
                                  </tr>
                                  </tbody>

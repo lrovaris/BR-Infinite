@@ -45,7 +45,7 @@ async function get_colaboradores_by_birthday(req_month){
 }
 
 function getDateInfoFromString(date) {
-  if(date === undefined){
+  if(date === undefined || date === null){
     return {
       valid: false
     }

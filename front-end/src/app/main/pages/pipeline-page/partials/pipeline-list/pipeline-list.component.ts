@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PipelineService} from "../../../../services/pipeline.service";
 import {Router} from "@angular/router";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-pipeline-list',
@@ -20,7 +21,7 @@ export class PipelineListComponent implements OnInit {
   isVigencia = false;
   filtered: boolean;
 
-  constructor(private pipelineService: PipelineService, private router: Router) { }
+  constructor(private pipelineService: PipelineService, private router: Router, private ordena: OrdenaListService) { }
 
 
 
@@ -28,6 +29,7 @@ export class PipelineListComponent implements OnInit {
     this.filtered = false;
     this.pipelineService.getAllOportunidades().subscribe((data: any) => {
       this.oportunidade = data;
+      this.ordena.ordenarAlfabetico(this.oportunidade, 'inclusionDate')
     })
   }
 
@@ -53,6 +55,7 @@ export class PipelineListComponent implements OnInit {
       setTimeout(()=> {
         console.log(data);
         this.oportunidade = data;
+        this.ordena.ordenarAlfabetico(this.oportunidade, 'inclusionDate');
       })
     }, error1 => {
       alert(error1.error.message)

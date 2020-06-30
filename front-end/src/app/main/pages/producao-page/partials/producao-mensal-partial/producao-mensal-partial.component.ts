@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ProducaoService} from "../../../../services/producao.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 import {DateService} from "../../../../services/utils/date.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-producao-mensal-partial',
@@ -50,7 +51,8 @@ export class ProducaoMensalPartialComponent implements OnInit {
     private router: Router,
     private producaoService: ProducaoService,
     private corretoraService: CorretoraService,
-    private dateService: DateService
+    private dateService: DateService,
+    private ordena: OrdenaListService
   ) { }
 
   navigateEnviarAnexo() {
@@ -107,10 +109,12 @@ export class ProducaoMensalPartialComponent implements OnInit {
     console.log(event.target.value.toLowerCase());
 
     if(event.target.value.toLowerCase() !== '') {
-      this.saveOldReport = this.reportsArray;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
       this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
     } else {
       this.reportsArray = this.saveOldReport;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
     }
 
   }
@@ -160,7 +164,10 @@ export class ProducaoMensalPartialComponent implements OnInit {
     this.producaoService.postRelatorioMensal(this.selectedYearStart, this.selectedMonthStart, this.selectedYearEnd, this.selectedMonthEnd, this.activeSeguradora).subscribe((data: any) => {
       console.log(data);
       this.reportsArray = data.report.report;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
       console.log(this.reportsArray);
+
     })
   }
 
@@ -168,9 +175,12 @@ export class ProducaoMensalPartialComponent implements OnInit {
     this.producaoService.postComparacaoMensal(this.selectedYearStart, this.selectedMonthStart, this.selectedYearEnd, this.selectedMonthEnd, this.activeSeguradora).subscribe((data: any) => {
       console.log(data);
       this.reportsArray = data.report.report;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
       this.variacao = data.report.var_media;
 
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
+
     })
   }
 

@@ -3,6 +3,7 @@ import {CorretoraService} from "../../../../services/corretora.service";
 import {Router} from "@angular/router";
 import {ProducaoService} from "../../../../services/producao.service";
 import {DateService} from "../../../../services/utils/date.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-producao-corretora-anual',
@@ -46,7 +47,8 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
     private corretoraService: CorretoraService,
     private router: Router,
     private producaoService: ProducaoService,
-    private dateService: DateService
+    private dateService: DateService,
+    private ordena: OrdenaListService
   ) { }
 
 
@@ -100,9 +102,11 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
     console.log(event.target.value.toLowerCase());
 
     if(event.target.value.toLowerCase() !== '') {
-      this.saveOldReport = this.reportsArray;
-      this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.reportsArray.filter(prod => prod.seguradora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
     } else {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
       this.reportsArray = this.saveOldReport;
     }
 
@@ -148,7 +152,8 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
 
       this.reportsArray = data.report.report;
 
-      console.log(data)
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.saveOldReport;
 
     })
   }
@@ -159,7 +164,8 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
       this.variacao = data.report.var_media;
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
 
-      console.log(data);
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.saveOldReport;
 
     })
   }
@@ -217,5 +223,7 @@ export class ProducaoCorretoraAnualComponent implements OnInit {
       console.log(e)
     }
   };
+
+
 
 }

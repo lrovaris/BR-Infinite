@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ProducaoService} from "../../../../services/producao.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 import {DateService} from "../../../../services/utils/date.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-producao-anual-partial',
@@ -49,7 +50,8 @@ export class ProducaoAnualPartialComponent implements OnInit {
     private router: Router,
     private producaoService: ProducaoService,
     private corretoraService: CorretoraService,
-    private dateService: DateService
+    private dateService: DateService,
+    private ordena: OrdenaListService
   ) { }
 
 
@@ -103,9 +105,11 @@ export class ProducaoAnualPartialComponent implements OnInit {
     console.log(event.target.value.toLowerCase());
 
     if(event.target.value.toLowerCase() !== '') {
-      this.saveOldReport = this.reportsArray;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
       this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
     } else {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
       this.reportsArray = this.saveOldReport;
     }
 
@@ -151,8 +155,8 @@ export class ProducaoAnualPartialComponent implements OnInit {
 
       this.reportsArray = data.report.report;
 
-      console.log(data)
-
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
     })
   }
 
@@ -162,6 +166,8 @@ export class ProducaoAnualPartialComponent implements OnInit {
       this.variacao = data.report.var_media;
 
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
     })
   }
 

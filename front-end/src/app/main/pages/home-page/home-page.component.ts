@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColaboradorService} from "../../services/colaborador.service";
 import { SeguradoraService} from "../../services/seguradora.service";
 import { CorretoraService} from "../../services/corretora.service";
+import {OrdenaListService} from "../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-home-page',
@@ -19,7 +20,10 @@ export class HomePageComponent implements OnInit {
   seguradoras = [];
   corretoras = [];
 
-  constructor(private colaboradorService: ColaboradorService, private seguradoraService: SeguradoraService, private corretoraService: CorretoraService) { }
+  constructor(private colaboradorService: ColaboradorService,
+              private seguradoraService: SeguradoraService,
+              private corretoraService: CorretoraService,
+              private ordena: OrdenaListService) { }
 
   ngOnInit() {
 
@@ -48,16 +52,9 @@ export class HomePageComponent implements OnInit {
     });
 
 
-
-
-
-
-
-
-
-
     this.seguradoraService.getProducaoHomePage().subscribe((data: any) => {
       this.producaoSeguradoras = data.report.report;
+      this.ordena.ordenarAlfabetico(this.producaoSeguradoras, 'name');
     })
 
   }

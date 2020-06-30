@@ -7,6 +7,7 @@ import {ColaboradorService} from "../../../../services/colaborador.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 
 import { saveAs } from 'file-saver';
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-list-seguradora',
@@ -26,7 +27,8 @@ export class ListSeguradoraComponent implements OnInit {
   constructor(private seguradoraService: SeguradoraService,
               private router: Router,
               private colaboradorService: ColaboradorService,
-              private corretoraService: CorretoraService) {
+              private corretoraService: CorretoraService,
+              private ordernar: OrdenaListService) {
 
   }
   settings = tableData.settings;
@@ -56,6 +58,7 @@ export class ListSeguradoraComponent implements OnInit {
     this.filtered = false;
     this.seguradoraService.getAllSeguradoras().subscribe((data:any) => {
       this.seguradoras = data;
+      this.ordernar.ordenarAlfabetico(this.seguradoras, 'name');
     });
   }
 
@@ -70,6 +73,7 @@ export class ListSeguradoraComponent implements OnInit {
       setTimeout(()=> {
         console.log(data);
         this.seguradoras = data;
+        this.ordernar.ordenarAlfabetico(this.seguradoras, 'name');
       })
     }, error1 => {
       alert(error1.error.message)

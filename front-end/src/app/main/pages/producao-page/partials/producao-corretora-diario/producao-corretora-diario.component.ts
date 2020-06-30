@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProducaoService} from "../../../../services/producao.service";
 import {CorretoraService} from "../../../../services/corretora.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-producao-corretora-diario',
@@ -41,7 +42,9 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
 
   variacao: any;
 
-  constructor(private producaoService: ProducaoService, private corretoraService: CorretoraService) { }
+  saveOldReport: any;
+
+  constructor(private producaoService: ProducaoService, private corretoraService: CorretoraService, private ordena: OrdenaListService) { }
 
   ngOnInit() {
 
@@ -183,9 +186,12 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
     this.producaoService.postRelatorioCorretoraDiario(this.selectedYear, this.selectedMonth, this.activeCorretora).subscribe((data: any) => {
 
       this.reportsArray = data.report.report;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
       this.media = data.report.media;
       this.acumulado = data.report.total;
       this.projecao = data.report.projection;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.saveOldReport = this.reportsArray;
     })
 
 
@@ -200,6 +206,14 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
 
       this.reportsArray = data.report.report;
+
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+
+      this.saveOldReport = this.reportsArray;
+
+
 
     })
   }
@@ -228,5 +242,20 @@ export class ProducaoCorretoraDiarioComponent implements OnInit {
       console.log(e)
     }
   };
+
+  filterCorretoras(event){
+
+    console.log(event.target.value.toLowerCase());
+
+    if(event.target.value.toLowerCase() !== '') {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.reportsArray.filter(prod => prod.seguradora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+    } else {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.saveOldReport;
+    }
+
+  }
 
 }

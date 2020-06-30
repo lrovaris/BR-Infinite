@@ -4,6 +4,7 @@ import { CorretoraService } from "../../../../services/corretora.service";
 import {SeguradoraService} from "../../../../services/seguradora.service";
 import {ColaboradorService} from "../../../../services/colaborador.service";
 import { saveAs } from 'file-saver';
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-list-corretora',
@@ -21,7 +22,8 @@ export class ListCorretoraComponent implements OnInit {
   constructor(private corretoraService: CorretoraService,
               private router: Router,
               private seguradoraService: SeguradoraService,
-              private colaboradorService: ColaboradorService) { }
+              private colaboradorService: ColaboradorService,
+              private ordena: OrdenaListService) { }
 
   navigateCadastroCorretora() {
     this.seguradoraService.setseguradoraInfoWithOutFormGroupNull();
@@ -56,6 +58,7 @@ export class ListCorretoraComponent implements OnInit {
           });
           return prod;
         });
+        this.ordena.ordenarAlfabetico(this.corretoras, 'name')
       });
     });
   }
@@ -71,6 +74,7 @@ export class ListCorretoraComponent implements OnInit {
       setTimeout(()=> {
         console.log(data);
         this.corretoras = data;
+        this.ordena.ordenarAlfabetico(this.corretoras, 'name')
       })
     }, error1 => {
       alert(error1.error.message)

@@ -156,6 +156,11 @@
                       <h4 style="font-weight: 400">Variação: R${{formatMoney(variacao)}}%  </h4>
                     </div>
                   </div>
+                  <div class="row" style="margin-top: 2rem">
+                    <div class="col-4">
+                      <input type="text"  (change)="filterCorretoras($event)"  class="form-control mb-3" placeholder="Filtrar seguradoras" />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="card-content" style="margin: 0 2.2rem">

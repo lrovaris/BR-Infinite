@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {ProducaoService} from "../../../../services/producao.service";
 import {CorretoraService} from "../../../../services/corretora.service";
 import {DateService} from "../../../../services/utils/date.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-producao-corretora-mensal',
@@ -47,7 +48,8 @@ export class ProducaoCorretoraMensalComponent implements OnInit {
     private corretoraService: CorretoraService,
     private router: Router,
     private producaoService: ProducaoService,
-    private dateService: DateService
+    private dateService: DateService,
+    private ordena: OrdenaListService
   ) { }
 
   navigateEnviarAnexo() {
@@ -104,9 +106,11 @@ export class ProducaoCorretoraMensalComponent implements OnInit {
     console.log(event.target.value.toLowerCase());
 
     if(event.target.value.toLowerCase() !== '') {
-      this.saveOldReport = this.reportsArray;
-      this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.reportsArray = this.reportsArray.filter(prod => prod.seguradora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
     } else {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
       this.reportsArray = this.saveOldReport;
     }
 
@@ -158,6 +162,8 @@ export class ProducaoCorretoraMensalComponent implements OnInit {
       console.log(data);
       this.reportsArray = data.report.report;
       console.log(this.reportsArray);
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.saveOldReport = this.reportsArray;
     })
   }
 
@@ -168,6 +174,8 @@ export class ProducaoCorretoraMensalComponent implements OnInit {
       this.variacao = data.report.var_media;
 
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'seguradora');
+      this.saveOldReport = this.reportsArray;
     })
   }
 

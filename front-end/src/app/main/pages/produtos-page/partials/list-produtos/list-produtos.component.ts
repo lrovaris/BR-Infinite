@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProdutoService} from "../../../../services/produto.service";
 import {Router} from "@angular/router";
 import {SeguradoraService} from "../../../../services/seguradora.service";
+import {OrdenaListService} from "../../../../services/utils/ordena-list.service";
 
 @Component({
   selector: 'app-list-produtos',
@@ -16,7 +17,10 @@ export class ListProdutosComponent implements OnInit {
 
   filtered: boolean;
 
-  constructor(private produtoService: ProdutoService, private router: Router, private seguradoraService: SeguradoraService) { }
+  constructor(private produtoService: ProdutoService,
+              private router: Router,
+              private seguradoraService: SeguradoraService,
+              private ordena: OrdenaListService) { }
 
   navigateCadastroProduto() {
     this.produtoService.setProdutoNull();
@@ -56,6 +60,7 @@ export class ListProdutosComponent implements OnInit {
         });
 
         console.log(this.produtos);
+       this.ordena.ordenarAlfabetico(this.produtos, 'name')
 
 
       });
@@ -90,7 +95,7 @@ export class ListProdutosComponent implements OnInit {
           });
 
           console.log(this.produtos);
-
+          this.ordena.ordenarAlfabetico(this.produtos, 'name')
 
         });
       })

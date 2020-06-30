@@ -7,6 +7,7 @@ import { DateService} from "../../services/utils/date.service";
 
 import { barChartSingle, barChartmulti, pieChartSingle, pieChartmulti, lineChartSingle, lineChartMulti, areaChartSingle, areaChartMulti } from '../../../shared/data/ngxChart';
 import * as chartsData from '../../../shared/configs/ngx-charts.config';
+import {OrdenaListService} from "../../services/utils/ordena-list.service";
 
 
 @Component({
@@ -57,6 +58,7 @@ export class ProducaoPageComponent implements OnInit {
               private seguradoraService: SeguradoraService,
               private router: Router,
               private producaoService: ProducaoService,
+              private ordena: OrdenaListService
   ) { }
 
 
@@ -82,9 +84,11 @@ export class ProducaoPageComponent implements OnInit {
 
 
     if(event.target.value.toLowerCase() !== '') {
-      this.saveOldReport = this.reportsArray;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
       this.reportsArray = this.reportsArray.filter(prod => prod.corretora.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
     } else {
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
       this.reportsArray = this.saveOldReport;
     }
 
@@ -94,6 +98,8 @@ export class ProducaoPageComponent implements OnInit {
     this.producaoService.postRelatorioDiario(this.selectedYear, this.selectedMonth, this.activeSeguradora).subscribe((data: any) => {
 
       this.reportsArray = data.report.report;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
       this.media = data.report.media;
       this.acumulado = data.report.total;
       this.projecao = data.report.projection;
@@ -110,6 +116,8 @@ export class ProducaoPageComponent implements OnInit {
       this.variacao = Number((Number(this.variacao) * 100)).toFixed(2);
 
       this.reportsArray = data.report.report;
+      this.ordena.ordenarAlfabetico(this.reportsArray, 'corretora');
+      this.reportsArray = this.saveOldReport;
 
     })
   }
